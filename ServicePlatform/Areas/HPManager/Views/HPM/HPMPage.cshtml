@@ -1,0 +1,193 @@
+﻿@{
+    Layout = null;
+    ServicePlatform.Models.ContentContext ac = new ServicePlatform.Models.ContentContext();
+    var CType = from o in ac.C_ContentType select o;//拿到内容种类对象
+    ViewData["TypeList"] = new SelectList(CType, "ConTypeID", "ConTypeName");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HPMPage</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Areas/HPManager/Script/HPMTable.js"></script>
+    <script src="~/Areas/HPManager/Script/HPMBottomTable.js"></script>
+    <script src="~/Areas/HPManager/Script/DropList.js"></script>
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        function ComSearch() {
+            var selectItem = $('#SearchHPColumn').combobox('getValue');
+            var pagesize = $('#HPMPageTableBox').datagrid('getPager').data("pagination").options.pageSize;
+            var pagenumber = $('#HPMPageTableBox').datagrid('getPager').data("pagination").options.pageNumber;
+
+            //$.post("/NewsCenter/GetTheData", { BaichaoTestData: selectItem, page: pagenumber, rows: pagesize });
+            $('#HPMPageTableBox').datagrid('load', {
+                BaichaoTestData: selectItem,
+                page: pagenumber,
+                rows: pagesize
+            });
+        }
+
+        function remove() {
+            //删除按钮
+            var SelectRows = $('#HPMPageTableBox').datagrid('getSelections');//获取选中的要删除的行
+            if (SelectRows.length > 0) {
+                $.messager.confirm('确定操作', '你确定要删除选中的数据吗？', function (flag) {
+                    if (flag) {
+                        //alert('弹出框框');
+                        var DeletedID = [];
+                        for (var i = 0; i < SelectRows.length; i++) {
+                            DeletedID.push(SelectRows[i].ContentID);
+                        }
+                        //console.log(DeletedID.join(','));
+
+                        //使用Ajax传递需要删除的新闻编号
+                        $.ajax({
+                            type: 'POST',
+                            url: '/HPM/RemoveHPContent',
+                            data: {
+                                //DeleteRow: DeletedID.join(','),
+                                DeleteRow: DeletedID,
+                            },
+                            beforeSend: function () {
+                                $('#HPMPageTableBox').datagrid('loading');
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    $('#HPMPageTableBox').datagrid('loaded');
+                                    $('#HPMPageTableBox').datagrid('load');
+                                    $.messager.show({
+                                        title: '提示信息',
+                                        msg: data + "个被用户删除",
+                                    });
+                                }
+                            },
+                        });
+                    }
+                });
+            }
+            else {
+                //给予警告
+                $.messager.alert('警告', '你没有选中要删除的行', 'warning');
+            }      
+        }
+
+        function UnionSearch() {
+            //联动下拉菜单查询
+            var selectType = $('#SelectCType').val();
+            var selectItem = $('#SelectCC').val();//获得第二个联动菜单的值对应选择的栏目
+            var pagesize = $('#HPMBottomTable').datagrid('getPager').data("pagination").options.pageSize;
+            var pagenumber = $('#HPMBottomTable').datagrid('getPager').data("pagination").options.pageNumber;
+
+            $('#HPMBottomTable').datagrid('load', {
+                ColID: selectItem,
+                TypeID:selectType,
+                page: pagenumber,
+                rows: pagesize
+            });
+        }
+
+    </script>
+
+    <style type="text/css">
+
+        #HPMPageTable {
+            margin-top:20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="HPMPageTop">
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">首页栏目管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="margin-bottom:15px;"></div>
+    <div id="HPMPageBody">
+
+        <div id="HPMTopPart">          
+            <table id="HPMPageTableBox"></table>
+
+            <div id="HPMTToolBar">
+                <div style="margin-bottom:15px;"></div>
+                <table>
+                    <tr>
+                        <td>
+                            <div id="HPCSearch">
+                                @*选择首页栏目：@Html.DropDownList("SearchHPColumn", ViewData["ContentColumnList"] as SelectList, "--请选择--", null) <input type="button" value="搜索栏目" onclick="searchHPcolumn();" />*@
+                                选择首页栏目：<select class="easyui-combobox" id="SearchHPColumn" name="SearchHPColumn" style="width:100px;">
+                                    <option value=0>所有栏目</option>
+                                    @foreach (var m in (ViewData["CContent"] as IEnumerable<ServicePlatform.Models.T_HomePageColumn>))
+                                    {
+                                        <option value=@m.HPColumnID>@m.HPColumnName</option>
+                                    }
+                                </select>
+                                @*<input type="button" value="搜索" onclick="ComSearch();"/>*@
+                                <a href="#" class="easyui-linkbutton" id="sButton" iconcls="icon-search" onclick="ComSearch();">搜索</a>
+                        </td>
+                        <td>
+                            <div class="datagrid-btn-separator"></div><div style="margin-right:15px;"></div>
+                        </td>
+                        <td>
+                            操作：<a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="remove();">删除</a>
+                            <!--用于修改显示顺序的操作按钮-->
+                            <a href="#" id="TBT1" name="TBT1" class="easyui-linkbutton" iconcls="icon-edit" onclick="ooe.change();">修改</a>
+                            <a href="#" id="TBT2" name="TBT2" class="easyui-linkbutton" iconcls="icon-save" onclick="ooe.save();" style="display:none;">保存</a>
+                        </td>
+                    </tr>
+                </table>    
+                <div style="margin-bottom:15px;"></div>
+            </div>
+        </div>
+
+        <div id="seperateLine">
+            <img src="/Areas/HPManager/Content/Img/HPSeperateLine.png" />
+            <div style="margin-bottom:15px;"></div>
+        </div>
+
+        <div id="HPMBottomPart">
+            <table id="HPMBottomTable"></table>
+
+            <div id="HPMBToolBar">
+                <!--下半身DataGrid的工具栏-->
+                <div style="margin-bottom:15px;"></div>
+                <table>
+                    <tr>
+                        <td>
+                            内容筛选===>内容类别：
+                            @Html.DropDownList("SelectCType", ViewData["TypeList"] as SelectList, "--所有类型--", null)
+                            栏目选择：
+                            @Html.DropDownList("SelectCC", new SelectList(new List<string>()), "--请选择--", null)
+                            <!--联动菜单查询按钮-->
+                            <a href="#" class="easyui-linkbutton" id="sButton" iconcls="icon-search" onclick="UnionSearch();">搜索</a>
+                        </td>
+                        <td>
+                            <div class="datagrid-btn-separator"></div><div style="margin-right:15px;"></div>
+                        </td>
+                        <td>
+                            操作：<a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="obj.addToCol();">添加到栏目</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

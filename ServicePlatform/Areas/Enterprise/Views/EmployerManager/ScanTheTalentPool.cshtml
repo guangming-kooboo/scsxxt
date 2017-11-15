@@ -1,0 +1,253 @@
+﻿@{
+    ViewBag.Title = "ScanTheTalentPool";
+}
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    List<T_Student> StuList = ViewBag.StuList;
+    Dictionary<string, List<int>> StuInfoList = ViewBag.StuInfoList;
+
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+@Html.Partial("_LaydateTimePick")
+<html>
+<head>
+    <title>人才库浏览</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+
+    <script>
+
+        $(document).ready(function () {
+            $("#School").val('@ViewBag.SchoolFoucs');
+            $("#EntryYear").val('@ViewBag.EntryYearFoucs');
+            $("#Specialty").val('@ViewBag.SpecialtyFoucs');
+        });
+
+        function SendOffer() {
+            var posid = document.getElementById("joblist").value;
+            var nowopstu = document.getElementById("nowopstu").value;
+            var nowopschool = document.getElementById("nowopschool").value;
+            var nowopyear = document.getElementById("nowopyear").value;
+            var nowopspe = document.getElementById("nowopspe").value;
+
+            $.ajax({
+                type: "post",
+                url: "Sendoffer",
+                data: { PosID: posid, Nowopstu: nowopstu, Nowopschool: nowopschool, Nowopyear: nowopyear, Nowopspe: nowopspe },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        layer.msg("操作成功！请等待学生确认。");
+                    }
+                    else {
+                        layer.msg(data.Pos);
+                    }
+                },
+                error: function (data) {
+                    layer.msg(data.Pos);
+                }
+            });
+        }
+
+        function SendYQ() {
+            var posid = document.getElementById("joblist").value;
+            var nowopstu = document.getElementById("nowopstu").value;
+            var nowopschool = document.getElementById("nowopschool").value;
+            var nowopyear = document.getElementById("nowopyear").value;
+            var nowopspe = document.getElementById("nowopspe").value;
+            var ttime = document.getElementById("meettime").value;
+
+            $.ajax({
+                type: "post",
+                url: "SendYQ",
+                data: { PosID: posid, Nowopstu: nowopstu, Nowopschool: nowopschool, Nowopyear: nowopyear, Nowopspe: nowopspe, Ttime: ttime },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        layer.msg("操作成功！请等待学生确认。");
+                    }
+                    else {
+                        layer.msg(data.Pos);
+                    }
+                },
+                error: function (data) {
+                    layer.msg(data.Pos);
+                }
+            });
+        }
+
+    function show(userid) {
+        document.getElementById("nowopstu").setAttribute("value", userid);
+        var Htmls = '@ViewBag.Htmls'
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['700px', '260px'],
+                title: "发送面试邀请",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + '<label>选择岗位：</label>' + Htmls + '</br>' + '</br>' + '</br>' + '</br>' + '<label>面试时间：</label><input type="text" placeholder="请输入日期" name="meettime" id="meettime" class="laydate-icon" onclick="laydate({istime: true, format: \'YYYY-MM-DD hh:mm:ss\'})" />' + '<i style="color:red">*</i>' + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="SendYQ()" class="btn" id="mysendoffer">发送邀请</button>' + '\<\/div>'
+            });
+    }
+        function show_offer(userid) {
+
+            document.getElementById("nowopstu").setAttribute("value", userid);
+            var Htmls = '@ViewBag.Htmls'
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['600px', '260px'],
+                title: "发送Offer",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + '<label>选择岗位：</label>' + Htmls + '</br>' + '</br>' + '</br>' + '</br>' + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="SendOffer()" class="btn">发送Offer</button>' + '\<\/div>'
+            });
+        }
+        function jump0(userid)
+        {
+            var url = '/School/StuManager/ViewDetail?ForbidFlag=true&userid=' + userid;
+            window.open(url);
+        }
+
+        function jump1(userid)
+        {
+            var flag = "readonly";
+            var schoolid = document.getElementById('nowopschool').value;
+            var url = '/Enterprise/EmployerManager/ScanStuPraInfo?userid=' + userid + '&schoolid=' + schoolid + '&flag=' + flag;
+            window.open(url);
+        }
+
+        function jump2(userid) {
+            var schoolid = document.getElementById('nowopschool').value;
+            var url = '/Enterprise/EmployerManager/ScanStuResumeInfo?userid=' + userid + '&schoolid=' + schoolid;
+            window.open(url);
+        }
+
+        function jump3(userid) {
+            var schoolid = document.getElementById('nowopschool').value;
+            var url = '/Enterprise/EmployerManager/ScanStuResumeInfo?userid=' + userid + '&schoolid=' + schoolid;
+            window.open(url);
+        }
+    </script>
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">招聘管理</a></li>
+            <li><a href="#">人才库浏览</a></li>
+            
+        </ul>
+        
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("ScanTheTalentPool", "EmployerManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>选择学校/年级/专业: </span></div>
+
+            @Html.Partial("_GetSchoolYearSpe")
+
+            <input type="submit" class="btn" value="查询" />
+            
+            
+        }
+            <div class="formtitle"><span>人才库列表:  </span></div>
+
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">学号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">姓名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">性别<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">身高<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">体重<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                </tr>
+                <tbody>
+                    @if (StuList != null)
+                    {
+                        for (int i = 0; i < StuList.Count(); i ++)
+                        {
+
+                                <tr class="odd">
+                                    <td>
+                                        @StuList[i].StuNo
+                                    </td>
+                                    <td>
+                                        @StuList[i].StuName
+                                    </td>
+                                    <td>
+                                        @StuList[i].StuSex
+                                    </td>
+                                    <td>
+                                        @StuList[i].StuHeight
+                                    </td>
+                                    <td>
+                                        @StuList[i].StuWeight
+                                    </td>
+                                    <td>
+                                        @if (!(StuInfoList[StuList[i].StuNo].Contains(10)))
+                                        {
+                                            <button onclick="jump0('@StuList[i].UserID')" class="mybtn">基本资料</button>
+                                            @*<a href='/School/StuManager/ViewDetail?userid=@StuList[i].UserID &ForbidFlag=true' target="_blank">基本资料</a>*@
+                                         }
+                                        @if (!(StuInfoList[StuList[i].StuNo].Contains(20)))
+                                        {
+                                            <button onclick="jump1('@StuList[i].UserID')" class="mybtn">实习资料</button>
+                                        }
+                                        @if (!(StuInfoList[StuList[i].StuNo].Contains(50)))
+                                        {
+                                            <button onclick="jump3('@StuList[i].UserID')" class="mybtn">查看简历</button>
+                                        }             
+                                        <button id="test2"  onclick="show('@StuList[i].UserID')" class="mybtn">面试邀请</button> | 
+                                        <button  onclick="show_offer('@StuList[i].UserID')" class="mybtn">直接录取</button> | 
+                                    </td>
+                                </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        
+
+
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <div class="none"></div>
+
+    <input type="hidden" value="" id="nowopstu" name="nowopstu" />
+
+    <input type="hidden" value='@ViewBag.NowOpSchool' id="nowopschool" name="nowopschool" />
+    <input type="hidden" value='@ViewBag.NowOpYear' id="nowopyear" name="nowopyear" />
+    <input type="hidden" value='@ViewBag.NowOpSpe' id="nowopspe" name="nowopspe" />
+
+
+
+</body>
+</html>
+

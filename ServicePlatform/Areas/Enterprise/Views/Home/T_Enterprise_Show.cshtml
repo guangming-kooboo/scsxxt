@@ -1,0 +1,45 @@
+﻿@model Core.Services.Entity.T_Enterprise
+
+@using ServicePlatform.Lib;
+@using ServicePlatform.Config;
+@{
+
+    var Ent_No = Model.Ent_No;
+}
+
+    @{
+        /*喻小光3月31日修改
+         * if (data.EntState == 1)
+        {
+            <button onclick="location.href = '/Enterprise/Home/T_Enterprise_ApplyCheck?UserID=@data.Ent_No'">提交审核</button>
+        }
+        else
+        {
+            <button onclick="alert('请耐心等待管理员的审核')">资料审核中...</button>
+        }
+          
+        if (data.InfoLocked == 1)
+        {
+            <button onclick="location.href = '/Enterprise/Home/T_Enterprise_ApplyUnlock?UserID=@data.Ent_No'">申请解锁</button>
+        }
+        else if (data.InfoLocked == 0)
+        {
+            <button onclick="alert('请耐心等待管理员的审核')">申请解锁中..</button>
+        }
+        else
+        {
+            <button onclick="location.href = '/Enterprise/Home/T_Enterprise_Edict?Ent_No=@data.Ent_No'">修改资料</button>
+        }
+          */
+        //当前版本企业是由平台管理员直接建立的，所以，默认状态为UnitStatus.Approved
+        @*if (Model.InfoLocked == EditStatus.Locked)
+        {
+            <button onclick="alert('资料已经锁定！请与管理员联系，申请解锁。')">资料锁定</button>
+        }
+        else//如果处于未锁定状态,则“允许修改资料”，一旦点击“提交”，则资料锁定。
+        {
+            <button onclick="location.href = '/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Ent_No'">修改资料</button>
+        }*@
+        
+    }
+  @Html.Action("Index", new { Ent_No = Ent_No })

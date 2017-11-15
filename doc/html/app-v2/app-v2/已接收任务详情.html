@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>WeUI</title>
+    <link rel="stylesheet" href="css/jquery-weui.css"/>
+    <link rel="stylesheet" href="css/weui.min.css" />
+    <link rel="stylesheet" href="css/pubilice.css"/>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+	</script>
+	<script src="js/jquery-weui.js"></script>
+<style>
+	.name2{
+		width:100%;
+	
+	}
+	.name2{
+		width:80%;
+		padding-left:20%;
+		
+	}
+	.textcolor{
+		color:#000000;
+	}
+
+</style>
+</head>
+<body ontouchstart>
+ <div class="weui-tab__bd">
+	        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+	        	
+	        	<div class="weui-cells_form" style="background:#ffffff">
+                 <div class="weui-cell">
+                 	<div class="weui-cell__hd" style="width:25px"><label for="date" class="weui-label"><img src="images/jiahao.png" width=20px;></label></div>
+		            <div class="weui-cell__bd">
+		              <p style="text-align: center;">设置日期</p>
+		            </div>
+		            <div class="weui-cell__ft "id="show-actions1"><img src="images/icon_nav_cell.png" height=25px></div>
+		          </div>
+	          <div class="weui-cell">
+		        <div class="weui-cell__hd"><label class="weui-label">分配人员</label></div>
+		        <div class="weui-cell__bd" id="show-actions2">
+		                                                          某某某
+		        </div>
+		      </div>
+	          <div class="weui-cell">
+		        <div class="weui-cell__hd"><label for="date" class="weui-label">截止时间 :</label></div>
+		        <div class="weui-cell__bd">
+		          <input class="weui-input" id="date" type="text" readonly="">
+		        </div>
+		      </div>
+		    </div>
+	          <div class="weui-cells weui-cells_form">
+			      <div class="weui-cell">
+			        <div class="weui-cell__bd">
+			          <textarea class="weui-textarea"  rows="8">2月22号早上开会</textarea>
+         	        </div>
+			      </div>
+			    </div>
+			  <div class="weui-cells weui-cells_form">
+			      <div class="weui-cell weui-cell_switch">
+			        <div class="weui-cell__bd">是否为公开任务</div>
+			        <div class="weui-cell__ft">
+			          <label for="switchCP" class="weui-switch-cp">
+			            <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked">
+			            <div class="weui-switch-cp__box"></div>
+			          </label>
+			        </div>
+			      </div>
+			    </div>	  
+	<div class="weui-cells weui-cells_checkbox">
+	      <div class="name1">
+	      <label class="weui-cell weui-check__label" for="s11">
+	        <div class="weui-cell__hd">
+	          <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+	          <i class="weui-icon-checked"></i>
+	        </div>
+	        <div class="weui-cell__bd">
+	          <p>子任务一</p>
+	        </div>
+	        <div class="weui-cell__ft textcolor">马光明</div>
+	      </label>
+	
+	        <div class="weui-progress">
+		        <div class="weui-progress__bar">
+		          <div class="weui-progress__inner-bar js_progress" style="width: 50%;"></div>
+		        </div>
+		      
+		     </div>
+	      </div>
+		<div class="name2">
+		   <label class="weui-cell weui-check__label" for="s12">
+		        <div class="weui-cell__hd">
+		          <input type="checkbox" class="weui-check" name="checkbox1" id="s12" checked="checked">
+		          <i class="weui-icon-checked"></i>
+		        </div>
+		        <div class="weui-cell__bd">
+		          <p>子任务一</p>
+		        </div>
+		        <div class="weui-cell__ft textcolor">潘清杰</div>
+		      </label>
+		     <div class="weui-progress">
+			        <div class="weui-progress__bar">
+	          <div class="weui-progress__inner-bar js_progress" style="width: 30%;"></div>
+	        </div>
+	 </div>
+	 </div>
+		   <div class="name1">
+			<label class="weui-cell weui-check__label" for="s13">
+			        <div class="weui-cell__hd">
+			          <input type="checkbox" class="weui-check" name="checkbox1" id="s13" checked="checked">
+			          <i class="weui-icon-checked"></i>
+			        </div>
+			        <div class="weui-cell__bd">
+			          <p>子任务一</p>
+			        </div>
+			        <div class="weui-cell__ft textcolor">马光明</div>
+			      </label>
+			<div class="weui-progress">
+			        <div class="weui-progress__bar">
+			          <div class="weui-progress__inner-bar js_progress" style="width: 70%;"></div>
+			        </div>
+			       
+			     </div>
+		   </div>
+		    
+    
+	</div>
+      
+     <div class="weui-tabbar">
+        <div class="weui-tabbar__item">
+            <a href="javascript:;" class="weui-btn weui-btn_primary">确认</a>
+        </div>
+	</div>
+   
+    <script>
+    
+    
+    
+       $("#date").calendar({
+        onChange: function (p, values, displayValues) {
+          console.log(values, displayValues);
+        }
+      });
+      
+      
+       $(document).on("click", "#show-actions1", function() {
+        $.actions({
+          title: "任务分配",
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "高级优先",
+              className: "color-danger",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            },
+            {
+              text: "中级优先",
+              className: "color-warning",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            },
+            {
+              text: "低级优先",
+              className: "color-primary",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            },
+            {
+              text: "无优先级",
+              className: "",
+              onClick: function() {
+               $.alert("选择成功");
+              }
+            }
+          ]
+        });
+      });
+       $(document).on("click", "#show-actions2", function() {
+        $.actions({
+          title: "任务分配",
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "分配给组",
+              className: "color-primary",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            },
+            {
+              text: "分配给个人",
+              className: "color-primary",
+              onClick: function() {
+               $.alert("选择成功");
+              }
+            }
+          ]
+        });
+      });
+    </script>
+	  </body>
+</html>

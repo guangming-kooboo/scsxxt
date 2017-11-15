@@ -1,0 +1,139 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using ServicePlatform.Models;
+@model Webdiyer.WebControls.Mvc.PagedList<T_MsgRec>
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+
+@Scripts.Render("/Areas/Message/Content/jquery-1.9.1.min.js")
+
+@{
+    ViewBag.Title = "收件箱";
+    int initial = ViewBag.PageIndex;
+    int sender_index = (initial - 1) * 10;//发送人
+    int sendtime_index = (initial - 1) * 10;//消息时间
+    int content_index = (initial - 1) * 10;//处理消息内容
+    int mgt_index = (initial - 1) * 10;//消息类型
+    //int recrole = (initial - 1) * 10;
+    int status_index = (initial - 1) * 10;//是否已读
+    //int send = (initial - 1) * 10;
+}
+@using (Html.BeginForm("RecMsg_Delete_ALL", "MsgCenter", FormMethod.Post))
+{ 
+    <input type="button" id="btnall" name="btnall" class="btn" value="全选" onclick="checkall()" />
+    <input type="submit" class="btn" value="批量删除" onclick="findRow('1')" name="action">
+    <input type="submit" class="btn" value="批量标记为已读" onclick="findRow('2')" name="action" />
+    @*<label>全文检索：</label><input type="text" class="dfinput" value="请输入检索内容" id="jiansuo" name="jiansuo" /><input type="submit" class="btn" value="检索" onclick="" name="action" />@*<label>按消息类型（10：用户注册、11：项目评估、12：项目招标、13：系统消息）</label>*@
+    <input type="text" value="" id="piliang" name="piliang" class="dfinput" style="display:none" />
+    <input type="text" value="" id="piliangmark" name="piliangmark" class="dfinput" style="display:none" />
+}
+    <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+        <tr class="title">
+            <td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>
+            <td bgcolor="#CCCCCC">状态<i class="sort"><img src="/Areas/Message/Content/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">编号<i class="sort"><img src="/Areas/Message/Content/px.gif" /></i></td>
+
+            <td bgcolor="#CCCCCC">发送人<i class="sort"><img src="/Areas/Message/Content/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">发送时间<i class="sort"><img src="/Areas/Message/Content/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC" onclick="">消息内容<i class="sort"><img src="/Areas/Message/Content/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">消息类别<i class="sort"><img src="/Areas/Message/Content/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC" onclick="">操作</td>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+        {
+
+                <tr class="odd">
+                    <td><input type="checkbox" value="" name="check_approve" /></td>
+                    <td>
+                        @Html.Raw(@ViewBag.HasRead[status_index++])
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MsgID)
+                    </td>
+                    <td>
+                        @ViewBag.Sender[sender_index++]
+                        @*@Html.DisplayFor(modelItem => item.Sender)*@
+                    </td>
+                    <td>
+                        @ViewBag.SendTime[sendtime_index++]
+                        @*@Html.DisplayFor(modelItem => item.SendTime)*@
+                    </td>
+                    <td>
+                        @ViewBag.Msgcontent[content_index++]
+                        @*@Html.DisplayFor(modelItem => item.MsgContent)*@
+                    </td>
+                    <td>
+                        @ViewBag.Msgtype[mgt_index++]
+                        @*@Html.DisplayFor(modelItem => item.MsgTypeID)*@
+                    </td>
+                    <td>
+                        @Html.ActionLink("标记已读", "MarkReaded", "MsgCenter", new { id = item.MsgID }, null) |
+                        @Html.ActionLink("阅读", "RecMsg_Detail", "MsgCenter", new { id = item.MsgID }, null) |
+                        @Html.ActionLink("回复", "RecMsg_Replay", "MsgCenter", new { id = item.MsgID }, null) |
+                        @Html.ActionLink("删除", "RecMsg_Delete", "MsgCenter", new { id = item.MsgID }, new { onclick = "javascript:return confirm('确定删除吗?');" })
+                    </td>
+                </tr>
+        }
+        </tbody>
+
+    </table>
+
+
+    <script type="text/javascript">
+
+        function findRow(flag) {
+            if (flag == 1) {
+                if (confirm("确认删除所选的信息吗？")) {
+                    var check = document.getElementsByName("check_approve");
+                    var result = "";
+                    var table = document.getElementById('msgcontent');
+                    var rows = table.rows.length;
+                    for (var j = 0; j < check.length; j++) {
+                        if (check[j].checked) {
+                            //result += table.rows[j + 1].cells[4].innerText + "!";
+                            result += table.rows[j + 1].cells[2].innerHTML + "!";
+                        }
+                    }
+                    var objsel = document.getElementById("piliang");
+                    objsel.setAttribute("value", result);
+                }
+            }
+            else {
+                if (confirm("确认标记所选的信息为已读吗？")) {
+                    var check = document.getElementsByName("check_approve");
+                    var result = "";
+                    var table = document.getElementById('msgcontent');
+                    var rows = table.rows.length;
+                    for (var j = 0; j < check.length; j++) {
+                        if (check[j].checked) {
+                            //result += table.rows[j + 1].cells[4].innerText + "!";
+                            result += table.rows[j + 1].cells[2].innerHTML + "!";
+                        }
+                    }
+                    var objsel = document.getElementById("piliang");
+                    objsel.setAttribute("value", result);
+                }
+            }
+        }
+
+        function checkall() {
+            var check = document.getElementsByName("check_approve");
+            if (check[0].checked == true) {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = false;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "全选");
+            }
+            else {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = true;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "取消全选");
+            }
+        }
+    </script>
+
+
+

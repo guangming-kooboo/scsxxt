@@ -1,0 +1,136 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.PhotoAlbum_M
+@{
+    Layout = ViewData["Layout"].ToString();
+    int pageIndex = (int)ViewData["pageIndex"];
+    int maxIndex = (int)ViewData["maxIndex"];
+}
+
+
+
+@section script{
+    <script>
+            function jumpTo(index) {
+                location.href = '@ViewData["currentUrl"]?pageIndex=' +index+ '&perCount=@ViewData["perCount"]'+'&id=@Model.userid';
+            };
+
+        $().ready(function () {
+            $('#uploadPhoto').hide();
+            $('#active-upload').click(function()
+            {
+                $('#uploadPhoto').show();
+            });
+        })
+
+        //上传成功后调用
+        function OnUploadFinish(file) {
+            $('#uploadPhoto').hide();
+           // alert('文件上传成功' + file);
+            location.href = "/BBS/CRUD/UploadPhoto?file=" + file + "&id=@Model.userid";
+        }
+    </script>
+}
+
+
+<div class="main">
+
+    <!-- 导航-->
+      @Html.Action("_Head", new { id = Model.userid })
+    <div class="means">
+        <div class="main-share-head">
+            <p class="main-share-head-p">相册</p>
+            <div class="main-share-head-img">
+                <img src="~/Areas/BBS/Content/Image/分界线.png">
+            </div>
+        </div>
+
+        <div class="main-share-middle">
+            <div class="main-photo-middle-main">
+                <ul>
+                    <li class="photos-input-head">
+                        <img class="photo-input-head-img" src="~/Areas/BBS/Content/Image/用户头像.png">
+                    </li>
+                    <li class="photos-input-head">
+                        <div id="uploadPhoto">
+                            @Html.Partial("/Views/Templates/_FileUpload.cshtml", new ViewDataDictionary(ViewData)
+                                                {
+                                                    { "saveDirectory","/UserFiles/BBS/Files/"},
+                                                    { "id","photo"},
+                                                    { "name","photo"}
+                                                })
+                        </div>
+                        <ul class="photos-input-head-ul">
+                            <li class="photos-input-head">
+                                <div class="main-share-middle-left-input" id="active-upload">
+
+                                    <p>
+
+                                        <img src="~/Areas/BBS/Content/Image/上传照片.png">
+                                        <div class="main-share-middle-left-input-div">
+                                            <a class="main-share-middle-left-input-a">上传照片</a>
+
+
+
+                                    </p>
+
+                                </div>
+                               
+            </div>
+            </li>
+            <li class="photos-input-head">
+                @*<div class="main-photo-middle-left-input">
+                    <div class="main-photo-middle-left-input-div">
+                        <a class="main-photo-middle-left-input-a" href="@Url.Action("ManagePhoto","UserCenter",new{area="BBS"})">管理照片</a>
+                    </div>
+                </div>*@
+            </li>
+            </ul>
+            </li>
+
+
+
+
+
+            </ul>
+
+            <ul>
+                @foreach (var photo in Model.Photos)
+                {
+                    <li class="main-photos-middle-left-li">
+                        <div class="main-photos-middle-left-div">
+                            <p align="center"><a href=""><img class="main-photos-middle-left-li-img" src="@photo.PhotoUrl"></a></p><p class="main-photo-middle-left-li-p" align="center"><a class="main-photo-middle-left-li-a" href="">@photo.PhotoExplain</a><a href="@Url.Action("PhotoDelete","CRUD",new{area="BBS",id=photo.ID})" style="float:right">X</a></p>
+                        </div>
+                    </li>
+                }
+
+                @if (Model.Photos.Count == 0)
+               {
+                    <li style="color:red">这里空空如也，快添加一条吧</li>
+               }
+            </ul>
+           
+
+        </div>
+        @if ((int)ViewData["maxIndex"] > 1)
+        {
+            <div class="jump">
+                <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+                @if (pageIndex != 1)
+                {
+                    <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+                }
+                <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+                @if (pageIndex != maxIndex)
+                {
+                    <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+                }
+                <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+            </div>
+        }
+
+
+    </div>
+
+
+
+</div>

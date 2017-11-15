@@ -1,0 +1,54 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.EvaluateSchoolDetail_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex">
+            <div>
+                @*跳到主页*@
+                <a href="javascript:submit('a');">
+                    <div class="placeholder"><img src="@ViewData["root"]images/return.png" class="return"></div>
+                </a>
+            </div>
+            <div class="weui-flex__item">
+                <div class="placeholder">评价学校</div>
+            </div>
+            @*修改评价*@
+            <a href="javascript:submit('b');">
+                <div class="placeholder" style="color: floralwhite">修改</div>
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">学校</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text" id="Subjects" readonly="readonly" class="weui-input">@Model._SchoolName</label>
+                </div>
+            </div>
+            </div>
+            @foreach (var item in Model.EvaluateSchool)
+            {
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">@item.ItemName</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" value="@item.ItemGrade" readonly="true">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea"  rows = "5"  readonly="true">@item.ItemContent</textarea>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@Styles.Render("/Areas/School/SchoolContent/SchoolNewsDetail/NEWSPage.css")
+@model ServicePlatform.Models.T_Content
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomeNewsDetail</title>
+</head>
+<body>
+
+   
+
+    <div id="HomeNewsDetail">
+        <!--主内容-->
+        <section id="wrapper">
+            <!--NEWS-->
+            <div class="left_news">
+                <h3>@Model.ContentTitle</h3>
+                <p>来源：@Model.ContentPublisher</p>
+                <p>时间：@ServicePlatform.Areas.News.ToolHelper.HandleTime.ConvertIntDateTime(Convert.ToInt32(Model.PubDate))</p>
+                <p>浏览数：201次</p>
+                <div style="clear:both;"></div>
+                <hr>
+                <div class="NEWSConent">
+                    <pre>
+                        @if (ViewData["TargetNewsPic"] != "")
+                        {
+                            <img src=@ViewData["TargetNewsPic"] />
+                        }
+                        @if (ViewData["TargetNewsHtml"] != "")
+                        {
+                            @Html.Raw(@ViewData["TargetNewsHtml"]);
+                        }
+                       
+			        </pre>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+</body>
+</html>

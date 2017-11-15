@@ -1,0 +1,210 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.Home.PostList_M
+@{
+    Layout = ViewData["Layout"].ToString();
+    int pageIndex = (int)ViewData["pageIndex"];
+    int maxIndex = (int)ViewData["maxIndex"];
+}
+
+
+@section script{
+    <script>
+        function SendPost() {
+            $("#sendpost").focus();
+        }
+        function Tip()
+        {
+            alert("请登陆");
+        }
+        $().ready(function () {
+            $('#uploadFile').hide();
+            $('#active-upload').click(function () {
+                $('#uploadFile').show();
+            });
+        })
+
+        //上传成功后调用
+        function OnUploadFinish(file) {
+            $('#uploadFile').hide();
+            $('#files').val(file);
+        }
+        function jumpTo(index) {
+            location.href = '@ViewData["currentUrl"]?pageIndex=' + index + '&perCount=@ViewData["perCount"]' + '&columnid=@Model.column.ID&themeid=@Model.themeid';
+        };
+    </script>
+}
+
+
+<div class="main">
+
+
+
+          @Html.Action("_Search")
+
+<!-- 列表-->
+           <div class="list">
+                <div class="list-head">
+                    <div class="list-head-left">
+                       <p class="list-head-left-p">|<a class="list-head-left-p"href="@Url.Action("Main","Home",new{area="BBS"})">&nbsp;@Model.column.ForumName</a>>><a class="list-head-left-p"href="">@Model.column.ColumnName</a></p>
+                    </div>
+                    <div class="list-head-right">
+                       <div class="list-head-right-back">
+                           <a class="list-head-right-a" onclick="SendPost()">我要发帖</a>
+                       </div>
+                    </div>
+                </div>
+           </div>
+
+           <div class="satnav">
+               <div class="satnav-left">
+                  <a class="satnav-left-a@(string.IsNullOrEmpty(Model.filter)?"-active":"")"href="@Url.Action("PostList","Home",new{area="BBS",themeid=Model.themeid, columnid=Model.column.ID, filter = ""} )">默认</a>
+                  <a  class="satnav-left-a@(Model.filter=="best"?"-active":"")"href="@Url.Action("PostList", "Home", new { area = "BBS", themeid = Model.themeid, columnid = Model.column.ID, filter = "best" })">&nbsp;&nbsp;&nbsp;&nbsp;精品&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                  <a  class="satnav-left-a@(Model.filter=="time"?"-active":"")"href="@Url.Action("PostList", "Home", new { area = "BBS", themeid = Model.themeid, columnid = Model.column.ID, filter = "time" })">最新</a>
+                 
+               </div>
+               <div class="satnav-right">
+                   <ul class="satnav-right-ul">
+                      <li class="satnav-right-li"><p class="satnav-right-p">@Model.column.ReplyCount</p></li>
+                      <li class="satnav-right-li"><p class="satnav-right-p">回帖数&nbsp;:&nbsp;&nbsp;</p></li>
+                      <li class="satnav-right-li"><p class="satnav-right-p">@Model.column.PostCount&nbsp;&nbsp;&nbsp;&nbsp;</p></li>
+                      <li class="satnav-right-li"><p class="satnav-right-p">帖子数&nbsp;:&nbsp;&nbsp;</p></li>
+                   </ul>
+
+                 
+               </div>
+            </div>
+             <hr>
+
+
+             <div class="list-main">
+                <div class="list-main-head">
+                    <a class="list-main-head-a" href="@Url.Action("PostList", "Home", new {  columnid =Model.column.ID })">全部&nbsp;&nbsp;&nbsp;</a>|
+                    @foreach(var theme in Model.theme)
+                    {
+                    <a class="list-main-head-a" href="@Url.Action("PostList", "Home", new { themeid = theme.ID, columnid = theme.ColumnID })">&nbsp;&nbsp;&nbsp;@theme.ThemeName |&nbsp;&nbsp;&nbsp;</a>
+                    }
+                </div>
+
+                <div class="list-main-lists"> 
+                    @foreach(var post in Model.post)
+                    {
+                    <ul>
+                         <li class="list-main-lists-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=post.AuthorID})"><img class="list-main-lists-head"src="@post.AuthorHeadPictureUrl"></a></li>
+                         <li class="list-main-lists-li">
+                         <p><a class="list-main-lists-li-a"href="@Url.Action("PostPage","Home",new{area="BBS",id=post.ID})">[@post.Theme]@post.PostTitle</a></p>
+                         <p class="list-main-lists-li-p"><img src="~/Areas/BBS/Content/Image/用户.png"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=post.AuthorID})">@post.Author</a>&nbsp;&nbsp;&nbsp;&nbsp;<img src="~/Areas/BBS/Content/Image/时间.png">发表于:@post.Time&nbsp;&nbsp;&nbsp;&nbsp;最后回复:@post.LastTime</p>
+                         </li>
+                         <li class="list-main-lists-lit">
+                           <div class="list-main-lists-li-location">
+                             <div class="list-main-lists-li-back">
+                                
+                                <img src="~/Areas/BBS/Content/Image/浏览.png">
+                                <p class="list-main-lists-li-back-p"><a herf="">@post.ClickCount</a>浏览</p>
+                             </div>
+                           </div>
+                         </li>
+                         <li class="list-main-lists-lits">
+                           <div class="list-main-lists-li-locations">
+                             <div class="list-main-lists-li-back">
+
+                                <img src="~/Areas/BBS/Content/Image/4.png">
+                                <p class="list-main-lists-li-back-p"><a herf="">@post.Reply</a>回复</p>
+                             </div>
+                           </div>
+                         </li>      
+                    </ul>
+                    <hr>
+                    }
+                    
+ 
+
+                </div>
+
+                 @if ((int)ViewData["maxIndex"] > 1)
+                 {
+                     <div class="jump">
+                         <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+                         @if (pageIndex != 1)
+                         {
+                             <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+                         }
+                         <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+                         @if (pageIndex != maxIndex)
+                         {
+                             <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+                         }
+                         <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+                     </div>
+                 }
+
+                 <div class="write">
+                     <div class="write-head">
+                         <p class="write-head-p">发表帖子</p>
+
+                     </div>
+                     <div class="write-form">
+                         <form action="/BBS/CRUD/SendPost" method="post">
+                             <div class="write-chrose">
+                                 <p class="write-chrose-p">
+                                     &nbsp;@Model.column.ForumName>>@Model.column.ColumnName>>
+                                     <select class="write-chrose-select" name="themename">
+                                         @foreach (var theme in Model.theme)
+                                         {
+                                             <option >@theme.ThemeName</option>
+                                         }
+                                     </select>
+                                 </p>
+                             </div>
+
+                             <input class="write-input-head" type="text" placeholder="请在此输入标题~" id="sendpost" name="posttitle" />
+                            <hr/>
+                             @Html.Partial("/Views/Templates/_KindEditor.cshtml", new ViewDataDictionary(ViewData)
+                            {
+                               { "css","write-input-main"},
+                               { "id","postcontent"},
+                               { "name","postcontent"},
+                               { "value","请在此输入内容"}
+                            })
+                             
+                             @if(Model.IsLogin)
+                             { 
+                             <input class="write-submit" type="submit" name="sendpost" value="发表帖子" /> @(new HtmlString("&nbsp;&nbsp;&nbsp;&nbsp;"))
+                             <input class="write-submit" type="submit" name="sendpost" value="保存草稿" />@(new HtmlString("&nbsp;&nbsp;&nbsp;&nbsp;"))
+                             <input class="write-submit" type="button" value="添加附件" id="active-upload"  />
+                             }
+                             else
+                             {
+                                <input class="write-submit" type="button" style="background-color:gray" name="sendpost" value="发表帖子" onclick="Tip()" /> @(new HtmlString("&nbsp;&nbsp;&nbsp;&nbsp;"))
+                                <input class="write-submit" type="button" style="background-color:gray" name="sendpost" value="保存草稿" onclick="Tip()" />@(new HtmlString("&nbsp;&nbsp;&nbsp;&nbsp;"))
+                                <input class="write-submit" type="button" style="background-color:gray" value="添加附件" onclick="Tip()" />
+                             } 
+                             <input type="hidden" name="file" id="files" />
+                          </form>
+                         <div id="uploadFile">
+                             @Html.Partial("/Views/Templates/_FileUpload.cshtml", new ViewDataDictionary(ViewData)
+                           {
+                              { "saveDirectory","/UserFiles/BBS/Files/"},
+                                { "id","file"},
+                              { "name","file"}
+
+                           })
+                         </div>
+
+                     </div>
+
+                 </div>
+
+             </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+                  

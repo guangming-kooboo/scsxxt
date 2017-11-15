@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Regist";
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>新用户注册</title>
+   
+
+
+    <link href="~/Areas/Platform/Content/Home/Regist/supersized.css" rel="stylesheet" />
+    <link href="~/Areas/Platform/Content/Home/Regist/style.css" rel="stylesheet" />
+    
+    <link href="~/Areas/Platform/Content/Home/Regist/reset.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
+    <script src="~/Areas/Platform/Content/Home/Regist/scripts.js"></script>
+
+
+    <script src="~/Areas/Platform/Content/Home/Regist/supersized.js"></script>
+
+    <script src="~/Areas/Platform/Content/Home/Regist/supersized-init.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#submit").on("click", function () {
+                //$("#tongyi").attr("checked")//获取checked属性的值
+                // $("#tongyi").attr("checked", "checked")//设置checked属性的值为checked
+                var f = $("#registForm").serialize();//序列化form
+                if (document.getElementById("tongyi").checked) {
+                    //ajax post表单
+                    $.post("/Platform/Home/Regist", f, function (returndate) {
+                        if (returndate != "注册成功") {
+                            alert(returndate)
+                        } else {
+                            window.location.href = "/Platform/Home/Login";
+                        }
+
+                    })
+                } else {
+                    alert('请阅读并同意服务协议！')
+                }
+            })
+
+        })
+    </script>
+
+</head>
+<body id="scroll" style="height:1000px;">
+    <div class="page-container">
+        <form action="/Platform/Home/Regist" id="registForm">
+            <fieldset>
+                <div class="login_main">
+                    <div class="row">
+                        <h2 class="denglu">用户注册</h2>
+
+
+
+
+                        
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="editor-label col-xs-4">
+
+                                </div>
+                                <div class="editor-field col-xs-8">
+                                    <input class="form-control" data-val="true" data-val-required="用户ID 字段是必需的。" id="UserID" name="UserID" placeholder="用户名" type="text" value="" />
+                                    <span class="field-validation-valid" data-valmsg-for="UserID" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="editor-label col-xs-4">
+
+                                </div>
+                                <div class="editor-field col-xs-8">
+                                    <input class="form-control" data-val="true" data-val-required="昵称 字段是必需的。" id="NickName" name="NickName" placeholder="昵称" type="text" value="" />
+                                    <span class="field-validation-valid" data-valmsg-for="UserID" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="editor-label col-xs-4">
+
+                                </div>
+                                <div class="editor-field col-xs-8">
+                                    <input class="form-control" data-val="true" data-val-required="密码 字段是必需的。" id="UserPwd" name="UserPwd" placeholder="密码" type="password" value="" />
+                                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="editor-label col-xs-4">
+
+                                </div>
+                                <div class="editor-field col-xs-8">
+                                    <input class="form-control" data-val="true" data-val-required="密码 字段是必需的。" id="UserPwd2" name="UserPwd2" placeholder="确认密码" type="password" value="" />
+                                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="editor-field col-xs-8">
+                                    <select class="form-control usertype-select" data-val="true" data-val-required="类型 字段是必需的。" id="UserType" name="UserType">
+                                        <option value="1">高校</option>
+                                        <option value="2">企业</option>
+                                    </select>
+
+                                    <span class="field-validation-valid" data-valmsg-for="Type" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="editor-field col-xs-8">
+                                   <input type="checkbox" class="form-control usertype-select" id="tongyi" name="tongyi" /><a href="#" class="form-control ">已阅读并接受我们的服务条款 </a>
+
+                                    <span class="field-validation-valid" data-valmsg-for="Type" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="editor-label col-xs-4">
+                                </div>
+                                <div class="editor-field col-xs-8">
+                                    <input type="button" id="submit" class="submit" value="注册" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+

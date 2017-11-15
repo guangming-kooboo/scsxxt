@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"所有企业.html",
+  "generationDate":new Date(1483078092081.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"b56ce0b3226e4034b0f4a39a18382936",
+    "type":"Axure:Page",
+    "name":"所有企业",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"0413bafe22714d37b25ae88bde803758",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":130,
+              "y":105},
+            "size":{
+              "width":370,
+              "height":635}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"5707e950e3c84678ac488e8a6f531d50",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":130,
+                  "y":105},
+                "size":{
+                  "width":370,
+                  "height":635}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/所有企业/u0.jpg"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "0413bafe22714d37b25ae88bde803758":{
+      "scriptId":"u0"},
+    "5707e950e3c84678ac488e8a6f531d50":{
+      "scriptId":"u1"}}});

@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"实习案例列表.html",
+  "generationDate":new Date(1483078092403.8),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"4cc3aed0b8044b328a2d19464eea0c37",
+    "type":"Axure:Page",
+    "name":"实习案例列表",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"3c1eed4afca440cc85d7254aae1302a8",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":120,
+              "y":36},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"dd93be2a169945008cd0c6d46d8b88ba",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":120,
+                  "y":36},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/实习案例列表/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "3c1eed4afca440cc85d7254aae1302a8":{
+      "scriptId":"u0"},
+    "dd93be2a169945008cd0c6d46d8b88ba":{
+      "scriptId":"u1"}}});

@@ -1,0 +1,229 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/School/Content/Home/css/style.css" rel="stylesheet" />
+
+
+    <script src="~/Include/layer/jquery-1.9.1.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <link href="~/Include/layer/skin/layer.ext.css" rel="stylesheet" />
+    <script src="~/Include/layer/extend/layer.ext.js"></script>
+    <script src="~/Include/layer/layer.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".click").click(function () {
+                $(".tip").fadeIn(200);
+            });
+
+            $(".tiptop a").click(function () {
+                $(".tip").fadeOut(200);
+            });
+
+            $(".sure").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+            $(".cancel").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">后台首页</a></li>
+            <li><a href="#">@ViewBag.Title</a></li>
+
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        <div class="tools">
+
+            <ul class="toolbar">
+
+                <li id="Bt_Add"><span><img src="/Areas/Platform/Content/Admin/images/t01.png" /></span>添加</li>
+                <li>
+                    <label>选择学校</label>
+                </li>
+
+                <li>
+                    @using ServicePlatform.Lib
+                    @using ServicePlatform.Models
+                    @using ServicePlatform.Config
+                    @{
+                        var Ent_No = (Session["Vars"] as Vars).getUserUnit();
+                        var sql = @"select T_PracBatch.*
+                                    from T_EntBatchReg
+                                    inner join T_PracBatch on T_EntBatchReg.PracBatchID=T_PracBatch.PracBatchID
+                                    inner join T_School on T_PracBatch.SchoolID=T_School.SchoolID
+                                    where T_EntBatchReg.Ent_No='" + Ent_No + "' AND T_PracBatch.IsCurrentBatch='是'";
+                                                                @(new HtmlString(PageHelper.GetSelectHtml(PageHelper.GetSelectListItem<T_PracBatch>(new SchoolContext(), sql, 3, 2, ViewBag.SchoolID), "SchoolID", "dfinput")))
+                    }
+                </li>
+                <script type="text/javascript">
+                    $("#SchoolID").change(function () {
+                        location.href = "ScoreItem_ListShow?SchoolID=" + $(this).val();
+                    }
+
+                        )
+                </script>
+
+            </ul>
+
+
+            @*<ul class="toolbar1">
+                <li><span><img src="/Areas/Platform/Content/Admin/images/t05.png" /></span>设置</li>
+            </ul>*@
+
+        </div>
+
+        <table class="tablelist">
+            <thead>
+                <tr>
+                    <th><input name="" type="checkbox" value="" checked="checked" /></th>
+                    @for (int i = 0; i < ViewBag.headerTitle.Length && i < ViewBag.Limit; i++)
+                    {
+                        <th>@ViewBag.headerTitle[i]<i class="sort"><img src="/Areas/Platform/Content/Admin/images/px.gif" /></i></th>
+                    }
+
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.dataList)
+                {
+                    string parsmStr = "";//
+
+                    var objList = LibHelper.ReflectionHelper.GetObjInfo(item);//
+
+                    var data = objList[1];
+                    <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        @for (int i = 0; i < data.Length && i < ViewBag.Limit; i++)
+                        {
+                            parsmStr += objList[0][i] + "=" + objList[1][i]+"&";//
+                            <td>@data[i]</td>
+                            
+
+                        }
+                        @{
+                        //统计信息
+                  // int personCount= new ServicePlatform.Areas.Enterprise.controllers.ScoreSetupController().Get_ScoreItemToEmployeeList(item.EntPracNo, item.ItemNo).Count;
+                        }
+                       
+                        <td>
+                            @*<label>(当前有 @personCount 位员工参与)</label>*@
+                           @for (int i = 0; i < ViewBag.Action.Length; i++)
+                            {
+                                <a href='@(ViewBag.Action[i][0] + "?" +
+parsmStr + "EntPracNo=" + ViewBag.EntPracNo + "&SchoolID=" + ViewBag.SchoolID
+                                ) ' class="tablelink">@ViewBag.Action[i][1]</a>
+                            }
+
+</td>
+                    </tr>
+                }
+
+
+
+
+            </tbody>
+        </table>
+
+
+        <!--分页开始-->
+        @Html.Partial("_CutPage")
+        <!--分页结束-->
+
+
+        <div class="tip">
+            <div class="tiptop"><span>提示信息</span><a></a></div>
+
+            <div class="tipinfo">
+
+                <div class="tipright">
+
+                    <p>是否确认对信息的修改 ？</p>
+                    <ul>
+                        <li><input type="text" class="dfinput" placeholder="用户名" /></li>
+                        <li><input type="text" class="dfinput" placeholder="密码" /></li>
+                    </ul>
+
+
+                    <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                </div>
+            </div>
+
+            <div class="tipbtn">
+                <input name="" type="button" class="sure" value="确定" />&nbsp;
+                <input name="" type="button" class="cancel" value="取消" />
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Bt_Add').click(function () {
+             
+                if ($("#SchoolID").val() == -1) {
+                    alert('请先选择学校！');
+                    return;
+                }
+                layer.open({
+                    type: 2,
+                    area: ['700px', '500px'],
+                    skin: 'layui-layer-rim', //加上边框
+                    content: ['ScoreItem_Add?SchoolID=@ViewBag.SchoolID', 'no']
+                });
+               
+            })
+         
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("#EntPracNo").change(function () {
+
+            location.href = "ScoreItem_ListShow?EntPracNo=" + $(this).val();
+        }
+        )
+
+    </script>
+
+
+
+</body>
+
+</html>
+
+
+
+
+

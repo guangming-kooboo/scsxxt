@@ -1,0 +1,154 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{
+	font-size:12px;
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+body{
+	font-family:'微软雅黑'; 
+	margin-left:15px;
+	margin-top:15px;
+	min-width:430px;
+}
+a,a:focus{
+	text-decoration:none;
+	color:#000;
+	outline:none;
+	blr:expression(this.onFocus=this.blur());
+}
+a:hover{
+	color:#9A3601;
+	text-decoration:none;
+}
+table{border-collapse:collapse;border-spacing: 0;}
+cite{font-style:normal;}
+h2{font-weight:normal;}
+
+ul{
+	list-style: none;
+}
+nav ul li {
+	display: inline-block;
+	_zoom:1;
+	*display:inline;
+}
+img{border:0;}
+ 
+hr{
+	width:95%;
+	margin:10px 0;
+	height:0;
+	border:1px solid #9A3601;
+}
+
+.company{
+	margin-left:20px;
+}
+
+.company  label{
+	width:100px;
+	text-align:right;
+	height:30px;
+}
+
+.company select{
+	width:250px;
+	height:30px;
+	background:white;
+	border:1px solid #000;
+	margin-left:15px;
+	margin-right:65px;
+	border-radius:4px 0  0 4px;
+}
+
+.company input[type=text]{
+	border:1px solid #000;
+	padding-left:8px;
+	height:28px;
+	width:220px;
+	border-radius:6px 0px 0px 6px;
+}
+
+.company input[type=submit]{
+	width:70px;
+	height:30px;
+	background:#9A3601;
+	color:white;
+	margin-left:-5px;
+	border-radius: 0 6px 6px 0 ;
+}
+
+/*-----------------------------------------*/
+.wrapper{
+	width:1000px;
+	border:1px solid #999;	
+	overflow:hidden;
+	margin-top:15px;
+	padding :10px;
+	background:#f8f8f8;
+}
+.inner_out{
+    width:1000px;
+    float:none;
+    display:block;
+}
+
+.biuuu_last{
+    width:1020px;
+    background:#f8f8f8;
+    border:1px solid #000;
+}
+
+.inner {
+	background:white;
+	width:240px;
+	border:1px solid #ccc;
+	float:left;
+	margin-right:8px;
+	margin-bottom:10px;
+}
+.inner img{
+	padding:10px;
+	width:220px;
+	height:165px;
+	
+}
+.inner p{	
+	padding:3px 0px 8px 5px;
+	text-align:center;
+	overflow:hidden;
+	word-break:keep-all;
+	width:95%;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+.last{
+	float:right;
+	margin:10px 0 20px 0;
+}
+.last input{
+	width:60px;
+	padding:5px 0;
+	background:#9A3601;
+	color:white;
+	border-radius:6px;
+	font-size:12px;
+}
+.last input[type=text]{
+	width:55px;
+	background:white;
+	border:1px solid #666;
+}
+
+.last a:hover{
+	text-decoration:underline;
+	color:#000;
+}
+
+	
+	
+

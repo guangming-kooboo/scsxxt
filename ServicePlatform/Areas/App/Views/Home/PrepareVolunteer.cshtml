@@ -1,0 +1,215 @@
+﻿
+@model ServicePlatform.Areas.App.ViewModel.Home.PrepareVolunteer_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>我的预报名志愿</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+</head>
+<body>
+<div class="main-do">
+    <div class="company-head">
+        <div class="left">
+            <a href="@Url.Action("Main", "Home", new {area = "App", uid = Model.Uid})"><span>&nbsp;<</span>&nbsp;首页</a>
+        </div>
+        <div class="middle">
+            <p>我的预报名志愿</p>
+        </div>
+        <div class="right">
+            <p></p>
+        </div>
+    </div>
+
+    @*<div class="company-head">
+        <a class="list-head-b" href="@Url.Action("Main", "Home", new {area = "App", uid = Model.Uid})"><span>&nbsp;<</span>&nbsp;首页</a>我的预报名志愿
+    </div>*@
+
+    <div class="volunteers">
+        <div class="volunteer">
+            <p><span>|</span>&nbsp;&nbsp;第一志愿
+            </p>
+        </div>
+
+        <ul class="volunteer-head-ul">
+            <li class="volunteer-head-ul-left">
+                <p class="volunteer-p">第一岗位</p></li>
+            @if (Model.CareerStatus == 10)
+            {
+                <li class="volunteer-head-ul-right"><a href="@Url.Action("EnterpriseInfo", "Home", new {area = "App", uid = Model.Uid, VolunteerSequence = 1, PosSequence = 1})"><button type="button">添加</button></a></li>
+            }
+        </ul>
+        @foreach (var item in Model.Volunteer1_1)
+        {
+            <a href="@Url.Action("DetailPrepareVolunteer", "Home", new {area = "App", PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID, uid = Model.Uid})">
+                <div>
+                    <ul class="volunteer-ul">
+                        <li class="volunteer-li-one">
+                            <p>@item.EntName</p></li>
+                        <li class="volunteer-li">
+                            <p>@item.PositionName</p></li>
+                        <br/>
+                        @if (Model.CareerStatus == 10)
+                        {
+                            <a href="@Url.Action("DeleteVolunteer", "Home", new {area = "App",uid=Model.Uid, PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                                <div>
+                                    <li class="volunteer-li-two">
+                                        <img src="~/Areas/App/Content/Image/删除.png"/>
+                                        <label>删除</label>
+                                        @*@Html.ActionLink("删除", "DeleteVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                    </li>
+                                </div>
+                            </a>
+                            <a href="@Url.Action("ConfirVolunteer", "Home", new {area = "App",  uid=Model.Uid,PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                                <div>
+                                    <li class="volunteer-li-three">
+                                        <div>转为正式</div>
+                                        @*@Html.ActionLink("转为正式", "ConfirVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                    </li>
+                                </div>
+                            </a>
+                        }
+                    </ul>
+                </div>
+                <hr width="89%"/>
+            </a>
+        }
+
+
+        <ul class="volunteer-head-ul">
+            <li class="volunteer-head-ul-left">
+                <p class="volunteer-p">第二岗位</p></li>
+            @if (Model.CareerStatus == 10)
+            {
+                <li class="volunteer-head-ul-right"><a href="@Url.Action("EnterpriseInfo", "Home", new {area = "App", uid = Model.Uid, VolunteerSequence = 1, PosSequence = 2})"><button type="button">添加</button></a></li>
+            }
+        </ul>
+        @foreach (var item in Model.Volunteer1_2)
+        {
+            <a href="@Url.Action("DetailPrepareVolunteer", "Home", new {area = "App", PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID, uid = Model.Uid})">
+                <ul class="volunteer-ul">
+                    <li class="volunteer-li-one">
+                        <p>@item.EntName</p>
+                    </li>
+                    <li class="volunteer-li">
+                        <p>@item.PositionName</p>
+                    </li>
+                    @if (Model.CareerStatus == 10)
+                    {
+                        <a href="@Url.Action("DeleteVolunteer", "Home", new {area = "App", uid=Model.Uid,PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                            <div>
+                                <li class="volunteer-li-two">
+                                    <img src="~/Areas/App/Content/Image/删除.png"/>
+                                    <label>删除</label>
+                                    @*@Html.ActionLink("删除", "DeleteVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                </li>
+                            </div>
+                        </a>
+                        <a href="@Url.Action("ConfirVolunteer", "Home", new {area = "App",  uid=Model.Uid,PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                            <div>
+                                <li class="volunteer-li-three">
+                                    <div>转为正式</div>
+                                    @*@Html.ActionLink("转为正式", "ConfirVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                </li>
+                            </div>
+                        </a>
+                    }
+                </ul>
+                <hr width="89%"/>
+            </a>
+        }
+
+        <div class="volunteer">
+            <p><span>|</span>&nbsp;&nbsp;第二志愿
+            </p>
+        </div>
+        <ul class="volunteer-head-ul">
+            <li class="volunteer-head-ul-left">
+                <p class="volunteer-p">第一岗位</p></li>
+            @if (Model.CareerStatus == 10)
+            {
+                <li class="volunteer-head-ul-right"><a href="@Url.Action("EnterpriseInfo", "Home", new {area = "App", uid = Model.Uid, VolunteerSequence = 2, PosSequence = 1})"><button type="button">添加</button></a></li>
+            }
+        </ul>
+        @foreach (var item in Model.Volunteer2_1)
+        {
+            <a href="@Url.Action("DetailPrepareVolunteer", "Home", new {area = "App", PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID, uid = Model.Uid})">
+                <ul class="volunteer-ul">
+                    <li class="volunteer-li-one">
+                        <p>@item.EntName</p></li>
+                    <li class="volunteer-li">
+                        <p>@item.PositionName</p>
+                    </li>
+                    @if (Model.CareerStatus == 10)
+                    {
+                        <a href="@Url.Action("DeleteVolunteer", "Home", new {area = "App", uid=Model.Uid,PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                            <div>
+                                <li class="volunteer-li-two">
+                                    <img src="~/Areas/App/Content/Image/删除.png"/>
+                                    <label>删除</label>
+                                    @*@Html.ActionLink("删除", "DeleteVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                </li>
+                            </div>
+                        </a>
+                        <a href="@Url.Action("ConfirVolunteer", "Home", new {area = "App",  uid=Model.Uid,PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                            <div>
+                                <li class="volunteer-li-three">
+                                    <div>转为正式</div>
+                                    @*@Html.ActionLink("转为正式", "ConfirVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                </li>
+                            </div>
+                        </a>
+                    }
+                </ul>
+                <hr width="89%"/>
+            </a>
+        }
+
+        <ul class="volunteer-head-ul">
+            <li class="volunteer-head-ul-left">
+                <p class="volunteer-p">第二岗位</p></li>
+            @if (Model.CareerStatus == 10)
+            {
+                <li class="volunteer-head-ul-right"><a href="@Url.Action("EnterpriseInfo", "Home", new {area = "App", uid = Model.Uid, VolunteerSequence = 2, PosSequence = 2})"><button type="button">添加</button></a></li>
+            }
+        </ul>
+        @foreach (var item in Model.Volunteer2_2)
+        {
+            <a href="@Url.Action("DetailPrepareVolunteer", "Home", new {area = "App", PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID, uid = Model.Uid})">
+                <ul class="volunteer-ul">
+                    <li class="volunteer-li-one">
+                        <p>@item.EntName</p></li>
+                    <li class="volunteer-li">
+                        <p>@item.PositionName</p>
+                    </li>
+                    @if (Model.CareerStatus == 10)
+                    {
+                        <a href="@Url.Action("DeleteVolunteer", "Home", new {area = "App", uid=Model.Uid,PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                            <div>
+                                <li class="volunteer-li-two">
+                                    <img src="~/Areas/App/Content/Image/删除.png"/>
+                                    <label>删除</label>
+                                    @*@Html.ActionLink("删除", "DeleteVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                </li>
+                            </div>
+                        </a>
+                        <a href="@Url.Action("ConfirVolunteer", "Home", new {area = "App", uid=Model.Uid,PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID})">
+                            <div>
+                                <li class="volunteer-li-three">
+                                    <div>转为正式</div>
+                                    @*@Html.ActionLink("转为正式", "ConfirVolunteer", "Home", new { PracticeNo = item.PracticeNo, EntPracNo = item.EntPracNo, PosID = item.PosID }, new { })*@
+                                </li>
+                            </div>
+                        </a>
+                    }
+                </ul>
+                <hr width="89%"/>
+            </a>
+        }
+    </div>
+
+</div>
+</body>

@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "FindPosToStu";
+}
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    List<T_Student> Student = ViewBag.Student;
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+<html>
+<head>
+    <title>学生岗位管理中心</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script>
+        function jump(userid)
+        {
+            url = '/School/StuPosManager/FindPosToStuDetails?userid=' + userid;
+            window.location = url;
+        }
+    </script>
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生岗位管理</a></li>
+            <li><a href="#">报名情况查询</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("FindPosToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>选择年级/专业/班级: </span></div>
+
+            @Html.Partial("_YearSpeClass")
+
+    <input type="submit" class="btn" value="查询" id="nowoperation" />
+            <div class="formtitle"><span>报名情况:  </span></div>
+
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">学号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">姓名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">性别<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">身高<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">体重<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                </tr>
+                <tbody>
+                    @if (Student != null)
+                    {
+                        for (int i = 0; i < Student.Count(); i++)
+                        {
+                                <tr class="odd">
+                                    <td>
+                                        @Student[i].StuNo
+                                    </td>
+                                    <td>
+                                        @Student[i].StuName
+                                    </td>
+                                    <td>
+                                       @Student[i].StuSex
+                                    </td>
+                                    <td>
+                                        @Student[i].StuHeight
+                                    </td>
+                                    <td>
+                                        @Student[i].StuWeight
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="jump('@Student[i].UserID')">查看报名情况</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                </tbody>
+            </table>
+        }
+
+
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+
+        function get(pracno, entpracno, posid) {
+            var vol = document.getElementById("volunteer").value;
+            var order = document.getElementById("vorder").value;
+            var url = "/School/S_PraEnrollManager/PreEnroll?pracno=" + pracno + "&entpracno=" + entpracno + "&posid=" + posid + "&vol=" + vol + "&order=" + order;
+            window.location = url;
+        }
+
+    </script>
+
+    <div class="none"></div>
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['300px', '180px'],
+                title: "岗位说明",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+            });
+        }
+    </script>
+
+</body>
+</html>

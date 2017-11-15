@@ -1,0 +1,146 @@
+﻿@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        GetGrades();
+
+        $("#gradeId").change(function () {
+            GetMajors($(this).val());
+        });
+       
+        $("#majorId").change(function () {
+            GetClasss($(this).val());
+            document.getElementById('stunum').setAttribute("value", "班级人数:");
+        });
+
+        $("#classId").change(function () {
+            alert($(this).val());
+            //GetClasss($(this).val());
+            document.getElementById('stunum').setAttribute("value", "班级人数:");
+        });
+    });
+    //根据学校取年级
+    function GetGrades(value) {
+        $.ajax({
+            type: "post",
+            url: "/School/ScoreQuery/GetGrades",
+            data: { schoolId: value },
+            dataType: "json",
+            success: function (reslut) {
+                if (reslut.count > 0) {
+                    $("#gradeId option").remove();
+                    $.each(data.Pos, function (i, item) {
+                        $("#gradeId").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                    });
+                }
+                else {
+                    $("#gradeId option").remove();
+                    $("#gradeId").append("<option value=''>--请选择--</option>");
+                }
+            },
+            error: function (data) {
+                alert("请求出错！"+data);
+            }
+        });
+    }
+
+    ////根据年级取学院
+    //function GetDepartment(value) {
+    //    $.ajax({
+    //        type: "post",
+    //        url: "/School/ScoreQuery/GetDepartment",
+    //        data: { gradeId: value },
+    //        dataType: "json",
+    //        success: function (reslut) {
+    //            if (reslut.count > 0) {
+    //                $("#departmentId option").remove();
+    //                $.each(data.Pos, function (i, item) {
+    //                    $("#departmentId").append("<option value='" + item.SpeNo + "'>" + item.SpeName + "</option>");
+    //                });
+    //            }
+    //            else {
+    //                $("#departmentId option").remove();
+    //                $("#departmentId").append("<option value=''>--请选择--</option>");
+    //            }
+    //        },
+    //        error: function (data) {
+    //            //alert(data);
+    //        }
+    //    });
+    //}
+
+
+    //根据年级取专业
+    function GetMajors(value) {
+        $.ajax({
+            type: "post",
+            url: "/School/ScoreQuery/GetDepartment",
+            data: { gradeId: value },
+            dataType: "json",
+            success: function (reslut) {
+                if (reslut.count > 0) {
+                    $("#majorId option").remove();
+                    $.each(data.Pos, function (i, item) {
+                        $("#majorId").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                    });
+                }
+                else {
+                    $("#departmentId option").remove();
+                    $("#departmentId").append("<option value=''>--请选择--</option>");
+                }
+            },
+            error: function (data) {
+                //alert(data);
+            }
+        });
+    }
+    //根据专业取班级
+    function GetClasss(value) {
+     
+        $.ajax({
+            type: "post",
+            url: "/School/ScoreQuery/GetClasss",
+            //data: "p=" + provinveCode + "&date=" + new Date(),
+            data: { majorId: value },
+            dataType: "json",
+            success: function (data) {
+                if (data.count > 0) {
+                    $("#classId option").remove();
+                    $.each(data.Pos, function (i, item) {
+                        $("#classId").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                    });
+                }
+                else {
+                    $("#classId option").remove();
+                    $("#classId").append("<option value=''>--请选择--</option>")
+                    //document.getElementById('stunum').setAttribute("value", "班级人数:");
+
+                }
+            },
+            error: function (data) {
+                //alert(data);
+            }
+        });
+    }
+</script>
+
+
+<ul class="forminfo">
+    @using ServicePlatform.Lib
+    @*<li><label>学校：</label><input value='@ViewBag.SchoolName' class="dfinput" readonly /><i></i></li>*@
+    <li><span class="text-primary">年级：</span>
+   @PageHelper.GetSelectHtml(new List<SelectListItem>(), "gradeId")
+    <i></i></li>
+    <li><label class="text-primary">专业：</label>
+        @PageHelper.GetSelectHtml(new List<SelectListItem>(), "departmentId")
+    <i></i></li>
+    <li><label class="text-primary">班级：</label>
+        @PageHelper.GetSelectHtml(new List<SelectListItem>(), "classId")
+        <i></i></li>
+
+    <li ><span></span>添加</li>
+    <li><span><img src="/Areas/Platform/Content/Admin/images/t02.png" /></span>修改</li>
+
+</ul>

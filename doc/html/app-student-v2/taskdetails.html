@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    
+    <title>WeUI</title>
+    <link rel="stylesheet" href="css/weui.min.css" />
+        <link rel="stylesheet" href="css/weui.css"/>
+        <link rel="stylesheet" href="css/example.css" />
+    
+</head>
+<body ontouchstart>
+
+<div class="header">
+  	<div class="container"id="container">
+       <div class="page layers flex input button js_show">
+          <div class="page__bd page__bd_spaci js_show">
+                <div class="weui-flex colortitle page__bd_spacing">
+		            <div ><div class="placeholder"><a><</a></div></div>
+		            <div class="weui-flex__item"><div class="placeholder">
+		                              任务详情
+		            </div></div>	
+		           <div style="width:40px"><div class="placeholder"></div></div>
+		        </div>   
+        </div>
+     </div>
+  </div>
+</div>
+<div class="content">
+    <div class="container" id="container">
+        <div class="page layers flex input button uploader panel grid uploader js_show">
+          <div class="page__bd page__bd_spaci js_show">
+              <div class="weui-cells">
+                <div class="weui-cell">
+	                <div class="weui-cell__bd">
+	                    <p>定额任务</p>
+	                </div>
+	                <div class="weui-cell__ft">正在审核</div>
+                </div>
+                 <div class="weui-cell">
+	                <div class="weui-cell__bd">
+	                    <p>查看学生基本信息填写情况</p>
+	                </div>
+	                
+                </div>
+                 <div class="weui-cell">
+	                <div class="weui-cell__bd">
+	                    <p>占比：5%</p>
+	                </div>
+                </div>
+                
+              </div>
+              <div class="weui-cells weui-cells_form">
+	                <div class="weui-flex">
+			            <div class="placeholder">备注</div>
+			            <div class="weui-flex__item"><div class="placeholder"></div></div>
+			        </div>
+			        <div class="weui-cell">
+				    
+	                <div class="weui-cell__bd">
+	                    <textarea class="weui-textarea"   rows="3">同学们基本完成了自己的基本信息，但是还是有一部分没有</textarea>
+	                </div>
+	            </div>
+	          </div>
+              <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd">
+                            <p class="weui-uploader__title">图片上传</p>
+                            <div class="weui-uploader__info">0/2</div>
+                        </div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderFiles">
+                                <li class="weui-uploader__file" style="background-image:url(./images/pic_160.png)"></li>
+                                <li class="weui-uploader__file" style="background-image:url(./images/pic_160.png)"></li>
+                                <li class="weui-uploader__file" style="background-image:url(./images/pic_160.png)"></li>
+                                <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">
+                                    <div class="weui-uploader__file-content">
+                                        <i class="weui-icon-warn"></i>
+                                    </div>
+                                </li>
+                                <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">
+                                    <div class="weui-uploader__file-content">50%</div>
+                                </li>
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                                <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
+    </div>
+</div>
+
+</body>
+</html>

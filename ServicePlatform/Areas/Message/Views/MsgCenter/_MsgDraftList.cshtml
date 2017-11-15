@@ -1,0 +1,20 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using ServicePlatform.Models;
+@model Webdiyer.WebControls.Mvc.PagedList<T_SysMsg>
+
+@*@Styles.Render("/Content/css/Admin/style.css")
+@Styles.Render("/Content/css/Admin/MsgStyle.css")
+@Scripts.Render("/Scripts/Admin/MsgJs.js")
+@Scripts.Render("/Scripts/Admin/jquery-1.5.2.min.js")*@
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+
+@Scripts.Render("/Areas/Message/Content/jquery-1.9.1.min.js")
+
+@{ Html.RenderPartial("MsgDraftTable"); }
+
+<div class="pagin">
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "paginList", PagerItemTemplate = "<li class=\"paginItem\"><a style='display:none'>{0}</a></li>" }).AjaxOptions(a => a.SetUpdateTargetId("articles"))
+</div>

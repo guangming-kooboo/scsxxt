@@ -1,0 +1,60 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.RecEnt_SucceedCase_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            @*跳转到招聘企业详情*@
+            <a href='javascript:submit("a",{EntPracNo:"@Model.EntPracNo",VolunteerSequence:"@Model.VolunteerSequence",PosSequence:"@Model.PosSequence"});'>
+                <div><div class="placeholder"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+            </a>
+
+            <div class="weui-flex__item">
+                <div class="placeholder">
+                    成功案例
+                </div>
+            </div>
+            <div style="width:48px"><div class="placeholder"></div></div>
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-uploader__bd" style="width: 100%">
+            <ul class="weui-uploader__files">
+                @if (Model.DownLoadFiles.Count > 0)
+                {
+                    foreach (var item in Model.DownLoadFiles)
+                    {
+                        <li class="weui-uploader__file1 Photo"><img style="background-image: url(@item.DLFileUrl); background-size: 100% auto" width="90%" src="@item.DLFileUrl"></li>
+                    }
+                }
+                else
+                {
+                    <li class="weui-uploader__file1">企业暂没上传文件</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="weui-gallery" id="gallery" style="opacity: 1; display: none">
+    <span class="weui-gallery__img" id="galleryImg" style="background-image: url()"></span>
+    <div class="weui-gallery__opr">
+    </div>
+</div>
+<script src="~/Content/AppStudentV3/js/zepto.js"></script>
+<script>
+                    $gallery = $("#gallery"),
+                    $galleryImg = $("#galleryImg"),
+                        $uploaderFiles = $(".Photo");
+                    $uploaderFiles.on("click", "img", function () {
+                        $galleryImg.attr("style", this.getAttribute("style"));
+
+
+                        $gallery.fadeIn(100);
+                        $gallery.on("click", function () {
+                            $gallery.fadeOut(100);
+                        });
+                    });
+</script>
+
+

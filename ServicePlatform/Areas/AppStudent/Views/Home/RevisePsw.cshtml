@@ -1,0 +1,43 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.RevisePsw_M
+@Html.Partial("student_menu")
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                    @*跳转到个人中心*@
+                    <a href="javascript:submit('a');"><div><div class="placeholder colortitle"><img src="@ViewData["root"]images/return.png" class="return"></div></div></a>
+                <div class="weui-flex__item colortitle"><div class="placeholder">修改密码</div></div>
+                <div>
+                    @*本页面*@
+                    <a href="javascript:submit('-');" class="weui-btn1 weui-btn_mini">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">原密码</label></div>
+                    <div class="weui-cell__bd">
+                        @Html.PasswordFor(o => o.OldPwd, new { @class = "weui-input", placeholder = "原密码" })
+                        @*<input class="weui-input" placeholder="请输入原密码">*@
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">新密码</label></div>
+                    <div class="weui-cell__bd">
+                        @Html.PasswordFor(o => o.NewPwd, new { @class = "weui-input", placeholder = "新密码" })
+                        @*<input class="weui-input" placeholder="请输入新密码">*@
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">再次确认</label></div>
+                    <div class="weui-cell__bd">
+                        @Html.PasswordFor(o => o.SecondPwd, new { @class = "weui-input", placeholder = "确定密码" })
+                        @*<input class="weui-input" placeholder="请输入新密码">*@
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

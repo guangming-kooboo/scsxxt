@@ -1,0 +1,35 @@
+﻿@model  List<object[]>
+@{
+    var id = new Random(new Random(DateTime.Now.Millisecond).Next()).Next();
+    var count1 = 0;
+    var count2 = 0;
+}
+
+<div id="@id" class="carousel slide" data-ride="carousel" data-interval="6000">
+        <ol class="carousel-indicators">
+            @foreach (var item in Model)
+            {
+                <li data-target="@("#"+id)" data-slide-to="@(count1)" class="@(count1==0? "active" : "none")"></li>
+                { count1++;}
+            }      
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            @foreach (var item in Model)
+            {
+                <div class="item @(count2==0? "active" : "none")">
+                    @Html.Action(item[0].ToString(), item[1].ToString(), item[2])
+                </div>
+                { count2++; }
+            }
+        </div>
+        @*<a style="background-image: linear-gradient(to right,rgba(255, 255, 255, 0.5) 0,rgba(0,0,0,.0001) 100%);" 
+           class="left carousel-control" href="@("#"+id)" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a style="background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(255, 255, 255, 0.5) 100%);"
+           class="right carousel-control carousel-bg" href="@("#"+id)" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>*@
+    </div>

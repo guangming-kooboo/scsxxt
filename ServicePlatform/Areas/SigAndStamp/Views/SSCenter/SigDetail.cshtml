@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ServicePlatform.Models.T_Signature>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SigDetail</title>
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="SigDetailContainer">
+        <div id="SigDetailTopic">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="/SigAndStamp/SSCenter/SigTable">首页</a></li>
+                    <li><a href="#">签名详情</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="SigDetailContent">
+            @foreach (var s in Model)
+            {
+                <div id="SigDetail">
+                    <div style="margin-top:10px;"><div class="fontSet">签名编号：</div>@s.SignatureID</div>
+                        <div style="margin-top:10px;"><div class="fontSet">签名标题：</div>@ViewData["thetitle"]</div>
+                        <div style="margin-top:10px;"><div class="fontSet">签名发布者：</div>@ViewData["thepublish"]</div>
+                        <div style="margin-top:10px;"><div class="fontSet">发布时间：</div>@ViewData["thetime"]</div>
+                        <div style="margin-top:10px;"><div class="fontSet">用户名称：</div>@ViewData["UserName"]</div>
+                    </div>
+
+                <div id="SigPicBrowser">
+                    <div style="margin-top:10px;">
+                        <div class="fontSet">
+                            签名预览：
+                        </div>
+                        <div><img src="@s.SignatureUrl" /></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+
+

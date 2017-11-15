@@ -1,0 +1,27 @@
+﻿@model Qx.Community.Models._Search
+<div>
+
+    <input type="button" value="返回" style="margin-left:150px;" />
+    <input type="button" value="首页" />
+    <input type="button" value="注册" style="float:right;margin-right:150px;" />
+    <input type="button" value="登录" style="float:right;margin-right:5px;" />
+    <img src="~/Areas/BBS/Content/Image/1.png" style="float:right;margin-right:5px;" />
+    <hr style="margin-left:150px;margin-right:150px;" />
+    <img src="~/Areas/BBS/Content/Image/LOGO[1].jpg" style="float:left;height:131px;width:170px;margin-left:130px;" />
+    <h1 style="margin-top:65px;float:left">顶岗实习论坛</h1>
+
+ 
+    <label style="color:grey;margin-top:55px;margin-left:400px;float:left;">热搜:</label>
+    @foreach (var item in Model.HotSearch)
+    {
+        <a href="@(item.Url+"?id="+item.ID)" style="color:gray;margin-top:55px;float:left;padding-left:10px;">@item.Text</a>
+    }
+    <input type="text" placeholder="请输入搜索内容" style="float:left;margin-top:10px;margin-left:400px;" />
+    <select style="float:left;margin-top:10px;">
+        <option style="color:gray">帖子</option>
+        <option style="color:gray">用户</option>
+    </select>
+    <a href="/BBS/Home/SearchPost" style="float:left; margin-top:10px;margin-left:10px;" >搜索</a>
+
+
+</div>

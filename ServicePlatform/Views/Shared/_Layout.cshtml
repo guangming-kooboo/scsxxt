@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script>
+        function back() {
+            history.go(-1);
+        }
+    </script>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Include/bootstrap/css/bootstrap.min.css")
+    @Scripts.Render("~/Include/bootstrap/js/bootstrap.min.js")
+    @Styles.Render("~/Include/font-awesome/css/font-awesome.min.css")
+    <button onclick="back()">返回</button>
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

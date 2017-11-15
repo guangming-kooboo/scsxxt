@@ -1,0 +1,47 @@
+﻿@model ServicePlatform.Models.T_SysMsg
+@{
+    ViewBag.Title = "New_Msg_Detail";
+}
+
+@*@Styles.Render("/Content/css/Admin/style.css")
+@Scripts.Render("/Scripts/Admin/jquery.js")
+@Scripts.Render("/Scripts/Admin/jquery.idTabs.min.js")
+@Scripts.Render("/Scripts/Admin/select-ui.min.js")*@
+
+
+
+<html>
+<head>
+    <title>回复消息</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    @Html.Partial("_KindEditorLinks")
+    <script type="text/javascript" src="/Areas/Message/Content/jquery-1.9.1.min.js"></script>
+</head>
+@using (Html.BeginForm("RecMsg_Replay", "MsgCenter", FormMethod.Post))
+{
+    <body>
+                <div class="place">
+                    <span>位置：</span>
+                    <ul class="placeul">
+                        <li><a href="#">消息中心</a></li>
+                        <li><a href="#">回复消息</a></li>
+                    </ul>
+                </div>
+                <div class="formbody">
+                    <div class="formtitle"><span>回复消息</span></div>
+                    <ul class="forminfo">
+                        <div style="display:none">
+                            <label style="display:none">回复消息ID：</label> @Html.TextBoxFor(model => model.MsgID, new { @class = "dfinput", @readonly = true, @hidden = true })
+                            <label style="display:none">回复消息类型：</label>@Html.TextBoxFor(model => model.MsgTypeID, new { @class = "dfinput", @readonly = true, @hidden = true })
+                        </div>
+                        <li><label>回复对象：</label>@Html.TextBoxFor(model => model.MsgOwner, new { @class = "dfinput", @readonly = true })</li>
+                        <li><label>消息内容：</label>@Html.TextAreaFor(model => model.MsgContent, new { id = "editor", name = "editor", style = "height: 375px;" })</li>
+        <li><input type="text" id="msgtext" name="msgtext" value="" style="display:none" /></li>
+                        <li><label>&nbsp;</label><input class="btn" type="button" value="取消" id="quit" name="action" onclick="javascript:history.back(-1);" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="btn" type="submit" value="回复" id="replay" name="action" onclick="check()" /></li>
+                    </ul>
+                </div>
+        <div style="display:none"><input type="text" id="msgcontent" name="msgcontent" value="" /></div>
+            </body>
+}
+        </html>

@@ -1,0 +1,101 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.DiaryDrafts_M
+
+@{
+    Layout = ViewData["Layout"].ToString();
+    int pageIndex = (int)ViewData["pageIndex"];
+    int maxIndex = (int)ViewData["maxIndex"];
+}
+@section script{
+    <script>
+    function jumpTo(index) {
+        location.href = '@ViewData["currentUrl"]?pageIndex=' +index+ '&perCount=@ViewData["perCount"]'+'&id=@Model.userid';
+    };
+
+    </script>
+}
+
+
+<div class="main">
+
+<!-- 导航-->
+           @Html.Action("_Head", new  { id=Model.userid})
+          <div class="means">
+               <div class="my-note-lists-head">
+                       <ul class="my-note-lists-head-ul-ul">
+                              <li class="my-note-lists-head-li"><a class="my-note-lists-head-a"href="">&nbsp;&nbsp;&nbsp;日志&nbsp;&nbsp;&nbsp;</a></li>
+                              <li class="my-note-lists-head-li"><p class="my-note-lists-head-p">|</p></li>
+                              <li class="my-note-lists-head-li"><p class="my-note-lists-head-ap" >草稿箱</p></li>
+                       </ul>
+                    </div>
+                    <div class="main-note-head-img-img3">
+                      <img src="~/Areas/BBS/Content/Image/分界线3.png">
+                    </div>
+                 <div class="main-share-middle">
+                    <div class="main-share-middle-left">
+                        <div class="main-share-middle-left-input">
+                           <p><img src="~/Areas/BBS/Content/Image/管理分享.png">
+                           <div class="main-share-middle-left-input-div">
+                              <a class="main-share-middle-left-input-a"href="@Url.Action("WriteDiary","UserCenter",new{area="BBS"})">编写日志</a></p>
+                           </div>
+
+                        </div>
+                      
+                    </div>
+
+
+                    <div class="main-share-middle-right">
+                       <ul class="main-share-middle-right-ul">
+                            <li class="main-share-middle-right-li"><a class="main-share-li-a" href="@Url.Action("Diarys","UserCenter",new{area="BBS",id=Model.userid})"><p class="main-share-middle-right-li-p">日志&nbsp;&nbsp;<a class="main-share-middle-right-li-a" href="">@Model.diaryCount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p></a></li>
+                            <li class="main-share-middle-right-li"><a class="main-share-li-a" href="@Url.Action("DiaryDrafts","UserCenter",new{area="BBS",id=Model.userid})"><p class="main-share-middle-right-li-p">草稿&nbsp;&nbsp;<a class="main-share-middle-right-li-a" href="">@Model.draftCount</a></p></a></li>
+                       </ul>
+                      
+                    </div>
+                </div>
+
+            
+                <div class="main-share">
+                    @foreach(var draft in Model.drafts)
+                    {
+                      <ul class="main-share-ul">
+                       <li class="main-share-lit"><a class="main-share-li-a" href="@Url.Action("ShowDiary","UserCenter",new{area="BBS",id=Model.userid})">@draft.DiaryTitle</a></li>            
+                        <li class="main-share-note-lis"><a class="main-share-li-p" href="@Url.Action("EditDiary","UserCenter",new{area="BBS",id=draft.ID})"> 编辑</a></li>
+                        <li class="main-share-li"><img src="~/Areas/BBS/Content/Image/日志编辑.png"></li>
+                       <li class="main-share-note-lis"><a class="main-share-li-p" href="@Url.Action("DeleteDiary","UserCenter",new{area="BBS",id=draft.ID})"> 删除</a></li>
+                        <li class="main-share-li"><img src="~/Areas/BBS/Content/Image/日志删除.png"></li>
+
+                        <li class="main-share-liss"><p class="main-share-li-p">@draft.Time</p></li>
+                        <li class="main-share-li"><img src="~/Areas/BBS/Content/Image/分享时间.png"></li>
+                     </ul>
+                    }
+                   
+
+
+                    
+                  
+                </div> 
+    @if ((int)ViewData["maxIndex"] > 1)
+    {
+        <div class="jump">
+            <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+            @if (pageIndex != 1)
+            {
+                <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+            }
+            <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+            @if (pageIndex != maxIndex)
+            {
+                <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+            }
+            <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+        </div>
+    }
+          </div>
+
+
+          
+
+
+
+
+

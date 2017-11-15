@@ -1,0 +1,102 @@
+﻿@using ServicePlatform.Models
+
+@{
+    ViewBag.Title = "基本信息维护";
+    T_School ts = ViewBag.SchoolInfo;
+}
+
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+<html>
+<head>
+    <title>增添员工</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+        function check() {
+            var classno = document.getElementById("Class").value;
+            document.getElementById("classno").setAttribute("value", classno);
+        }
+    </script>
+
+    <script type="text/javascript">
+
+        function UpladFile() {
+            var sid = document.getElementById("sid").value;
+            var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+            var FileController = "/FacultyManager/SchoolLogoUpload";                    // 接收上传文件的后台地址
+
+            // FormData 对象
+            var form = new FormData();
+            //form.append("author", "hooyes");                        // 可以增加表单数据
+            form.append("file", fileObj);                           // 文件对象
+            // XMLHttpRequest 对象
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", FileController, true);
+            xhr.onload = function () {
+                alert("上传完成!");
+                window.location = '/School/FacultyManager/SchoolBaseInfo';
+            };
+            xhr.send(form);
+            //document.getElementById("schoollogo").setAttribute("src", "/UserFiles/School/"+sid+"/BasicInfo/+"+sid+"-" + fileObj.name)
+        }
+    </script>
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学校管理中心</a></li>
+            <li><a href="#">学校基本信息</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("ModifySchoolBaseInfo", "FacultyManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <ul class="forminfo">
+                @if (ts != null)
+                {
+                    <li><label>学校ID：</label><input type="text" id="sid" name="sid" class="dfinput" value='@ts.SchoolID' hidden /></li>
+                    <li><label>学校地址：</label><input type="text" id="sadd" name="sadd" class="dfinput" value='@ts.Address' /></li>
+                    <li><label>联系方式：</label><input type="text" id="sphone" name="sphone" class="dfinput" value='@ts.Contact' /></li>
+                    <li><label>官方邮箱：</label><input type="text" id="semail" name="semail" class="dfinput" value='@ts.Email' /></li>
+                    <li><label>学校Logo：</label><img src='@ts.SchoolLogo' id="schoollogo"/></li>
+                    @*<li><label>更选Logo：</label><input type="file" id="slogo" name="slogo" class="dfinput" value="更换" /></li>*@
+                    <li><label>更换Logo：</label><input type="file" id="file" name="myfile" class="dfinput" onchange="UpladFile()" /><i style="color:red">推荐尺寸：380*280</i></li>
+                }
+                else
+                {
+                    <li><label>Error：</label>该学校已被删除！</li>
+                }
+
+                <li>
+                    <label>&nbsp;</label>
+                    @if (ts == null)
+                    {
+                        @*<input type="submit" value="保存" class="btn" />*@
+                    }
+                    else
+                    {
+                        <input type="submit" value="提交修改" class="btn" />
+                    }
+                </li>
+            </ul>
+
+
+        }
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <div class="none"></div>
+</body>
+</html>

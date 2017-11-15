@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>印章类型表维护</title>
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="~/Areas/CodeManager/Content/C_StampType/js/StampType.js"></script>
+    
+    <script language="javascript" type="text/javascript">
+        function detail() {
+            var SelectRow = $('#StampTypetablebox').datagrid("getSelected");
+            var SelectId = SelectRow.TypeID;
+            var s = "/CodeManager/Code/detailStampType?id=" + SelectId + "";
+            window.location = s;
+        }
+        function update() {
+            var SelectRow = $('#StampTypetablebox').datagrid("getSelected");
+            var SelectId = SelectRow.TypeID;
+
+            var s = "/CodeManager/Code/updateStampType?id=" + SelectId + "";
+            window.location = s;
+        }
+    </script>
+
+
+    <style type="text/css">
+        .datagrid-cell {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">印章类型维护表</a></li>
+                <li><a href="#">印章类型列表</a></li>
+            </ul>
+        </div>
+    <!--用于显示表格-->
+    <div id="StampTypetablebox">
+        <table id="StampTypetable"></table>
+        <div id="HomeToolBar">
+            <div id="TButton" style="padding:5px;">
+                <div>
+                    <a href="/CodeManager/Code/AddStampType" class="easyui-linkbutton" iconcls="icon-add">添加</a>
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="obj.remove();">删除</a>
+                    <a href="#" class="easyui-linkbutton" id="TB1" iconcls="icon-edit" onclick="update();">修改</a>
+                    <a href="#" class="easyui-linkbutton" id="TB2" iconcls="icon-tip"  onclick="detail();">详情</a>
+                   
+                </div>
+            </div>
+            @*<div>
+                    查询新闻：<input type="text" name="SearchNews" style="width=100px;" />
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="obj.search();">查询</a>
+                </div>*@
+            <input class="easyui-searchbox" data-options="prompt:'搜索内容',menu:'#SearchItem',searcher:doSearch" style="width:300px" name="AtributeSearch"/>
+              
+                
+                 
+            <div id="SearchItem">
+                <div data-options="name:'all',iconCls:'icon-ok'">所有印章类型</div>
+                <div data-options="name:'TypeID'">印章类型编号</div>
+                
+                <div data-options="name:'TypeName'">印章名称</div>
+                <div data-options="name:'SybSystem'">所属单位名称</div>
+
+                <script>
+                    function doSearch(value, name) {
+                        //alert('You input: ' + value + '(' + name + ')');
+                        $('#StampTypetablebox').datagrid('load', {
+                            classAttribute: name,
+                            classValue: value,
+                        });
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

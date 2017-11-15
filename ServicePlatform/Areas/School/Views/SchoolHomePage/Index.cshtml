@@ -1,0 +1,326 @@
+﻿@{
+    Layout = null;
+    ServicePlatform.Models.ContentContext sb = new ServicePlatform.Models.ContentContext();
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>旅游学院</title>
+    <script type="text/javascript" src="~/Content/FrontSharePlugin/SlideJS/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/FrontSharePlugin/SpryAssets/SpryTabbedPanels.js"></script>
+    <script src="~/Content/FrontSharePlugin/SlideJS/lib/Slides-SlidesJS-3/source/jquery.slides.js"></script>
+    <link href="~/Areas/School/SchoolContent/SchoolHomePage/body/index.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/FrontSharePlugin/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        //获取Tab页点击的栏目信息
+        function TabClick(parameter) {
+            var ColumnId = parameter;
+            //使用JQuery的Post方法将此值传递去后台
+            $.post("/SchoolHomePage/GetTabIndex", { IndexId: ColumnId });
+        };
+    </script>
+
+</head>
+
+<body>
+    @Html.Partial("Head")
+    <!-- /导航 -->
+    <!-- 轮播大图 -->
+    <div id="slides" class="slide-banner">
+        <ul class="slides_container">
+            <li class="banner-img" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/body/img/banner/1.jpg); background-position: center; "></li>
+            <li class="banner-img" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/body/img/banner/2.jpg); background-position: center;"></li>
+            <li class="banner-img" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/body/img/banner/3.jpg); background-position: center;"></li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+
+    <div id="wrapper">
+        <!--左侧-->
+        <div id="left">
+            <!--用户登录-->
+            <div class="login height">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p> 用户登录</p>
+                </div>
+                <form action="/Platform/Home/Login" method="post">
+                    <input id="UnitID" name="UnitID"  type="text" value=@ViewData["SchoolID"] hidden="hidden" />
+                    <div class="user">
+                        <label for="username">用户名：</label>
+                        <input autocomplete="off" data-val="true" data-val-required="用户名 字段是必需的。" id="UserID" name="UserID" placeholder="工号/学号" type="text" value="" /><br />
+                    </div>
+                    <div class="user">
+                        <label for="password">密 码：</label>
+                        <input autocomplete="off" data-val="true" data-val-required="密码 字段是必需的。" id="UserPwd" name="UserPwd" placeholder="密码" type="password" />
+                    </div>
+                    <div class="botton">
+                        <input name="submit" type="submit" value="确定" />
+                        <input name="reset" type="reset" value="重置" />
+                    </div>
+                    <a href="#">忘记密码</a>
+                </form>
+            </div>
+
+            <!--视频新闻-->
+            <div class="news height">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p>视频新闻</p>
+                    <a href="/School/SchoolHomePage/VideoNewsList?ColumnName=视频新闻">更多>></a>
+                </div>
+                <ul>
+                    @foreach (var m in (ViewData["VideoNotice"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                    {
+                        string tlink = "/School/SchoolHomePage/HomeVideoDetail?id=" + @m.ContentID + ""; 
+                        <li>
+                            <img src="/Areas/School/SchoolContent/SchoolHomePage/body/img/link.png" width="16" heigth="16" />
+                            <a href=@tlink>@m.ContentTitle</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <!--实习随拍-->
+            <div class="photo">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p>实习随拍</p>
+                    <a href="/School/SchoolHomePage/PicNewsList">更多>></a>
+                </div>
+                <div id="scrollcontainer">
+                    <div id="scrollcontent">
+                        @foreach (var m in (ViewData["PicNotice"] as IEnumerable<ServicePlatform.Models.T_News>))
+                        {
+                            string plink = m.PicUrl;
+                            <img src=@plink />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="right">
+            <div class="height">
+                <!--选项卡标签-->
+                <div id="TabbedPanels1" class="TabbedPanels">
+                    <ul class="TabbedPanelsTabGroup">
+                        <li class="TabbedPanelsTab" tabindex="0" onclick="TabClick(0);">学院公告</li>
+                        <li class="TabbedPanelsTab" tabindex="1" onclick="TabClick(1);">班级公告</li>
+                        <li class="TabbedPanelsTab" tabindex="2" onclick="TabClick(2);">企业公告</li>
+                        <li> <a href="/School/SchoolHomePage/TabToNewsList" id="TabSelect" class="more">更多>></a></li>
+                    </ul>
+                    <div class="TabbedPanelsContentGroup">
+                        <div class="TabbedPanelsContent">
+                            <table class="notice">
+                                <tr>
+                                    <th scope="col">公告标题</th>
+                                    <th scope="col">发布人</th>
+                                    <th scope="col">日期</th>
+                                </tr>
+                                @foreach (var m in (ViewData["AcademyNotice"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                                {
+                                    string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @m.ContentID + "";                                                           
+                                    <tr>
+                                        <td class="DS"><a href=@tlink>@m.ContentTitle</a></td>
+                                        <td>@m.ContentPublisher</td>
+                                        <td>@ServicePlatform.Areas.News.ToolHelper.HandleTime.ConvertIntDateTime(Convert.ToInt32(m.PubDate))</td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        <div class="TabbedPanelsContent">
+                            <table class="notice">
+                                <tr>
+                                    <th scope="col">公告标题</th>
+                                    <th scope="col">发布人</th>
+                                    <th scope="col">日期</th>
+                                </tr>
+                                @foreach (var n in (ViewData["ClassNotice"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                                {
+                                    string rlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @n.ContentID + "";
+                                    <tr>
+                                        <td class="DS"><a href=@rlink>@n.ContentTitle</a></td>
+                                        <td>@n.ContentPublisher</td>
+                                        <td>@ServicePlatform.Areas.News.ToolHelper.HandleTime.ConvertIntDateTime(Convert.ToInt32(n.PubDate))</td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                        <div class="TabbedPanelsContent">
+                            <table class="notice">
+                                <tr>
+                                    <th scope="col">公告标题</th>
+                                    <th scope="col">发布人</th>
+                                    <th scope="col">日期</th>
+                                </tr>
+                                @foreach (var n in (ViewData["EntNotice"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                                {
+                                    string rlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @n.ContentID + "";
+                                    <tr>
+                                        <td class="DS"><a href=@rlink>@n.ContentTitle</a></td>
+                                        <td>@n.ContentPublisher</td>
+                                        <td>@ServicePlatform.Areas.News.ToolHelper.HandleTime.ConvertIntDateTime(Convert.ToInt32(n.PubDate))</td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--实习企业简介-->
+            <div class="descEnterprise height">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p>实习企业简介</p>
+                </div>
+                <table class="desctable">
+                    <tr>
+                        <th scope="row">酒店：</th>
+                        <td><a href="#">王府井饭店</a></td>
+                        <td><a href="#">悦华酒店</a></td>
+                        <td><a href="#">悦来客栈</a></td>
+                        <td><a href="#">白鹭洲大酒店</a></td>
+                        <td><a href="#">华大招待所</a></td>
+                        <td><a href="#">七天快捷酒店</a></td>
+                        <td><a href="#">更多>></a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">景区：</th>
+                        <td><a href="#">厦门鼓浪屿</a></td>
+                        <td><a href="#">北京故宫</a></td>
+                        <td><a href="#">黄山风景区</a></td>
+                        <td><a href="#">长白山天池</a></td>
+                        <td><a href="#">西藏布达拉宫</a></td>
+                        <td><a href="#">兵马俑</a></td>
+                        <td><a href="#">更多>></a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">旅行社：</th>
+                        <td><a href="#">国旅</a></td>
+                        <td><a href="#">青旅</a></td>
+                        <td><a href="#">途牛</a></td>
+                        <td><a href="#">去哪儿</a></td>
+                        <td><a href="#">携程</a></td>
+                        <td><a href="#">中旅</a></td>
+                        <td><a href="#">更多>></a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">其他：</th>
+                        <td><a href="#">博物馆</a></td>
+                        <td><a href="#">拓展基地</a></td>
+                        <td><a href="#">万达广场</a></td>
+                        <td><a href="#">歌乐山</a></td>
+                        <td><a href="#">纪念馆</a></td>
+                        <td><a href="#">兵马俑</a></td>
+                        <td><a href="#">更多>></a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="lastlist">
+                <!--实习日记-->
+                <div class="daily">
+                    <div class="title">
+                        <span class="logo"></span>
+                        <p>实习日记</p>
+                        <a href="/School/SchoolHomePage/HomeIndexNewsList?ColumnName=实习日记">更多>></a>
+                    </div>
+                    <ul class="list">
+                        @foreach (var n in (ViewData["InternShipNotice"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                        {
+                            string rlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @n.ContentID + "";
+                            <li>
+                                <div class="DS"><a href=@rlink>@n.ContentTitle</a></div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!--实习辅导-->
+                <div class="daily">
+                    <div class="title">
+                        <span class="logo help"></span>
+                        <p>实习辅导</p>
+                        <a href="/School/SchoolHomePage/HomeIndexNewsList?ColumnName=实习辅导">更多>></a>
+                    </div>
+                    <ul class="list">
+                        <ul class="list">
+                            @foreach (var n in (ViewData["InternShipGuide"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                            {
+                                string rlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @n.ContentID + "";
+                                <li>
+                                    <div class="DS"><a href=@rlink>@n.ContentTitle</a></div>
+                                </li>
+                            }
+                        </ul>
+                    </ul>
+                </div>
+                <!--招聘信息-->
+                <div class="daily">
+                    <div class="title">
+                        <span class="logo job"></span>
+                        <p>招聘信息</p>
+                        <a href="/School/SchoolHomePage/HomeIndexNewsList?ColumnName=招聘信息">更多>></a>
+                    </div>
+                    <ul class="list">
+                        @foreach (var m in (ViewData["HireNotice"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                        {
+                            string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @m.ContentID + "";
+                            <li>
+                                <a href=@tlink>@m.ContentTitle</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!--资料下载-->
+                <div class="daily">
+                    <div class="title">
+                        <span class="logo download"></span>
+                        <p>资料下载</p>
+                        <a href="/School/SchoolHomePage/DownLoad?ColumnName=资料下载">更多>></a>
+                    </div>
+                    <ul class="list">
+                        @foreach (var m in (ViewData["DownLoad"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                        {
+                            string DLLink = sb.T_DownLoadFiles.Find(m.ContentID).DLFileUrl;
+                            <li>                                
+                                <a href=@DLLink>@m.ContentTitle</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script type="text/javascript" src="~/Content/FrontSharePlugin/SlideJS/lib/Slides-SlidesJS-3/source/jquery.slides.min.js"></script>
+    <script src="~/Areas/School/SchoolContent/SchoolHomePage/body/js/imgScrollUp.js" type="text/javascript"></script>
+
+    <!-- 页面自定义js -->
+    <script type="text/javascript">
+        $().ready(function () {
+            //$("#slides ul").slidesjs({
+            $("#slides ul").slidesjs();
+
+
+            $(".main-nav-link a").click(function () {
+                $(".main-nav-link .current").removeClass("current");
+                $(this).addClass("current");
+            });
+
+            $("#slides1 ul").slidesjs();
+
+        });
+        var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+    </script>
+
+    @Html.Partial("Foot")
+
+</body>
+</html>
+

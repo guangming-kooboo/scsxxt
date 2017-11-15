@@ -1,0 +1,41 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Areas/Message/Content/jquery-1.9.1.min.js"></script>
+@model ServicePlatform.Areas.WbsHqu.ViewModels.EnterPriseApply_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+@Html.InputFor(o => o.Ent_Name)
+
+@Html.SelectFor(o => o.EntCategoryID, Model.EntCategoryItems)
+
+@Html.SelectFor(o=>o.EntRankID,Model.EntRankItems)
+
+@Html.InputFor(o=>o.EntAddress)
+
+@Html.InputFor(o => o.Contectinfo)
+
+@Html.InputFor(o => o.Email)
+
+@Html.RichBoxFor(o => o.EntResume)
+<script>
+    $("#EntCategoryID").change(function () {
+        $.ajax({
+            type: "GET",
+            url: "/WbsHqu/V3/GetRank?EntCategoryID=" +$("#EntCategoryID").val(),
+            success: function (data) {
+                if (data == 500)
+                    alert("获取失败");
+                else {
+                    $("#EntRankID option").remove();
+                    $.each(data.data,function(index,item){
+                        $("#EntRankID").append("<option value=" + item.RankID + ">" + item.RankName + "</option>");
+                    })
+               
+                }
+            }
+        })
+    }
+    )
+</script>

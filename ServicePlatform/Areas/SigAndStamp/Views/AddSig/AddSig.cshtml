@@ -1,0 +1,98 @@
+﻿@model ServicePlatform.Models.T_Stamps
+@{
+    Layout = null;
+    string DefaultTimeValue = ServicePlatform.Areas.News.ToolHelper.CurrentTimeToEasyuiValue.getValue();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddSig</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+    <style type="text/css">
+        .SubmitButton {
+            width: 137px;
+            height: 35px;
+            background: url(/Areas/News/Content/Image/btnbg.png) no-repeat;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            .SubmitButton:hover {
+                background-image: url(/Areas/News/Content/Image/btnbg3.png);
+                color: white;
+                cursor: pointer;
+            }
+
+        #TabSubmitButton {
+            width: 600px;
+            height: 40px;
+            margin-top: 10px;
+            border: 1px dashed #89bafd;
+            padding-left: 200px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="StampContainer">
+
+        <div id="StampContentTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="/SigAndStamp/SSCenter/SigTable">首页</a></li>
+                    <li><a href="#">签名添加</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="StampContent">
+            @using (Html.BeginForm("AddSig", "AddSig", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="editor-label" style="margin-top:5px;">
+                    签名标题：
+                </div>
+                <div class="editor-field" style="margin-top:5px;">
+                    <input tyepe="text" id="SigTitle" name="SigTitle" />
+                </div>
+
+                <div class="editor-label" style="margin-top:5px;">
+                    日期输入：
+                </div>                
+                <div id="SigPubTime" style="margin-top:5px;">
+                    <input class="easyui-datetimebox" id="SigPubdate" name="SigPubdate" data-options="required:true" value=@DefaultTimeValue style="width:150px">
+                </div>
+
+                <div title="签名上传" data-options="closable:true" style="overflow:auto;padding:20px;" id="SigLink">
+                    <!--下载资源上传-->
+                    请上传资源：<input type="file" id="SigUpload" name="SigUpload" />
+                </div>
+
+                <div id="TabSubmitButton">
+                    <input class="SubmitButton" type="submit" value="提  交" />
+                </div>
+
+            }
+        </div>
+
+    </div>
+</body>
+</html>
+
+

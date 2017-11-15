@@ -1,0 +1,96 @@
+﻿@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+@{
+    IEnumerable<SelectListItem> School = ViewData["School"] as IEnumerable<SelectListItem>;
+    IEnumerable<SelectListItem> EntryYear = ViewData["EntryYear"] as IEnumerable<SelectListItem>;
+    IEnumerable<SelectListItem> Specility = ViewData["Specialty"] as IEnumerable<SelectListItem>;
+
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var first = document.getElementById("School").value;
+        getEntryYear(first);
+
+        $("#School").change(function () {
+            getEntryYear($(this).val());
+            //var next = document.getElementById("EntryYear").value;
+            getSpe($(this).val(), $("#EntryYear").val());
+        });
+        $("#EntryYear").change(function () {
+            //var next = document.getElementById("School").value;
+            getSpe($(this).val(), $("#School").val());
+        });
+        //获取专业
+
+    })
+
+    function getEntryYear(value) {
+        //$("#City").html(""); //清空
+        $.ajax({
+            type: "post",
+            url: "GetYearList",
+            //data: "p=" + provinveCode + "&date=" + new Date(),
+            data: { SchoolCode: value },
+            dataType: "json",
+            success: function (data) {
+                if (data.count > 0) {
+                    $("#EntryYear option").remove();
+                    $.each(data.Pos, function (i, item) {
+
+                        if (i == 0)
+                        {
+                            getSpe(item.EntryYear, value);
+                        }
+                        $("#EntryYear").append("<option value='" + item.EntryYear + "'>" + item.EntryYear_S + "</option>");
+                    });
+                }
+                else {
+                    $("#EntryYear option").remove();
+                    $("#EntryYear").append("<option value=''>--请选择--</option>")
+                }
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    }
+
+    function getSpe(value,sid) {
+        //$("#City").html(""); //清空
+        $.ajax({
+            type: "post",
+            url: "GetSpeList",
+            //data: "p=" + provinveCode + "&date=" + new Date(),
+            data: { EntryYearCode: value,SchoolCode:sid },
+            dataType: "json",
+            success: function (data) {
+                if (data.count > 0) {
+                    $("#Specialty option").remove();
+                    $.each(data.Pos, function (i, item) {
+                        $("#Specialty").append("<option value='" + item.SpeNo + "'>" + item.SpeName + "</option>");
+                    });
+                }
+                else {
+                    $("#Specialty option").remove();
+                    $("#Specialty").append("<option value=''>--请选择--</option>")
+                }
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    }
+
+
+</script>
+
+
+<ul class="forminfo">
+    <li><label>学校：</label>@Html.DropDownList("School", School, new { @class = "dfinput", id = "School", name = "School" })<i></i></li>
+    <li><label>年级：</label>@Html.DropDownList("EntryYear", EntryYear, new { @class = "dfinput", id = "EntryYear", name = "EntryYear" })<i></i></li>
+    <li><label>专业：</label>@Html.DropDownList("Specialty", Specility, new { @class = "dfinput", id = "Specialty", name = "Specialty" })<i></i></li>
+</ul>

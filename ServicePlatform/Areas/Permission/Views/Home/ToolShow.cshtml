@@ -1,0 +1,153 @@
+﻿@using ServicePlatform.Areas.Permission.Models
+
+@{
+    
+    string[] Properties = (string[])ViewData["Properties"];
+    IEnumerable<object> list = (IEnumerable<object>)ViewData["list"];
+
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    
+    <link href="~/Areas/Permission/Content/css/style.css" rel="stylesheet" />
+    <script src="~/Areas/Permission/Content/js/jquery.js"></script>
+  
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".click").click(function () {
+                $(".tip").fadeIn(200);
+            });
+
+            $(".tiptop a").click(function () {
+                $(".tip").fadeOut(200);
+            });
+
+            $(".sure").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+            $(".cancel").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+        });
+    </script>
+
+
+</head>
+
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">@ViewBag.Title</a></li>
+         
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        <div class="tools">
+
+            <ul class="toolbar">
+                <li ><span><img src="/Areas/Permission/Content/images/t01.png" /></span>添加</li>
+                <li ><span><img src="/Areas/Permission/Content/images/t02.png" /></span>修改</li>
+                <li><span><img src="/Areas/Permission/Content/images/t03.png" /></span>删除</li>
+                <li><span><img src="/Areas/Permission/Content/images/t04.png" /></span>统计</li>
+            </ul>
+
+
+            <ul class="toolbar1">
+                <li><span><img src="/Areas/Permission/Content/images/t05.png" /></span>设置</li>
+            </ul>
+
+        </div>
+
+
+        <table class="tablelist">
+            <thead>
+                <tr>
+                    <th><input name="" type="checkbox" value="" checked="checked" /></th>
+                @for (int i = 0; i < Properties.Length; i++)
+                {
+                   
+                       <th>@Properties[i]<i class="sort"><img src="/Areas/Permission/Content/images/px.gif" /></i></th>
+                }
+                   
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (object o in list)
+                {
+                    string[][] values = LibHelper.ReflectionHelper.GetObjInfo(o);
+                  <tr>
+                      <td><input name="" type="checkbox" value="" /></td>
+                        @for (int j = 0; j < values[1].Length; j++)
+                        {
+                            <td>@values[1][j]</td>
+                        }
+                    <td><a href="#" class="tablelink">查看</a>     <a href="#" class="tablelink">删除</a></td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+
+
+        <div class="pagin">
+            <div class="message">共<i class="blue">1256</i>条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页</div>
+            <ul class="paginList">
+                <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
+                <li class="paginItem"><a href="javascript:;">1</a></li>
+                <li class="paginItem current"><a href="javascript:;">2</a></li>
+                <li class="paginItem"><a href="javascript:;">3</a></li>
+                <li class="paginItem"><a href="javascript:;">4</a></li>
+                <li class="paginItem"><a href="javascript:;">5</a></li>
+                <li class="paginItem more"><a href="javascript:;">...</a></li>
+                <li class="paginItem"><a href="javascript:;">10</a></li>
+                <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
+            </ul>
+        </div>
+
+
+        <div class="tip">
+            <div class="tiptop"><span>提示信息</span><a></a></div>
+
+            <div class="tipinfo">
+                <span><img src="/Areas/Permission/Content/images/ticon.png" /></span>
+                <div class="tipright">
+                    <p>是否确认对信息的修改 ？</p>
+                    <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                </div>
+            </div>
+
+            <div class="tipbtn">
+                <input name="" type="button" class="sure" value="确定" />&nbsp;
+                <input name="" type="button" class="cancel" value="取消" />
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+</body>
+
+</html>
+

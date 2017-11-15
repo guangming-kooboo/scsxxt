@@ -1,0 +1,187 @@
+﻿@{
+
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/Platform/Content/Admin/css/style.css" rel="stylesheet" />
+    <script src="~/Areas/Platform/Content/Admin/js/jquery.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".click").click(function () {
+                $(".tip").fadeIn(200);
+            });
+
+            $(".tiptop a").click(function () {
+                $(".tip").fadeOut(200);
+            });
+
+            $(".sure").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+            $(".cancel").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+        });
+
+        function search()
+        {
+            location.href = '/Platform/Home/T_Enterprise_ListShow?keyWord=' + document.getElementById('keyWord').value;
+        }
+    </script>
+
+
+</head>
+
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">后台首页</a></li>
+            <li><a href="#">@ViewBag.Title</a></li>
+
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        <div class="tools">
+
+            <ul class="toolbar">
+
+                <li><a href="@ViewBag.addLink"><span><img src="/Areas/Platform/Content/Admin/images/t01.png" /></span>添加</a></li>
+              
+                <li><label>&nbsp;企业名称检索&nbsp;</label><input name="keyWord" id="keyWord" type="text" class="dfinput" /></li>
+               
+                <li><label>&nbsp;</label><input name="" type="button" onclick="search()" class="btn" value="搜索" /></li>
+            </ul>
+
+
+            <ul class="toolbar1">
+                <li><span><img src="/Areas/Platform/Content/Admin/images/t05.png" /></span>设置</li>
+            </ul>
+
+        </div>
+
+        <table class="tablelist">
+            <thead>
+                <tr>
+                    <th><input name="" type="checkbox" value="" checked="checked" /></th>
+                    @for (int i = 0; i < ViewBag.headerTitle.Length && i < ViewBag.Limit; i++)
+                    {
+                        <th>@ViewBag.headerTitle[i]<i class="sort"><img src="/Areas/Platform/Content/Admin/images/px.gif" /></i></th>
+                    }
+
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.dataList)
+                {
+                    var data = LibHelper.ReflectionHelper.GetObjInfo(item)[1];
+                    <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        @for (int i = 0; i < data.Length && i < ViewBag.Limit; i++)
+                        {
+
+                            <td>@data[i]</td>
+
+                        }
+                        <td>
+
+                            @if (LibHelper.ReflectionHelper.GetObjPropertieValue(item, "InfoLocked") == 1)
+                            {
+                                <a href="/Platform/Home/T_Enterprise_UnLock?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">解锁</a>
+                            }
+                            else
+                            {
+                                <a href="/Platform/Home/T_Enterprise_Lock?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">锁定</a>
+                            }
+
+                            @if (LibHelper.ReflectionHelper.GetObjPropertieValue(item, "EntState") == 1 || LibHelper.ReflectionHelper.GetObjPropertieValue(item, "EntState") == 2)
+                            {
+                                <a href="/Platform/Home/T_Enterprise_UnSuspend?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">通过审核</a>
+                            }
+                     
+
+                            @if (LibHelper.ReflectionHelper.GetObjPropertieValue(item, "EntState") == 4)
+                            {
+                                <a href="/Platform/Home/T_Enterprise_UnSuspend?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">解挂</a>
+                            }
+                            else if (LibHelper.ReflectionHelper.GetObjPropertieValue(item, "EntState") == 3 || LibHelper.ReflectionHelper.GetObjPropertieValue(item, "EntState") == 2 || LibHelper.ReflectionHelper.GetObjPropertieValue(item, "EntState") == 1)
+                            {
+                                <a href="/Platform/Home/T_Enterprise_Suspend?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">挂起</a>
+                                 <a href="/Platform/Home/T_Enterprise_Respring?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">注销</a>
+                            } else if (LibHelper.ReflectionHelper.GetObjPropertieValue(item, "EntState") == 5)
+                            {
+                               <a href="/Platform/Home/T_Enterprise_UnRespring?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">解注</a>
+                            }
+
+                            <a href="/Platform/Home/T_Enterprise_Delete?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">删除企业</a>
+                            <a href="/Platform/SAdmin/Login?Ent_No=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")" target="_top">免密登入</a>
+                            <a href="/Platform/Home/T_Enterprise_RevisePSW?EntNo=@LibHelper.ReflectionHelper.GetObjPropertieValue(item, "Ent_No")">重置密码</a>
+                        </td>
+                    </tr>
+                }
+
+
+
+
+            </tbody>
+        </table>
+
+
+        <!--分页开始-->
+        @Html.Partial("_CutPage")
+        <!--分页结束-->
+
+
+        <div class="tip">
+            <div class="tiptop"><span>提示信息</span><a></a></div>
+
+            <div class="tipinfo">
+
+                <div class="tipright">
+
+                    <p>是否确认对信息的修改 ？</p>
+                    <ul>
+                        <li><input type="text" class="dfinput" placeholder="用户名" /></li>
+                        <li><input type="text" class="dfinput" placeholder="密码" /></li>
+                    </ul>
+
+
+                    <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                </div>
+            </div>
+
+            <div class="tipbtn">
+                <input name="" type="button" class="sure" value="确定" />&nbsp;
+                <input name="" type="button" class="cancel" value="取消" />
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+</body>
+
+</html>
+
+

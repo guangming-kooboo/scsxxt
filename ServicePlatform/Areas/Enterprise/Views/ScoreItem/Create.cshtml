@@ -1,0 +1,53 @@
+﻿@model Core.Services.Entity.T_EntReviewItem
+
+@{
+   
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var EntPracNo = ViewData["EntPracNo"];
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.ItemID)
+    @Html.HiddenFor(model => model.EntPracNo,new { value= Model.EntPracNo==null? EntPracNo: Model.EntPracNo })
+    <fieldset>
+
+        <div class="editor-label">
+            @Html.Label("评分项名称")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemName)
+            @Html.ValidationMessageFor(model => model.ItemName)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("所占比重（请输入整数，如：70%输入70）")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemWeight)
+         
+
+            @Html.ValidationMessageFor(model => model.ItemWeight)
+        </div>
+
+        <div class="editor-label">
+           @Html.Label("排序")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemSequence)
+            @Html.ValidationMessageFor(model => model.ItemSequence)
+        </div>
+
+        <p>
+            <button class="btn btn-primary" >保存</button> 
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("返回", "Index",new { EntPracNo= EntPracNo?? Model.EntPracNo })
+</div>
+

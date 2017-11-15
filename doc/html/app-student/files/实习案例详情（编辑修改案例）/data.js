@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"实习案例详情（编辑修改案例）.html",
+  "generationDate":new Date(1483078092416.8),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"01c71d9981ae43e4a682bce3ee2fb6df",
+    "type":"Axure:Page",
+    "name":"实习案例详情（编辑修改案例）",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"b506d80d946d4db8b3e45cf88e9a305b",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":160,
+              "y":117},
+            "size":{
+              "width":312,
+              "height":553}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"eb3aa4c1eda0456a8333e007d6298c95",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":160,
+                  "y":117},
+                "size":{
+                  "width":312,
+                  "height":553}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/实习案例详情（编辑修改案例）/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "b506d80d946d4db8b3e45cf88e9a305b":{
+      "scriptId":"u0"},
+    "eb3aa4c1eda0456a8333e007d6298c95":{
+      "scriptId":"u1"}}});

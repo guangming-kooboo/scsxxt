@@ -1,0 +1,105 @@
+﻿@using ServicePlatform.Areas.App.ViewModel.Home
+@using Core.Services.Entity
+@model IdentificationTable_M
+@{
+    ViewBag.Title = "T_EntBatchReg_PracticeIdentification";
+    T_PracticeVolunteer data = ViewBag.T_PracticeIdentification_View;
+    T_StuBatchReg stuBatch = ViewBag.stuBatch;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>华侨大学学生实习鉴定表</title>
+
+    <link href="~/Areas/Enterprise/Content/Home/T_EntBatchReg_PracticeIdentification/PracticeIdentification.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form action="/Enterprise/Home/T_EntBatchReg_PracticeIdentification_Teacher" method="post">
+        <input type="text" name="PracticeNo" hidden="hidden" value="@ViewBag.PracticeNo" class="" />
+        <input type="text" name="EntPracNo" hidden="hidden" value="@ViewBag.EntPracNo" class="" />
+        <input type="text" name="PosID" hidden="hidden" value="@ViewBag.PosID" class="" />
+        <input type="text" name="SchoolID" hidden="hidden" value="@ViewBag.SchoolID" class="" />
+        <table cellspacing="0">
+            <caption>华侨大学学生实习鉴定表</caption>
+            <tr>
+                <th width="153" height="38">企业</th>
+                <td width="242">@Model.EntName</td>
+                <th width="81">年级</th>
+                <td width="102">@Model.EnteyYear</td>
+                <th width="84">专业</th>
+                <td width="212">@Model.SpeName</td>
+            </tr>
+
+            <tr>
+                <th height="38">姓名</th>
+                <td>@Model.StuName</td>
+                <th>性别</th>
+                <td>@(Model.StuSex.HasValue() ? Model.StuSex : "未填写")</td>
+                <th>学号</th>
+                <td>@Model.StuNo</td>
+            </tr>
+            <tr>
+                <th height="38">实习部门</th>
+                <td><input name="PracticelName" readonly="readonly" value="@stuBatch.PracticeDept" type="text" placeholder="" class="Practicel Name" /></td>
+                <th colspan="2">实习分部门</th>
+                <td colspan="2">@stuBatch.PracticeDivDept</td>
+            </tr>
+            <tr>
+                <th height="38">起止时间</th>
+                <td colspan="5"><input name="PracticeStartEnd" type="text" readonly="readonly" value="@(stuBatch.PracticeStartEnd.HasValue()? Model.StuSex:"未填写")" placeholder="" class="Practicel Time" /></td>
+            </tr>
+
+
+            <tr>
+                <th height="114">实习内容</th>
+                <td colspan="5">
+                <textarea name="PracticeContent" readonly="readonly" placeholder="实习内容由学生填写" cols="1" rows="" class="PracticelContent">
+                    @stuBatch.PracticeContent</textarea></td>
+            </tr>
+            <tr>
+                <th height="114">实习报告</th>
+                <td colspan="5">
+                <textarea name="PracticeReport" readonly="readonly" placeholder="实习报告由学生填写" cols="1" rows="" class="PracticelContent">
+                    @stuBatch.PracticeReport</textarea></td>
+            </tr>
+            <tr>
+                <th height="114">实习单位考核意见</th>
+                <td colspan="5">
+                    <textarea placeholder="实习单位考核意见由实习单位填写" readonly="readonly" name="PracUnitComment" cols="1" readonly="readonly" rows="" class="PracticelContent">
+                    @stuBatch.PracUnitComment</textarea>
+                    <div class="sign">
+                        签章：<br />   <br />
+                        年<span> 月</span><span> 日</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th height="114">指导教师考核意见</th>
+                <td colspan="5">
+                    <textarea name="TutorComment" placeholder="请在这里填写指导教师考核意见" cols="1" rows="" class="PracticelContent">
+                   @stuBatch.TutorComment</textarea>
+                    <div class="sign">
+                        指导教师签名：<br />   <br />
+                        年<span> 月</span><span> 日</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th height="114">学院考核评定意见</th>
+                <td colspan="5">
+                    <textarea name="SchoolComment" cols="1" placeholder="学院考核评定意见由学院填写" rows="" readonly="readonly" class="PracticelContent">
+                    @stuBatch.SchoolComment</textarea>
+                    <div class="sign">
+                        签章：<br />   <br />
+                        年<span> 月</span><span> 日</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input name="save" type="submit" value="保存" class="save" />
+    </form>
+</body>
+</html>
+

@@ -1,0 +1,122 @@
+﻿@model ServicePlatform.Areas.Admin.Models.T_Message
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>收件箱</title>
+    <script src="http://suiyidian.cn/texiao/tab/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <style>
+        .main {
+            height: auto;
+            overflow: hidden;
+            margin: 0px auto;
+        }
+
+            .main td {
+                text-align: center;
+                height: 28px;
+                width: 100px;
+                line-height: 28px;
+                font-size: 14px;
+                color: #555;
+            }
+
+            .main .title td {
+                cursor: pointer;
+                color: #333;
+            }
+
+        .none {
+            display: none;
+        }
+    </style>
+
+    <script>
+
+        $(function () {
+            var pk = 1;
+            $(".title td").click(function () {
+                // 把要排序的内容添加到数组里
+                var tIndex = parseInt($(this).index());
+                var valueArray = new Array();
+                var p = 0;
+                for (var i = 1; i < $("table tr").length; i++) {
+
+                    if (tIndex != 0) {
+                        valueArray[p] = parseInt($("table tr:eq(" + i + ") td").eq(tIndex).html());
+                    } else {
+                        valueArray[p] = $("table tr:eq(" + i + ") td").eq(tIndex).html();
+                    }
+
+                    p++;
+
+                }
+
+                //数据排序
+                if (pk == 1) {
+                    valueArray.sort(function (a, b) { return a < b ? -1 : 1 })
+                    pk = 2
+                } else {
+                    valueArray.sort(function (a, b) { return a > b ? -1 : 1 })
+                    pk = 1
+                }
+
+                //匹配内容        加入到一个隐藏的排序div里+-
+                for (var i = 0; i < valueArray.length; i++) {
+                    for (var d = 1; d < $("table tr").length; d++) {
+                        var valueText = tIndex != 0 ? parseInt($("table tr:eq(" + d + ") td").eq(tIndex).html()) : $("table tr:eq(" + d + ") td").eq(tIndex).html();
+                        if (valueArray[i] == valueText) {
+                            $("table tr").eq(d).clone().appendTo(".none")
+                        }
+                    }
+
+                }
+                //重新整理html 排序，添加到视图里
+                var titleClone = $("table tr").eq(0).clone(true);
+                $("table").html("").append(titleClone);
+
+                $("table").append($(".none").html())
+
+                $(".none").html("");
+
+
+
+            })
+
+        })
+    </script>
+</head>
+
+<body>
+@using (Html.BeginForm("Index", "MsgCenter", FormMethod.Get))
+{
+    <table class="main" width="500" border="0" cellspacing="1" bgcolor="#666666">
+        <tr class="title">
+            <td bgcolor="#CCCCCC">流水号</td>
+            <td bgcolor="#CCCCCC">消息类型</td>
+            <td bgcolor="#CCCCCC">接收者</td>
+            <td bgcolor="#CCCCCC">消息内容</td>
+            <td bgcolor="#CCCCCC">接收群</td>
+            <td bgcolor="#CCCCCC">发送人</td>
+            <td bgcolor="#CCCCCC">发送时间</td>
+            <td bgcolor="#CCCCCC">父消息ID</td>
+        </tr>
+        <tr>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.MsgID)</td>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.MsgTypeID)</td>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.Receiver)</td>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.MsgContent)</td>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.RecRole)</td>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.Sender)</td>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.SendTime)</td>
+            <td bgcolor="#CCCCCC">@Html.DisplayFor(model => model.FatherMsgID)</td>
+        </tr>
+    </table>
+}
+    <div class="none"></div>
+</body>
+</html>

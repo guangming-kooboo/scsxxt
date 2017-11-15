@@ -1,0 +1,107 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.Admin.EditQuestionnaire_M
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = ViewData["Layout"].ToString();
+}
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=@Model.ownerID+";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+
+
+        @*这个到时候还是要继续读取的*@
+    </ol>
+
+</div>
+<h2>编辑问卷</h2>
+   
+<input type="text" name="QuestionnaireID" id="QuestionnaireID" value=@Model.QuestionnaireID hidden="hidden">
+
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>问卷名称</label>
+    </div>
+    <div class="col-lg-10">
+        <input type="text" id="QuestionnaireName" value=@Model.QuestionnaireName>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>问题简介</label>
+    </div>
+    <div class="col-lg-10">
+      
+        <input type="text" id="QuestionnaireSummary"  value=@Model.QuestionnaireSummary>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-lg-2">
+        <label>问题领域</label>
+    </div>
+    <div class="col-lg-10">
+        @Html.DropDownListFor(o => o.QuestionDomain, Model.QuestionDomainListItem)
+    </div>
+</div>
+    <div class="row">
+        <div class="col-lg-2">
+            <label>问题类型</label>
+        </div>
+        <div class="col-lg-10">
+            @Html.DropDownListFor(o => o.QuestionType, Model.QuestionTypeListItem)
+        </div>
+    </div>
+
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+        var Params = v("QuestionnaireID") + ";" +
+            v("QuestionDomain") + ";" +
+            v("QuestionType");
+        //    v("拥有者");同理这里的问卷ID可以通过viewbag获得
+
+        Query(Params, "@ViewData["Url"]");
+    }
+
+
+   
+        var temp;
+        $("#QuestionnaireSummary,#QuestionnaireName").bind({
+            focusin: function () { 
+                temp = $.trim($(this).val());
+                
+            },
+            focusout: function () {
+               
+                var lastValue = $.trim($(this).val());
+
+                if (temp != lastValue && null != lastValue && "" != lastValue) {
+                    
+                    var dataInfo = $("#QuestionnaireID").val() + ";" + $("#QuestionnaireName").val() + ";" + $("#QuestionnaireSummary").val();
+                    alert(dataInfo);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/AdminCRUD/editQuestionnaire',
+                        data: {
+                            //DeleteRow: DeletedID.join(','),
+                            DeleteRow: dataInfo,
+
+                        },
+                        success: function (data) {
+                            alert("success");
+                            //$("#address").show();//成功的话再显示地址
+                           
+                        },
+                    });
+                    }
+                }  
+            
+        });
+    
+    
+</script>

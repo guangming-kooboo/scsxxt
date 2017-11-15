@@ -1,0 +1,64 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@model ServicePlatform.Areas.WbsHqu.ViewModels.StuScoreApply_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+@Html.HiddenFor(o => o.PracticeNo)
+@Html.HiddenFor(o=>o.type)
+@Html.HiddenFor(o => o.UserID)
+
+@Html.InputFor(o => o.ApplyReviewScore,"",true)
+@Html.InputFor(o => o.WeekRecordScore, "", true)
+@Html.InputFor(o => o.PracticeCaseScore, "", true)
+@Html.HiddenFor(o => o.ApplyContents)
+
+<div class="form-group">
+    <label class="col-md-3 control-label" for="WeekRecordComment">申请理由</label>
+    <div class="col-md-9">
+        <label class="" cols="20" data-val="true" data-val-length="字段 实习周记评语 必须是最大长度为 1024 的字符串。"
+               data-val-length-max="1024" id="WeekRecordComment" name="WeekRecordComment" readonly="readonly"
+               rows="2" style="width: 100%; height: 100%">
+
+            @(new HtmlString(Model.ApplyContents))
+        </label><span class="help-block">
+
+        </span>
+    </div>
+</div>
+
+@Html.HiddenFor(o => o.StateID)
+
+@Html.HiddenFor(o => o.PracticeStartEnd)
+
+@Html.HiddenFor(o => o.WeekRecordScore)
+
+@Html.HiddenFor(o => o.WeekRecordComment)
+
+@Html.HiddenFor(o => o.PracticeCaseScore)
+
+@Html.HiddenFor(o => o.PracticeCaseComment)
+
+@Html.HiddenFor(o => o.PracUnitComment)
+
+@Html.HiddenFor(o => o.SchoolComment)
+
+@Html.HiddenFor(o => o.TutorComment)
+
+@Html.HiddenFor(o => o.PracticeContent)
+
+@Html.HiddenFor(o => o.PracticeReport)
+
+@Html.HiddenFor(o => o.StuEvaEntScore)
+
+@Html.HiddenFor(o => o.StuEvaSchoolScore)
+
+@Html.HiddenFor(o => o.PracticeReportFile)
+
+@Html.HiddenFor(o => o.EvidenceFile)
+
+
+@Html.HiddenFor(o => o.ReviewScore)
+
+@Html.InputAreaFor(o => o.AuditOpinion)

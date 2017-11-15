@@ -1,0 +1,43 @@
+﻿@model ServicePlatform.Models.C_SchoolReviewItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>C_SchoolReviewItem</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemWeight)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemWeight)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemSequence)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemSequence)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PracBatchID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PracBatchID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ItemNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

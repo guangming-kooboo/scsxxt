@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+}
+img{
+	border:none;
+}
+ul{
+	list-style: none;
+}
+nav ul li {
+	display: inline-block;
+	_zoom:1;
+	*display:inline;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+a:hover{
+	text-decoration:underline;
+}
+body{
+	font-family: tahoma, arial, 微软雅黑, 宋体,'Hiragino Sans GB', 'WenQuanYi Micro Hei',  sans-serif;
+	font-size:1.em;
+	font-weight:400;
+}
+
+
+/*--------------footer-----------------*/
+	#footer{
+		width:100%;
+		height:130px;
+		background:#484443;
+	}
+	#footer div{
+		width:800px;
+		margin:0 auto;		
+		padding-top:30px;
+		
+		color:#eee;
+	}
+	#footer div ul{
+		display:block;
+		margin-left:230px;
+	}
+	#footer div li{
+		float:left;
+		margin:0 5px;
+		padding:0 12px;		
+		border-right:1px solid #CCC;			
+	}
+	#footer div li:last-child{
+		border:none;		
+	}
+	#footer a,#footer p{
+		color:#CCC;
+		font-size:0.9em;
+		text-align:center;
+	}
+	#footer div li a:hover{
+		text-decoration:underline;
+		color:#008ED6;
+	}
+

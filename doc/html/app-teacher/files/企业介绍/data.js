@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"企业介绍.html",
+  "generationDate":new Date(1483616327828.36),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"0bdc830acf874180b67094da1a96c68d",
+    "type":"Axure:Page",
+    "name":"企业介绍",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"875ba766a5a24584abe17c44849d3896",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":100,
+              "y":10},
+            "size":{
+              "width":460,
+              "height":740}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"44f4208357e841afa1812514fa353c3d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":100,
+                  "y":10},
+                "size":{
+                  "width":460,
+                  "height":740}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/企业介绍/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "875ba766a5a24584abe17c44849d3896":{
+      "scriptId":"u0"},
+    "44f4208357e841afa1812514fa353c3d":{
+      "scriptId":"u1"}}});

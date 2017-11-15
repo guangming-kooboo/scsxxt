@@ -1,0 +1,35 @@
+﻿@model List<Core.Services.Entity.T_Enterprise>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>企业编号</th>
+            <th>企业名称</th>
+            <th>注册时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ent_No</td>
+                <td>
+                    @item.Ent_Name
+                </td>
+                <td>@item.RegisterTime</td>
+                <td class="text-navy"> <i class="fa fa-level-up"></i> <a href="/Login?EntNo=@item.Ent_No"></a>  免密登人</td>
+            </tr>
+        }
+      
+     
+    </tbody>
+</table>

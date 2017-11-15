@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "ButtonPermissionAdd";
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加记录</title>
+    <link href="/Areas/Permission/Content/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">添加记录</a></li>
+        </ul>
+    </div>
+
+
+    <form action="@ViewBag.actionLink" method="post">
+
+        <input name="objName" value="ServicePlatform.Areas.Permission.Models.T_RoleFuncObjForbid" type="text" hidden="hidden" class="dfinput" />
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>添加记录</span></div>
+
+            <ul class="forminfo">
+                <li>
+                    <label>角色编号</label>
+                    <input name="RoleID" type="text" class="dfinput" />
+                    <i><a href="/Permission/Home/RoleShow" target="_blank">*查询角色编号</a></i>
+                </li>
+
+                <li>
+                    <label>禁用按钮编号</label>
+                    <input name="FuncObjID" type="text" class="dfinput" />
+                    <i><a href="/Permission/Home/" target="_blank">*查询按钮编号</a></i>
+                </li>
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" /></li>
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+    
+</body>
+
+</html>
+
+
+
+
+

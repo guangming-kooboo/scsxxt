@@ -1,0 +1,48 @@
+﻿@model Core.Services.Entity.T_SchoolReviewItem
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>T_SchoolReviewItem</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PracBatchID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PracBatchID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemWeight)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemWeight)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemSequence)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemSequence)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,35 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.DetailFormalVolunteer_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>志愿详情</title>
+
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+    <div class="appraisal-head">
+        <div class="left">
+            <a href="@Url.Action("FormalVolunteer", "Home", new {area = "App",uid=Model.uid})"><</a>
+        </div>
+
+        <div class="middle">
+            <p>志愿详情</p>
+        </div>
+
+    </div>
+    <p></p>
+    <div>
+    </div>
+    <div class="the-main-of-v">
+        <p class="one">@Model.volunteer.EntName</p>
+        <p class="two">岗位: @Model.volunteer.PositionName</p>
+        <div class="div-one">岗位详情：</div>
+        <div class="div-two">@Model.volunteer.PositionDescription</div>
+    </div>
+</body>

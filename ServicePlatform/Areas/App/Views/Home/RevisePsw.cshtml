@@ -1,0 +1,80 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.RevisePsw_M
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>修改信息</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+    <link href="~/Include/timePicker/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Include/timePicker/bootstrap/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+</head>
+<body>
+<div class="main-do">
+    
+    <form method="post">
+        <div class="main-head">
+            <p class="main-head-p">修改密码</p>
+            <p>
+                <a href=""><img class="main-head-img" src="~/Areas/App/Content/Image/头像.png"></a>
+            </p>
+            <a class="main-head-a" href=""></a>
+
+        </div>
+
+        <br/>
+        @Html.HiddenFor(o => o.Uid)
+        <p class="get-p">
+            @Html.LabelFor(o => o.OldPwd) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.PasswordFor(o => o.OldPwd, new {@class = "get-input", placeholder = ""})
+        </p>
+
+        <p class="get-p">
+            @Html.LabelFor(o => o.NewPwd)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.PasswordFor(o => o.NewPwd, new {@class = "get-input", placeholder = ""})
+        </p>
+
+        <p class="get-p">
+            @Html.LabelFor(o => o.SecondPwd)&nbsp;&nbsp;&nbsp;
+            @Html.PasswordFor(o => o.SecondPwd, new {@class = "get-input", placeholder = ""})
+        </p>
+        <p class="get-p">
+        </p>
+        <p class="get-p">
+        </p>
+        <a href="">
+            <div class="">
+                <input class="do-its-2" type="submit" value="确定"/>
+            </div>
+        </a>
+    </form>
+</div>
+
+
+<script src="~/Include/timePicker/jquery/jquery-1.8.3.min.js"></script>
+<script src="~/Include/timePicker/bootstrap/js/bootstrap.js"></script>
+<script src="~/Include/timePicker/jquery/bootstrap-datetimepicker.js"></script>
+<script src="~/Include/timePicker/jquery/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script type="text/javascript">
+
+    $('.form_datetime').datetimepicker({
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: "yyyy-MM-dd hh:ii"
+    });
+
+</script>
+
+</body>
+</html>

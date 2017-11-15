@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "UpdateClass";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改班级</title>
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">学生代码维护表</a></li>
+                <li><a href="#">修改班级</a></li>
+            </ul>
+        </div>
+    <div class="formtitle"><span>修改班级</span></div>
+
+    <form method="post" action="/Code/UpdatereceClass" name="myform" id="myform">
+        <ul class="forminfo">
+<li>
+
+                <label for="SchoolName">学校名称</label>
+            
+    <select style="width:100px" name="SchoolName" id="SchoolName" class="dfinput">
+
+
+        <option value="@ViewBag.schoolname">@ViewBag.schoolname</option>
+
+    </select>
+                 
+    </li><li>
+                <label for="entryyear">年级</label>
+            
+                <select style="width:100px" name="entryyear" id="entryyear"class="dfinput">
+                   
+          <option value="@ViewBag.updateClass.EntryYear" selected="selected">@ViewBag.updateClass.EntryYear</option>
+                      
+                </select>
+      </li> 
+            <li>
+    
+
+
+   
+
+        <input  id="speno" name="speno" value="@ViewBag.updateClass.SpeNo"hidden="hidden"/>
+
+
+    
+<li>
+
+    <label for="entryno">专业名称</label>
+
+
+    <select style="width:100px" name="spename" id="spename" class="dfinput">
+
+        <option value="@ViewBag.spename">@ViewBag.spename</option>
+
+
+    </select>
+
+</li><li>
+
+            
+                <label for="ClassNo">班级编号</label><br />
+                <input type="text" name="ClassNo" id="ClassNo" value="@ViewBag.updateClass.ClassID"class="dfinput">
+           
+</li>
+            <li>
+
+                <label for="ClassName">班级名称</label><br />
+                <input type="text" name="ClassName" id="ClassName" value="@ViewBag.updateClass.ClassName"class="dfinput"/>
+      </li>  
+            <li>    
+                   
+
+               <label>&nbsp;</label> <input type="submit" value="确  定"  class="btn"/>
+       </li>     
+</ul>
+    </form>
+
+
+
+
+     <script>
+         // $(function () {
+         
+       
+
+
+
+        
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>

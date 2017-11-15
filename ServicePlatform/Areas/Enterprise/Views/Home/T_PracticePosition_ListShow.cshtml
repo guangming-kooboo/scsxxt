@@ -1,0 +1,136 @@
+﻿@using Core.Services.Entity 
+@model IEnumerable<T_PracticePosition>
+
+@{
+    ViewBag.Title = "岗位列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var EntPracNo = ViewData["EntPracNo"];
+}
+
+
+
+
+
+
+<div class="col-lg-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>@ViewBag.Title</h5>
+        </div>
+        <div class="ibox-content">
+        
+            @Html.Partial("_SelectSchool", new ViewDataDictionary()
+            {
+                {"EntPracNo", EntPracNo}
+            })
+            @*@Html.ActionLink("+添加岗位", "T_PracticePosition_Add")*@
+            <script type="text/javascript">
+                $("#EntPracNo").change(function () {
+                    location.href = "T_PracticePosition_ListShow?EntPracNo=" + $('#EntPracNo').val();
+                });
+
+                function AfterSelectSchools() {
+                }
+            </script>
+
+
+            <hr />
+            @if (!Model.Any())
+            {
+                @Html.Label("点击添加岗位为学校提供岗位吧~", new { style = "color: red;font-size: 22px" })
+            }
+            else
+            {
+                @ViewBag.tip
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th>
+                                @Html.DisplayName("岗位编号")
+                            </th>
+                            <th>
+                                @Html.DisplayName("岗位名称")
+                            </th>
+                        
+                            <th>
+                                @Html.DisplayName("岗位数量")
+
+                            </th>
+                            <th>
+                                @Html.DisplayName("发布时间")
+
+                            </th>
+                            <th>
+                                @Html.DisplayName("截止时间")
+
+                            </th>
+                            @*<th>
+                                    @Html.DisplayName("家庭住址")
+
+                                </th>*@
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                {
+                            <tr>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PositionID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.C_Position.PositionName)
+                                </td>
+                              
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosQuantity)
+                                </td>
+                                <td>
+                                    @(item.PubDate.ToDateTime().ToTimeStr())
+                                </td>
+                                <td>
+                                    @(item.PosExpireDate.ToDateTime().ToTimeStr())
+                                </td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#@item.PositionID">查看</a>
+                                    <div class="modal inmodal" id="@item.PositionID" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated flipInY">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title">岗位描述</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>@(new HtmlString(item.PosDesc))
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @Html.ActionLink("编辑", "T_PracticePositionEdit", new {EntPracNo = EntPracNo, PositionID = item.PositionID}) |
+
+                                    @Html.ActionLink("删除", "T_PracticePositionDelete", new {EntPracNo = EntPracNo, PositionID = item.PositionID})
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+
+
+        </div>
+    </div>
+</div>
+
+
+   
+
+        

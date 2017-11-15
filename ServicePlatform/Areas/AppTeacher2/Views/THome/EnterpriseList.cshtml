@@ -1,0 +1,171 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.EnterpriseList_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+  
+
+    <script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+
+    <script type="text/javascript">
+        function AllEnterprise() {
+            var myselect = document.getElementById("EntCategoryID");
+            var index = myselect.selectedIndex;
+            var value = myselect.options[index].value;
+            window.location.href = "/AppTeacher2/THome/EnterpriseList" + "?EntCategoryID=" +value;
+        }
+    </script>
+
+
+    <!----------------------此页面独有 ---------------------->
+    <style>
+        .weui-select- {
+            -webkit-appearance: none;
+            border: 0;
+            outline: 0;
+            background-color: transparent;
+            width: 100%;
+            font-size: inherit;
+            position: relative;
+            z-index: 1;
+            padding-left: 15px;
+        }
+        .weui-media-box__info__meta {
+            list-style: none;
+        }
+    </style>
+    <!---------------------------------------------------->
+</head>
+<body ontouchstart>
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            <a href="@Url.Action("HomePage","THome",new {area="AppTeacher2"})">
+                <div>
+                    <div class="placeholder">
+                        <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return"/>
+                    </div>
+                </div>
+            </a>
+            <div class="weui-flex__item">
+                <div class="placeholder"></div>
+            </div>
+            <div>
+                <div class="placeholder">
+                    @Html.DropDownListFor(o => o.EntCategoryID, @Model._EntCategory, new {@class = "weui-select- colortitle", onchange = "AllEnterprise()"})
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-panel">
+                <div class="weui-panel__bd">
+                    @if (!Model._EntpriseList.Any())
+                    {
+                        <div class="weui-media-box weui-media-box_text">
+                                <div class="weui-media-box__title">
+                                    <img style="width: 100%" src="~/Areas/AppTeacher2/Content/images/nopic_385x240.png">
+                                </div>
+                            <h3 style="color: #179B16"></h3>
+                            <ul style="color: #cecece; overflow: hidden">
+                                <li class="weui-media-box__info__meta"></li>
+                                <li class="weui-media-box__info__meta"></li>
+                            </ul>
+                            <p>暂无该类企业</p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var item in Model._EntpriseList)
+                         {
+                             if (!string.IsNullOrEmpty(item.Photos))
+                             {
+                                 var photo = item.Photos.Split(';');
+                                 var first = photo[photo.Length - 1];
+                                 foreach (var ent in Model._PositionCount)
+                                 {
+                                     if (item.EntPracNo == ent.EntPracNo)
+                                     {
+                                         <div class="weui-media-box weui-media-box_text">
+                                             <a href="@Url.Action("EnterpriseInfo", "THome", new {area = "AppTeacher2", Ent_No = item.Ent_No})">
+                                                 <div class="weui-media-box__title">
+                                                     <img style="width: 100%; height: 200px" src="@first">
+                                                 </div>
+                                             </a>
+                                             <h3 style="color: #179B16">@item.Ent_Name</h3>
+                                             <ul style="color: #cecece; overflow: hidden">
+                                                 <li class="weui-media-box__info__meta">招聘人数</li>
+                                                 <li class="weui-media-box__info__meta">@ent.PositionCount 人</li>
+                                             </ul>
+                                             <p>已报人数: @ent.YetAddVolunteerCount 人</p>
+                                             <p>可报人数:@ent.RemainRecruitingCount 人</p>
+                                             <p>截止日期: @ent.LastTime.ToString("yyyy-M-d dddd")</p>
+                                             <p>地址:@item.EntAddress</p>
+                                         </div>
+                                         break;
+                                     }
+                                     else
+                                     {
+                                         continue;
+                                     }
+                                 }
+                             }
+                             else
+                             {
+                                 foreach (var ent in Model._PositionCount)
+                                 {
+                                     if (item.EntPracNo == ent.EntPracNo)
+                                     {
+                                         <a href="@Url.Action("EnterpriseInfo", "THome", new {area = "AppTeacher2", Ent_No = item.Ent_No})">
+                                             <div class="weui-media-box weui-media-box_text">
+                                                 <div class="weui-media-box__title">
+                                                     <img style="width: 100%" src="~/Areas/AppTeacher2/Content/images/nopic_385x240.png"/>
+                                                 </div>
+                                                 <h3 style="color: #179B16">@item.Ent_Name</h3>
+                                                 <ul style="color: #cecece; overflow: hidden">
+                                                     <li class="weui-media-box__info__meta">招聘人数</li>
+                                                     <li class="weui-media-box__info__meta">@ent.PositionCount 人</li>
+                                                 </ul>
+                                                 <p>已报人数:@ent.YetAddVolunteerCount 人</p>
+                                                 <p>可报人数: @ent.RemainRecruitingCount 人</p>
+                                                 <p>截止日期:@ent.LastTime.ToString("yy-MMM-dd ddd")</p>
+                                                 <p>地址: @item.EntAddress</p>
+                                             </div>
+                                         </a>
+                                         break;
+                                     }
+                                     else
+                                     {
+                                         continue;
+                                     }
+                                 }
+                             }
+                         }
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

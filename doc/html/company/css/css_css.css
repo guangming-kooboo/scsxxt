@@ -1,0 +1,691 @@
+body
+{
+	width: 100%;
+}
+li
+{
+list-style:none;
+}
+a:link 
+{
+text-decoration: none;
+}
+.main-head
+{
+text-align: center;
+
+}
+
+.main-head p
+{
+color: rgb(45,44,44);
+font-size:36px;
+font-family: "微软雅黑";
+}
+
+.main-head p span
+{
+color: rgb(255,172,13);
+}
+
+.main-small-head
+{
+text-align: center;
+margin-top: -15px;
+}
+
+.main-small-head p
+{
+color: rgb(45,44,44);
+font-size:24px;
+font-family: "微软雅黑";
+}
+
+.main-small-head p span
+{
+color: rgb(255,172,13);
+}
+
+
+/*what can we do*/
+
+.main-what-do
+{
+	width: 1000px;
+	margin: 0 auto;
+	height: 440px;
+
+}
+
+.main-what-do li
+{
+	float: left;
+	padding-right: 25px;
+}
+
+.main-what-do-ps
+{
+	width: 265px;
+	height: 120px;
+	border: 1px solid rgb(194,194,194);
+	margin-top: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	text-align: center;
+
+}
+
+.main-what-do-ps a
+{
+	color: rgb(61,60,60);
+	font-size: 24px;
+	font-family: "微软雅黑";
+
+	
+
+}
+
+.main-what-do-ps p
+{
+	color: rgb(61,60,60);
+	font-size: 16px;
+	font-family: "微软雅黑";
+	
+
+}
+
+/*successful case*/
+
+/*amazing news*/
+
+.amazing-news
+{
+	width: 90%;
+	margin: 0 auto;
+	height: 410px;
+}
+
+.amazing-news ul
+{
+	width: 80%;
+	height: 380px;
+	margin: 0 auto;
+	padding: 0 0;
+
+}
+
+.amazing-news ul li
+{
+	width: 33.3%;
+	height: 380px;
+	float: left;
+	
+}
+
+.amazing-news ul li p img
+{
+	width: 92%;
+	height: 240px;
+}
+
+.amazing-news ul li div
+{
+	width: 92%;
+	margin: 0 auto;
+	height: 140px;
+
+	overflow: hidden;
+    text-overflow: ellipsis;
+text-overflow:ellipsis;
+
+
+
+}
+
+.amazing-news ul li div p
+{
+	font-size: 14px;
+	color: rgb(49,49,49);
+}
+.amazing-news ul li div p span
+{
+		font-size: 17px;
+	color: rgb(49,49,49);
+}
+
+
+/*our clients*/
+.main-clients
+{
+	width: 100%;
+	height: 290px;
+
+}
+.main-clients li
+{
+	    padding: 0px auto;
+    float: left;
+    list-style-type: none;
+    margin: 0px auto;
+    background-color: green;
+    width: 19.4%;
+}
+.main-clients li img
+{
+	width:100%;
+	height: 250px;
+}
+
+
+/*our advantage*/
+
+
+.main-advantage
+{
+  background-color: rgb(47,47,47);
+
+  width: 100%;
+  height: 460px;
+  margin: 0 auto;
+}
+
+.main-advantage-head
+{
+text-align: center;
+
+}
+
+.main-advantage-head p
+{
+color: rgb(255,255,255);
+font-size:36px;
+font-family: "微软雅黑";
+}
+
+.main-advantage-head p span
+{
+color: rgb(255,172,13);
+}
+
+.main-advantage-small-head
+{
+text-align: center;
+margin-top: -15px;
+}
+
+.main-advantage-small-head p
+{
+color: rgb(149,149,149);
+font-size:24px;
+font-family: "微软雅黑";
+}
+
+.main-advantage-small-head p span
+{
+color: rgb(255,172,13);
+}
+
+.main-advantage li
+{
+float: left;
+width: 25%;
+text-align: center;
+}
+.main-advantage li img
+{
+	width: 36%;
+}
+.main-advantage li p
+{
+	font-size: 28px;
+	font-family: "微软雅黑";
+	color: rgb(255,255,255);
+}
+
+
+/*are you intersested*/
+
+.contact-way
+{
+	width: 64%;
+	float: right;
+
+
+
+}
+.contact-way li
+
+{
+float: left;
+
+
+}
+.contact-way li img
+{
+	width: 100%;
+}
+
+.contact-way li p
+{
+	font-size: 22px;
+	color: rgb(0,0,0);
+	font-family: "微软雅黑";
+	margin-top:10px;
+	margin-left: 5px;
+}
+
+
+
+
+
+
+/*tail*/
+
+
+footer{
+
+    width: 98.58%;
+    color: white;
+    background: black;
+    text-align: center;
+  
+    margin-top: 280px;
+       padding: 20px 10px;
+       font-family: "微软雅黑";
+
+}
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/*案例*/
+.main-head2
+{
+text-align: center;
+
+}
+
+.main-head2 p
+{
+color: rgb(255,172,13);
+font-size:28px;
+font-family: "微软雅黑";
+}
+
+
+
+.main-small-head2
+{
+text-align: center;
+margin-top: -15px;
+}
+
+.main-small-head2 p
+{
+color: rgb(149,149,149);
+font-size:20px;
+font-family: "微软雅黑";
+}
+
+.main-small-head2 p span
+{
+color: rgb(49,49,49);
+}
+
+
+
+/*main photo*/
+
+.main-photo
+{
+	width: 100%;
+}
+.main-photo img
+{
+	width: 100%;
+	height: 580px;
+}
+
+
+
+/*app design*/
+.app-design
+{
+	width: 100%;
+	height: 450px;
+
+}
+.design-left
+{
+	width: 65%;
+	float:left;
+	text-align: center;
+	padding: 50px 0;
+}
+
+.design-main
+{
+  width: 100%
+}
+
+.design-main-p
+{
+	font-size: 16px;
+	font-family: "微软雅黑";
+
+}
+.design-main-big
+{
+	font-size: 28px;
+	font-family: "微软雅黑";
+
+}
+.design-main-p span
+{
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: rgb(255,172,13);
+
+}
+
+
+.design-right
+{
+	width: 35%;
+	float: left;
+	margin-left: -200px;
+}
+.design-right img
+{
+	width: 85%;
+	height: 320px;
+	padding: 70px 0px;
+}
+
+
+/*lun bo*/
+.lun-bo
+{
+	width: 100%;
+}
+.lun-bo img
+{
+	width: 100%;
+}
+
+
+.system-design
+{
+	width: 100%;
+	height: 230px;
+
+}
+.design2-left
+{
+	width: 35%;
+	float: left;
+   
+    margin-right: -200px;
+    margin-left: 200px;
+	
+}
+
+.design2-main
+{
+  width: 100%
+}
+
+.design2-main-p
+{
+	font-size: 16px;
+	font-family: "微软雅黑";
+
+}
+.design2-main-big
+{
+	font-size: 28px;
+	font-family: "微软雅黑";
+
+}
+.design2-main-p span
+{
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: rgb(255,172,13);
+
+}
+
+
+.design2-right
+{
+
+
+		width: 65%;
+	float:left;
+	text-align: center;
+	padding-top: 50px;
+
+}
+.design2-left img
+{
+	width: 85%;
+	height: 320px;
+	padding: 70px 0px;
+}
+
+/*tail*/
+footer a
+{
+	font-size: 16px;
+	color: rgb(255,255,255);
+	font-family: "微软雅黑";
+}
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/*方案*/
+
+
+
+/*金融方案*/
+.financial
+{
+width: 100%;
+height: 910px;
+
+}
+
+.financial .main
+{
+	width: 60%;
+	margin: 0 auto;
+	height: 260px;
+}
+
+.financial .main .left
+{
+	width: 65%;
+	float: left;
+	height: 260px;
+}
+
+.financial .main .left div
+{
+	width: 100%;
+	margin-top: 30px;
+}
+
+
+.financial .main .left .p-head
+{
+   font-size: 20px;
+   color: rgb(49,49,49);
+}
+
+.financial .main .left .p-head span
+{
+   font-size: 28px;
+   color: rgb(250,190,58);
+}
+
+
+.financial .main .left hr
+{
+	width: 60%;
+	float: left;
+	margin-top: -10px;
+    
+	border:none;border-top:1px double rgb(250,190,58);
+}
+
+.financial .main .left .p-main
+{
+	font-size: 15px;
+   color: rgb(49,49,49);
+
+}
+.financial .main .right
+{
+	width: 30%;
+	float: right;
+	height: 200px;
+}
+.financial .main .right img
+{
+	width: 100%;
+	float: left;
+	margin-top: 60px;
+}
+
+
+
+
+.financial .main2
+{
+	width: 60%;
+	margin: 0 auto;
+	height: 260px;
+}
+
+.financial .main2 .left
+{
+	width: 40%;
+	float: left;
+}
+
+
+.financial .main2 .left p
+{
+   font-size: 20px;
+   color: rgb(49,49,49);
+}
+
+.financial .main2 .left .head span
+{
+   font-size: 20px;
+   color: rgb(49,49,49);
+}
+
+.financial .main2 .left img
+{
+	width: 100%;
+	float: left;
+	margin-top: 70px;
+}
+.financial .main2 .right
+{
+	width: 55%;
+	float: right;
+	height: 260px;
+}
+
+
+.financial .main2 .right div
+{
+	width: 100%;
+	height: 60px;
+}
+.financial .main2 .right div .p-head
+{
+	
+	   font-size: 20px;
+   color: rgb(49,49,49);
+  float: right;
+
+}
+
+
+.financial .main2 .right .p-head span
+{
+   font-size: 28px;
+   color: rgb(250,190,58);
+}
+
+.financial .main2 .right .p-main
+{
+		font-size: 15px;
+   color: rgb(49,49,49);
+}
+
+
+.financial .main2 .right hr
+{
+	width: 60%;
+	float: right;
+	margin-top: -10px;
+    
+	border:none;border-top:1px double rgb(250,190,58);
+}
+
+
+
+
+.financial .main3
+{
+	width: 100%;
+	height: 400px;
+	background-color: rgb(49,47,48);
+	margin-top: 20px;
+	
+}
+
+.financial .main3 ul
+{
+	padding: 0 0;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.financial .main3 ul li
+{
+	width: 20%;
+	float: left;
+	margin-top: 35px;
+	height: 290px;
+}
+
+.financial .main3 ul li img
+{
+	width: 230px;
+	float: left;
+	height: 290px;
+}
+
+
+.footer3
+{
+
+    width: 98.58%;
+    color: white;
+    background: black;
+    text-align: center;
+  
+    margin-top: 50px;
+       padding: 20px 10px;
+       font-family: "微软雅黑";
+
+}
+
+

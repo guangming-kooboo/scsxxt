@@ -1,0 +1,95 @@
+﻿@model List<List<string>>
+
+@{
+    //ViewBag.Title = "报表";
+   // Layout = "~/Views/Shared/_HomeLayout.cshtml";
+   // List<SelectListItem> items = ViewBag.items;
+   //T_ReportData report = ViewBag.report;
+}
+
+
+<script>
+    
+    $().ready(function () {
+        $("#Preview").click(Preview);
+        $("#ToExcel").click(ToExcel);
+      
+    });
+    
+
+    function Query(_Params,ReturnUrl) {
+        $("#Params").val(_Params);
+
+        var ReportID = $("#ReportID").val();
+        var Params = $("#Params").val();
+        if (ReportID == undefined || ReportID == "" || Params == "") {
+            alert('请填写完整的信息');
+            return;
+        }
+        location.href = ReturnUrl+"?ReportID=" + ReportID + "&Params=" + Params;
+    }
+
+    function ToExcel() {
+        var ReportID = $("#ReportID").val();
+        var Params = $("#Params").val();
+        if (ReportID == "" ) {
+            alert('检测到错误，请联系开发人员');
+            return;
+        }
+        location.href = "/Home/ReportToExcel?ReportID=" + ReportID + "&Params=" + Params;
+    }
+</script>
+<script>
+    function t(sName) {
+        return $("[name='" + sName + "']").find("option:selected").text();
+    }
+    function v(sName) {
+        return $("[name='" + sName + "']").val();
+    }
+</script>
+
+<div>
+    @*@Html.DropDownList("ReportID", items,new {style= "visibility:hidden" })*@
+    <input type="text" value="@ViewData["ReportID"]" id="ReportID" placeholder="报表编号" style="visibility:hidden" />
+
+    <input type="text" value="@ViewData["Params"]" id="Params" placeholder="多个参数使用;分隔" style= "visibility:hidden"/>
+    @*<button class="btn btn-primary" onclick="Query()">刷新</button>*@
+    
+    <table class="table table-striped">
+
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            if (i == 0)
+            {
+                <thead>
+                    <tr>
+                        @for (var j = 0; j < Model[i].Count; j++)
+                    {
+                            <th>
+                                @Model[i][j]
+                            </th>
+                        }
+                    
+                    </tr>
+                </thead>
+                @(new HtmlString("<tbody>"))
+            }
+            else
+            {
+                <tr>
+                    @for(var j = 0; j < Model[i].Count; j++)
+                    {
+                    <td>
+                        @(new HtmlString(Model[i][j])) 
+                    </td>
+                    }
+                   
+                </tr>
+               
+            }
+        }
+        @(new HtmlString("</tbody>"))
+
+    </table>
+
+</div>

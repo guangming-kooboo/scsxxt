@@ -1,0 +1,76 @@
+﻿
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>专业详情</title>
+     <link href="/Areas/CodeManager/Content/ALL/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">学生代码维护表</a></li>
+                <li><a href="#">专业详情</a></li>
+            </ul>
+        </div>
+
+
+  <div class="formtitle"><span>专业详情</span></div>
+       
+    <ul class="forminfo">
+            
+           <li>
+                <label for="SchoolID">学校名称</label>
+                <input type="text" name="SchoolID" id="SchoolID" value="@ViewBag.schoolname" readonly="readonly"class="dfinput">
+            
+</li> <li>
+
+                <label for="EntryYear">年级</label>
+
+                <input name="EntryYear" id="EntryYear" value="@ViewBag.spedetail.EntryYear" readonly="readonly"class="dfinput"/>
+            
+</li> <li>
+
+                <label for="SpeNo">专业编号</label>
+                <input type="text" name="SpeNo" id="SpeNo" value="@ViewBag.spedetail.SpeNo" readonly="readonly"class="dfinput">
+            
+</li> <li>
+
+                <label for="SpeName">专业名称</label>
+                <input type="text" name="SpeName" id="SpeName" value="@ViewBag.spedetail.SpeName" readonly="readonly"class="dfinput">
+            
+</li> <li>
+
+                <label>&nbsp;</label>  <button class="btn">返回</button>
+   </li>          
+
+   </ul>
+     <script>
+
+         $("button").bind("click", function () {
+             var s = "speciality1";
+             window.location = s;
+
+
+         })
+
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>
+
+

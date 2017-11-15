@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>印章类型详情</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">印章类型管理</a></li>
+                <li><a href="#">查看印章类型详情</a></li>
+            </ul>
+        </div>
+
+    <div class="formbody">
+
+            <div class="formtitle"><span>查看详情</span></div>
+            
+
+    
+        
+           <ul class="forminfo">
+               
+               
+           
+       
+        <li>
+                   <label>印章类型编号:</label>
+                <input type="text" name="EntCategoryID" id="EntCategoryID" class="dfinput" value="@ViewBag.detail.TypeID" readonly="readonly">
+         </li>
+            
+
+                <li>
+                   <label>印章类型名称:</label>
+                <input type="text" id="EntCategoryName"  name="EntCategoryName"class="dfinput" value="@ViewBag.detail.TypeName"readonly="readonly">
+         </li>
+                
+               <li>
+                   <label>所属单位:</label>
+                   <input type="text" id="SybSystem" name="SybSystem" class="dfinput" value="@ViewBag.detail.SybSystem"readonly="readonly">
+               </li>
+
+              <li>  
+                  
+                  <label>&nbsp;</label><button id="button1" class="btn">返 回</button>
+               
+            </li>
+               </ul>
+            
+    
+   
+    </div>
+     
+    <script>
+        $("#button1").bind("click", function () {
+            var s = "C_StampType1";
+            window.location = s;
+
+
+        })
+
+
+
+
+    </script>
+
+</body>
+</html>
+

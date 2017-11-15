@@ -1,0 +1,144 @@
+﻿@Styles.Render("/Areas/School/SchoolContent/PicNewsList/imgList.css")
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PicNewsList</title>
+</head>
+<body>
+
+    @Html.Partial("Head")
+
+    <div class="wrapper">
+        <!--图片列表-->
+        <div class="imgList">
+            <div>
+                当前位置：<a href="#">首页</a> | 实习随拍
+            </div>
+            <div class="classic">
+                <ul>
+                    <li><a href="">全部</a></li>
+                    <li><a href="">团体</a></li>
+                    <li><a href="">自拍</a></li>
+                    <li><a href="">实习单位风采</a></li>
+                    <li><a href="">企业文化</a></li>
+                    <li><a href="">地方风貌</a></li>
+                    <li><a href="">人物采风</a></li>
+                    <li><a href="">人在旅途</a></li>
+                </ul>
+            </div>
+            @*<div class="innerList">*@
+                @*@foreach (var m in (ViewData["PicN1"] as List<ServicePlatform.Models.T_News>))
+                { 
+                    string PLink=m.PicUrl;
+                    string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @m.NewsID + "";
+                    <div class="inner">
+                        <a href=@tlink><img src=@PLink alt="" /></a>
+                        <p>@m.NewsTitle</p>
+                        <p>作者：<span>@m.NewsAuthor</span></p>
+                    </div>
+                }*@
+            @*</div>*@  <!--/innerList-->
+            @for (var i = 0; i <(ViewData["PicN"] as List<ServicePlatform.Models.T_News>).Count(); i++)
+            {
+                <div class="innerList">
+                    @if (i % 4 == 0)
+                    {
+                        string theTitle = "";
+                        ServicePlatform.Models.ContentContext context=new ServicePlatform.Models.ContentContext();
+                        List<ServicePlatform.Models.T_News> a = (ViewData["PicN"] as List<ServicePlatform.Models.T_News>);
+                        ServicePlatform.Models.T_News theNew = a[i];
+                        //从T_Content表中获得该新闻的标题
+                        var theContent = from u in context.T_Content from v in context.T_News where u.ContentID == v.NewsID && v.NewsID == theNew.NewsID select u;
+                        foreach(var n in theContent){
+                            theTitle = n.ContentTitle;
+                        }
+                        string PLink = theNew.PicUrl;
+                        string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @theNew.NewsID + "";
+                        <div class="inner">
+                            <a href=@tlink><img src=@PLink alt="" /></a>
+                            <p>@theTitle</p>
+                            <p>作者：<span>@theNew.NewsAuthor</span></p>
+                        </div>
+                    }
+                </div>
+                <div class="innerList">
+                    @if (i % 4 == 1)
+                    {
+                        string theTitle1 = "";
+                        ServicePlatform.Models.ContentContext context = new ServicePlatform.Models.ContentContext();
+                        List<ServicePlatform.Models.T_News> b = (ViewData["PicN"] as List<ServicePlatform.Models.T_News>);
+                        ServicePlatform.Models.T_News theNew1 = b[i];
+                        //从T_Content表中获得该新闻的标题
+                        var theContent = from u in context.T_Content from v in context.T_News where u.ContentID == v.NewsID && v.NewsID==theNew1.NewsID select u;
+                        foreach (var n in theContent)
+                        {
+                            theTitle1 = n.ContentTitle;
+                        }
+                        string PLink = theNew1.PicUrl;
+                        string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @theNew1.NewsID + "";
+                        <div class="inner">
+                            <a href=@tlink><img src=@PLink alt="" /></a>
+                            <p>@theTitle1</p>
+                            <p>作者：<span>@theNew1.NewsAuthor</span></p>
+                        </div>
+                    }
+                </div> 
+                <div class="innerList">
+                    @if (i % 4 == 2)
+                    {
+                        string theTitle2 = "";
+                        ServicePlatform.Models.ContentContext context = new ServicePlatform.Models.ContentContext();
+                        List<ServicePlatform.Models.T_News> a = (ViewData["PicN"] as List<ServicePlatform.Models.T_News>);
+                        ServicePlatform.Models.T_News theNew = a[i];
+                        //从T_Content表中获得该新闻的标题
+                        var theContent = from u in context.T_Content from v in context.T_News where u.ContentID == v.NewsID && v.NewsID == theNew.NewsID select u;
+                        foreach (var n in theContent)
+                        {
+                            theTitle2 = n.ContentTitle;
+                        }
+                        string PLink = theNew.PicUrl;
+                        string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @theNew.NewsID + "";
+                        <div class="inner">
+                            <a href=@tlink><img src=@PLink alt="" /></a>
+                            <p>@theTitle2</p>
+                            <p>作者：<span>@theNew.NewsAuthor</span></p>
+                        </div>
+                    }
+                </div>  
+                <div class="innerList">
+                    @if (i % 4 == 3)
+                    {
+                        string theTitle3 = "";
+                        ServicePlatform.Models.ContentContext context = new ServicePlatform.Models.ContentContext();
+                        List<ServicePlatform.Models.T_News> a = (ViewData["PicN"] as List<ServicePlatform.Models.T_News>);
+                        ServicePlatform.Models.T_News theNew = a[i];
+                        //从T_Content表中获得该新闻的标题
+                        var theContent = from u in context.T_Content from v in context.T_News where u.ContentID == v.NewsID && v.NewsID == theNew.NewsID select u;
+                        foreach (var n in theContent)
+                        {
+                            theTitle3 = n.ContentTitle;
+                        }
+                        string PLink = theNew.PicUrl;
+                        string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @theNew.NewsID + "";
+                        <div class="inner">
+                            <a href=@tlink><img src=@PLink alt="" /></a>
+                            <p>@theTitle3</p>
+                            <p>作者：<span>@theNew.NewsAuthor</span></p>
+                        </div>
+                    }
+                </div>                
+            }
+        </div><!--/imgList-->
+    </div>
+
+    @Html.Partial("Foot")
+
+</body>
+</html>

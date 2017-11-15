@@ -1,0 +1,15 @@
+﻿@model ServicePlatform.Areas.WbsHqu.ViewModels.FAQ.List_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<label>
+    类型列表:&nbsp;
+    @Html.TextBox("FAQ类型", "", new { @class = "form-control input-sm", PlaceHolder = "请输入要查询的类型" })
+</label>
+
+<script>
+    function Search() {
+        var Params = v("FAQ类型");
+        return Params+";" + @Model.FatherId;
+    }
+</script>

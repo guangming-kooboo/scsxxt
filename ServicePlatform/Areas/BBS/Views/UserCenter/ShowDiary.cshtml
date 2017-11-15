@@ -1,0 +1,89 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.ShowDiarys_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+
+
+
+
+
+<div class="main">
+
+    <!-- 导航-->
+      @Html.Action("_Head", new { id = Model.userid })
+    <div class="means-note">
+        <div class="means-main-head">
+            <div class="write-note-left">
+                <p class="means-main-head-p">查看日志
+            </div>
+            <div class="write-note-right">
+                <ul>
+                    <li class="write-note-right-li"><a class="write-note-right-li-a" href="@Url.Action("Diarys","UserCenter",new{area="BBS",id=Model.userid})">返回日志列表</a></li>
+                    <li class="write-note-right-li"><p class="write-note-right-li-p">| </li>
+                    <li class="write-note-right-li"><a class="write-note-right-li-a" href="@Url.Action("DiaryDrafts","UserCenter",new{area="BBS",id=Model.userid})">草稿箱</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="one-note-1">
+            <ul>
+                <li class="one-note-1-li"><p class="one-note-1-li-p">@Model.showDiarys.DiaryTitle</li>
+                <li class="one-note-1-li"><p class="one-note-1-li-ps">&nbsp;&nbsp;&nbsp;&nbsp;@Model.showDiarys.Time&nbsp;&nbsp; </li>
+            </ul>
+        </div>
+
+        <div class="one-note-2">
+            <ul>
+                <li class="one-note-2-li"><img src="~/Areas/BBS/Content/Image/点赞1.png"></li>
+                <li class="one-note-2-lit"><p class="one-note-1-li-ps">赞(@Model.showDiarys.PraiseCount) </li>
+                <li class="one-note-2-li"><img src="~/Areas/BBS/Content/Image/评论.png"></li>
+                <li class="one-note-2-lit"><p class="one-note-1-li-ps">评论(@Model.showDiarys.ReplyCount) </li>
+                <li class="one-note-2-li"><img src="~/Areas/BBS/Content/Image/分享1.png"></li>
+                <li class="one-note-2-lit"><p class="one-note-1-li-ps"><a href="@Url.Action("ReportDiary","UserCenter",new{area="BBS"})">举报</a> </li>
+                <li class="one-note-2-li"><p class="one-note-1-li-ps"><a href="@Url.Action("ShareDiary","UserCenter",new{area="BBS"})"> 分享</a></p></li>
+                <li class="one-note-2-liss"><a class="one-note-1-li-ps" href="@Url.Action("LastDiary","UserCenter",new{area="BBS"})">下一篇</a></li>
+                <li class="one-note-2-lis">&nbsp;|&nbsp;</li>
+                <li class="one-note-2-lis"><a class="one-note-1-li-ps" href="@Url.Action("NextDiary","UserCenter",new{area="BBS"})">上一篇</a></li>
+            </ul>
+
+        </div>
+
+        <div class="one-note-main">
+            <p>@Model.showDiarys.Content  </p>
+        </div>
+
+        <div class="one-note-note">
+            <p class="means-right-head">
+                |&nbsp;&nbsp;<a class="means-right-head-a" href="">留言&nbsp;(@Model.showDiarys.ReplyCount)</a>
+                @foreach (var reply in Model.replydiarys)
+                {
+                    <hr class="message-main-hr">
+
+                    <div class="message-main-main">
+                        <ul>
+                            <li class="message-main-main-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=reply.AuthorID})"><img class="list-main-lists-head" src="@reply.AuthorHeadPicture"></a></li>
+                            <li class="message-main-main-lis"><a class="message-main-main-a" href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=reply.AuthorID})">@reply.Author</a></li>
+                            <li class="message-main-main-lis"><img src="~/Areas/BBS/Content/Image/用户.png"></li>
+                            <li class="message-main-main-li">
+                <p class="message-main-main-li-p">
+                    第234楼  </li>
+                    <li class="message-main-main-li">
+                <p class="message-main-main-li-p">
+                    发表于 @reply.Time  </li>
+                    <li class="message-main-main-liss"><a class="message-main-main-li-a" href="@Url.Action("DeleteReplyDiary","UserCenter",new{area="BBS"})">删除</a></li>
+                    </ul>
+                </div>
+                    <div class="message-main-main-note">
+                        <p class="message-main-main-note-p">@reply.Content</p>
+                    </div>
+                    <hr>
+                }
+
+                <br>
+
+            </div>
+
+
+</div>

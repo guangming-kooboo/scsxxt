@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "detailContentColumn";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>内容栏目详情</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">内容栏目管理</a></li>
+                <li><a href="#">查看内容栏目详情</a></li>
+            </ul>
+        </div>
+
+    <div class="formbody">
+
+            <div class="formtitle"><span>查看详情</span></div>
+            
+
+    
+        
+           <ul class="forminfo">
+               
+       
+                
+               <li>
+                   <label>内容栏目编号:</label>
+                   <input type="text" name="ContColumnID" id="ContColumnID" class="dfinput" value="@ViewBag.detail.ContColumnID" readonly="readonly">
+               </li>
+
+               <li>
+                   <label>内容栏目名称:</label>
+                   <input type="text" name="ContColumnName" id="ContColumnName" class="dfinput" value="@ViewBag.detail.ContColumnName" readonly="readonly">
+               </li>
+
+
+               <li>
+                   <label>所属内容类型:</label>
+                   <input type="text" id="ContTypeID" name="ContTypeID" class="dfinput" value="@ ViewBag.contypeName" readonly="readonly">
+               </li>
+               <li>
+                   <label>所属子系统:</label>
+                   <input type="text" id="SybSystem" name="SybSystem" class="dfinput" value="@ViewBag.detail.ContColumnID" readonly="readonly">
+               </li>
+            
+
+              <li>  
+                  
+                  <label>&nbsp;</label><button id="button1" class="btn">返 回</button>
+               
+            </li>
+               </ul>
+            
+    
+   
+    </div>
+     
+    <script>
+        $("#button1").bind("click", function () {
+            var s = "C_ContentColumn1";
+            window.location = s;
+
+
+        })
+
+
+
+
+    </script>
+
+</body>
+</html>
+

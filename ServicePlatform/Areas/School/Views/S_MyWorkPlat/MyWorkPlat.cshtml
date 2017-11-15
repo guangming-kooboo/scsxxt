@@ -1,0 +1,338 @@
+﻿@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+@{
+    ViewBag.Title = "MyWorkPlat";
+
+    //List<T_WeekRecord> WeekRecord = ViewBag.WeekRecord;
+
+    //List<T_PracticeCase> PracticeCase = ViewBag.PracticeCase;
+
+    List<C_PracticeCaseItem> PracticeCaseItem = ViewBag.PracticeCaseItem;
+
+    List<T_StuBatchReg> Report = ViewBag.Report;
+
+    ViewData["Pulic"] = null;
+
+    List<string> forbidlist = ViewBag.fobidlist;
+
+
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的工作台</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    @Html.Partial("_LayerLinks")
+    @Html.Partial("_KindEditorLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.idTabs.min.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/select-ui.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+
+            var flag = '@ViewBag.Focus';
+            if (flag == 'tab2') {
+                document.getElementById('mycase').click();
+            }
+            else if (flag == 'tab3') {
+                document.getElementById('report').click();
+            }
+            else
+            {
+                document.getElementById('weekrecord').click();
+            }
+
+        });
+    </script>
+    <script>
+        function jump(caseno)
+        {
+            var check = '@ViewBag.NowOpSchoolID';
+            var type = "Detail";
+            var url = '/School/S_MyWorkPlat/AddNewCase?type=' + type + '&caseno=' + caseno + '&temp_sid=' + check;
+            window.location = url;
+        }
+
+        function jumptoo()
+        {
+            var url = '/Enterprise/Home/T_EntBatchReg_PracticeIdentification_Student?PracticeNo=@ViewBag.PraticeNo';
+            window.open(url);
+        }
+
+        function jumpedit(caseno) {
+            var check = '@ViewBag.NowOpSchoolID';
+            var type = "Modify";
+            var url = '/School/S_MyWorkPlat/AddNewCase?type=' + type + '&caseno=' + caseno + '&temp_sid=' + check;
+            window.location = url;
+        }
+    </script>
+
+    <script>
+
+    $(document).ready(function () {
+
+        @*var ss = '@ViewBag.ForbidFlag';
+
+        if (ss == "true")
+        {
+            $('#edi_weekrec').remove();
+            $('#del_weekrec').remove();
+
+            $('#edi_case').remove();
+
+            $('#del_case').remove();
+
+            $('#del_case').remove();
+
+            $('#del_rep').remove();
+        }*@
+       // var count = '@forbidlist.Count';
+        @*@for(var i = 0; i < forbidlist.Count; i++)
+        {
+           @(new HtmlString( "$('"+forbidlist[i]+"').remove();"));
+       
+        }*@
+
+        $('#T_WeekRec tr').find('td:eq(0)').remove();
+        $('#T_WeekRec tr').find('td:eq(1)').remove();
+        $('#T_WeekRec tr').find('td:eq(3)').remove();
+
+
+    });
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">实习过程管理</a></li>
+            <li><a href="#">我的工作台</a></li>
+        </ul>
+    </div>
+    
+    <div class="formbody">
+
+        <div id="usual1" class="usual">
+
+            <div class="itab">
+                <ul>
+                    <li><a href="#tab1" class="selected" id="weekrecord" name="weekrecord">实习周记</a></li>
+                    <li><a href="#tab2" id="mycase" name="mycase" class="">实习案例</a></li>
+                    <li><a href="#tab3" id="report" name="report" class="">实习报告</a></li>
+                    @if (ViewBag.ForbidFlag!="true")
+                    {
+                        <li><a href="#tab4" id="rescore" name="rescore" class="" onclick="jumptoo2222()">实习鉴定表</a></li>
+                    }              
+                </ul>
+            </div>
+
+            <div id="tab1" class="tabson">
+
+                @*@using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+                {*@                    
+
+                @{
+                    ViewData["Pulic"] = ViewData["Table1"];
+                   
+                }
+
+                @if (ViewBag.ForbidFlag != "true")
+                {
+                    <div id="_form_weekrec">
+                        @using (Html.BeginForm("AddWeekRecord", "S_MyWorkPlat", FormMethod.Post, new { }))
+                        {
+                            <div class="formtitle"><span>撰写新周记: </span></div>
+                            <ul class="forminfo">
+                                <li><label>标题:</label><input name="title" id="title" type="text" class="dfinput" value="" /><i>*</i></li>
+                                <li><label>摘要:</label><input name="summary" id="summary" type="text" class="dfinput" value="" /><i>*</i></li>
+                                <li><input name="practiceno" id="practiceno" type="hidden" class="dfinput" value='@ViewBag.PraticeNo' /><i></i></li>
+                                <li><label>文章内容</label><textarea name="content" id="editor" class="textinput"></textarea></li>
+
+                                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存" /></li>
+                            </ul>
+                        }
+                    </div>
+                }
+                <div class="formtitle"><span>已撰写的周记列表: </span></div>
+                <p><font size="20">共：@ViewBag.WeekRecNum 篇周记</font></p>
+                @Html.Partial("_TableForAll", ViewData["Pulic"])
+
+                @*}*@
+
+
+                
+             
+            </div>
+
+
+            <div id="tab2" class="tabson">
+                @{
+                    ViewData["Pulic"] = ViewData["Table2"];
+
+                }
+                @if (ViewBag.ForbidFlag != "true")
+                {
+                    <div id="_form_practicecase">
+                        @using (Html.BeginForm("AddNewCase", "S_MyWorkPlat", FormMethod.Post, new { }))
+                        {
+                            <div class="formtitle"><span>撰写新案例: </span></div>
+
+                            <input type="submit" class="scbtn" value="创建新案例" />
+                        }
+                    </div>
+                }
+                @using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+                {
+                    <div class="formtitle"><span>已撰写的案例列表: </span></div>
+                    <p><font size="20">共：@ViewBag.CaseNum 个案例</font></p>
+                    @Html.Partial("_TableForAll", ViewData["Pulic"])
+                }
+
+
+
+                
+               
+
+
+            </div>
+
+
+            <div id="tab3" class="tabson">
+                @{
+                    ViewData["Pulic"] = ViewData["Table3"];
+
+                }
+
+                @if (ViewBag.ForbidFlag != "true")
+                {
+                    <div id="_form_newrep">
+                        @using (Html.BeginForm("AddNewReport_ByFile", "S_MyWorkPlat", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="formtitle"><span>导入新的实习报告: </span></div>
+
+                            <input type="file" name="Report" id="Report" value="导入实习报告" />
+
+                            <input name="practiceno" id="practiceno" type="hidden" class="dfinput" value='@ViewBag.PraticeNo' />
+                            <input type="submit" value="确认导入" class="btn" />
+                        }
+                    </div>
+                }
+                @using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+                {
+                    <div class="formtitle"><span>已提交的实习报告: </span></div>
+                    <p><font size="20">共：@ViewBag.ReportNum 个报告</font></p>
+                    @Html.Partial("_TableForAll", ViewData["Pulic"])
+                }
+
+
+                
+             
+
+
+
+            </div>
+
+            <div id="tab4" class="tabson">
+                @Html.Action("T_EntBatchReg_PracticeIdentification_Student", "Home", new {area= "Enterprise", PracticeNo = ViewBag.PraticeNo })
+
+                @*<a href='/Enterprise/Home/T_EntBatchReg_PracticeIdentification_Student?PracticeNo=@ViewBag.PraticeNo'>实习鉴定表</a>*@
+                @*@{
+                    ViewData["Pulic"] = ViewData["Table4"];
+                }
+                <div class="formtitle"><span>总评分: @ViewBag.ScoreForAll</span></div>
+                @using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+                {
+                    
+                    <div class="formtitle"><span>企业评分: </span></div>
+                    @Html.Partial("_TableForAll", ViewData["Pulic"])
+                }
+                @{
+                    ViewData["Pulic"] = ViewData["Table5"];
+                }
+                @using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+                {
+                    <div class="formtitle"><span>学校评分: </span></div>
+                    @Html.Partial("_TableForAll", ViewData["Pulic"])
+                }*@
+
+                @*@if (!forbidlist.Contains("_form_newrep"))
+                {
+                    <div id="_form_newrep">
+                        @using (Html.BeginForm("AddNewReport_ByFile", "S_MyWorkPlat", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="formtitle"><span>导入新的实习报告: </span></div>
+
+                            <input type="file" name="Report" id="Report" value="导入实习报告" />
+
+                            <input name="practiceno" id="practiceno" type="hidden" class="dfinput" value='@ViewBag.PraticeNo' />
+                            <input type="submit" value="确认导入" class="btn" />
+                        }
+                    </div>
+                }*@
+
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+        </script>
+
+        <script type="text/javascript">
+            $('.tablelist tbody tr:odd').addClass('odd');
+        </script>
+
+        <script>
+
+            function show(PosDesc) {
+                //弹出一个页面层
+                layer.open({
+                    type: 1,
+                    area: ['300px', '180px'],
+                    title: "周记详情",
+                    shadeClose: true, //点击遮罩关闭
+                    offset: ['200px', '500px'],
+                    content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+                });
+            }
+        </script>
+
+        <script>
+
+            function showEdit(url, title, content) {
+                //弹出一个页面层
+                layer.open({
+                    type: 1,
+                    area: ['420px', '300px'],
+                    title: "编辑周记",
+                    shadeClose: true, //点击遮罩关闭
+                    offset: ['200px', '500px'],
+                    content: '\<\div style="padding:20px;">' + '\<form action=' + url + ' method="post">' + '\<\label>标题:   <\/lable>' + '\<\input type="text" class="dfinput" name="title" id="title" value=' + title + '>' + '\<br />' + '\<br />' + '\<br />' + '\<\label>内容:   <\/lable>' + '\<textarea class="dfinput" name="content" id="content">' + content + '<\/textarea>' + '\<br />' + '\<br />' + '\<br />' + '\<\input type="submit" value="提交修改" class="btn" style="float:right">' + '\<\/form>' + '\<\/div>'
+                });
+            }
+        </script>
+    </div>
+
+</body>
+
+</html>
+

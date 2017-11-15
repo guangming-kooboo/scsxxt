@@ -1,0 +1,76 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.AdminCRUD.AddQuestionSome_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+ 
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+        <li><a href=@Url.Action("editQuestionnaire", "Admin", new { area = "CPQ", ReportID = "CPQ编辑问卷", Params = "10385-14093-201608290428;;" })>编辑问卷页面</a><i class="fa fa-angle-right"></i></li>
+    </ol>
+
+</div>
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>@ViewBag.Title
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal"  method="POST" role="form">
+                <div class="form-body">
+                    <input type="text" name="QuestionnaireID" id="QuestionnaireID" value=@Model.QuestionnaireID hidden="hidden">
+                    <input type="text" name="share" id="share" value=@Model.share hidden="hidden">
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">问题类型</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(o => o.QuestionType, Model.QuestionTypeListItem ,new{@class="form-control"})
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">问题领域</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(o => o.QuestionDomain, Model.QuestionDomainListItem, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="form-actions fluid">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-success">下一步</button>
+
+                    </div>
+                </div>
+            </form>
+
+            @*<p>================================================================================= </p>*@
+            <hr>
+            <button type="button" class="btn btn-default" onclick="questionModel()">从题库中选择</button><!--这个以后再写链接-->
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function questionModel() {
+        var QuestionnaireID = $("#QuestionnaireID").val();
+
+        var s = "/CPQ/Admin/questionModels?ReportID=CPQ问题模板库&Params=;&QuestionnaireID=" + QuestionnaireID;//这里我必须传一个参数给问题模板库
+        window.location = s;
+
+    }
+
+
+</script>

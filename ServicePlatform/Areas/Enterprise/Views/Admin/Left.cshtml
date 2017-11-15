@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "Left";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>菜单栏</title>
+
+
+    <link href="~/Areas/Enterprise/Content/Admin/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Enterprise/Content/Admin/css/select.css" rel="stylesheet" />
+    <script src="~/Areas/Enterprise/Content/Admin/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //导航切换
+            $(".menuson li").click(function () {
+                $(".menuson li.active").removeClass("active")
+                $(this).addClass("active");
+            });
+
+            $('.title').click(function () {
+                var $ul = $(this).next('ul');
+                $('dd').find('ul').slideUp();
+                if ($ul.is(':visible')) {
+                    $(this).next('ul').slideUp();
+                } else {
+                    $(this).next('ul').slideDown();
+                }
+            });
+        })
+    </script>
+
+
+</head>
+
+<body style="background:#f0f9fd;">
+    <div class="lefttop"><span></span>企业控制台</div>
+
+    <dl class="leftmenu">
+
+        @*<dd>
+                <div class="title">
+                    <span><img src="/Areas/Enterprise/Content/Admin/images/leftico01.png" /></span>管理信息
+                </div>
+                <ul class="menuson">
+                    <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
+                    <li class="active"><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li>
+                    <li><cite></cite><a href="imgtable.html" target="rightFrame">图片数据表</a><i></i></li>
+                    <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
+                    <li><cite></cite><a href="imglist.html" target="rightFrame">图片列表</a><i></i></li>
+                    <li><cite></cite><a href="imglist1.html" target="rightFrame">自定义</a><i></i></li>
+                    <li><cite></cite><a href="tools.html" target="rightFrame">常用工具</a><i></i></li>
+                    <li><cite></cite><a href="filelist.html" target="rightFrame">信息管理</a><i></i></li>
+                    <li><cite></cite><a href="tab.html" target="rightFrame">Tab页</a><i></i></li>
+                    <li><cite></cite><a href="error.html" target="rightFrame">404页面</a><i></i></li>
+                </ul>
+            </dd>*@
+
+        <dd>
+            <div class="title">
+
+                <span><img src="/Areas/Enterprise/Content/Admin/images/leftico01.png" /></span>企业信息维护
+
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Enterprise/Home/T_Enterprise_Add" target="rightFrame">基本信息维护</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/T_EntBatchReg_ListShow" target="rightFrame">申请高校实习</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/T_PracticePosition_ListShow" target="rightFrame">实习岗位发布</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ChgPsw" target="rightFrame">登入密码修改</a><i></i></li>
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/Enterprise/Content/Admin/images/leftico02.png" /></span>实习报名管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Enterprise/Home/T_PracticeVolunteer_ListShow?actionFlag=面试管理" target="rightFrame">面试管理</a><i></i></li>                
+                <li><cite></cite><a href="/Enterprise/Home/T_PracticeVolunteer_ListShow?actionFlag=实习结果管理" target="rightFrame">实习结果管理</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/T_PracticeVolunteer_ListShow?actionFlag=岗位指派管理" target="rightFrame">岗位指派管理</a><i></i></li>
+
+
+            </ul>
+        </dd>
+
+      
+       
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico03.png" /></span>实习评分管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Enterprise/ScoreSetup/ScoreWeightSet" target="rightFrame">查看评分比重</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/ScoreSetup/ScoreItem_ListShow" target="rightFrame">评分项目设置</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/ScoreSetup/ScoreToStudent_ListShow" target="rightFrame">成绩录入</a><i></i></li>
+
+
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>就业招聘管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Enterprise/Home/ButtonAdd" target="rightFrame">招聘信息发布</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonShow" target="rightFrame">招聘信息推送</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonShow" target="rightFrame">实习生转正</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonShow" target="rightFrame">就业岗位设置</a><i></i></li>
+            </ul>
+
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>招聘管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Enterprise/EmployerManager/ApplyToTalentPool" target="rightFrame">人才库浏览申请</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/EmployerManager/ScanTheTalentPool" target="rightFrame">人才库浏览</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/EmployerManager/AddEmployePost" target="rightFrame">招聘岗位管理</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/EmployerManager/ApplyToTalentPool" target="rightFrame">简历管理</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/EmployerManager/MeetingAndOffer" target="rightFrame">面试与Offer管理</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/EmployerManager/ApplyToTalentPool" target="rightFrame">面试邀请管理</a><i></i></li>
+
+
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>报表查询</div>
+            <ul class="menuson">
+
+                <li><cite></cite><a href="/Enterprise/Home/UserPermissionAdd" target="rightFrame">报名情况查询</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/MenuPermissionAdd" target="rightFrame">面试安排查询</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonPermissionAdd" target="rightFrame">面试结果查询</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonPermissionAdd" target="rightFrame">录取结果查询</a><i></i></li>
+
+            </ul>
+
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>首页栏目管理</div>
+            <ul class="menuson">
+
+                <li><cite></cite><a href="/HPManager/HPM/HPMPage" target="rightFrame">栏目管理列表</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>新闻管理</div>
+            <ul class="menuson">
+
+                <li><cite></cite><a href="/News/NewsCenter/HomePageTable" target="rightFrame">新闻列表</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>资源下载管理</div>
+            <ul class="menuson">
+
+                <li><cite></cite><a href="/DownLoadFile/DLCenter/DLTable" target="rightFrame">下载资源列表</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>印章签名管理</div>
+            <ul class="menuson">
+
+                <li><cite></cite><a href="/SigAndStamp/SSCenter/StampTable" target="rightFrame">印章管理列表</a><i></i></li>
+                <li><cite></cite><a href="/SigAndStamp/SSCenter/SigTable" target="rightFrame">签名管理列表</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>文件管理</div>
+            <ul class="menuson">
+
+                <li><cite></cite><a href="/Enterprise/Home/UserPermissionAdd" target="rightFrame">文件上传</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/MenuPermissionAdd" target="rightFrame">文件下载</a><i></i></li>
+
+            </ul>
+
+        </dd>
+
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico04.png" /></span>系统管理</div>
+            <ul class="menuson">
+                
+                <li><cite></cite><a href="/Enterprise/Home/UserListShow" target="rightFrame">员工管理</a><i></i></li>
+
+                <li><cite></cite><a href="/Enterprise/Home/UserPermissionAdd" target="rightFrame">职位设置</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/MenuPermissionAdd" target="rightFrame">职员设置</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonPermissionAdd" target="rightFrame">权限设置</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonPermissionAdd" target="rightFrame">印章管理</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ButtonPermissionAdd" target="rightFrame">签名管理</a><i></i></li>
+
+            </ul>
+
+        </dd>
+
+      
+    </dl>
+
+</body>
+</html>
+

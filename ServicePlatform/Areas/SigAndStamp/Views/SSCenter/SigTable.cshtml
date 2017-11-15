@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SigTable</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Areas/SigAndStamp/Script/SigTable.js"></script>
+
+    <script type="text/javascript">
+
+        function detail() {
+            var SelectRow = $('#SigTableBox').datagrid("getSelected");
+            var SelectId = SelectRow.SignatureID;
+            var s = "/SigAndStamp/SSCenter/SigDetail?id='" + SelectId + "'";
+            window.location = s;
+        }
+
+        function Delete() {
+            //删除按钮
+            var SelectRows = $('#SigTableBox').datagrid('getSelections');//获取选中的要删除的行
+            if (SelectRows.length > 0) {
+                $.messager.confirm('确定操作', '你确定要删除选中的数据吗？', function (flag) {
+                    if (flag) {
+                        //alert('弹出框框');
+                        var DeletedID = [];
+                        for (var i = 0; i < SelectRows.length; i++) {
+                            DeletedID.push(SelectRows[i].SignatureID);
+                        }
+                        //console.log(DeletedID.join(','));
+
+                        //使用Ajax传递需要删除的新闻编号
+                        $.ajax({
+                            type: 'POST',
+                            url: '/SSCenter/DeleteSig',
+                            data: {                                
+                                DeleteRow: DeletedID,
+                            },
+                            beforeSend: function () {
+                                $('#SigTableBox').datagrid('loading');
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    $('#SigTableBox').datagrid('loaded');
+                                    $('#SigTableBox').datagrid('load');
+                                    $.messager.show({
+                                        title: '提示信息',
+                                        msg: data + "个签名已被删除",
+                                    });
+                                }
+                            },
+                        });
+                    }
+                });
+            }
+            else {
+                //给予警告
+                $.messager.alert('警告', '提醒你，你没有选中要删除的行', 'warning');
+            }
+        }
+    </script>
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="SigContanier">
+
+        <div id="SigContentTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">签名管理列表</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="SigContent">
+            <table id="SigTableBox"></table>
+        </div>
+        <div id="SigToolBar">
+            <div>
+                <a href="/SigAndStamp/AddSig/AddSig" class="easyui-linkbutton" iconcls="icon-add">添加</a>
+                <a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="Delete();">删除</a>
+                <a href="#" class="easyui-linkbutton" iconcls="icon-tip" onclick="detail();">详情</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

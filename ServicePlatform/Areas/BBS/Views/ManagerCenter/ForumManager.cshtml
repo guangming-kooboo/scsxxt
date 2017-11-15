@@ -1,0 +1,30 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.ManagerCerter.ForumManeger_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+
+
+
+<h2>@ViewBag.Title</h2>
+@if(Model.id!=";")
+{
+    <div class="col-md-12">
+       <ol class="page-breadcrumb breadcrumb">
+          <li><a href="/BBS/ManagerCenter/ForumManager?ReportID=BBS_版块管理&Params=;">板块管理</a><i class="fa fa-angle-right"></i></li>
+      </ol>
+   </div>
+}
+<input type="text" placeholder="输入板块名搜索" name="test" />
+
+ 
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+        var Params = v("test");
+        Query(Params, "@ViewData["Url"]");
+    }
+</script>
+

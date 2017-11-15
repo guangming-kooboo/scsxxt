@@ -1,0 +1,54 @@
+﻿@model Core.Services.Entity.T_SchoolReviewItem
+
+@{
+    ViewBag.Title = "添加评分项";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <div class="form-group">
+        @Html.Label("评分项名称", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr/>
+    <div class="form-group">
+        @Html.Label("评分项比重", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ItemWeight, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ItemWeight, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        @Html.Label("评分项顺序", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ItemSequence, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ItemSequence, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存" class="btn btn-default" />
+        </div>
+    </div>
+
+  
+
+    
+}
+
+<div>
+    @Html.ActionLink("返回", "Index")
+</div>
+
+

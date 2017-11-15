@@ -1,0 +1,85 @@
+﻿@model ServicePlatform.Areas.BBS.Models._Space
+<style>
+.main
+{
+width: 900px;
+min-height:800px;
+margin:0 auto;
+
+}
+.head
+{
+position: relative;
+bottom:-20px;
+height: 56px;
+}
+.head-left
+{
+width: 750px;
+float: left;
+}
+.head-right
+{
+width: 150px;
+float: right;
+}
+
+    .message-head {
+        border: 1px solid rgb(170,172,173);
+        background-color: rgb(255,255,255);
+        margin-top: -3px;
+        padding-top: 0px;
+    }
+
+    .message-head-p {
+        padding-top: 5px;
+        font-size: 24px;
+    }
+
+    #linknav {
+        height: 70px;
+    }
+
+        #linknav ul {
+            text-align: center;
+            list-style-type: none;
+            padding-top: 5px;
+        }
+
+            #linknav ul li {
+                display: inline;
+                list-style-type: none;
+                font-size: 18px;
+            }
+
+</style > 
+<div class="main" >
+    <div class="head" >
+        <div class=head-left >
+            <a href="" > 返回</a > &nbsp;
+            <a href="" > 首页</a >
+        </div >
+        <div class="head-right" >
+            <a href="" > 当前用户</a >
+            <a href="" > 消息</a >
+            <a href="" > 退出</a >
+        </div >
+    </div >
+    <!-- 空间导航-->
+    <div class="message" >
+        <div class="message-head" >
+            <p align="center" class="message-head-p" > xxx的个人空间</p >
+            @*<img src="~/Areas/BBS/Content/Image/LOGO[SpaceHeader].png" style="float:left;height:70px;width:170px;margin-left:130px;">*@
+            <div id="linknav" >
+                <ul >
+                    <li > <a href="#" > 空间首页&nbsp;</a ></li >
+                    <li > <a href="#" > &nbsp;日志&nbsp;</a > </li >
+                    <li > <a href="#" > &nbsp;我的帖子&nbsp;</a > </li >
+                    <li > <a href="#" > &nbsp;主题&nbsp;</a > </li >  
+                    <li > <a href="#" > &nbsp;留言板&nbsp;</a > </li > 
+                    <li > <a href="#" > &nbsp;个人资料</a > </li > 
+                </ul > 
+            </div > 
+        </div >
+     </div > 
+</div >

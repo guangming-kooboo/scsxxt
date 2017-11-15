@@ -1,0 +1,105 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.Home.MyPost_M
+@{
+    Layout = ViewData["Layout"].ToString();
+    int pageIndex = (int)ViewData["pageIndex"];
+    int maxIndex = (int)ViewData["maxIndex"];
+}
+@section script{
+    <script>
+    function jumpTo(index) {
+        location.href = '@ViewData["currentUrl"]?pageIndex=' +index+ '&perCount=@ViewData["perCount"]'+'&id=@Model.userid';
+    };
+
+    </script>
+}
+
+<div class="main">
+
+<!-- 导航-->
+           @Html.Action("_Head", new { id = Model.userid})
+          <div class="means">
+               <div class="main-share-head">
+                  <p class="main-share-head-p">发帖子</p>
+                  <div class="main-share-head-img">
+                      <img src="~/Areas/BBS/Content/Image/分界线.png">
+                  </div>
+                </div>
+
+                <div class="main-share-middle">
+                    <div class="main-photo-middle-left">
+                        @foreach(var mypost in Model.myPost)
+                        {
+                              <div class="message-main-main">
+                                <ul class="message-main-main-ul">
+                                     <li class="note-main-main-lis-img"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=mypost.AuthorID})"><img class="list-main-lists-head-img" src="@mypost.AuthorHeadPictureUrl"></li>
+                                     <li class="note-main-main-li"><a class="message-main-main-a" href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=mypost.AuthorID})">@mypost.Author</a></li>
+                                     <li class="note-main-main-li" ><img src="~/Areas/BBS/Content/Image/用户.png"></li>
+                                     <li class="note-main-main-lis" ><p class="message-main-main-li-p">&nbsp;&nbsp;在</p></li>
+                                     <li class="note-main-main-li"><a class="message-main-main-li-a"href="@Url.Action("PostList","Home",new{area="BBS",columnid=mypost.ColumnID})">@mypost.ForumName</a></li>
+                                     <li class="note-main-main-lis"><p class="message-main-main-li-p">中发表&nbsp;</p></li>
+                                     <li class="note-main-main-li"><a class="message-main-main-li-a"href="@Url.Action("PostPage","Home",new{area="BBS",id=mypost.ID})">"@mypost.PostTitle"</a></li> 
+                                     <li class="note-main-main-lits"><a class="message-main-main-li-a"href="">回复(@mypost.Reply)</a></li>                               
+                                </ul>
+                             
+                              </div>
+                              <div class="message-main-main-notes">
+                                  <p class="note-main-main-note-p">发表于 @mypost.Time</p>
+                              </div>
+                              <hr class="message-main-main-notes-hr">
+                              
+                             
+                        }
+                    
+                    </div>
+
+
+                    <div class="main-photo-middle-right">
+                         <ul>
+                             <li class="main-photo-middle-right-li"><img class="main-photo-middle-right-img"src="@Model.userinformation.HeadPictureUrl"></li>
+                             <li class="main-photo-middle-right-li"><a class="main-photo-middle-right-li-a"href="">@Model.userinformation.Name</a><p class="main-photo-middle-right-li-p"><a class="main-photo-middle-right-li-a-a"href="">@Model.postCount</a>&nbsp;条发帖</p></li>
+                         </ul>
+                         <hr class="main-photo-middle-right-hr">
+                         <a class="main-photo-middle-right-help" href="">发帖使用帮助？</a>
+
+                    </div>
+                </div>
+
+                
+                  
+              </div>
+
+
+          </div>
+
+              <br>
+@if ((int)ViewData["maxIndex"] > 1)
+{
+    <div class="jump">
+        <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+        @if (pageIndex != 1)
+        {
+            <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+        }
+        <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+        @if (pageIndex != maxIndex)
+        {
+            <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+        }
+        <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+    </div>
+}
+                    
+                  
+               
+          </div>
+
+
+          
+
+
+
+
+
+
+

@@ -1,0 +1,124 @@
+﻿@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    ViewBag.Title = "MyWorkPlat";
+
+    List<C_PracticeCaseItem> PracticeCaseItem = ViewBag.PracticeCaseItem;
+    
+    List<T_PracticeCase> PracticeCase = ViewBag.PracticeCase;
+
+    string id = "";
+
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的工作台</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    @Html.Partial("_KindEditorLinks")
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.idTabs.min.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/select-ui.min.js"></script>
+    <script>
+        function back()
+        {
+            var no='@ViewBag.PracticeNo';
+            var url = '/School/S_MyWorkPlat/MyWorkPlat/?focus=tab2' + '&StuPracNo=' + no;
+            window.location = url;
+        }
+    </script>
+</head>
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">实习过程管理</a></li>
+            <li><a href="#">我的工作台</a></li>
+        </ul>
+    </div>
+    @if (ViewBag.Type=="ADD")
+    { 
+        using (Html.BeginForm("AddPracticeCase", "S_MyWorkPlat", FormMethod.Post, new { id = "_form" }))
+        {
+        <div class="formtitle"><span>撰写新案例: </span></div>
+        <input type="hidden" value='@ViewBag.CaseNo' id="caseno" name="caseno" />
+        
+        <ul class="forminfo">
+            <li><label>案例标题</label><input type="text" value="" id="casename" name="casename" class="dfinput" /></li>
+            @if (PracticeCaseItem.Count != 0)
+            {
+                for (int i = 0; i < PracticeCaseItem.Count; i++)
+                {
+                    id = "editor" + i.ToString();
+                    @*<li><label>@PracticeCaseItem[i].ItemName</label><textarea name='@PracticeCaseItem[i].ItemNo' id='@PracticeCaseItem[i].ItemNo' class="textinput"></textarea></li>*@
+                <li><label>@PracticeCaseItem[i].ItemName</label><textarea name='@PracticeCaseItem[i].ItemNo' id='@id' class="textinput"></textarea></li>
+                }
+                <li><label>&nbsp;</label><input type="submit" class="scbtn" value="保存" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="scbtn" value="返回" onclick="back()" /></li>
+            }
+            else
+            {
+                <li><label style="color:red;"></label>
+            </li>
+            <li>
+                <label style="color:red;">请联系学校管理员设置实习案例！</label>
+
+            </li>
+            }
+
+        </ul>
+        }
+    }
+    else if (ViewBag.Type == "Detail")
+    {
+        <div class="formtitle"><span>案例详情: </span></div>
+        <ul class="forminfo">
+            @if (PracticeCase.Count != 0)
+            {
+                for (int i = 0; i < PracticeCase.Count; i++)
+                {
+                    <li><label>@PracticeCase[i].ItemName</label>
+                        <label>
+                            <span    style="width: 800px">
+                                @(new HtmlString(PracticeCase[i].ItemContent))
+                            </span>
+
+                        </label>
+                      
+            </li>  
+            }
+            <li><label>&nbsp;</label><input type="button" class="scbtn" value="返回" onclick="back()"/></li>
+            }
+        </ul>
+    }
+    else
+    {
+        using (Html.BeginForm("AddPracticeCase", "S_MyWorkPlat", FormMethod.Post, new { id = "_form" }))
+        {
+        <div class="formtitle"><span>编辑案例: </span></div>
+            <input type="hidden" value='@ViewBag.No' id="caseno" name="caseno"/>
+
+            <ul class="forminfo">
+                <li><label>案例标题</label><input type="text" value="@ViewBag.PracticeCaseTitle" id="casename"  name="casename" class="dfinput" /></li>
+
+                @if (PracticeCase.Count != 0)
+                {
+                    for (int i = 0; i < PracticeCase.Count; i++)
+                    {
+                        id = "editor" + i.ToString();
+                        <li><label>@PracticeCase[i].ItemName</label><textarea name='@PracticeCaseItem[i].ItemNo' id='@id' class="textinput">@PracticeCase[i].ItemContent</textarea></li>
+                    }
+                    <li><label>&nbsp;</label><input type="submit" class="scbtn" value="提交修改"/></li>
+                }
+            </ul>
+        }
+    }
+    
+
+</body>
+
+</html>
+

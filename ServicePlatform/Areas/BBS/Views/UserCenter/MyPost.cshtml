@@ -1,0 +1,180 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.MyPost_M
+@{
+    Layout = ViewData["Layout"].ToString();
+    int pageIndex = (int)ViewData["pageIndex"];
+    int maxIndex = (int)ViewData["maxIndex"];
+}
+
+
+@section script{
+    <script>
+    function jumpTo(index) {
+        location.href = '@ViewData["currentUrl"]?pageIndex=' +index+ '&perCount=@ViewData["perCount"]'+'&id=@Model.userid';
+    };
+     $().ready(function () {
+     $('#uploadFile').hide();
+     $('#active-upload').click(function () {
+     $('#uploadFile').show();
+         });
+      })
+
+            //上传成功后调用
+      function OnUploadFinish(file) {
+        $('#uploadFile').hide();
+        $('#files').val(file);
+         }
+
+    </script>
+}
+
+
+
+
+<div class="main">
+
+    <!-- 导航-->
+   @Html.Action("_Head", new { id = Model.userid })
+    <div class="means" style="height:1200px">
+        <div class="main-share-head">
+            <p class="main-share-head-p">发帖子</p>
+            <div class="main-share-head-img">
+                <img src="~/Areas/BBS/Content/Image/分界线.png">
+            </div>
+        </div>
+
+        <div class="main-share-middle " >
+            <div class="main-photo-middle-left">
+                <div class="write-note-main" style="height:550px;">
+                    <form method="post" action="/BBS/CRUD/SendPost">
+                        <select class="write-chrose-select">
+                            @foreach (var forum in Model.forums)
+                            {
+                                <option value="">@forum.ForumName</option>
+                            }
+
+                        </select>>>
+
+                        <select class="write-chrose-select">
+                            @foreach (var column in Model.columns)
+                            {
+                                <option value="">@column.ColumnName</option>
+                            }
+                        </select>>>
+
+                        <select class="write-chrose-select" name="themename">
+                            @foreach (var theme in Model.themes)
+                            {
+                                <option >@theme.ThemeName</option>
+                            }
+                        </select>
+
+                        <input type="hidden" name="file" id="files" />
+                        <input class="write-note-input-head" typle="text" placeholder="请在此输入标题信息~" name="posttitle" />
+                        <br \>
+                        <br \>
+
+                        @Html.Partial("/Views/Templates/_KindEditor.cshtml", new ViewDataDictionary(ViewData)
+                            {
+                               { "css","write-input-main"},
+                               { "id","postcontent"},
+                               { "name","postcontent"},
+                               { "value","请在此输入内容"}
+                            })
+
+                        <input class="write-note-submit" type="submit" name="sendpost" value="发表帖子" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="write-note-submit" type="submit" name="sendpost" value="保存草稿" />
+                        <input class="write-submit" type="button" value="添加附件" id="active-upload" /></p>
+                    </form>
+                    <div id="uploadFile">
+                        @Html.Partial("/Views/Templates/_FileUpload.cshtml", new ViewDataDictionary()
+                           {
+                              { "saveDirectory","/UserFiles/BBS/Files/"},
+                                { "id","file"},
+                              { "name","file"}
+
+                           })
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="main-photo-middle-right-note">
+                <ul>
+                    <li class="main-photo-middle-right-li"><img class="main-photo-middle-right-img" src="@Model.userinformation.HeadPictureUrl"></li>
+                    <li class="main-photo-middle-right-li"><a class="main-photo-middle-right-li-a" href="">@Model.userinformation.Name</a><p class="main-photo-middle-right-li-p"><a class="main-photo-middle-right-li-a-a" href="">@Model.postCount</a>&nbsp;条发帖</p><p class="main-photo-middle-right-li-pp"><a class="main-photo-middle-right-li-a-a" href="">@Model.draftCount</a>&nbsp;条草稿</p></li>
+                </ul>
+                <hr class="main-photo-middle-right-hr">
+                <a class="main-photo-middle-right-help" href="">发帖使用帮助？</a>
+
+            </div>
+        </div>
+
+        <div class="my-note-lists">
+            <div class="my-note-lists-head">
+                <ul class="my-note-lists-head-ul">
+                    <li class="my-note-lists-head-li"><p class="my-note-lists-head-ap"><a href="@Url.Action("MyPost","UserCenter",new{area="BBS",id=Model.userid})"> 我发的帖</a></p></li>
+                    <li class="my-note-lists-head-li"><p class="my-note-lists-head-p">|</p></li>
+                    <li class="my-note-lists-head-li"><a class="my-note-lists-head-a" href="@Url.Action("PostDrafts", "UserCenter", new { area = "BBS",id=Model.userid }) ">草稿箱</a></li>
+                </ul>
+            </div>
+            <div class="main-note-head-img">
+                <img src="~/Areas/BBS/Content/Image/分界线.png">
+            </div>
+            @foreach (var mypost in Model.myPost)
+            {
+                
+                <div class="message-main-main">
+                    <ul>
+                        <li class="note-main-main-lis-img"><a href="@Url.Action("PersonalSpace","UserCenter",new{area="BBS",id=mypost.AuthorID})"><img class="list-main-lists-head-img" src="@Model.userinformation.HeadPictureUrl" /></a></li>
+                        <li class="note-main-main-li"><a class="message-main-main-a" href="@Url.Action("PersonalSpace","UserCenter",new{area="BBS",id=mypost.AuthorID})">@mypost.Author</a></li>
+                        <li class="note-main-main-li"><img src="~/Areas/BBS/Content/Image/用户.png"></li>
+                        <li class="note-main-main-lis"><p class="message-main-main-li-p">&nbsp;&nbsp;在</p></li>
+                        <li class="note-main-main-li"><a class="message-main-main-li-a" href="">@mypost.ForumName</a></li>
+                        <li class="note-main-main-lis"><p class="message-main-main-li-p">中发表&nbsp;</p></li>
+                        <li class="note-main-main-li"><a class="message-main-main-li-a" href="@Url.Action("PostPage","Home",new{area="BBS",id=mypost.ID})">"@mypost.PostTitle"</a></li>
+                        <li class="note-main-main-lits"><a class="message-main-main-li-a" href="@Url.Action("DeletePost","CRUD",new{area="BBS"})">删除</a></li>
+                        <li class="note-main-main-lit"><a class="message-main-main-li-a" href="">回复（@mypost.Reply）</a></li>
+
+
+                    </ul>
+
+                </div>
+                <div class="message-main-main-note">
+                    <p class="note-main-main-note-p">发表于 @mypost.Time</p>
+                </div>
+                <hr>
+            }
+            @if (Model.myPost.Count == 0)
+            {
+                <label style="color:red">这里空空如也，快添加一条吧</label>
+            }
+
+        </div>
+
+
+    </div>
+
+    <br>
+
+    @if ((int)ViewData["maxIndex"] > 1)
+    {
+        <div class="jump">
+            <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+            @if (pageIndex != 1)
+            {
+                <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+            }
+            <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+            @if (pageIndex != maxIndex)
+            {
+                <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+            }
+            <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+        </div>
+    }
+
+
+
+</div>

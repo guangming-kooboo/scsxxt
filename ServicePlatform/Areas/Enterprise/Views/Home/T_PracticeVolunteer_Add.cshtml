@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "T_PracticeVolunteer_Add";
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加记录</title>
+
+    <link href="/Areas/Enterprise/Content/Admin/css/style.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">安排面试</a></li>
+        </ul>
+    </div>
+
+
+    <form action="/Enterprise/Home/T_PracticePosition_Add" method="post">
+
+        <input name="objName" value="ServicePlatform.Models.T_PracticePosition" type="text" hidden="hidden" class="dfinput" />
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>安排面试</span></div>
+
+            <ul class="forminfo">
+                <li>
+                    <label>企业实习编号</label>
+                    @Html.DropDownList("EntPracNo", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.CodeTableContext(), "T_EntBatchReg", "ServicePlatform.Models", 0, 0, " where ApplyStatus=2"), new { @class = "dfinput" })
+
+
+
+                    <i>*请输入 企业实习编号</i>
+                </li>
+                <li>
+                    <label>岗位编号</label>
+                    <input name="PositionID" type="text" class="dfinput" />
+                    <i>*请输入 岗位编号</i>
+                </li>
+
+                <li>
+                    <label>岗位描述</label>
+                    <input name="PosDesc" type="text" class="dfinput" />
+                    <i>*请输入 岗位描述</i>
+                </li>
+                <li>
+                    <label>招生数量</label>
+                    <input name="PosQuantity" type="text" class="dfinput" />
+                    <i>*请输入 招生数量</i>
+                </li>
+
+                <li>
+                    <label>发布日期</label>
+                    <input name="PubDate" type="text" class="dfinput" />
+                    <i>*请输入 发布日期</i>
+                </li>
+                <li>
+                    <label>截止日期</label>
+                    <input name="PosExpireDate" type="text" class="dfinput" />
+                    <i>*请输入 截止日期</i>
+                </li>
+
+
+
+
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" /></li>
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+
+
+</body>
+
+</html>
+

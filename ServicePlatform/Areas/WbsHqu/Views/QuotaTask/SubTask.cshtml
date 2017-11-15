@@ -1,0 +1,81 @@
+﻿@model ServicePlatform.Areas.WbsHqu.ViewModels.QuotaTask_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@if (Model.fathers.Count != 0)
+{
+    <div class="col-md-12">
+        <ol class="page-breadcrumb breadcrumb">
+            @for (var i = 0; i < Model.fathers.Count; i++)
+            {
+                <li>
+                    @if (Model.fathers[i].FatherID == "0")
+                    {
+                        <a href="/WbsHqu/QuotaTask/Index?ReportID=Qx.Wbs.Hqu.定额任务父列表&Params=@Model.fathers[i].WbsTaskID">@("[" + (i + 1) + "级]" + Model.fathers[i].TaskName)</a>
+                    }
+                    else
+                    {
+                        <a href="/WbsHqu/QuotaTask/SubTask?ReportID=Qx.Wbs.Hqu.定额任务子列表&Params=@Model.fathers[i].FatherID">@("[" + (i + 1) + "级]" + Model.fathers[i].TaskName)</a>
+                    }
+                    <i class="fa fa-angle-right"></i>
+                </li>
+            }
+
+            <lable>&nbsp;&nbsp;&nbsp;&nbsp;相对占比总和为:</lable>
+            <lable id="summary">aaa</lable>
+            <lable>&nbsp;&nbsp;&nbsp;绝对占比总和为:</lable>
+            <lable id="absummary">aaa</lable>
+        </ol>
+
+    </div>
+}
+
+<script>
+    function Search() {
+        var Params = v("定额任务名称");
+        return Params;
+    }
+    function fn(id) {
+        if (confirm("确定删除吗")) {
+            location.href = "/WbsHqu/QuotaTask/Delete?id=" + id;
+        } else {
+            return;
+        }
+    }
+
+    $().ready(function () {
+        var summary = 0;
+        var absummary = 0;
+
+        $("table tr").each(function () {
+
+            var text = $(this).find("td:eq(1)").html();
+            if (text == undefined) {
+                text = "";
+            }
+            text = text.substring(0, text.length - 2);
+
+            var temp = parseFloat(text);
+            if (text != "") {
+                summary += temp;
+            }
+
+            var abtext = $(this).find("td:eq(2)").html();
+            if (abtext == undefined) {
+                abtext = "";
+            }
+            abtext = abtext.substring(0, abtext.length - 2);
+
+            var abtemp = parseFloat(abtext);
+            if (abtext != "") {
+                absummary += abtemp;
+            }
+        })
+        summary = summary.toFixed(2);
+        absummary = absummary.toFixed(2);
+        summary += "%";
+        absummary += "%";
+        $("#summary").html(summary);
+        $("#absummary").html(absummary);
+    })
+</script>

@@ -1,0 +1,184 @@
+﻿@{
+    var uploadAction = "/Base/UploadHandle";
+    var saveDirectory = "/UserFiles/APP/Files/PracticeCases/";
+}
+
+@model ServicePlatform.Areas.AppStudent.ViewModel.Home.AddCase_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            @*跳转主页*@
+            <a href="javascript:window.history.go(-1);">
+                <div style="width:60px"><div class="placeholder"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+            </a>
+            <div class="weui-flex__item"><div class="placeholder">添加案例</div></div>
+            @*跳转到案例列表*@
+            <a href="javascript:submit('a');">
+                <div>
+                    <div class="placeholder" style="color: #ffffff">提交</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">案例 @Model.CaseCount</label>
+            </div>
+            <div class="weui-cell__bd">
+                @Html.TextBoxFor(o => o.CaseName, new {@class = "weui-input", placeholder = "案例标题"})
+
+            </div>
+        </div>
+
+        @foreach (var item in Model.CaseItemNo)
+        {
+            <div class="weui-cells__title">@item.ItemName</div>
+            <div class="weui-cells weui-cells_form">
+                <input type="hidden" value="@item.ItemNo" name="ItemNo">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        @Html.TextAreaFor(o => o.ItemContent, new {@class = "weui-textarea ", rows = "3"})
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="weui-cells">
+            <div class="container js_container">
+                <!--图片放大容器 style的透明度一定是0.8-->
+                <div class="weui-gallery" id="gallery" style="display: none;">
+                    <span class="weui-gallery__img" id="galleryImg" style="background-image: url(../img/doctor/55.jpg)"></span>
+                    @*<div class="weui-gallery__opr">
+                        <a href="javascript:" class="weui-gallery__del" id="deleid">
+                            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                        </a>
+                    </div>*@
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <div class="weui-uploader">
+                            <div class="weui-uploader__hd">
+                                <p class="weui-uploader__title">图片上传</p>
+                                <div class="weui-uploader__info"></div>
+                            </div>
+                            <div class="weui-uploader__bd">
+                                <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                                <div class="weui-uploader__input-box">
+                                    <input id="uploaderInput" name="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="multiple">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Allpic">
+                    <input type="hidden" id="piclist" name="piclist" value="" style="display: none" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/JQueryFileUploadPlugin/js/vendor/jquery.ui.widget.js"></script>
+<script src="~/Content/JQueryFileUploadPlugin/js/jquery.fileupload.js"></script>
+<script src="~/Content/JQueryFileUploadPlugin/js/jquery.iframe-transport.js"></script>
+<script src="~/Content/JqueryFileStyle/jquery.filestyle.js"></script>
+<script>
+    var BarImageWidth = 225;
+
+    $('#uploaderInput').fileupload({
+        //dataType: "json",//返回类型
+        autoUpload: true, //自动上传
+        url: "@(uploadAction + "?saveDirectory=" + saveDirectory)", //请求传递的路径
+        limitConcurrentUploads: 1, //限制并发数
+        sequentialUploads: true, //设置为true保证文件顺序存储而不是同步存储
+        progressInterval: 100, //触发进度条事件的最小间隔事件，以毫秒为单位
+      //  maxChunkSize: 10000, //块状分段存储，允许块的最大长度
+
+        success: function (result) {
+            console.log(result);
+            var oldpic = $("#piclist").val();
+            var pic = oldpic + result.filePath + ';';
+            console.log(pic);
+            console.log(result.filePath);
+            $("#piclist").val(pic);
+            console.log($("#piclist").val());
+           // $("#Allpic").push('<input type="hidden" id="' + result.filePath + '" name="piclist" value="' + result.filePath + '" style="display: none" />');
+            console.log(result.filePath);
+        },
+        //设置文件上传完毕事件的回调函数
+        add: function (e, data) {
+            //开始上传
+            //var Begin = "提示:上传中，请稍后...";
+            //var thethat = this;
+            console.log("提示:上传中，请稍后...");
+            data.submit();
+            console.log(data);
+
+        },
+
+        //设置上传进度事件的回调函数
+        progress: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            //data.context.find('.bar').css('width', progress + '%');
+            var CurrentBarWidth = progress / 100 * BarImageWidth;
+            @*//$('#@("BarArea_"+id) img').css({ "width": CurrentBarWidth, "height": 14 });
+            //$('#@("MessageContent_"+id)').html(progress + '%');*@
+            console.log(CurrentBarWidth);
+        },
+    });
+
+</script>
+
+<script>
+
+        	$(function() { var t=0;
+			    //var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)" id="'+"imgli"+t+'"></li>',
+			        $gallery = $("#gallery"),
+			        $galleryImg = $("#galleryImg"),
+			        $uploaderInput = $("#uploaderInput"),
+			        $uploaderFiles = $("#uploaderFiles");
+
+			    $uploaderInput.on("change", function(e) {
+			        var src, url = window.URL || window.webkitURL || window.mozURL,
+			            files = e.target.files;
+			        for(var i = 0, len = files.length; i < len; ++i) {
+			            var file = files[i];
+
+			            if(url) {
+			                src = url.createObjectURL(file);
+			            } else {
+			                src = e.target.result;
+			            }
+			    var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)" id="'+"imgli"+t+'"></li>';
+
+						t++;
+			            $uploaderFiles.append($(tmpl.replace('#url#', src)));
+			        }
+			    });
+
+			    $uploaderFiles.on("click", "li", function() {
+			        $galleryImg.attr("style", this.getAttribute("style"));
+			        var myid = this.getAttribute("id");
+			        alert(myid);
+			        // $("#deleid").click(function(){
+			        //     $("#uploaderFiles li").each(function ()
+			        //         {
+                    //             if ($(this).attr('id')==myid) {
+                    //                 this.remove();
+                    //             }
+			        //         })			             
+			    	//});
+			        $gallery.fadeIn(100);
+			    });
+			    $gallery.on("click", function() {
+			        $gallery.fadeOut(100);
+			    });
+
+			});
+</script>

@@ -1,0 +1,524 @@
+﻿
+@model ServicePlatform.Areas.Enterprise.Models.Home.Index
+@using Core.Services.Entity
+@using Qx.Tools.CommonExtendMethods
+@using ServicePlatform.Lib;
+@using ServicePlatform.Config;
+@{
+    var count = 0;
+    //var UserInfo=  Session["Vars"] as Vars;
+    var logo = Model.LogoList.FirstOrDefault();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>企业首页</title>
+    <script src="~/Content/H/js/jquery-2.1.1.min.js"></script>
+    <link href="~/Content/H/css/bootstrap.min.css" rel="stylesheet" />
+    @*<link href="~/Content/H/css/animate.css" rel="stylesheet" />*@
+    <script src="~/Content/H/js/bootstrap.min.js?v=3.4.0"></script>
+
+    <link href="~/Areas/Enterprise/Content/Home/Index/css/Practice_company.css" rel="stylesheet" />
+    <link href="~/Areas/Enterprise/Content/Home/Index/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css">
+    <script src="~/Areas/Enterprise/Content/Home/Index/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+    <script src="~/Areas/Enterprise/Content/Home/Index/js/jquery-1.10.2.min.js"></script>
+
+    <script src="~/Areas/Enterprise/Content/Home/Index/js/slider.js"></script>
+    <script src="~/Areas/Enterprise/Content/Home/Index/js/jquery-1.8.2.min.js"></script>
+    <script src="~/Areas/Enterprise/Content/Home/Index/js/jquery.carouFredSel-6.0.4-packed.js"></script>
+    <script src="~/Areas/Enterprise/Content/Home/Index/js/jquery.rollGallery_yeso.js"></script>
+ 
+
+
+    <script type="text/javascript">
+		function showDaTu(src){
+			document.getElementById("defaultImg").src=src;
+		}
+		$(function() {
+
+				$('#carousel ul').carouFredSel({
+					prev: '#prev',
+					next: '#next',
+					pagination: "#pager",
+					scroll: 1000
+				});
+
+			});
+
+		$(function() {
+		var bannerSlider = new Slider($('#banner_tabs'), {
+		time: 5000,
+		delay: 400,
+		event: 'hover',
+		auto: true,
+		mode: 'fade',
+		controller: $('#bannerCtrl'),
+		activeControllerCls: 'active'
+		});
+		$('#banner_tabs .flex-prev').click(function() {
+			bannerSlider.prev()
+		});
+		$('#banner_tabs .flex-next').click(function() {
+			bannerSlider.next()
+		});
+	})
+
+
+
+window.onload = function() {
+    var oDiv = document.getElementById("tab");
+    var oLi = oDiv.getElementsByTagName("div")[0].getElementsByTagName("li");
+    var aCon = oDiv.getElementsByTagName("div")[1].getElementsByTagName("div");
+    var timer = null;
+    for (var i = 0; i < oLi.length; i++) {
+        oLi[i].index = i;
+        oLi[i].onmouseover = function() {
+            show(this.index);
+        }
+    }
+    function show(a) {
+        index = a;
+        var alpha = 0;
+        for (var j = 0; j < oLi.length; j++) {
+            oLi[j].className = "";
+            aCon[j].className = "";
+            aCon[j].style.opacity = 0;
+//          aCon[j].style.filter = "alpha(opacity=0)";
+        }
+        oLi[index].className = "cur";
+        clearInterval(timer);
+        timer = setInterval(function() {
+            alpha += 2;
+            alpha > 100 && (alpha = 100);
+            aCon[index].style.opacity = alpha / 100;
+//          aCon[index].style.filter = "alpha(opacity=" + alpha + ")";
+            alpha == 100 && clearInterval(timer);
+        },
+        5)
+    }
+}
+
+    </script>
+</head>
+
+<body>
+    <!-------------------顶部企业名及快速入口-------->
+    <header>
+        <div id="Company_logo">
+            <img src="@(logo==null?"#":logo.DLFileUrl)" class="logo" />
+            <div id="name">
+                <p style="font-size: 28px;">@Model.Enterprise.Ent_Name</p>
+                <a>企业号: @Model.Enterprise.Ent_No</a>
+            </div>      
+            <div id="in">
+                @if(Model.Enterprise.InfoLocked == EditStatus.Locked)
+            {
+                    <a class="same" onclick="alert('资料已经锁定！请与管理员联系，申请解锁。')">
+                        <span class="in_title">资料锁定</span>
+                        <span class="tubiao" style="background: url(/Areas/Enterprise/Content/Home/Index/img/tubiao.png) 4px -105px;"></span>
+                    </a>
+                }
+                else//如果处于未锁定状态,则“允许修改资料”，一旦点击“提交”，则资料锁定。
+                {
+                    <a id="register" class="same" href="/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Enterprise.Ent_No">
+                        <span class="in_title">修改资料</span>
+                        @*<span class="tubiao" style="background: url(/Areas/Enterprise/Content/Home/Index/img/tubiao.png) 4px -105px;"></span>*@
+                    </a>
+                }
+                @*<button onclick="location.href = '/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Ent_No'">修改资料</button>*@
+                @*<a id="login" class="same" href="#">
+        <span class="in_title">消息</span>
+        <span class="tubiao" style="background: url(/Areas/Enterprise/Content/Home/Index/img/tubiao.png) 2px -61px;"></span>
+    </a>
+    <a id="goHome" class="same" href="/Platform/Home/">
+        <span class="in_title">平台首页</span>
+        @*<span class="tubiao" style="background: url(/Areas/Enterprise/Content/Home/Index/img/tubiao.png) 2px -61px;"></span>
+    </a>
+
+    <form action="post">
+        <input type="submit" name="ensure2" value="" style="width: 36px; height: 36px; background: url(/Areas/Enterprise/Content/Home/Index/img/tubiao.png);"/>
+        <input type="text" id="products" name="products" placeholder="请输入关键词试试" class="search-style"/>
+    </form>*@
+
+            </div>
+        </div>
+    </header>
+    <!----------轮播---------->
+    <div id="banner_tabs" class="flexslider">
+        <ul class="slides">
+            @foreach (var ad in Model.AdList)
+            {
+                <li>
+                    <a title="" target="_blank" href="#">
+                        <img width="1920" height="482" alt="" style="background: url(@ad.DLFileUrl) no-repeat center;" src="/Areas/Enterprise/Content/Home/Index/img/alpha.png" />
+                    </a>
+                </li>
+            }   
+         
+        </ul>
+        <ul class="flex-direction-nav">
+            <li><a class="flex-prev" href="javascript:;">Previous</a></li>
+            <li><a class="flex-next" href="javascript:;">Next</a></li>
+        </ul>
+        <ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
+            @{
+                count = 0;
+                foreach (var ad in Model.AdList)
+                {
+                    <li><a>@(++count)</a></li>
+                }
+            } 
+
+        </ol>
+    </div>
+<!---------------企业介绍-------------->
+    
+    <div class="Out_Introduce">
+        <div class="Company_Introduce">
+            <div class="Introduce_Left" style="width: 50%">
+                <p class="title"><img src="/Areas/Enterprise/Content/Home/Index/img/Resume.png"/>企业介绍
+                </p>
+                @if (Model.Enterprise.EntResume != null)
+                {
+                    var lengthToShow = 600;
+
+                    var textToShow = Model.Enterprise.EntResume;
+                   // @(new HtmlString(textToShow.Length.ToString()))
+
+                    if (Model.Enterprise.EntResume.Length > lengthToShow)
+                    {
+                        var temp = textToShow.Substring(lengthToShow, textToShow.Length - lengthToShow);
+
+                        var index = temp.IndexOf(">");
+                        if (index > -1)
+                        {
+                            Model.Enterprise.EntResume = Model.Enterprise.EntResume.Substring(0, lengthToShow + index);
+                        }
+                        else
+                        {
+                            Model.Enterprise.EntResume = Model.Enterprise.EntResume.Substring(0, lengthToShow);
+                        }
+                    }
+
+                    <p style="padding: 10px;">
+                        @(new HtmlString(Model.Enterprise.EntResume))
+                    </p>
+                }
+                else
+                {
+                    <p style="padding: 10px;">
+                        企业介绍没有书写
+                    </p>
+                }
+            </div>
+
+            <div class="video">
+                <embed src="@Model.Enterprise.EntVideos" width="400" height="250" allowfullscreen="true" quality="high"
+                       type="application/x-shockwave-flash" />
+            </div>
+        </div>
+    </div>
+    <!-------------企业风貌-------------->
+    <div class="Company_view">
+        <div class="title">
+            <p><img src="/Areas/Enterprise/Content/Home/Index/img/Photo.png"/>企业风貌</p>
+           
+        </div>
+        <div id="wrapper">
+            <div id="carousel">
+                <ul>
+                    @{
+                        count = 0;
+                        foreach (var pic in Model.PicList)
+                        {
+                            <li><img src="@pic.DLFileUrl" alt="" /><span>@(++count)</span></li>
+                    
+                        }
+                }                  
+                </ul>
+                <div class="clearfix"></div>
+                <a id="prev" class="prev" href="#">&lt;</a>
+                <a id="next" class="next" href="#">&gt;</a>
+                <div id="pager" class="pager"></div>
+            </div>
+        </div>
+    </div>
+    <!---------岗位信息------->   
+    <div class="Out_Job">
+        <div class="Company_job text ">
+            <div class="title">
+                <p><img src="/Areas/Enterprise/Content/Home/Index/img/Position.png"/>岗位信息</p>
+              
+            </div>
+            
+                <ul >
+                    <li class="text_nav">岗位名称</li>
+                    <li class="text_nav">类型</li>
+                    <li class="text_nav">需求人数</li>          
+                    <li class="text_nav">截止时间</li>
+                    <li class="text_nav">岗位描述</li>
+                </ul>
+
+
+
+            @foreach (var item in Model.PracticePositionList)
+                {
+
+
+                <ul>
+                    <li>@item.C_Position.PositionName</li>
+                    <li>实习</li>
+                    <li>@item.PosQuantity 名</li>
+
+                    <li>@item.PosExpireDate.ToDateTime().ToStr()</li>
+                    <li><a href="#" data-toggle="modal" data-target="#@item.PositionID">查看 </a></li>
+                </ul>
+
+
+
+                <div class="modal inmodal" id="@item.PositionID" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated flipInY">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">岗位描述</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    @(new HtmlString(item.PosDesc.Replace("\r\n","<br/>")))
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+@*
+    <!---------企业新闻&资料下载------------>
+    <div id="tab" style="margin: 0 auto;">
+        <!--<div style="width: 980px;height:50px;border-bottom: 1px solid #b2b2b4;"></div>-->
+        <div class="tabList">
+            <ul>
+                <li class="cur">企业新闻</li>
+                <li>资料下载</li>
+            </ul>
+        </div>
+        <div class="tabCon">
+            <div class="cur">
+                <span style="float: left;">
+                    <img src="/Areas/Enterprise/Content/Home/Index/img/wall2.jpg" id="defaultImg" />
+                    <br />
+                    <img src='/Areas/Enterprise/Content/Home/Index/img/wall1_s.jpg' onmouseover="showDaTu('/Areas/Enterprise/Content/Home/Index/img/wall1.jpg')" />
+                    <img src='/Areas/Enterprise/Content/Home/Index/img/wall2_s.jpg' onmouseover="showDaTu('/Areas/Enterprise/Content/Home/Index/img/wall2.jpg')" />
+                    <img src='/Areas/Enterprise/Content/Home/Index/img/wall3_s.jpg' onmouseover="showDaTu('/Areas/Enterprise/Content/Home/Index/img/wall3.jpg')" />
+                    <br />
+                </span>
+                <span style="float: right; width: 600px;">
+                    @foreach (var item in Model.NewaList)
+                    {
+                        <a href="/School/SchoolHomePage/HomeNewsDetail?id=@item.T_Content.ContentID"><p>·@item.T_Content.ContentTitle</p></a>
+                        
+                    }
+                  
+                    <p style="float: right; color: blue;">更多>></p>
+                </span>
+            </div>
+
+            <div>
+                <span style="float: left; width: 400px;">
+                    @foreach (var item in Model.DownloadList)
+                    {
+
+                        <a href="@(item.T_Content.T_DownLoadFiles.DLFileUrl??"#")"><p>·@item.T_Content.ContentTitle</p></a> 
+
+                    }
+                </span>
+                <span style="float: left;width: 500px;">
+                   
+                    <p style="float:right;color: blue;">更多>></p>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+*@
+
+
+    <!---------企业新闻&资料下载------------>
+    <div class="fromchen">
+   	  <div id="TabbedPanels1" class="TabbedPanels">
+    	  <ul class="TabbedPanelsTabGroup">
+            <li class="TabbedPanelsTab" tabindex="0">企业资源文件 </li>
+            @*<li class="TabbedPanelsTab" tabindex="0">企业PPT集</li>*@
+    	    @*<li class="TabbedPanelsTab" tabindex="0">企业新闻</li>*@
+            @*<li class="TabbedPanelsTab" tabindex="0">企业视频</li>*@
+    	    @*<li class="TabbedPanelsTab" tabindex="0">资料下载</li>*@
+
+  	    </ul>
+    	  <div class="TabbedPanelsContentGroup">
+          	<div class="TabbedPanelsContent">
+            	 <div class="cxRight">
+                	<ul>
+
+                        @{
+                            int iCountRes=0;
+                            foreach (var item in Model.ResFileList)
+                            {                           
+                                <li ><span>•</span><a href="@(item.T_Content.T_DownLoadFiles.DLFileUrl??"#")">@item.T_Content.ContentTitle</a></li>
+                                iCountRes++;
+                                @*if (iCountRes >= 9)
+                                {
+                                    <li class="cxMore"><a href="#">更多>></a></li>  
+                                    break;
+                                }*@
+                            }
+                          
+                        }                    
+                                      
+                    </ul>
+                </div><!--左边新闻-->
+@*
+            	 <div class="cxRight">
+                	<ul>
+                    	<li ><span>•</span><a href="#">测试数据：海关新规六月实施：旅客入境行李超范围将被暂存施：旅客入境行李超范围将被暂存</a></li>
+                        <li><span>•</span><a href="#">今年已7省上调最低工资标准 最高最低省差920元</a></li>
+                        <li><span>•</span><a href="#">北京政务公开要点发布 重大决策3日内公开解读</a></li>
+                        <li><span>•</span><a href="#">菲新总统:或与中国合作修铁路 不会搁置南海问题</a></li>
+                        <li><span>•</span><a href="#">日本在野党将联合提交不信任案 “对决”安倍政府</a></li>
+                        <li><span>•</span><a href="#">外国城市怎样收交通拥堵费 伦敦：每天11英镑</a></li>
+                        <li ><span>•</span><a href="#">测试数据：海关新规六月实施：旅客入境行李超范围将被暂存施：旅客入境行李超范围将被暂存</a></li>
+                        <li><span>•</span><a href="#">今年已7省上调最低工资标准 最高最低省差920元</a></li>
+                        	
+                        <li class="cxMore"><a href="#">更多>></a></li>                        
+                    </ul>
+                </div><!--左边新闻-->
+*@
+            </div><!--选项卡1-->
+
+
+              <!--选项卡2-->
+            @*<div class="TabbedPanelsContent">
+            	 <div class="cxRight">
+                	<ul>
+                        @{
+                            int iCounPPT=0;
+                            foreach (var item in Model.PPTList)
+                            {                           
+                                <li ><span>•</span><a href="@(item.T_Content.T_DownLoadFiles.DLFileUrl??"#")">@item.T_Content.ContentTitle</a></li>
+                                iCounPPT++;
+                                if (iCounPPT >= 9)
+                                {
+                                    <li class="cxMore"><a href="#">更多>></a></li>  
+                                    break;
+                                }
+                            }
+                          
+                        }  
+                                  
+                    </ul>
+                </div>*@<!--左边视频-->
+                @*
+            	 <div class="cxRight">
+                	<ul>
+                    	<li ><span>•</span><a href="#">测试数据：海关新规六月实施：旅客入境行李超范围将被暂存施：旅客入境行李超范围将被暂存</a></li>
+                        <li><span>•</span><a href="#">今年已7省上调最低工资标准 最高最低省差920元</a></li>
+                        <li><span>•</span><a href="#">北京政务公开要点发布 重大决策3日内公开解读</a></li>
+                        <li><span>•</span><a href="#">菲新总统:或与中国合作修铁路 不会搁置南海问题</a></li>
+                        <li><span>•</span><a href="#">日本在野党将联合提交不信任案 “对决”安倍政府</a></li>
+                        <li><span>•</span><a href="#">外国城市怎样收交通拥堵费 伦敦：每天11英镑</a></li>
+                        <li ><span>•</span><a href="#">测试数据：海关新规六月实施：旅客入境行李超范围将被暂存施：旅客入境行李超范围将被暂存</a></li>
+                        <li><span>•</span><a href="#">今年已7省上调最低工资标准 最高最低省差920元</a></li>
+                        	
+                        <li class="cxMore"><a href="#">更多>></a></li>                        
+                    </ul>
+                </div><!--右边视频-->
+                *@
+            </div><!--选项卡3--> 
+
+    	    <div class="TabbedPanelsContent">
+            	 <div class="cxRight">
+                	<ul>
+                         @{
+                               int iCountDL = 0;
+                               foreach (var item in Model.DownloadList)
+                                {                                   
+                                 <li ><span>•</span><a href="@(item.T_Content.T_DownLoadFiles.DLFileUrl??"#")">@item.T_Content.ContentTitle</a></li>
+                                    @*if (iCountDL >= 9)
+                                    {
+                                    <li class="cxMore"><a href="#">更多>></a></li>  
+                                     break;
+                                 }*@
+
+                            }  
+                             }
+
+                    </ul>
+                </div><!--左边新闻-->
+                @*
+            	 <div class="cxRight">
+                	<ul>
+
+                    	<li ><span>•</span><a href="#">测试数据：海关新规六月实施：旅客入境行李超范围将被暂存施：旅客入境行李超范围将被暂存</a></li>
+                        <li><span>•</span><a href="#">今年已7省上调最低工资标准 最高最低省差920元</a></li>
+                        <li><span>•</span><a href="#">北京政务公开要点发布 重大决策3日内公开解读</a></li>
+                        <li><span>•</span><a href="#">菲新总统:或与中国合作修铁路 不会搁置南海问题</a></li>
+                        <li><span>•</span><a href="#">日本在野党将联合提交不信任案 “对决”安倍政府</a></li>
+                        <li><span>•</span><a href="#">外国城市怎样收交通拥堵费 伦敦：每天11英镑</a></li>
+                        <li ><span>•</span><a href="#">测试数据：海关新规六月实施：旅客入境行李超范围将被暂存施：旅客入境行李超范围将被暂存</a></li>
+                        <li><span>•</span><a href="#">今年已7省上调最低工资标准 最高最低省差920元</a></li>
+                        	
+                        <li class="cxMore"><a href="#">更多>></a></li>                        
+                    </ul>
+                </div><!--左边新闻-->
+                *@
+            </div><!--选项卡4-->
+  	    </div>
+  	  </div>
+    </div><!--end of fromchen-->
+
+
+    <!----------联系我们--------------->
+    <div class="Callus">
+        <div style="width: 980px;height:20px;border-bottom: 1px solid #ccc;"></div>
+        <p class="call_title">联系我们</p>
+        <div class="call_left">
+        
+            <div class="each_tips">
+                <span class="call_logo" style="background: url(/Areas/Enterprise/Content/Home/Index/img/tubiao.png) -145px -73px;"></span>
+                <p>服务邮箱<br /><span>@Model.Enterprise.Email</span></p>
+            </div>
+
+            <div class="each_tips">
+                <span class="call_logo" style="background: url(/Areas/Enterprise/Content/Home/Index/img/tubiao.png) -145px -356px;"></span>
+                <p>地址<br/><span>@Model.Enterprise.EntAddress</span></p>
+            </div>
+
+
+        </div>
+        <div class="call_right">
+            <!----------地图--------->
+            @Html.Partial("_Map", new ViewDataDictionary()
+          {
+         {"keyword",Model.Enterprise.EntAddress}
+          }
+
+         )
+            <!----------地图--------->
+        </div>
+    </div>
+    <!----------底部--------->
+    <footer>
+        <p> </p>
+    </footer>
+        <script type="text/javascript">
+            var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+    </script>
+</body>
+</html>

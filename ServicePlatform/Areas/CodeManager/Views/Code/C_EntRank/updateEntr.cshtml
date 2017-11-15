@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改企业等级信息</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    
+    
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">企业代码管理</a></li>
+                <li><a href="#">修改企业等级</a></li>
+            </ul>
+        </div>
+
+    <div class="formbody">
+
+            <div class="formtitle"><span>修改企业等级</span></div>
+            
+
+        <form method="post" action="/CodeManager/Code/ReupdateEntr" name="myform" id="myform">
+
+            <ul class="forminfo">
+
+
+
+
+
+
+                <li>
+                    <label>企业类型</label>
+                    <select style="width:100px" name="EntCategoryID" id="EntCategoryID" class="dfinput">
+                        <option value="--请选择--">--请选择--</option>
+                        @foreach (var item in ViewBag.ggggg)
+                        {
+                            if (@item == @ViewBag.namemm)
+                            {
+                            <option value="@item" selected="selected">@item</option>}
+
+                            else
+                            {
+                            <option value="@item">@item</option>}
+                        }
+                    </select>
+                </li>
+
+
+
+                <li>
+                    <label>等级编号:</label>
+                    <input type="text" name="C_EntRankID" id="C_EntRankID" class="dfinput" value="@ViewBag.update.EntRankID">
+                </li>
+
+
+                <li>
+                    <label>等级名称:</label>
+                    <input type="text" id="C_EntRankName" name="C_EntRankName" class="dfinput" value="@ViewBag.update.EntRankName">
+                </li>
+
+
+
+                <li>
+                    <label>&nbsp;</label><input type="submit" value="保  存" class="btn" />
+
+                </li>
+            </ul>
+
+        </form>
+
+        
+   
+    </div>
+     
+
+
+    
+
+
+
+
+
+
+
+
+</body>
+</html>

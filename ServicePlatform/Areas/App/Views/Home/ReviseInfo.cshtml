@@ -1,0 +1,160 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.ReviseInfo_M
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>完善信息</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+    <link href="~/Include/timePicker/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Include/timePicker/bootstrap/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+</head>
+<body>
+<div class="main-do">
+    
+    <form method="post">
+        <div class="main-head">
+            <p class="main-head-p">修改信息</p>
+            <p>
+                @*<div>
+                    <div class="upload-img">
+                        <input type="file" class="comment-pic-upd" multiple="multiple" accept="image/*" capture="camera" name="file_head" id="file_head" onchange="javascript:setImagePreview();"/>
+                       
+                        <img src="~/Areas/App/Content/Image/头像.png" alt="上传照片" title="">
+                    </div>
+
+                        <div data-role="fieldcontain">
+                            <div id="localImag">
+                                <img id="preview" width="100px" height="100px" style="display: none" />
+                            </div>
+                        </div>
+                    
+                </div>*@
+                    <img class="main-head-img" src="~/Areas/App/Content/Image/头像.png">
+               
+            </p>
+            <a class="main-head-a" href="">@*<input type="file" accept="image/*" capture="camera" name="@Model.StuPhoto">*@</a>
+            
+        </div>
+
+
+        <br/>
+        @Html.HiddenFor(o => o.Uid)
+        <p class="get-p">
+            @Html.LabelFor(o => o.StuCellphone)&nbsp;
+            @Html.TextBoxFor(o => o.StuCellphone, new {@class = "get-input", placeholder = ""})
+
+        </p>
+
+        <p class="get-p">
+            @Html.LabelFor(o => o.StuEMail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.TextBoxFor(o => o.StuEMail, new {@class = "get-input", placeholder = ""})
+        </p>
+
+        <p class="get-p">
+            @Html.LabelFor(o => o.StuQQ)&nbsp;&nbsp;&nbsp;
+            @Html.TextBoxFor(o => o.StuQQ, new {@class = "get-input", placeholder = ""})
+        </p>
+
+        <p class="get-p">
+            @*性别*@
+            @Html.LabelFor(o => o.StuSex)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.DropDownListFor(o => o.StuSex, Model.selectItems, new {@class = "get-select"})
+        </p>
+
+        <p class="get-p">
+            @Html.LabelFor(o=>o.StuBirthday)&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <!-- @Html.Partial("/Views/Templates/_BootTimePicker.cshtml", new ViewDataDictionary(ViewData)
+                 {
+                     {"id", "StuBirthday"},
+                     {"name", "StuBirthday"},
+                     {"value", Model.StuBirthday},
+                     {"displayName", "出生日期"}
+                 })-->
+
+            <input size="16" type="text" value="@Model.StuBirthday" readonly class="form_datetime" name="StuBirthday">
+            @*@Html.TextAreaFor(o => o.StuResume, new {@class = "form_datetime", value = "2012-06-15 14:45"})*@
+
+        </p>
+        <p class="get-p">
+            @Html.LabelFor(o => o.StuResume)&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.TextAreaFor(o=>o.StuResume)
+        </p>
+        @*"@Url.Action("Main", "Home", new { area = "App", id = Model.Uid })"*@
+        <a href="">
+            <div class="">
+                @*<p class="do-it-a">*@
+                <input class="do-its" type="submit" value="确定"/>
+                @*</p>*@
+            </div>
+        </a>
+    </form>
+</div>
+
+    <script type="text/javascript">
+    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+    </script>
+<script src="~/Include/timePicker/jquery/jquery-1.8.3.min.js"></script>
+<script src="~/Include/timePicker/bootstrap/js/bootstrap.js"></script>
+<script src="~/Include/timePicker/jquery/bootstrap-datetimepicker.js"></script>
+<script src="~/Include/timePicker/jquery/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script type="text/javascript">
+   
+    $('.form_datetime').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: "yyyy-MM-dd hh:ii"
+    });
+    function setImagePreview() {
+        var preview, img_txt, localImag, file_head = document.getElementById("file_head"),
+        picture = file_head.value;
+        if (!picture.match(/.jpg|.gif|.png|.bmp|.img/i)) return alert("您上传的图片格式不正确，请重新选择！"),
+        !1;
+        //console.log(file_head.files);
+        if (preview = document.getElementById("preview"), file_head.files && file_head.files[0])
+ 
+            preview.style.display = "block",
+            preview.style.width = "120px",
+            preview.style.height = "115px",
+            preview.src = window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1 ?
+            window.webkitURL.createObjectURL(file_head.files[0]) :
+            window.URL.createObjectURL(file_head.files[0]
+
+            );
+
+        else {
+            file_head.select(),
+            file_head.blur(),
+            img_txt = document.selection.createRange().text,
+            localImag = document.getElementById("localImag"),
+            localImag.style.width = "115px",
+            localImag.style.height = "115px";
+            try {
+                localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
+                localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
+            } catch (f) {
+                return alert("您上传的图片格式不正确，请重新选择！"),
+                !1
+            }
+            preview.style.display = "none",
+            document.selection.empty()
+        }
+        return document.getElementById("DivUp").style.display = "block",
+        !0
+    }
+</script>
+
+</body>
+</html>

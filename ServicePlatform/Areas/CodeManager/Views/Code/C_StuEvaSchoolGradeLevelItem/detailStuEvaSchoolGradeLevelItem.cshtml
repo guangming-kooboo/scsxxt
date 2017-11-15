@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "detailStuEvaSchoolGradeLevelItem";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>条目等级详情</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+
+
+
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生评价学校条目等级管理</a></li>
+            <li><a href="#">查看条目等级详情</a></li>
+        </ul>
+    </div>
+
+    <div class="formbody">
+
+        <div class="formtitle"><span>查看条目等级</span></div>
+
+
+
+
+        <ul class="forminfo">
+
+
+
+
+            <li>
+                <label>批次编号:</label>
+                <input type="text" name="ProPosID" id="ProPosID" class="dfinput" value="@ViewBag.batchName" readonly="readonly">
+            </li>
+            <li>
+                <label>条目次序:</label>
+                <input type="text" id="ProPosName" name="ProPosName" class="dfinput" value="@ViewBag.detail.ItemSequence" readonly="readonly">
+            </li>
+            <li>
+                <label>条目编号:</label>
+                <input type="text" id="ProPosName" name="ProPosName" class="dfinput" value="@ViewBag.detail.ItemNo" readonly="readonly">
+            </li>
+
+            <li>
+                <label>条目名称:</label>
+                <input type="text" id="ProPosName" name="ProPosName" class="dfinput" value="@ViewBag.detail.ItemName" readonly="readonly">
+            </li>
+            <li>
+                <label>条目权重:</label>
+                <input type="text" id="Weight" name="Weight" class="dfinput" value="@ViewBag.detail.Weight">
+            </li>
+            <li>
+                <label>条目注释:</label>
+                <input type="text" id="Note" name="Note" class="dfinput" value="@ViewBag.detail.Note">
+            </li>
+
+            <li>
+
+                <label>&nbsp;</label><button id="button1" class="btn">返 回</button>
+
+            </li>
+        </ul>
+
+
+
+    </div>
+
+    <script>
+        $("#button1").bind("click", function () {
+            var s = "C_StuEvaSchoolGradeLevelItem1";
+            window.location = s;
+
+
+        })
+
+
+
+
+    </script>
+
+</body>
+</html>

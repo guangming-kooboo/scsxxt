@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"添加实习报告.html",
+  "generationDate":new Date(1483078092471.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"54b9b13c03d740538ff77c6e7044affc",
+    "type":"Axure:Page",
+    "name":"添加实习报告",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"1593e9acde804dfcb2518c494aa75f03",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":120,
+              "y":50},
+            "size":{
+              "width":371,
+              "height":643}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"9d6f05d92f314d7e9c6b944b75b1a93c",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":120,
+                  "y":50},
+                "size":{
+                  "width":371,
+                  "height":643}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/添加实习报告/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "1593e9acde804dfcb2518c494aa75f03":{
+      "scriptId":"u0"},
+    "9d6f05d92f314d7e9c6b944b75b1a93c":{
+      "scriptId":"u1"}}});

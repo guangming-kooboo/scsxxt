@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"登录.html",
+  "generationDate":new Date(1483078091875.77),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"f9fe96340063435e90ab6f0955bc57e7",
+    "type":"Axure:Page",
+    "name":"登录",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"9c3418a0b8ae4721b2a383ea2c033708",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":130,
+              "y":76},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"643fd00117f9495f92b57d7dcd8ed355",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":130,
+                  "y":76},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/登录/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "9c3418a0b8ae4721b2a383ea2c033708":{
+      "scriptId":"u0"},
+    "643fd00117f9495f92b57d7dcd8ed355":{
+      "scriptId":"u1"}}});

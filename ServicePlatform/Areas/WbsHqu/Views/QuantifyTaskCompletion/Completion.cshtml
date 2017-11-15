@@ -1,0 +1,16 @@
+﻿@model ServicePlatform.Areas.WbsHqu.ViewModels.QuantifyTaskCompletion_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+            <a href="/WbsHqu/QuantifyTaskCompletion/Index?ReportID=Qx.Wbs.Hqu.完成情况&Params=@Model.BackParams">&lt&lt返回完成情况</a>
+    </ol>
+</div>
+
+<script>
+    function Search() {
+        var Params = v("完成时间");
+        return Params;
+    }
+</script>

@@ -1,0 +1,49 @@
+﻿@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    TableHelper Table = (TableHelper)ViewData["Pulic"];
+
+    string tableID = Table.GettableID();
+
+    string[] tableTh = Table.GettableTh();
+
+    string[][] dataList = Table.GetdataList();
+
+    string[] cmp=dataList.FirstOrDefault();
+}
+
+
+
+
+
+
+<table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id='@tableID' >
+    <tr class="title">
+        @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+        @*<td bgcolor="#CCCCCC">企业<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+
+        @for (int i = 0; i < tableTh.Length; i++)
+        { 
+        <td bgcolor="#CCCCCC">@tableTh[i]<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+        }
+    </tr>
+    <tbody>
+           @if (cmp!=null)
+           { 
+            for (int i = 0; i < dataList.Length; i++)
+            {
+              
+                <tr class="odd">
+                    @for (int j= 0;j < dataList[i].Length; j++)
+                    {
+                    <td>
+                        @(new HtmlString(dataList[i][j]))
+                    </td>
+                    }
+                </tr>
+            }
+           }
+        
+    </tbody>
+</table>

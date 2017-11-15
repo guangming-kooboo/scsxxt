@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "Left";
+    List<ServicePlatform.Config.Menu> menus=(Session["Vars"] as ServicePlatform.Config.Vars).getMenu(); //获取菜单
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>菜单栏</title>
+
+
+    <link href="~/Areas/Platform/Content/Admin/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Platform/Content/Admin/css/select.css" rel="stylesheet" />
+    <script src="~/Areas/Platform/Content/Admin/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //导航切换
+            $(".menuson li").click(function () {
+                $(".menuson li.active").removeClass("active")
+                $(this).addClass("active");
+            });
+
+            $('.title').click(function () {
+                var $ul = $(this).next('ul');
+                $('dd').find('ul').slideUp();
+                if ($ul.is(':visible')) {
+                    $(this).next('ul').slideUp();
+                } else {
+                    $(this).next('ul').slideDown();
+                }
+            });
+        })
+    </script>
+
+
+</head>
+
+<body style="background:#f0f9fd;">
+    <div class="lefttop"><span></span>权限控制台</div>
+
+    <dl class="leftmenu">
+
+        @*<dd>
+                <div class="title">
+                    <span><img src="/Areas/Platform/Content/Admin/images/leftico01.png" /></span>管理信息
+                </div>
+                <ul class="menuson">
+                    <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
+                    <li class="active"><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li>
+                    <li><cite></cite><a href="imgtable.html" target="rightFrame">图片数据表</a><i></i></li>
+                    <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
+                    <li><cite></cite><a href="imglist.html" target="rightFrame">图片列表</a><i></i></li>
+                    <li><cite></cite><a href="imglist1.html" target="rightFrame">自定义</a><i></i></li>
+                    <li><cite></cite><a href="tools.html" target="rightFrame">常用工具</a><i></i></li>
+                    <li><cite></cite><a href="filelist.html" target="rightFrame">信息管理</a><i></i></li>
+                    <li><cite></cite><a href="tab.html" target="rightFrame">Tab页</a><i></i></li>
+                    <li><cite></cite><a href="error.html" target="rightFrame">404页面</a><i></i></li>
+                </ul>
+            </dd>*@
+
+        @{
+
+    for (int i = 0; i < menus.Count; i++)
+    {
+        
+            @{
+        if (menus[i].IsFather)
+        {
+            <dd>
+                <div class="title">
+
+                    <span><img src="/Areas/Platform/Content/Admin/images/leftico01.png" /></span>入驻单位管理
+
+                </div>
+
+                }
+                else if(i=menus.Count-1||menus[i+1].IsFather)
+                {
+            </dd>
+        }
+        else
+        {
+                          <ul class="menuson">
+                    <li><cite></cite><a href="/Platform/Home/T_Enterprise_ListShow" target="rightFrame">入驻企业管理</a><i></i></li>
+                    <li><cite></cite><a href="/Platform/Home/UserShow" target="rightFrame">入驻高校管理</a><i></i></li>
+
+                </ul>
+                     }
+           
+
+            }
+       
+    }
+}
+
+        <dd>
+            <div class="title">
+
+                <span><img src="/Areas/Platform/Content/Admin/images/leftico01.png" /></span>入驻单位管理
+
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/Home/T_Enterprise_ListShow" target="rightFrame">入驻企业管理</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/UserShow" target="rightFrame">入驻高校管理</a><i></i></li>
+
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/Platform/Content/Admin/images/leftico02.png" /></span>平台用户管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/Home/RoleAdd" target="rightFrame">员工信息管理</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/RoleShow" target="rightFrame">员工密码修改</a><i></i></li>
+               
+
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span>企业代码管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/C_EntCategory/C_EntCategory1" target="rightFrame">企业类别设置</a><i></i></li>
+                <li><cite></cite><a href="/Platform/C_EntRank/C_EntRank1" target="rightFrame">企业等级设置</a><i></i></li>
+                <li><cite></cite><a href="/Platform/C_Position/C_Position1" target="rightFrame">实习岗位设置</a><i></i></li>
+                
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico04.png" /></span>平台门户管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/Home/ButtonAdd" target="rightFrame">企业权限管理</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/ButtonShow" target="rightFrame">学生权限管理</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/ButtonShow" target="rightFrame">学校权限管理</a><i></i></li>
+
+            </ul>
+
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico04.png" /></span>新闻管理</div>
+            <ul class="menuson">
+              
+                <li><cite></cite><a href="/Platform/Home/UserPermissionAdd" target="rightFrame">新闻列表</a><i></i></li>
+              
+            </ul>
+
+        </dd>
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico04.png" /></span>消息管理</div>
+            <ul class="menuson">
+                 <li><cite></cite><a href="/Platform/Home/UserPermissionAdd" target="rightFrame">收件箱</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/MenuPermissionAdd" target="rightFrame">发件箱</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/ButtonPermissionAdd" target="rightFrame">草稿箱</a><i></i></li>
+            </ul>
+
+        </dd>
+
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico04.png" /></span>权限管理管理</div>
+            <ul class="menuson">
+                @*<li><cite></cite><a href="/Platform/Home/UserPermissionAdd" target="rightFrame">用户授权</a><i></i></li>*@
+                <li><cite></cite><a href="/Platform/Home/UserPermissionAdd" target="rightFrame">角色授权</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/MenuPermissionAdd" target="rightFrame">菜单授权</a><i></i></li>
+                <li><cite></cite><a href="/Platform/Home/ButtonPermissionAdd" target="rightFrame">按钮授权</a><i></i></li>
+            </ul>
+
+        </dd>
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span>地区代码管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/C_Province/C_Province1" target="rightFrame">省份设置</a><i></i></li>
+                <li><cite></cite><a href="/Platform/C_City/C_City1" target="rightFrame">城市设置</a><i></i></li>
+                <li><cite></cite><a href="/Platform/C_County/C_County1" target="rightFrame">县区设置</a><i></i></li>
+                
+            </ul>
+
+
+        </dd><dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span>职称代码管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/C_ProPosition/C_ProPosition1" target="rightFrame">职称设置</a><i></i></li>
+                          
+            </ul>
+        </dd>
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span>申请状态代码管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/C_ApplyStatus/C_ApplyStatus1" target="rightFrame">申请状态设置</a><i></i></li>
+               
+            </ul>
+        </dd>
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span>学生评价学校</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/C_StuEvaluateSchoolItem/C_StuEvaluateSchoolItem1" target="rightFrame">学生评价学校条目</a><i></i></li>
+                <li><cite></cite><a href="/Platform/C_StuEvaSchoolGradeLevelItem/C_StuEvaSchoolGradeLevelItem1" target="rightFrame">学生评价学校条目等级</a><i></i></li>
+
+            </ul>
+        </dd>
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span> 学生评价企业</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/C_StuEvaluateEntItem/C_StuEvaluateEntItem1" target="rightFrame">学生评价企业条目</a><i></i></li>
+                <li><cite></cite><a href="/Platform/C_StuEvaEntGradeLevelItem/C_StuEvaEntGradeLevelItem1" target="rightFrame">学生评价企业条目等级</a><i></i></li>
+
+            </ul>
+        </dd>
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span> 实习考勤条目</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/C_PracAttendanceItem/C_PracAttendanceItem1" target="rightFrame">实习考勤条目表</a><i></i></li>
+                <li><cite></cite><a href="/Platform/C_StuEvaEntGradeLevelItem/C_StuEvaEntGradeLevelItem1" target="rightFrame">实习考勤条目等级</a><i></i></li>
+
+<<<<<<< .mine
+        <dd>
+            <div class="title"><span><img src="/Areas/Platform/Content/Admin/images/leftico03.png" /></span>申请学校人才库</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Platform/PlatformApply/ApplySchool" target="rightFrame">申请学校人才库</a><i></i></li>
+=======
+            </ul>
+        </dd>
+>>>>>>> .r89
+
+<<<<<<< .mine
+            </ul>
+        </dd>
+
+
+
+=======
+
+>>>>>>> .r89
+    </dl>
+
+</body>
+</html>
+

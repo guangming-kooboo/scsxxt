@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "StuEvaluateSchool";
+}
+
+@using ServicePlatform.Models;
+@using ServicePlatform.Lib;
+
+@{
+
+    List<C_StuEvaluateSchoolItem> StuEvaluateSchoolItem = ViewBag.StuEvaluateSchoolItem;
+    int index = 0;
+
+    List<C_StuEvaSchoolGradeLevelItem> StuEvaSchoolGradeLevelItem = ViewBag.StuEvaSchoolGradeLevelItem;
+    int star_num = StuEvaSchoolGradeLevelItem.Count;
+    string hints = string.Empty;
+    hints += " hints: [";
+    for (int i = 0; i < star_num; i++)
+    {
+        if (i + 1 != star_num)
+        {
+            hints += "\'" + StuEvaSchoolGradeLevelItem[i].ItemName + "\'" + ",";
+        }
+        else
+        {
+            hints += "\'" + StuEvaSchoolGradeLevelItem[i].ItemName + "\'";
+        }
+    }
+    hints += "],";
+
+    T_PracticeVolunteer ts = ViewBag.StuMessage;
+
+    List<T_StuEvaluateSchool> HasEvaList = ViewBag.HasEvaList;
+
+
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>学生评价企业</title>
+    <link href="/Areas/School/Content/S_WorkMyPlat/css/PracticelGrade.css" rel="stylesheet" type="text/css" />
+    <script src="/Areas/School/Content/S_WorkMyPlat/js/jquery-1.5.1.js" type="text/javascript"></script>
+    <script src="/Areas/School/Content/S_WorkMyPlat/js/jquery.raty.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+
+    <form>
+        <p class="UnivDept">华侨大学旅游学院</p>
+        <p class="PracticelGrade">学生评价学校表</p>
+        <hr />
+        <label>学生姓名：</label><input name="stdName" type="text" readonly="readonly" value='@ts.StuName' class="onlyRead" />
+        <label>学生学号：</label><input name="stdId" type="text" readonly="readonly" value='@ts.StuNo' class="onlyRead" />
+        <div style="clear:both;"></div>
+        <label>实习单位：</label><input type="text" name="Unit" readonly="readonly" value='@ts.EntName' class="onlyRead" />
+        <label>实习岗位：</label><input type="text" name="Position" readonly="readonly" value='@ts.PosName' class="onlyRead" />
+        <div style="clear:both;"></div>
+        <label>实习部门：</label><input type="text" name="Department" readonly="readonly" value='@ts.PracticeDept' class="onlyRead" />
+        <label>实习分部门：</label><input type="text" name="SubDepartment" readonly="readonly" value='@ts.PracticeDivDept' class="onlyRead" />
+        <div style="clear:both;"></div>
+        @*<label>起止时间：</label><input type="text" name="StartTime" class="others" value='@ViewBag.StuMessage2' />*@
+        @*<label>结束时间：</label><input type="text" name="CloseTime" class="others" />*@
+    </form>
+
+    @if (HasEvaList.Count == 0)
+    { 
+    <table cellspacing="0">
+        <tr>
+            <th width="180" scope="col" class="firstLine">评价项目</th>
+            <th width="231" scope="col" class="firstLine">表现等级</th>
+            <th width="481" scope="col" class="firstLine">评价描述</th>
+        </tr>
+        @for (int i = 0; i < StuEvaluateSchoolItem.Count; i++)
+        {
+            <tr>
+                <th scope="row" class="firstRow">@StuEvaluateSchoolItem[i].ItemName</th>
+                <td>
+                    <div>
+                        @*<p style="font-size:20px">请给出你的评分(十分制)：</p>*@
+                        <div id='@ViewBag.Star[index]'></div>
+                        <div id='@ViewBag.Result[index]'></div>
+                    </div>
+                </td>
+                <td>
+                    <textarea id='@ViewBag.Judge[index++]' name="Judge" class="judge" placeholder=""></textarea>
+                </td>
+            </tr>
+        }
+    </table>
+        if( ViewBag.Foibid!="true")
+        { 
+        <p><input name="save" style="margin-left: 245px" type="button" value="保存" class="save" onclick="sub_jump()"/><input name="save" style="margin-left: 50px" type="button" value="放弃" class="save" onclick="history.go(-1)" /></p>
+        }
+    }
+
+    <hr />
+    <p>已评价的项目列表</p>
+    @if (HasEvaList.Count!=0)
+    { 
+        
+    <table cellspacing="0">
+        <tr>
+            <th width="180" scope="col" class="firstLine">评价项目</th>
+            <th width="231" scope="col" class="firstLine">表现等级</th>
+            <th width="481" scope="col" class="firstLine">评价描述</th>
+        </tr>
+        @for (int i = 0; i < HasEvaList.Count; i++)
+        {
+            <tr>
+                <th scope="row" class="firstRow">@HasEvaList[i].ItemNoName</th>
+                <td>
+                        @HasEvaList[i].ItemGradeName
+                </td>
+                <td>
+                    @HasEvaList[i].ItemContent
+                </td>
+            </tr>
+        }
+        <tr><td style="color:red;">总分</td><td colspan="2" style="color:red;">@ViewBag.Score</td></tr>
+    </table>
+     @*<p style="text-align:center;" >评价总分：</p>*@
+        if( ViewBag.Foibid!="true")
+        { 
+        <input name="save" type="button" value="撤销重评" class="save" onclick="sub_rollb()" />
+        }
+    }
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var count = '@ViewBag.ItemCount';
+            for(var i=0;i<count;i++)
+            {
+                var star = 'star' + i;
+                var result = 'result' + i;
+                rat(star, result, 1);
+            }
+        });
+        function rat(star, result, m) {
+
+            star = '#' + star;
+            result = '#' + result;
+            $(result).hide();//将结果DIV隐藏
+
+            $(star).raty({
+                //hints: ['10', '20', '30','40','50','60','70','80','90','100'],
+                @(new HtmlString(hints.Replace("/r/n", "").Replace("\r\n", "")))
+                path: "/Areas/School/Content/S_WorkMyPlat/css/img",
+                starOff: 'star-off-big.png',
+                starOn: 'star-on-big.png',
+                size: 24,
+                start: 40,
+                number: '@star_num',
+                showHalf: true,
+                target: result,
+                targetKeep: true,//targetKeep 属性设置为true，用户的选择值才会被保持在目标DIV中，否则只是鼠标悬停时有值，而鼠标离开后这个值就会消失
+                click: function (score, evt) {
+                    //第一种方式：直接取值
+                    //alert('你的评分是' + score * m + '分');
+                    document.getElementById(result).innerHTML = score * m;
+                    var t = document.getElementById(result).innerHTML;
+                    alert(t);
+                    //第二种方式可以设置一个隐蔽的HTML元素来保存用户的选择值，然后可以在脚本里面通过jQuery选中这个元素来处理该值。 弹出结果
+
+                }
+            });
+
+            /*第二种方式可以设置一个隐蔽的HTML元素来保存用户的选择值，然后可以在脚本里面通过jQuery选中这个元素来处理该值。 弹出结果
+            var text = $(result).text();
+            $('img').click(function () {
+                if ($(result).text() != text) {
+                    alert('你的评分是'+$(result).text()/m+'分');
+                    alert(result);
+                    return;
+                }
+            });*/
+        }
+
+        function sub_jump()
+        {
+            var count = '@ViewBag.ItemCount';
+            var final = '';
+            for (var i = 0; i < count; i++) {
+                var star = 'star' + i;
+                var result = 'result' + i;
+                var judge = 'judge' + i;
+                var s = document.getElementById(result).innerHTML;
+                final+=s+"!";
+                var jj = document.getElementById(judge).value;
+                final += jj+"!";
+            }
+            window.location = "/School/S_MyWorkPlat/AddStuEvaSchoolItem?final=" + final;
+        }
+
+        function sub_rollb() {
+            window.location = "/School/S_MyWorkPlat/DeleteStuEvaSchoolItem";
+        }
+    </script>
+
+</body>
+</html>
+

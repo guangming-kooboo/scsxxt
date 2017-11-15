@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "T_Enterprise_Show2";
+    var url = "/Enterprise/Home/T_Enterprise_Show?Ent_No?=" + ViewData["Ent_No"];
+}
+<script>
+    window.open("@url");
+</script>
+<h2>弹窗已被浏览器拦截，请<a target="_blank" href="@url">点击这里</a>手动打开预览企业首页</h2>

@@ -1,0 +1,98 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.EditCase_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            @*跳转到案例列表*@
+            <a href='javascript:submit("a",{id:"1"});'>
+                <div style="width:60px"><div class="placeholder"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+            </a>
+            <div class="weui-flex__item"><div class="placeholder">我的案例</div></div>
+            @*跳转到案例列表*@
+            @if (Model._careerstatus == 13)
+            {
+                <a href='javascript:submit("a",{id:"0"});'>
+                    <div>
+                        <div class="placeholder" style="color: floralwhite">保存</div>
+                    </div>
+                </a>
+            }
+            else
+            {
+                <div class="placeholder">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">案例 @Model.CaseCount</label>
+            </div>
+            <div class="weui-cell__bd">
+                @Html.TextBoxFor(o => o.CaseName, new { @class = "weui-input", placeholder = "案例标题" })
+                @*<input class="weui-input" type="text" placeholder="案例标题">*@
+            </div>
+        </div>
+        @foreach (var item in Model.Case)
+        {
+            <div class="weui-cells__title">@item.ItemName</div>
+            <input type="hidden" value="@item.CaseNo" name="CaseNo" />
+            <input type="hidden" value="@item.ItemNo" name="ItemNo">
+            <input type="hidden" value="@item.Pic" name="Pic">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        @if (Model._careerstatus == 13)
+                        {
+                            <textarea name="ItemContent" class="weui-textarea" placeholder="" rows="3">@item.ItemContent</textarea>
+                        }
+                        else
+                        {
+                            <textarea readonly="readonly" name="ItemContent" class="weui-textarea" placeholder="" rows="3">@item.ItemContent</textarea>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="weui-gallery" id="gallery" style="opacity: 1.0; display: none">
+            <span class="weui-gallery__img" id="galleryImg" style="background-image: url()"></span>
+            <div class="weui-gallery__opr">
+            </div>
+        </div>
+
+        <div class="weui-uploader__bd" style="width: 100%">
+            <ul class="weui-uploader__files">
+                   @if (!string.IsNullOrEmpty(Model.Case.FirstOrDefault().Pic))
+                   {
+                       var photo = Model.Case.FirstOrDefault().Pic.Split(';');
+                       for (int item = 0; item < photo.Count()-1; item++)
+                       {
+                            <li class="weui-uploader__file1 Photo"><img style="background-image: url(@photo[item]); background-size: 100% auto" width="90%" height="190px" src="@photo[item]"></li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="weui-uploader__file1"><img style="background-image: url()" src=""></li>
+                    }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/AppStudentV3/js/zepto.js"></script>
+<script>
+            $gallery = $("#gallery"),
+            $galleryImg = $("#galleryImg"),
+                $uploaderFiles = $(".Photo");
+            $uploaderFiles.on("click", "img", function () {
+                $galleryImg.attr("style", this.getAttribute("style"));
+                $gallery.fadeIn(100);
+                $gallery.on("click", function () {
+                    $gallery.fadeOut(100);
+                });
+            });
+</script>

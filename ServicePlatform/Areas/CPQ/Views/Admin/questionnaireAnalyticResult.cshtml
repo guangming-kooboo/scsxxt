@@ -1,0 +1,49 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.Admin.QuestionnaireAnalyticResult_M
+@{      
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=@Model.owernID+";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+        <li><a href=@Url.Action("editQuestionnaire", "Admin", new { area = "CPQ", ReportID = "CPQ编辑问卷", Params = @Model.QuestionnaireID+";;" })>编辑问卷页面</a><i class="fa fa-angle-right"></i></li>
+        @*这个到时候还是要继续读取的*@
+    </ol>
+
+</div>
+<input type="text" name="QuestionnaireID" id="QuestionnaireID" value=@Model.QuestionnaireID hidden="hidden">
+
+
+<h2>问卷分析</h2>
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>已经回收的问卷数目：</label>
+    </div>
+    <div class="col-lg-10">
+        <input type="text"  value=@Model.collectNumber>
+    </div>
+</div>
+<div class="row">
+    <button id="download">导出分析结果</button>
+</div>
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+      //  var Params = document.getElementById("QuestionnaireDomain").value;
+        //    v("拥有者");
+
+        Query(Params, "@ViewData["Url"]");
+    }
+    $("#download").bind("click", function () {
+        var QuestionnaireID = $("#QuestionnaireID").val();
+        var s = "/AdminCRUD/downLoadPdf?QuestionnaireID=" + QuestionnaireID;
+
+        window.location = s;
+
+
+
+    })
+</script>
+

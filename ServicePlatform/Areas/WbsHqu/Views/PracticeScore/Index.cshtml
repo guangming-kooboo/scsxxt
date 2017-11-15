@@ -1,0 +1,14 @@
+﻿@{
+    Layout = ViewData["Layout"].ToString();
+}
+<label>
+    实习成绩申请列表:&nbsp;
+    @Html.TextBox("实习成绩申请列表", "", new { @class = "form-control input-sm", PlaceHolder = "请输入要查询的实习成绩申请" })
+</label>
+
+<script>
+    function Search() {
+        var Params = v("实习成绩申请列表");
+        return Params;
+    }
+</script>

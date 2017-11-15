@@ -1,0 +1,39 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Visitor.Login_M
+
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <title>登录</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="main">
+        <img class="main-logo" src="~/Areas/App/Content/Image/logo.png">
+       
+        <p class="main-name-p">实学</p>
+      @*<p class="main-num-p">V1.8</p>*@
+
+        <form class="go-form" method="post">
+            <img class="go-img" src="~/Areas/App/Content/Image/用户.png">       
+            @Html.TextBoxFor(o => o.UserID, new { @class="go-inputs" , placeholder="用户名" })
+
+            @Html.DropDownListFor(o => o.UnitID, Model._UnitItems, new { @class = "get-selects" })
+           <br/>
+          
+            <img class="go-imgs" src="~/Areas/App/Content/Image/密码.png">    
+            @Html.PasswordFor(o => o.UserPwd, new { @class = "go-input", placeholder = "用户密码" })
+
+            <input class="go-submit" type="submit" value="登录" />
+        </form>
+        <div class="main-tail">
+            <a class="forget" href="">忘记密码？</a><a class="found" href="@Url.Action("ForgetPsw","Visitor",new {area="App"})">找回密码</a>
+        </div>
+    </div>
+</body>
+

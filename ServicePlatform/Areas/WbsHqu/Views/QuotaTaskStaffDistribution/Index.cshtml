@@ -1,0 +1,27 @@
+﻿@model ServicePlatform.Areas.WbsHqu.ViewModels.QuotaTaskStaffDistribution_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        @if (Model.Flag == "0")
+        {
+            <a href="/WbsHqu/QuotaTask/Index?ReportID=Qx.Wbs.Hqu.定额任务父列表&Params=@Model.TaskID">&lt&lt返回定额任务</a>
+        }
+        else
+        {
+            <a href="/WbsHqu/QuotaTask/SubTask?ReportID=Qx.Wbs.Hqu.定额任务子列表&Params=@Model.TaskID">&lt&lt返回定额任务</a>
+        }
+    </ol>
+</div>
+<label>
+    人员名称:&nbsp;
+    @Html.TextBox("人员名称", "", new { @class = "form-control input-sm", PlaceHolder = "请输入要查询的人员名称" })
+</label>
+
+<script>
+    function Search() {
+        var Params = v("人员名称");
+        return Params;
+    }
+</script>

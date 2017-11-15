@@ -1,0 +1,88 @@
+﻿
+@{
+    var style = string.IsNullOrEmpty((string)ViewData["style"]) ? "1" : (string)ViewData["style"];
+    var css = string.IsNullOrEmpty((string)ViewData["css"]) ? "" : (string)ViewData["css"];
+    var value =  DateTime.Now.ToLongDateString();
+    var name = string.IsNullOrEmpty((string)ViewData["name"]) ? "noName" : ((string)ViewData["name"]);
+    var id = string.IsNullOrEmpty((string)ViewData["id"]) ? "noId" : ((string)ViewData["id"]);
+    var displayName = string.IsNullOrEmpty((string)ViewData["displayName"]) ? "默认名称":(string)ViewData["displayName"]  ;
+
+}
+
+@switch (style)
+{
+    case "1":
+        {
+            <div class="form-group" id="@id">
+                <label class="col-sm-3 control-label">@displayName：</label>
+                <div class="col-sm-6 col-sm-offset-4 input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" name="@id" class="form-control" value="@value">
+                </div>
+            </div>
+
+        }
+        break;
+    case "2":
+        {
+
+            <div class="form-group" id="@id">
+                <label>@displayName</label>
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" name="@id" class="form-control" value="@value">
+                </div>
+            </div>
+        }
+        break;
+    case "3":
+        {
+            <div class="form-group" id="@id">
+                <label class="control-label col-md-2">@displayName</label>
+                <div class="col-md-10 input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" name="@id" class="form-control" value="@value">
+                </div>
+            </div>
+        }
+        break;
+    case "4":
+        {
+            <div class="form-group" id="@id">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" name="@id" class="form-control" value="@value">
+                </div>
+            </div>
+        }
+        break;
+}
+
+
+<script>
+    
+    $(document).ready(function () {
+      
+        $('@("#"+id) .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+    });
+</script>
+
+
+
+@*
+    @Html.Partial("/Views/Templates/_TimePicker.cshtml", new ViewDataDictionary()
+                {
+                   { "style","1"},
+                   { "css",""},
+                   { "id","调用举例"},
+                   { "name","调用举例"},
+                   { "value",Model DateTime.Now},
+                   { "displayName","调用举例"}
+                })
+*@

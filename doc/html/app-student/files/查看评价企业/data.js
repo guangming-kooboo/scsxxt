@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"查看评价企业.html",
+  "generationDate":new Date(1483078092527.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"1208b1c76c7e4861831f52323a55005a",
+    "type":"Axure:Page",
+    "name":"查看评价企业",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"b08042a1de0d4924812944847c23ca7d",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":140,
+              "y":60},
+            "size":{
+              "width":376,
+              "height":671}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"61779ccf77884ec8b45a3b68ff40d45c",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":140,
+                  "y":60},
+                "size":{
+                  "width":376,
+                  "height":671}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/查看评价企业/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "b08042a1de0d4924812944847c23ca7d":{
+      "scriptId":"u0"},
+    "61779ccf77884ec8b45a3b68ff40d45c":{
+      "scriptId":"u1"}}});

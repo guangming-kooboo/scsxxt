@@ -1,0 +1,213 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin: 0;padding: 0;}
+img{border:none;}
+ul{list-style: none;}
+nav ul li {display: inline-block;_zoom:1;*display:inline;}
+a{text-decoration: none;color: #0099F1;}
+body{font-family: tahoma, arial, 'Hiragino Sans GB', 'WenQuanYi Micro Hei', 微软雅黑, 宋体, sans-serif;}
+
+/*----clearfix清除浮动----*/
+.clearfix {*zoom: 1;}
+.clearfix:before,
+.clearfix:after {display: table;content: "";line-height: 0;}
+.clearfix:after {clear: both;}
+
+/*----头部-----*/
+#header{width: 100%;  font: 12px/1.5 tahoma,arial,Hiragino Sans GB,WenQuanYi Micro Hei,\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;
+	font-size: 12px;}
+	#header .top-nav{height: 28px;background: #f5f5f5;line-height: 26px;}
+	#header .top-nav li{padding: 0 2px;}
+	#header .top-nav-div,.top-blank{width: 900px;margin: 0 auto;}
+	#header nav ul{float: right;}
+	#header a {color: #777;vertical-align: top;}
+	#header nav a:hover {color: #f57a00;text-decoration: underline}
+
+	/*----logo 区域----*/
+	.top-blank{
+		width:900px;
+		height: 100px;
+		position: relative;		
+		overflow:hidden;
+	}
+	.LOGODiv{
+	width:550px;
+	float:left;	
+	line-height:60px;
+	margin:20px 5px;
+}
+.LOGODiv img{
+	width:60px;
+	height:60px;
+	float:left;
+}
+.LOGODiv  p{
+	width:400px;
+	float:left;
+	color:#4D4D4D;
+	margin-left:10px;
+	font-size:28px;
+	letter-spacing:2px;	
+}
+
+	
+/*-------主区域--------------*/
+#wrapper{
+	width:900px;
+	height:465px;
+	margin:5px auto;
+	border-top:2px solid #f57a00;
+	border-left:2px solid #B6B5B5;
+	border-right:2px solid #B6B5B5;
+	border-bottom:2px solid #A7ABB0;
+	overflow:hidden;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#FFF,endColorStr=#EFEFEF); /*IE 6 7 8*/ 
+
+	background: -ms-linear-gradient(top, #fff,  #EFEFEF);        /* IE 10 */
+	
+	background:-moz-linear-gradient(top,#FFF,#EFEFEF);/*火狐*/ 
+	
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#FFF), to(#EFEFEF));/*谷歌*/ 
+	
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#EFEFEF));      /* Safari 4-5, Chrome 1-9*/
+	
+	background: -webkit-linear-gradient(top, #fff, #EFEFEF);   /*Safari5.1 Chrome 10+*/
+	
+	background: -o-linear-gradient(top, #fff, #EFEFEF);  /*Opera 11.10+*/
+}
+.login{
+	width:420px;
+	height:400px;
+	float:left;
+	margin:8px;
+	padding:10px 10px;
+	margin-left:30px;
+	color:#999;
+	font-size:0.95em;
+}
+.login p{
+	width:80%;
+	float:left;
+	font-size: 0.9em;
+	margin:15px 0;
+	font-family:"微软雅黑", "宋体", "幼圆", sans-serif;
+	color:#333;
+	letter-spacing:2px;
+}
+
+.TYPE{
+	width:390px;
+	float:left;
+	height:128px;	
+	margin-top:10px;
+	font-family:"微软雅黑", "宋体", "幼圆", sans-serif;
+}
+
+.information :focus{
+	border:1px solid #0099F1;
+}
+
+.information{
+	width:389px;
+	float:left;
+	height:38px;
+	border:1px solid #EAEAEA;
+	margin:10px 0;
+	font-family:"微软雅黑", "宋体", "幼圆", sans-serif;
+}
+.information label{
+	width:50px;
+	height:22px;
+	float:left;
+	padding:8px  12px;		
+	font-size: 0.9em;
+	font-weight:bold;
+	color:#555;
+	text-align:center;
+}
+.information input{
+	width:305px;
+	border:none;
+	outline:none;
+	height:38px;
+	color:#999;
+	font-size:0.85em;	
+	padding-left:8px;
+}
+.Adjust{
+	height:38px;
+	width:305px;
+	background:white;
+	color:#666;
+	font-size:0.9em;
+	font-weight:bold;
+	padding-left:8px;
+}
+.information select{
+	font-size:0.9em;
+}
+
+.login input[type=button]:hover{
+	background:#0099f1;
+	color:white;
+	cursor:pointer;
+	border:none;
+}
+.submit{
+	width:93%;
+	background:#0099F1;
+	padding:10px 0;
+	color:white;
+	font-size:1.2em;
+	font-weight:bold;
+	margin-top:15px;
+}
+.login input[type=submit]:hover{
+	cursor:pointer;
+	border:none;
+}
+
+.nodisplay{
+	width:100px;
+}
+
+/*------------广告-----------------*/
+.PlatAd{
+	width:350px;
+	float:left;	
+	margin-top:50px;
+	margin-left:20px;
+}
+.PlatAd img{
+	width:340px;
+	height:340px;
+	float:left;
+	margin-bottom:10px;
+}
+	
+
+
+/*------------------------页脚------------------------*/
+#footer{
+	width:450px;
+	margin:10px auto;
+}
+#footer li{
+	width: 110x;
+	float: left;
+	font-size: 0.9em;
+	color: #999;
+	margin-right: 15px;
+	margin-bottom: 25px;
+	border-right: 1px solid #999;
+	padding-right:20px;
+}
+#footer li:last-child{
+	border:none;
+}
+#footer li a{
+	color:#999;
+}
+#footer li a:hover{
+	text-decoration:underline;
+}

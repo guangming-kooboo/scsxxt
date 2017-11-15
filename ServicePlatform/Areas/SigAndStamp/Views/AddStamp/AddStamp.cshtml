@@ -1,0 +1,136 @@
+﻿@model ServicePlatform.Models.T_Stamps
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@{
+    ServicePlatform.Models.ContentContext sb = new ServicePlatform.Models.ContentContext();
+
+    //int GetUserType = (Session["Vars"] as ServicePlatform.Config.Vars).UserType;
+    //string subSystem = "";
+    //if (GetUserType == 1)
+    //{
+    //    subSystem = "高校端";
+    //}
+    //if (GetUserType == 2)
+    //{
+    //    subSystem = "企业端";
+    //}
+    //if (GetUserType == 3)
+    //{
+    //    subSystem = "平台端";
+    //}
+    //string subSystem = (Session["Vars"] as ServicePlatform.Config.Vars).getSubSystem();//获取当前子系统
+    string subSystem = "学校端";
+
+    var stampType = from oa in sb.C_StampType where (oa.SybSystem == subSystem) select oa;
+    ViewData["stampTypeList"] = new SelectList(stampType, "TypeID", "TypeName");
+    string DefaultTimeValue = ServicePlatform.Areas.News.ToolHelper.CurrentTimeToEasyuiValue.getValue();
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddStamp</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+    <style type="text/css">
+        .SubmitButton {
+            width: 137px;
+            height: 35px;
+            background: url(/Areas/News/Content/Image/btnbg.png) no-repeat;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            .SubmitButton:hover {
+                background-image: url(/Areas/News/Content/Image/btnbg3.png);
+                color: white;
+                cursor: pointer;
+            }
+
+        #TabSubmitButton {
+            width: 600px;
+            height: 40px;
+            margin-top: 10px;
+            border: 1px dashed #89bafd;
+            padding-left: 200px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="StampContainer">
+
+        <div id="StampContentTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="/SigAndStamp/SSCenter/StampTable">首页</a></li>
+                    <li><a href="#">印章添加</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="StampContent">
+            @using (Html.BeginForm("AddStamp", "AddStamp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="editor-label" style="margin-top:5px;">
+                    印章标题：
+                </div>
+                <div class="editor-field" style="margin-top:5px;">
+                    <input tyepe="text" id="StampTitle" name="StampTitle" />
+                </div>
+
+                <div class="editor-label" style="margin-top:5px;">
+                    印章发布者：
+                </div>
+                <div class="editor-field" style="margin-top:5px;">
+                    <input tyepe="text" id="StampPublish" name="StampPublish" />
+                </div>
+
+                <div class="editor-label" style="margin-top:5px;">
+                    日期输入：
+                </div>
+                <div id="DLFPubTime" style="margin-top:5px;">
+                    <input class="easyui-datetimebox" id="StampPubdate" name="StampPubdate" data-options="required:true" value=@DefaultTimeValue style="width:150px">
+                </div>
+
+                <div class="editor-label" style="margin-top:5px;">
+                    @Html.LabelFor(model => model.StampsTypeID)
+                </div>
+                <div class="editor-field" style="margin-top:5px;">
+                    @Html.DropDownListFor(model => model.StampsTypeID, ViewData["stampTypeList"] as SelectList, "--请选择--", null)
+                    @Html.ValidationMessageFor(model => model.StampsTypeID)
+                </div>
+
+                <div title="资源地址" data-options="closable:true" style="overflow:auto;padding:20px;" id="DLFLink">
+                    <!--下载资源上传-->
+                    请上传资源：<input type="file" id="StampUpload" name="StampUpload" />
+                </div>
+
+                <div id="TabSubmitButton">
+                    <input class="SubmitButton" type="submit" value="提  交" />
+                </div>
+
+            }
+        </div>
+
+    </div>
+</body>
+</html>
+

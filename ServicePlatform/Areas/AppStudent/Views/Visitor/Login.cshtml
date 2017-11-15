@@ -1,0 +1,115 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Visitor.Login_M
+<script src="~/Content/AppStudentV3/js/jquery.cookie.js"></script>
+<script src="~/Content/AppStudentV3/js/jquery.base64.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        getCookie();
+    });
+    function setCookie() { //设置cookie  
+        var loginCode = $("#UserID").val(); //获取用户名信息  
+        var pwd = $("#UserPwd").val(); //获取登陆密码信息  
+        var checked = $("[name='checkbox']:checked"); //获取“是否记住密码”复选框  
+        if ($("#switchCP").is(':checked')) {
+            $.cookie("uid", loginCode, {
+                //path: "/",
+                expires: 7 //设置保存路劲与时间 
+            }); //调用jquery.cookie.js中的方法设置cookie中的用户名  
+            $.cookie("psw", $.base64.encode(pwd), {
+               // path: "/",
+                expires: 7
+            }); //调用jquery.cookie.js中的方法设置cookie中的登陆密码，并使用base64（jquery.base64.js）进行加密      
+            //$("#switchCP").attr("checked", "true");
+           // alert($.cookie("uid"));
+            //alert($.cookie("psw"));
+        }
+        else {
+           // alert("5555");
+           // alert("6666");
+            $.cookie("psw", "");
+            $.cookie("uid", "");
+            $("#UserID").val("");
+            $("#UserPwd").val("");
+        }
+    }
+
+    function getCookie() { //获取cookie  
+        var loginCode = $.cookie("uid"); //获取cookie中的用户名  
+        var pwd = $.cookie("psw"); //获取cookie中的登陆密码  
+        if (pwd == null||pwd=="") { //密码存在的话把“记住用户名和密码”复选框勾选住  
+           // alert("222");
+           //$("#switchCP").attr("checked", "false");
+        } else {
+            //alert("111");
+            $("#switchCP").attr("checked", "true");
+        }
+        if (loginCode) { //用户名存在的话把用户名填充到用户名文本框  
+            $("#UserID").val(loginCode);
+        }
+        if (pwd) { //密码存在的话把密码填充到密码文本框  
+            $("#UserPwd").val($.base64.decode(pwd));
+        }
+    }
+
+</script>
+<div class="weui-flex">
+    <div class="weui-flex__item"><div class="placeholder"><br></div></div>
+</div>
+<div class="weui-flex">
+    <div class="weui-flex__item"><div class="placeholder"><img src="@ViewData["root"]/images/u8.png" width=40%></div></div>
+</div>
+
+<div class="weui-flex">
+    <div class="weui-flex__item"><div class="placeholder">实学</div></div>
+</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">学校</label>
+        </div>
+        <div class="weui-cell__bd">
+            @Html.DropDownListFor(o => o.UnitID, Model._UnitItems, new {@class = "weui-select"})
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">账号</label>
+        </div>
+        <div class="weui-cell__bd">
+            @Html.TextBoxFor(o => o.UserID, new {@class = "weui-input", placeholder = "请输入帐号"})
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">密码</label>
+        </div>
+        <div class="weui-cell__bd">
+            @Html.PasswordFor(o => o.UserPwd, new {@class = "weui-input", placeholder = "请输入密码"})
+        </div>
+    </div>
+
+    @*<div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">标题文字</div>
+        <div class="weui-cell__ft">
+            <input class="weui-switch" type="checkbox">
+        </div>
+    </div>*@
+
+    <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">记住密码</div>
+        <div class="weui-cell__ft">
+                <input id="switchCP" class="weui-switch" type="checkbox"  onchange="setCookie()">
+        </div>
+    </div>
+</div> 
+
+<div class="pubilice-uppad">
+    <a href="javascript:submit('c');" class="weui-btn weui-btn_primary">登录</a>
+</div>
+<div class="weui-flex">
+    <div>
+        <a href="@Url.Action("ForgetPsw", "Visitor", new {area = "AppStudent"})">
+            <div class="placeholder">忘记密码？</div>
+        </a>
+    </div>
+    <div class="weui-flex__item"><div class="placeholder"> </div></div>
+    <div><div class="placeholder"></div></div>
+</div>

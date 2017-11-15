@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"实习周记详情（编辑修改周记）.html",
+  "generationDate":new Date(1483078092461.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"5e444b8ad29a4a059c95962eda3cab9a",
+    "type":"Axure:Page",
+    "name":"实习周记详情（编辑修改周记）",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"49e7f21fac0049dc8a33f215893ac552",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":107,
+              "y":27},
+            "size":{
+              "width":313,
+              "height":553}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"69df8bac4df54ec5b00c7814fdbe7d80",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":107,
+                  "y":27},
+                "size":{
+                  "width":313,
+                  "height":553}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/实习周记详情（编辑修改周记）/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "49e7f21fac0049dc8a33f215893ac552":{
+      "scriptId":"u0"},
+    "69df8bac4df54ec5b00c7814fdbe7d80":{
+      "scriptId":"u1"}}});

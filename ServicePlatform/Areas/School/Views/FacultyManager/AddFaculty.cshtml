@@ -1,0 +1,135 @@
+﻿@using ServicePlatform.Models
+
+@{
+    ViewBag.Title = "增添员工";
+    T_Faculty tf = ViewBag.TeaInfo;
+}
+
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+@Scripts.Render("~/Scripts/Check.js")
+<html>
+
+<head>
+    <title>增添员工</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @Html.Partial("_KindEditorLinks")
+    <script>
+
+        $(document).ready(function(){
+            var temp = '@ViewBag.Focus';
+            $("#ProPositionList").val(temp);
+            $("#fsex").val('@ViewBag.SexFocus');
+        });
+
+            
+        function check() {
+            //提交，最终验证。
+            $('#send').click(function () {
+                $("form :input.required").trigger('blur');
+                var numError = $('form .onError').length;
+                if (numError) {
+                    return false;
+                }
+                return true;
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">教师管理中心</a></li>
+            <li><a href="#">增添员工</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("FacaultyAdd", "FacultyManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <ul class="forminfo">
+                @if(tf!=null)
+                {
+                <li><label>职工号：</label><input type="text" id="fno" name="fno" class="dfinput required" value='@tf.FacNo' readonly /></li>
+                <li><label>职工姓名：</label><input type="text" id="fname" name="fname" class="dfinput required" value='@tf.FacName' /></li>
+                <li><label>职工电话：</label><input type="text" id="fphone" name="fphone" class="dfinput" value='@tf.PhoneNo' /></li>
+                <li><label>职工职称：</label>@Html.DropDownList("ProPositionList", ViewData["ProPositionList"] as IEnumerable<SelectListItem>, new { @class = "dfinput", id = "ProPositionList", name = "ProPositionList" })<i></i></li>
+                @*<li><label>职工职称：</label><input type="text" id="fpos" name="fpos" class="dfinput" value='@tf.FacProPos' /></li>*@
+                <li><label>职工邮箱：</label><input type="text" id="femail" name="femail" class="dfinput" value='@tf.EmailAddress' /></li>
+                <li><label>职工照片：</label><img style="width: 114px" src='@tf.FacPhoto' /></li>
+                <li><label>改换照片：</label><input type="file" id="fphoto" name="fphoto" class="dfinput" value="更换" /></li>
+                <li><label>职工简介：</label><input type="text" id="editor" name="fabstract" class="dfinput" multiple value='@tf.FacAbstract' /></li>
+                <li><label>职工性别：</label>
+                    <select name="fsex" id="fsex" class="dfinput">
+                        @if (tf.FacSex == "m")
+                        {
+                            <option value="m" selected="selected">男</option>
+                            <option value="f">女</option>
+                        }
+                        else
+                        {
+                            <option value="m">男</option>
+                            <option value="f" selected="selected">女</option>
+                        }
+                    </select>
+                </li>
+                <li><label>职工状态：</label>
+                <select name="fstatus" id="fstatus" class="dfinput">
+                                        @if (tf.FacStatus == 1)
+                    {
+                        <option value="1" selected="selected">在岗</option><option value="0">离职</option>
+                    }
+                    else
+                    {
+                        <option value="1">在岗</option><option value="0" selected="selected">离职</option>
+                    }
+                    
+                    </select>
+                </li>
+                }
+                else
+                {             
+                <li><label>职工号：</label><input type="text" id="fno" name="fno" class="dfinput required"/></li>
+                <li><label>职工姓名：</label><input type="text" id="fname" name="fname" class="dfinput required" /></li>
+                <li><label>职工电话：</label><input type="text" id="fphone" name="fphone" class="dfinput" value=""/></li>
+                <li><label>职工职称：</label>@Html.DropDownList("ProPositionList", ViewData["ProPositionList"] as IEnumerable<SelectListItem>, new { @class = "dfinput", id = "ProPositionList", name = "ProPositionList" })<i></i></li>
+                @*<li><label>职工职称：</label><input type="text" id="fpos" name="fpos" class="dfinput" value="0" /></li>*@
+                <li><label>职工邮箱：</label><input type="text" id="femail" name="femail" class="dfinput" value=""/></li>
+                <li><label>职工照片：</label><input type="file" id="fphoto" name="fphoto" class="dfinput" /></li>
+                <li><label>职工简介：</label><input type="text" id="editor" name="fabstract" multiple class="dfinput" /></li>
+                <li><label>职工性别：</label><select name="fsex" id="fsex" class="dfinput"><option value="m">男</option><option value="f">女</option></select></li>
+                <li><label>职工状态：</label><select name="fstatus" id="fstatus" class="dfinput"><option value="1">在岗</option><option value="0">离职</option></select></li>
+                }
+
+                <li>
+                    <label>&nbsp;</label>
+                    @if(tf==null)
+                    {
+                        <input type="submit" value="保存" class="btn" id="send" name="send"/>
+                    }
+                    else
+                    {
+                        <input type="submit" value="提交修改" class="btn" id="send" name="send" />
+                    }
+                </li>
+            </ul>
+            
+            
+        }
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <div class="none"></div>
+</body>
+</html>
+

@@ -1,0 +1,115 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.HomePage_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+ 
+
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+
+    <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+    </script>
+
+    <style>
+        .placeholder {
+            margin: 5px;
+            padding: 0 10px;
+            text-align: center;
+        }
+         .abc {
+            width: 125px;
+            height: 125px;
+            border-radius: 62.5px;
+        }
+    </style>
+</head>
+<body ontouchstart>
+
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+        </div>
+        <a href="@Url.Action("LogOut","THome",new {area="AppTeacher2"})"><div class="weui-cell__ft" style="color:#000000">退出</div></a> 
+    </div>
+    <div class="weui-flex">
+        <div class="weui-flex__item"><div class="placeholder"></div></div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                @if (!string.IsNullOrEmpty(Model._TeacherInfo.FacPhoto))
+                {
+                    var photo = Model._TeacherInfo.FacPhoto.Split(';');
+                    var first = photo[photo.Length - 1];
+                    <img class="abc" src="@first">
+                }
+                else
+                {
+                   <img class="abc" src="/Areas/AppTeacher2/Content/images/u14.png" />
+                }
+            </div></div>
+        <div class="weui-flex__item"><div class="placeholder"></div></div>
+    </div>
+<div class="placeholder">@Model._TeacherInfo.FacName@*（华侨大学&nbsp;|&nbsp;导师）*@</div>
+    <div class="pubilice-uppad"></div>
+    <div class="pubilice-uppad"></div>
+
+<div class="weui-grids">
+    
+    <a href="/AppTeacher2/THome/StudentInfo" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="~/Areas/AppTeacher2/Content/images/icon_nav_actionSheet.png" alt="">
+        </div>
+        <p class="weui-grid__label">学生信息</p>
+    </a>
+
+    <a href="/AppTeacher2/THome/Record" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="~/Areas/AppTeacher2/Content/images/icon_nav_article.png" alt="">
+        </div>
+        <p class="weui-grid__label">工作量记录</p>
+    </a>
+
+    <a href="/AppTeacher2/THome/WorkLoad" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="~/Areas/AppTeacher2/Content/images/icon_nav_cell.png" alt="">
+        </div>
+        <p class="weui-grid__label">工作量报表</p>
+    </a>
+
+    <a href="/AppTeacher2/THome/EnterpriseList" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="~/Areas/AppTeacher2/Content/images/icon_nav_button.png" alt="">
+        </div>
+        <p class="weui-grid__label">企业信息</p>
+    </a>
+
+    <a href="@Url.Action("MyTask", "THome", new {area = "AppTeacher2", type = 0})" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="~/Areas/AppTeacher2/Content/images/icon_nav_dialog.png" alt="">
+        </div>
+        <p class="weui-grid__label">任务消息</p>
+    </a>
+
+    <a href="/AppTeacher2/THome/FAQ" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="~/Areas/AppTeacher2/Content/images/icon_nav_feedback.png" alt="">
+        </div>
+        <p class="weui-grid__label">疑问解答</p>
+    </a>
+
+</div>
+
+
+
+
+</body>

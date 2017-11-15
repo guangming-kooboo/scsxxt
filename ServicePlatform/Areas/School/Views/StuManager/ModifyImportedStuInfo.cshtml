@@ -1,0 +1,58 @@
+﻿@model ServicePlatform.Models.T_Student
+
+@{
+    ViewBag.Title = "修改学生信息";
+}
+
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+<html>
+<head>
+    <title>修改学生信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+        function check()
+        {
+            var classno = document.getElementById("Class").value;
+            document.getElementById("classno").setAttribute("value", classno);
+        }
+    </script>
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生管理中心</a></li>
+            <li><a href="#">修改学生信息</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("ModifyStuInfo", "StuManager", FormMethod.Post))
+        {
+            <ul class="forminfo">
+                <li><label>学生学号：</label><input type="text" value='@ViewBag.Stuno' id="stuno" name="stuno" class="dfinput" /></li>
+                <li><label>学生姓名：</label><input type="text" value='@ViewBag.StuName' id="stuname" name="stuname" class="dfinput" /></li>
+                <li>
+                <li><label>学生班级：</label>@Html.DropDownList("Class", null, new { @class = "dfinput", id = "Class", name = "Class" })<i></i></li>
+                <li><input type="submit" value="提交修改" class="btn" style="margin-left:330px" onclick="check()"/></li>
+                <li><input type="hidden" value="" class="btn" id="classno" name="classno"/></li>
+                <li><input type="hidden" value='@ViewBag.UserID' class="btn" id="userid" name="userid" /></li>
+            </ul>
+        }
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <div class="none"></div>
+</body>
+</html>
+

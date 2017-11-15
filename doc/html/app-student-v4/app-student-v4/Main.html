@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>WeUI</title>
+    <link rel="stylesheet" href="css/jquery-weui.css">
+		<link rel="stylesheet" href="css/weui.min.css"/> 
+		<link rel="stylesheet" href="css/pubilice.css">
+<style>
+       .placeholder3 {
+        line-height:4em ;
+        height:4em ;
+        text-align: center;
+      }
+       .placeholder1 {
+        line-height:4em ;
+        height:4em ;
+        text-align:left;
+        padding-left:0.6em;
+     
+      }
+       .placeholder2{
+        line-height:4em ;
+        height:4em ;
+        text-align:right;
+         padding-right:0.6em;
+      }
+      .back1{
+      	background:url(images/back.png);
+      	background-size: 100% 4em;
+      	color:#ffffff;
+      	width:80%;
+      	
+      	text-align: center;
+      }
+       .back2{
+      	background:url(images/back2.png);
+      	background-size: 100% 4em;
+      	color:#ffffff;
+      	width:80%;
+      	text-align: center;
+      }
+        .back3{
+      	background:url(images/back3.png);
+      	width:80%;
+      	background-size: 100% 4em;
+      	color:#ffffff;
+      	text-align: center;
+      }
+         .back4{
+      	background:url(images/back4.png);
+        width:80%;
+      	background-size: 100% 4em;
+      	color:#ffffff;
+      	text-align: center;
+      }
+         .back5{
+      	background:url(images/back5.png);
+      	background-size: 100% 4em;
+      	color:#ffffff;
+      	text-align: center;
+      	width:80%;
+      }
+      .pubilice-uppad2{
+      	height:5px;
+      	background-color:#f8f8f8;
+      	  }
+      .content{
+      	background-color:#ffffff;
+      }
+      .swiper-container {
+        width: 100%;
+      } 
+
+      .swiper-container img {
+        display: block;
+        width: 100%;
+        height:300px;
+      }
+      .colorgray2{
+      	color:#ffffff;
+      	font-size:0.9em;
+      }
+    </style>
+ <script src="js/jquery-2.1.4.js"></script>
+		<script src="js/fastclick.js"></script>
+		<script>
+		  $(function() {
+		    FastClick.attach(document.body);
+		  });
+		</script>
+		<script src="js/jquery-weui.js"></script>
+		
+	
+  </head>
+  <body ontouchstart="">
+    <div class="swiper-container swiper-container-horizontal">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper" style="transform: translate3d(-360px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style="width: 360px;"><img src="./images/swiper-3.jpg"></div>
+        <!-- Slides -->
+        <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 360px;"><img src="./images/swiper-1.jpg"></div>
+        <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 360px;"><img src="./images/swiper-2.jpg"></div>
+        <div class="swiper-slide" data-swiper-slide-index="2" style="width: 360px;"><img src="./images/swiper-3.jpg"></div>
+      <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="3" style="width: 360px;"><img src="./images/swiper-4.jpg"></div></div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+    </div>
+    <div class="content">
+    <div class="pubilice-uppad2"></div>
+    <div class="weui-flex"> 
+    	
+      <div class="" style="width:40%"><a href="javascript:;" id="show-actions1" ><div class="placeholder3 back2">企业</div></a></div>
+      <div class="" style="width:60%"><a href="javascript:;" id="show-actions1" ><div class="placeholder1 mi">16家企业全新资讯</div></a></div> 
+    
+    </div>  
+    <div class="pubilice-uppad2"></div>
+   <div class="weui-flex">
+      <div class="" style="width:40%"><a href="javascript:;" id="show-actions2" ><div class="placeholder3 back5">评估项</div></a></div>
+      <div class="" style="width:60%"><a href="javascript:;" id="show-actions2" ><div class="placeholder1 mi">学校</div></a></div>
+      
+    </div>
+    <div class="pubilice-uppad2"></div>
+    <div class="weui-flex">
+      <div class=""style="width:40%"><a href="javascript:;" id="show-actions3" ><div class="placeholder3 back1">记录</div></a></div>
+      <div class=""style="width:60%"><a href="javascript:;" id="show-actions3" ><div class="placeholder1 mi">周记 </div></a></div>
+     
+    </div>
+    <div class="pubilice-uppad2"></div>
+         <div class="weui-flex">
+      <div class=""style="width:40%"><a href="javascript:;" id="show-actions4" ><div class="placeholder3 back3">我要报名</div></a></div>
+      <div class=""style="width:60%"><a href="javascript:;" id="show-actions4" ><div class="placeholder1 mi">16家企业正在招聘</div></a></div>
+    
+    </div>  
+    <div class="pubilice-uppad2"></div>
+   <div class="weui-flex">
+      <div class=""style="width:40%"><a href="javascript:;" id="show-actions5" ><div class="placeholder3 back4">个人中心</div></a></div>
+      <div class=""style="width:60%"><a href="javascript:;" id="show-actions5" ><div class="placeholder1 mi">这里是我的个人信息</div></a></div>
+   </div>
+    <div class="pubilice-uppad2"></div>
+    </div>
+    
+    <!------页面特有----------->
+    <script src="js/swiper.js"></script>
+	<script>
+      $(".swiper-container").swiper({
+        loop: true,
+        autoplay: 3000
+      });
+    </script>
+    <script>
+    $(document).on("click", "#show-actions1", function() {
+        $.actions({
+          title: "选择操作",
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "16家企业全新资讯",
+              className: "color-primary",
+              onClick: function() {
+                $.submit("选择成功");
+ }
+            },
+           ]
+        });
+      });
+    $(document).on("click", "#show-actions2", function() {
+        $.actions({
+          title: "选择操作",
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "学校",
+              className: "color-primary",
+              onClick: function() {
+                 $.submit("选择成功");
+              }
+            },
+            {
+              text: "企业",
+              className: "color-warning",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            },
+            {
+              text: "鉴定表",
+              className: 'color-danger',
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            },
+            {
+              text: " 评价表",
+              className: "   color-warning",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            }
+        
+          ]
+        });
+      });
+    $(document).on("click", "#show-actions3", function() {
+        $.actions({
+          title: "选择操作",
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "周记",
+              className: "color-primary",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            },
+            {
+              text: "案例",
+              className: "color-primary",
+              onClick: function() {
+               $.alert("选择成功");
+              }
+            },
+            {
+              text: "报告",
+              className: 'color-danger',
+              onClick: function() {
+               $.alert("选择成功");
+              }
+            }
+          ]
+        });
+      });
+    $(document).on("click", "#show-actions4", function() {
+        $.actions({
+          title: "选择操作",
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "16家企业正在招聘",
+              className: "color-primary",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            }
+          ]
+        });
+      });
+    $(document).on("click", "#show-actions5", function() {
+        $.actions({
+          title: "选择操作",
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "这里是我的个人信息",
+              className: "color-primary",
+              onClick: function() {
+                $.alert("选择成功");
+              }
+            }
+          ]
+        });
+      });
+
+    </script>
+      <!---------------------->
+
+  
+
+</body></html>

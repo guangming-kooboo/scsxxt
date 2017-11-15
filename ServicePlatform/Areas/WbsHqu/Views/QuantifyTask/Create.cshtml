@@ -1,0 +1,34 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.QuantifyTask_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.HiddenFor(o => o.QuantifyTaskID)
+
+@Html.HiddenFor(o => o.WbsTaskID)
+
+@Html.InputFor(o => o.TaskName)
+
+@Html.HiddenFor(o => o.RelativeWeight)
+
+@Html.HiddenFor(o => o.AbsoluteWeight)
+
+@Html.InputFor(o => o.TaskContent)
+
+<div class="form-group">
+    <label class="col-md-3 control-label">开始时间</label>
+    <div class='col-md-9'>
+        <input size="16" type="text" value=@Model.BeginTime name="BeginTime" readonly class="form_datetime form-control">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-3 control-label">结束时间</label>
+    <div class='col-md-9'>
+        <input size="16" type="text" value=@Model.EndTime name="EndTime" readonly class="form_datetime form-control">
+    </div>
+</div>
+
+@Html.HiddenFor(o => o.CreateTime, "")
+
+@Html.HiddenFor(o => o.TaskSequence)

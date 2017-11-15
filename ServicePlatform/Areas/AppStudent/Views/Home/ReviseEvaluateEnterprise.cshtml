@@ -1,0 +1,57 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.ReviseEvaluateEnterprise_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex">
+            @*跳转到查看评价企业*@
+            <a href="javascript:submit('b');">
+                <div style="width:60px"><div class="placeholder"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+            </a>
+            <div class="weui-flex__item"><div class="placeholder">修改评价企业</div></div>
+            @*跳转到查看评价企业*@
+            <a href="javascript:submit('a');">
+                <div><div class="placeholder" style="color: floralwhite">确认</div></div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">企业</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text" id="Subjects" readonly="readonly" class="weui-input">@Model.EntName</label>
+                </div>
+            </div>
+        </div>
+        @for (int i = 0; i < Model.EvaluateEnt.Count; i++)
+        {
+            var dropDownId = "DropDown-" + Model.EvaluateEnt[i].ItemNo;
+            var contentId = "Content-" + Model.EvaluateEnt[i].ItemNo;
+            <input type="hidden" value="@Model.EvaluateEnt[i].ItemNo" name="ItemNo">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">@Model.EvaluateEnt[i].ItemName</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @Html.DropDownList(dropDownId, Model._StuEvaEntGradeLevelItem, new { id = dropDownId, name = "dropDownId", @class = "weui-select" })
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        @Html.TextArea(contentId, new { id = contentId, name = "contentId", @class = "weui-textarea", rows = "5" })
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $("#@dropDownId").val('@Model.EvaluateEnt[i].ItemGradeNo');
+                $("#@contentId").val('@Model.EvaluateEnt[i].ItemContent');
+            </script>
+        }
+    </div>
+</div>

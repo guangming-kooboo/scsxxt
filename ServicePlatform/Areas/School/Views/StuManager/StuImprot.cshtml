@@ -1,0 +1,352 @@
+﻿@using ServicePlatform.Models
+@{
+    ViewBag.Title = "StuImprot";
+    IEnumerable<SelectListItem> Specility = ViewData["Specialty"] as IEnumerable<SelectListItem>;
+    IEnumerable<SelectListItem> Class = ViewData["Class"] as IEnumerable<SelectListItem>;
+    IEnumerable<SelectListItem> EntryYear = ViewData["EntryYear"] as IEnumerable<SelectListItem>;
+    List<T_Student> StuList = new List<T_Student>();    
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-2.1.1.min.js")
+<html>
+<head>
+    <title>学生信息维护</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#EntryYear").change(function () {
+                getSpe($(this).val());
+                //$("#Class option").remove();
+                //$("#Class").append("<option value=''>--请选择--</option>")
+            });
+            //获取专业
+            $("#Specialty").mouseenter(function () {
+                getClass($(this).val());
+            });
+
+            $("#Specialty").change(function () {
+                getClass($(this).val());
+                document.getElementById('stunum').setAttribute("value", "班级人数:");
+            });
+
+            $("#Class").change(function () {
+                getClassNum($(this).val());
+
+                getClassStu($(this).val(), $("#Specialty").val());
+                //document.getElementById('province').setAttribute("value", $(this).val());
+            });
+
+            $("#Class").mouseenter(function () {
+                getClassStu($(this).val(), $("#Specialty").val());
+                getClassNum($(this).val());
+            });
+
+            var init_year = $("#EntryYear").val();
+            getSpe(init_year);    
+            //var init_spe = $("#Specialty").val();
+            //getClass(init_spe);
+            //var init_class = $("#Class").val();
+
+        })
+
+        function getSpe(value) {
+            //$("#City").html(""); //清空
+            $.ajax({
+                type: "post",
+                url: "GetSpeList",
+                //data: "p=" + provinveCode + "&date=" + new Date(),
+                data: { EntryYearCode: value },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        $("#Specialty option").remove();
+                        //var frist = "";
+                        $.each(data.Pos, function (i, item) {
+                            if (i == 0)
+                            {
+                                getClass(item.SpeNo);
+                                //first = item.SpeNo;
+                            }
+                            $("#Specialty").append("<option value='" + item.SpeNo + "'>" + item.SpeName + "</option>");
+                        });
+                        //getClass(frist);
+                    }
+                    else {
+                        $("#Specialty option").remove();
+                        $("#Specialty").append("<option value=''>--请选择--</option>")
+                        $("#dynamic_table table tbody").remove();
+                        document.getElementById('stunum').setAttribute("value", "班级人数:0");
+                    }
+                },
+                error: function (data) {
+                    $("#dynamic_table table tbody").remove();
+                    alert("请求专业失败");
+                    document.getElementById('stunum').setAttribute("value", "班级人数:0");
+                }
+            });
+        }
+
+        function getClass(value) {
+            //$("#City").html(""); //清空
+            $.ajax({
+                type: "post",
+                url: "GetClassList",
+                //data: "p=" + provinveCode + "&date=" + new Date(),
+                data: { SpeCode: value },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        $("#Class option").remove();
+                        //var firstclass = "";
+                        $.each(data.Pos, function (i, item) {
+                            if (i == 0)
+                            {
+                                getClassNum(item.ClassID);
+                                getClassStu(item.ClassID, value)
+                            }
+                            $("#Class").append("<option value='" + item.ClassID + "'>" + item.ClassName + "</option>");
+                        });
+
+                        //getClassNum(firstclass);
+                        //getClassStu(firstclass, value)
+                    }
+                    else {
+                        $("#Class option").remove();
+                        $("#Class").append("<option value=''>--请选择班级--</option>")
+                        $("#dynamic_table table tbody").remove();
+                        document.getElementById('stunum').setAttribute("value", "班级人数:0");
+
+                    }
+                },
+                error: function (data) {
+                    $("#dynamic_table table tbody").remove();
+                    alert("请求班级失败");
+                    document.getElementById('stunum').setAttribute("value", "班级人数:0");
+                }
+            });
+        }
+
+        function getClassNum(value) {
+            //$("#City").html(""); //清空
+            $.ajax({
+                type: "post",
+                url: "GetClassNum",
+                //data: "p=" + provinveCode + "&date=" + new Date(),
+                data: { ClassID: value },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        document.getElementById('stunum').setAttribute("value", "班级人数:" + data.count);
+                    }
+                    else {
+                        document.getElementById('stunum').setAttribute("value", "班级人数:0");
+                    }
+                },
+                error: function (data) {
+                    $("#dynamic_table table tbody").remove();
+                    alert("请求班级人数失败");
+                    document.getElementById('stunum').setAttribute("value", "班级人数:0");
+                }
+            });
+        }
+
+        function getClassStu(value,speno)
+        {
+            $.ajax({
+                type: "post",
+                url: "GetStuList",
+                //data: "p=" + provinveCode + "&date=" + new Date(),
+                data: { ClassID: value, SpeNo: speno },
+                datatype: "html",
+                success: function (data) {
+                    if (data) {
+                        $("#dynamic_table table").remove();
+                        $("#dynamic_table").html(data);
+                    }
+                    else {
+                        $("#t_stulist tbody").remove();
+                    }
+                },
+                error: function (data) {
+                    $("#dynamic_table table tbody").remove();
+                    alert("请求失败");
+                    document.getElementById('stunum').setAttribute("value", "班级人数:0");
+                }
+            });
+        }
+
+        function getClassStu2(value, speno, stuno, stuname) {
+            $.ajax({
+                type: "post",
+                url: "GetStuList2",
+                //data: "p=" + provinveCode + "&date=" + new Date(),
+                data: { ClassID: value, SpeNo: speno, StuNo: stuno, StuName: stuname },
+                datatype: "html",
+                success: function (data) {
+                    if (data) {
+                        $("#dynamic_table table tbody").remove();
+                        $("#dynamic_table").html(data);
+                    }
+                    else {
+                        $("#t_stulist tbody").remove();
+                    }
+                },
+                error: function (data) {
+                    $("#dynamic_table table").remove();
+                    alert("请求班级失败");
+                    document.getElementById('stunum').setAttribute("value", "班级人数:0");
+                }
+            });
+        }
+
+
+    </script>
+
+    <script>
+        function jump()
+        {
+            var speno = $("#Specialty").val();
+            var classno = $("#Class").val();
+            var url = '/School/StuManager/ImportedStuList?classno=' + classno + '&&speno=' + speno;
+            window.location = url;
+        }
+        function jump1() {
+            var speno = $("#Specialty").val();
+            var classno = $("#Class").val();
+            var url = '/School/StuManager/StuRegToBatch?classno=' + classno + '&&speno=' + speno;
+            window.location = url;
+        }
+        function exportStuInfo() {
+            $("#schoolid").val($("#sid").val());
+            $("#classno_e").val($("#Class").val());
+            $("#speno_e").val($("#Specialty").val());
+            var form = $("#exportForm");
+            form.submit();
+        }
+
+        function re_student()
+        {
+            var speno = $("#Specialty").val();
+            var classno = $("#Class").val();
+            var stuno = $("#re_stuno").val();
+            var stuname = $("#re_stuname").val();
+            getClassStu2(classno, speno, stuno, stuname);
+        }
+    </script>
+
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生管理中心</a></li>
+            <li><a href="#">学生信息维护</a></li>
+        </ul>
+    </div>
+@using (Html.BeginForm("StudentImprot", "StuManager", FormMethod.Post, new { enctype = "multipart/form-data" ,id="stu_info"}))
+{
+    <div class="formbody">
+        <div style="width:50%;float:left">
+            <div class="formtitle"><span>选择专业班级</span></div>
+            <ul class="forminfo">
+                <li><label>学校：</label><input value='@ViewBag.SchoolName' class="dfinput" readonly /><i></i></li>
+                <li><label>年级：</label>@Html.DropDownList("EntryYear", ViewData["EntryYear"] as IEnumerable<SelectListItem>, new { @class = "dfinput", id = "EntryYear", name = "EntryYear" })<i></i></li>
+                <li><label>专业：</label>@Html.DropDownList("Specialty", ViewData["Specialty"] as IEnumerable<SelectListItem>, new { @class = "dfinput", id = "Specialty", name = "Specialty" })<i></i></li>
+                <li><label>班级：</label>@Html.DropDownList("Class", ViewData["Class"] as IEnumerable<SelectListItem>, new { @class = "dfinput", id = "Class", name = "Class" })<i><input type="text" id="stunum" name="stunum" value="班级人数:未知" style="color:red" readonly /></i></li>
+                @*<li><input type="button" onclick="jump()" value="管理该班级学生" class="btn" /><input type="button" onclick="jump1()" value="注册该班级批次" class="btn" /></li>*@
+                <li><label>学号：</label><input type="text" id="re_stuno" name="re_stuno" class="dfinput" placeholder="输入学号筛选" /></li>
+                <li><label>姓名：</label><input type="text" id="re_stuname" name="re_stuname" class="dfinput" placeholder="输入姓名筛选" /></li>
+                <li><input type="button" onclick="re_student()" value="查询" class="btn" /></li>
+
+                @*隐藏字段用于在js调用，设置url路径*@
+                @Html.Hidden("GetClassList", Url.Action("GetClassList", "StuManagerController"))
+                @Html.Hidden("getClassNum", Url.Action("getClassNum", "StuManagerController"))
+            </ul>
+        </div>
+        <div @*class="rightinfo"*@ style="width:50%;float:left">
+            
+
+                <div class="formtitle"><span>模版下载</span></div>
+                <ul class="forminfo">
+                <li><label>Excel模版格式 </label></li>
+                <li><font color="red">请注意！导入学生信息的模板格式如下，若模板格式不正确，则相应的学生信息不能导入!</font></li>
+                <li><p style="color: Red; text-align: center;">@Html.ActionLink("下载模版", "GetFile", null, new { @class = "btn" })</p></li>                   
+                </ul>
+                
+                <div class="formtitle"><span>学生信息批量导入</span></div>
+                <ul class="forminfo">
+                    <li><label>选择文件：</label><p><input id="FileUpload" type="file" name="files" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnImport" name="btnImport" type="submit" value="导入" class="btn" /></p></li>
+                    <li><p style="color: Red; text-align: center;">@ViewBag.error</p></li>
+                    <li><input type="hidden" value='@ViewBag.SchoolID' id="sid" name="sid"/></li>
+                </ul>        
+        </div>
+    </div>
+}
+
+
+    <div class="formbody" style="float:left">
+
+        @*<div class="formtitle"><span>专业：@ViewBag.SpeName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 班级：@ViewBag.ClassName</span></div>*@
+
+        <div id="dynamic_table">
+        </div>
+        @*功能可用，按需在服务器上安装office2007组件*@
+        @*<div class="formtitle"><span>学生信息批量导出</span></div>
+        @using (Html.BeginForm("ExportExcel", "StuManager", FormMethod.Post, new { id = "exportForm" }))
+        {
+            <input type="button" id="export" name="action" class="btn" value="导出该班级学生信息" onclick="exportStuInfo()" />
+            <input type="hidden" id="schoolid" name="schoolid" class="btn" value='@ViewBag.Schoolid' />
+            <input type="hidden" id="classno_e" name="classno_e" class="btn" value='@ViewBag.ClassNo' />
+            <input type="hidden" id="speno_e" name="speno_e" class="btn" value='@ViewBag.SpeNo' />
+        }*@
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+        function findRow() {
+            if (confirm("确认删除所选的信息吗？")) {
+                var check = document.getElementsByName("check_approve");
+                var result = "";
+                var table = document.getElementById('msgcontent');
+                var rows = table.rows.length;
+                for (var j = 0; j < check.length; j++) {
+                    if (check[j].checked) {
+                        //result += table.rows[j + 1].cells[4].innerText + "!";
+                        result += table.rows[j + 1].cells[1].innerHTML + "!";
+                    }
+                }
+                var objsel = document.getElementById("piliang");
+                objsel.setAttribute("value", result);
+            }
+        }
+
+        function checkall() {
+            var check = document.getElementsByName("check_approve");
+            if (check[0].checked == true) {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = false;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "全选");
+            }
+            else {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = true;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "取消全选");
+            }
+        }
+    </script>
+
+    <div class="none"></div>
+</body>
+</html>

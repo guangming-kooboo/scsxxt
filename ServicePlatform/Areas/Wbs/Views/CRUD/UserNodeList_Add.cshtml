@@ -1,0 +1,77 @@
+﻿@model ServicePlatform.Areas.Wbs.ViewModels.CRUD.UserNodeList_Add_M
+@{
+    Layout = ViewData["Layout"].ToString();
+  
+}
+
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>@ViewBag.Title
+            </div>
+        </div>
+
+            <div class="portlet-body form">
+                <form class="form-horizontal" method="POST" role="form">
+                    <div class="form-body">
+
+                        @Html.HiddenFor(o => o.NodeID)
+                        <div class="form-group">
+                            @Html.LabelFor(o => o._NodeName, new { @class = "col-md-3 control-label"})
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(o => o._NodeName, new { @class = "form-control",@readonly="readonly"})
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(o => o._Decription, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(o => o._Decription, new { @class = "form-control",@readonly="readonly" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(o => o.UserID, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(o => o.UserID, new { @class = "form-control" })
+                                <span class="help-block">
+                                    @Html.ActionLink("账号查询", "UserList", "Share",
+                               new { area = "Report", ReportID = "Share_用户查询", Params = ";" }
+                               , new { @class = "control-label", target = "_blank" }
+                               )
+                                </span>
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            <label class="col-md-3 control-label">姓名</label>
+                            <div class="col-md-9">
+                                  @Html.TextBoxFor(o =>o.UserID,new { @class = "form-control"})
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(o => o.UserWeight, new { @class = "col-md-3 control-label" })
+
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(o => o.UserWeight, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="form-actions fluid">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-success">保存</button>
+                            <button type="button" class="btn btn-default back">返回</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+

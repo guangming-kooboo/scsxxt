@@ -1,0 +1,14 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.ScoringRule_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.HiddenFor(o => o.ScoringRuleID)
+
+@Html.HiddenFor(o=>o.QuantifyTaskID)
+
+@Html.InputFor(o=>o.FormName)
+
+@Html.InputFor(o=>o.Score)
+
+@Html.InputFor(o => o.Note)

@@ -1,0 +1,15 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter._Head_M
+    <!-- 导航-->
+<div class="means-head">
+    <p class="means-head-main">@Model.User.Name 的个人空间</p>
+    <ul class="means-head-ul">
+        <li class="means-head-li"><a class="means-head-a" href="@Url.Action("PersonalSpace","UserCenter",new{area="BBS",id=Model.User.ID})">空间首页</a></li>
+        <li class="means-head-li"><a class="means-head-a" href="@Url.Action("Diarys", "UserCenter", new { area = "BBS", id = Model.User.ID })">日志</a></li>
+        <li class="means-head-li"><a class="means-head-a" href="@Url.Action("PhotoAlbum", "UserCenter", new { area = "BBS", id = Model.User.ID })">相册</a></li>
+        <li class="means-head-li"><a class="means-head-a" href="@Url.Action("MyPost", "UserCenter", new { area = "BBS", id = Model.User.ID })">我的发帖</a></li>
+        <li class="means-head-li"><a class="means-head-a" href="@Url.Action("MessageBoard", "UserCenter", new { area = "BBS", id = Model.User.ID })">留言板</a></li>
+        <li class="means-head-li"><a class="means-head-a" href="@Url.Action("PersonalInformation", "UserCenter", new { area = "BBS", id = Model.User.ID })">个人资料</a></li>
+        <li class="means-head-li"><a class="means-head-a" href="@Url.Action("Share", "UserCenter", new { area = "BBS", id = Model.User.ID })">分享</a></li>
+    </ul>
+
+</div>

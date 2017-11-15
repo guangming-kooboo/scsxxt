@@ -1,0 +1,47 @@
+﻿@{
+    var EntPracNo = ViewData["EntPracNo"];
+
+}
+
+<ul class="toolbar">
+    <li>
+        <label class="text text-info">选择岗位：</label>
+        <input type="hidden" name="EntPracNo" value="@EntPracNo" />
+        @Html.DropDownList("PositionID", new List<SelectListItem>(), new { id = "PositionID" })
+        <label id="tip" style="color: red">&nbsp; </label>
+    </li>
+</ul>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        GetPositions();
+        $("#PositionID").change(function () {
+            $("#tip").html("请稍后...");
+            AfterSelectPositions();
+        });
+    });
+
+
+    function GetPositions() {
+        $.ajax({
+            type: "post",
+            url: "/Ajax/GetPositions",
+            data: { EntPracNo: '@EntPracNo' },
+            dataType: "json",
+            success: function (reslut) {
+                $("#PositionID option").remove();
+                $("#PositionID").append("<option value='-1'>请选择</option>");
+                $.each(reslut, function (i, item) {
+                    $("#PositionID").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                });
+
+            },
+            error: function (data) {
+                alert("请求出错！" + data);
+            }
+        });
+    }
+
+
+</script>

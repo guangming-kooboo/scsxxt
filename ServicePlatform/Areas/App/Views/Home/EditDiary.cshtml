@@ -1,0 +1,114 @@
+﻿@using System.Activities.Statements
+@model ServicePlatform.Areas.App.ViewModel.Home.EditDiary_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>编写周记</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+</head>
+<body>
+<div class="main-do">
+    <form method="post">
+        <div class="main-head">
+            <p class="main-head-p">我的周记</p>
+            <p class="main-head-one">
+                @Html.HiddenFor(o => o.RecordNo)
+                @Html.HiddenFor(o => o.PracticeNo)
+                @Html.HiddenFor(o => o.RecordDate)
+
+                @Html.TextBoxFor(o => o.RecordTitle, new {@class = "", placeholder = "周记标题"})
+            </p>
+        </div>
+        @Html.TextAreaFor(o => o.RecordContent, new {@class = "note-textarea", placeholder = ""})
+        <hr size="2px" color="purple" width="94%"/>
+        <div class="camera-photo">
+
+            <div class="upload-img">
+                <input type="file" class="comment-pic-upd" multiple="multiple" accept="image/*" capture="camera" name="file_head" id="file_head" onchange="javascript:setImagePreview();"/>
+                <img src="~/Areas/App/Content/Image/photo.png" alt="上传照片" title="">
+            </div>
+            @if (Model.Pic != "")
+            {
+                var photos = Model.Pic.Split(';');
+                var photo = photos[photos.Length - 1];
+                for (int i = 0; i < photos.Length; i++)
+                {
+                    <div data-role="fieldcontain">
+                        <div id="localImag">
+                            <img id="preview" src="@photos[i]" width="100px" height="100px" style="display: none;"/>
+                        </div>
+                    </div>
+
+                        <p align="" style="float: left;">
+                            <img src="@photos[i]"/>
+                        </p>
+                }
+            }
+            else
+            {
+                <p align="">
+                    <img src="~/Areas/App/Content/Image/没有上传.png"/>
+                </p>
+            }
+
+        </div>
+
+        <a href="">
+            <div class="">
+                <input class="do-its" type="submit" value="保存周记"/>
+            </div>
+        </a>
+    </form>
+</div>
+    <script type="text/javascript">
+        function setImagePreview() {
+            //var Files = document.getElementsByName("file_head").files;
+            //var File = Files.Split(';');
+            //for (var i = 0; i < File.length; i++)
+            //{
+                var preview,
+                    img_txt,
+                    localImag,
+                    file_head = document.getElementById("file_head"),
+                    picture = file_head.value;
+                if (!picture.match(/.jpg|.gif|.png|.bmp|.img/))
+                    return alert("您上传的图片格式不正确，请重新选择！"),
+                        !1;
+                //console.log(file_head.files);
+                if (preview = document.getElementById("preview"), file_head.files && file_head.files[0])
+                    preview.style.display = "block",
+                        preview.style.width = "120px",
+                        preview.style.height = "115px",
+                        preview.src = window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1 ?
+                            window.webkitURL.createObjectURL(file_head.files[0]) :
+                            window.URL.createObjectURL(file_head.files[0]
+                            );
+
+                else {
+                    file_head.select(),
+                        file_head.blur(),
+                        img_txt = document.selection.createRange().text,
+                        localImag = document.getElementById("localImag"),
+                        localImag.style.width = "115px",
+                        localImag.style.height = "115px";
+                    try {
+                        localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
+                            localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
+                    } catch (f) {
+                        return alert("您上传的图片格式不正确，请重新选择！"),
+                            !1
+                    }
+                    preview.style.display = "none",
+                        document.selection.empty()
+                }
+                return document.getElementById("DivUp").style.display = "block",
+                    !0
+            }
+
+    </script>  
+</body>

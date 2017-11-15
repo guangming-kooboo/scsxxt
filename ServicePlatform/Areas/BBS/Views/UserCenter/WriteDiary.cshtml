@@ -1,0 +1,48 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.WriteDiary_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+
+
+
+
+
+
+
+<div class="main">
+
+    <!-- 导航-->
+      @Html.Action("_Head", new { id = Model.userid })
+    <div class="means-note">
+        <div class="means-main-head">
+            <div class="write-note-left">
+                <p class="means-main-head-p">写日志</p>
+            </div>
+            <div class="write-note-right">
+                <ul>
+                    <li class="write-note-right-li"><a class="write-note-right-li-a" href="@Url.Action("Diarys","UserCenter",new{area="BBS",id=Model.userid})">返回日志列表</a></li>
+                    <li class="write-note-right-li"><p class="write-note-right-li-p">|</p></li>
+                    <li class="write-note-right-li"><a class="write-note-right-li-a" href="@Url.Action("DiaryDrafts","UserCenter",new{area="BBS",id=Model.userid})">>草稿箱</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="write-form">
+            <form method="post" action="/BBS/CRUD/WriteDiary@(new HtmlString(Model.title == null ? "?flag=write" : "?flag=edit"))">
+                <input type="hidden" name="DiaryID" value="@(new HtmlString(Model.diaryid==null?"":Model.diaryid))" />
+                <input class="write-input-head" typle="text" placeholder="请在此输入标题" name="DiaryTitle" value="@(new HtmlString(Model.title??""))"/>
+                <br \>
+                <br \>
+                <textarea name="DiaryContent" class="write-input-main" placeholder="想说点什么" >@(new HtmlString(Model.content ?? ""))</textarea></p>
+                <input class="write-submit" type="submit" name="writediary" value="发表日志" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="write-submit" type="submit" name="writediary" value="保存草稿" /></p>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+</div>

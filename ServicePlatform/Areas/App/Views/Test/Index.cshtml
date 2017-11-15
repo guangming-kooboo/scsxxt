@@ -1,0 +1,16 @@
+﻿@using Qx.Scsxxt.Core.Services
+@{
+
+    var Login = (bool)ViewData["Login"];
+    var Diarys = ((AppBag)ViewData["Diarys"]).Diarys;
+    var GetSchoolIItems = (List<SelectListItem>)ViewData["GetSchoolIItems"];
+    var Msgs = ((AppBag)ViewData["Msgs"]).Msgs;
+    var Recruitments = ((AppBag)ViewData["Recruitments"]).Jobs;
+    var Reports = ((AppBag)ViewData["Reports"]).Reports;
+}
+
+
+<hr>
+<h2>请断点查看数据</h2>
+
+

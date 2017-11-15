@@ -1,0 +1,54 @@
+﻿@Styles.Render("/Areas/School/SchoolContent/SchoolNewsDetail/NEWSPage.css")
+@Styles.Render("/Areas/School/SchoolContent/SchoolVideoDetail/VideoPage.css")
+@model ServicePlatform.Models.T_Content
+@{
+    Layout = null;
+    string vediolink = "";
+    foreach (var m in (ViewData["VideoLink"] as IEnumerable<ServicePlatform.Models.T_News>))
+    {
+        vediolink = m.VideoUrl;
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomeVideoDetail</title>
+
+</head>
+<body>
+
+    @Html.Partial("Head")
+
+    <div id="VideoNewsContent">
+        <!--主内容-->
+        <section id="wrapper">
+            <!--NEWS-->
+            <div class="left_news">
+                <h3>@Model.ContentTitle</h3>
+                <p>来源：@Model.ContentPublisher</p>
+                <p>时间：@ServicePlatform.Areas.News.ToolHelper.HandleTime.ConvertIntDateTime(Convert.ToInt32(Model.PubDate))</p>
+                <p>浏览数：201次</p>
+                <div style="clear:both;"></div>
+                <hr>
+                <div style="margin-left:150px; margin-top:10px;">
+                    <div id="VedioPlay">
+                        <video controls="controls">
+                            <source src=@vediolink type="video/mp4" />
+                            <source src=@vediolink type="video/ogg" />
+                            <source src=@vediolink type="video/webm" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    @Html.Partial("Foot")
+
+</body>
+</html>

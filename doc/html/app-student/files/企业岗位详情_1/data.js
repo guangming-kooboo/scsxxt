@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"企业岗位详情_1.html",
+  "generationDate":new Date(1483078092255.79),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"5f7b36bacfab4b30b304e788139bf0aa",
+    "type":"Axure:Page",
+    "name":"企业岗位详情",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"0f8f51a004cc484683b6789498e67e69",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":130,
+              "y":70},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"20be1dbc78ab4c699062ee8b1f8afdd0",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":130,
+                  "y":70},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/企业岗位详情_1/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "0f8f51a004cc484683b6789498e67e69":{
+      "scriptId":"u0"},
+    "20be1dbc78ab4c699062ee8b1f8afdd0":{
+      "scriptId":"u1"}}});

@@ -1,0 +1,65 @@
+﻿
+@{
+
+    var style = (string)ViewData["style"] != "" ? (string)ViewData["style"] : "1";
+    var id = (string)ViewData["id"] != "" ? (string)ViewData["id"] : "noId";
+    var displayName = (string)ViewData["displayName"] != "" ? (string)ViewData["displayName"] :"默认名称" ;
+    var value = (string)ViewData["value"] != "" ? (string)ViewData["value"] : DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+@switch (style)
+{
+    case "1":
+        {
+            <div class="form-group" id="@id">
+                <label class="col-sm-3 control-label">@displayName：</label>
+                <div class="col-sm-6 col-sm-offset-4 input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" name="@id" class="form-control" value="@value">
+                </div>
+            </div>
+        }
+        break;
+    case "2":
+        {
+            <div class="form-group" id="@id">
+                <label>@displayName</label>
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" name="@id" class="form-control" value="@value">
+                </div>
+            </div>
+        }
+        break;
+}
+
+<script>
+
+    $(document).ready(function() {
+        $('@("#"+id) .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+    })
+</script>
+@section scripts{
+
+}
+
+
+
+
+
+
+@*
+    @Html.Partial("/Views/Templates/_Input.cshtml", new ViewDataDictionary()
+                {
+                   { "style","1"},
+                   { "id","BirthDay"},
+                   { "value",""},
+                   { "displayName","调用举例"}
+                })
+*@

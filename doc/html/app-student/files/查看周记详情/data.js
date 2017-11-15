@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"查看周记详情.html",
+  "generationDate":new Date(1483078092454.8),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"8f9716e04e0f42ce9cde3dbe7d3f89aa",
+    "type":"Axure:Page",
+    "name":"查看周记详情",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"65370097cc884e84adbf1056a17157cc",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":110,
+              "y":35},
+            "size":{
+              "width":311,
+              "height":555}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"b7ae05cbaefe4df7abf7cf5d46f8eb07",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":110,
+                  "y":35},
+                "size":{
+                  "width":311,
+                  "height":555}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/查看周记详情/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "65370097cc884e84adbf1056a17157cc":{
+      "scriptId":"u0"},
+    "b7ae05cbaefe4df7abf7cf5d46f8eb07":{
+      "scriptId":"u1"}}});

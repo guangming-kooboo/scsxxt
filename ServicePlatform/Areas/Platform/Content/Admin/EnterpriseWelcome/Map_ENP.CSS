@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* CSS Document */
+
+a{
+	text-decoration:none;
+	color:#fff;
+	font-weight:bold;
+}
+a:hover{
+	text-decoration:underline;
+	color:#fff;
+	font-weight:bolder;
+	letter-spacing:2px;
+}
+
+.Main{
+	width: 1100px;
+	margin: 10px auto;
+	text-align: center;
+	vertical-align: middle;
+	color: #FFF;
+	font: 0.9em "微软雅黑";
+}
+
+.left_table{
+	padding-top:8px;
+	width:180px;
+	float:left;
+	line-height:30px;
+	color:#fff;
+}
+
+.right_table{
+	width:800px;
+	float:left;
+	line-height:20px;
+	margin:0px;
+}
+
+table{
+	padding:0px  ;
+	
+}
+
+table th{
+	width:100px;
+}
+
+.border{
+	border:1px solid #999;
+	box-shadow:0px 1px 1px #999;
+	border-radius:10px;	
+	margin-bottom:10px;
+}
+
+.mainProcessing{
+	width:100px;color:#FFF;
+	padding: 2px 10px;
+	text-align:center;
+	font-weight:bold;
+	box-shadow:0px 1px 1px #666;
+	/*background-color:#46FFFF;*/
+	border:1px solid #666;
+	/**/
+	border-radius:10px;	
+	/*background:-webkit-gradient(linear, 0% 0%, 100% 100%,from(#46FFFF), to(#00E8E8));谷歌*/
+	background-image:url(img/bg.jpg);
+	background-position:center;
+	
+}
+
+.arrow img{
+	width:25px;
+	height:30px;
+}
+
+.processing{
+	width: 100px;
+	font-size: 0.8em;
+	font-weight:bold;
+	/*background-image: url(img/bg.jpg);
+	background-position: center;
+	background:-webkit-gradient(linear, 0% 100%, 100% 100%,from(#555), to(#CCC));*/
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#fafafa,endColorStr=##15A216); /*IE*/ 
+background:-moz-linear-gradient(top,#fafafa,#15A216);/*火狐*/ 
+background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#fafafa), to(#15A216));/*谷歌*/ 
+background-image: -webkit-gradient(linear,left bottom,left top,color-start(0, #fafafa),color-stop(1, #15A216));/* Safari & Chrome*/ 
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fafafa', endColorstr='#15A216'); /*IE6 & IE7*/ 
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fafafa', endColorstr='#15A216')"; /* IE8 */ 
+	border: 1px solid #B4ABA7;
+	padding: 5px 2px;
+	text-align: center;
+	border-radius: 10px;	
+	font-weight: normal;
+}	
+.processing a{
+	color:#666;	
+}
+.processing a:hover{
+	color:#000;
+	letter-spacing:2px;
+}
+	
+.inner{
+	width:50px;
+	
+}
+.inner img{
+	height:15px;		
+	width:40px;
+}
+.down1 img{
+	width:12px;
+	height:15px;	
+}
+.down img{
+	width:30px;
+	height:20px;	
+}
+.down2
+{
+	border-top:1px solid #666;
+}
+.down2 img{
+	width:30px;
+	height:20px;
+}
+
+
+	

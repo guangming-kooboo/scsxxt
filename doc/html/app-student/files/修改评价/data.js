@@ -1,0 +1,108 @@
+﻿$axure.loadCurrentPage({
+  "url":"修改评价.html",
+  "generationDate":new Date(1483078092509.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"784566ebb3f44a80acf7db96ed6f8dce",
+    "type":"Axure:Page",
+    "name":"修改评价",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"ac8a86b3d56944b985c624a1a72b4134",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":100,
+              "y":54},
+            "size":{
+              "width":263,
+              "height":486}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"a35d54c42bd04fa3b608f0a4d448aad0",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":100,
+                  "y":54},
+                "size":{
+                  "width":263,
+                  "height":486}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/修改评价/u0.png"}},
+{
+          "id":"8e768fcbd85e4fd084b4a8a969d9cb36",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":373,
+              "y":57},
+            "size":{
+              "width":263,
+              "height":483}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"ab82683fc6b84670b3ae3028d3dd6932",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":373,
+                  "y":57},
+                "size":{
+                  "width":263,
+                  "height":483}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/修改评价/u2.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "ac8a86b3d56944b985c624a1a72b4134":{
+      "scriptId":"u0"},
+    "a35d54c42bd04fa3b608f0a4d448aad0":{
+      "scriptId":"u1"},
+    "8e768fcbd85e4fd084b4a8a969d9cb36":{
+      "scriptId":"u2"},
+    "ab82683fc6b84670b3ae3028d3dd6932":{
+      "scriptId":"u3"}}});

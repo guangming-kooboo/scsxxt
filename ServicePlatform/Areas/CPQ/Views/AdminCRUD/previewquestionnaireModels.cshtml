@@ -1,0 +1,106 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.AdminCRUD.PreviewquestionnaireModels_M
+@{
+    Layout = ViewData["Layout"].ToString();
+
+}
+<script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+
+        <li><a href=@Url.Action("questionnaireModels", "Admin", new { area = "CPQ", ReportID = "CPQ问卷模板库", Params = ";" })>问卷模板库</a><i class="fa fa-angle-right"></i></li>
+        @*这个到时候还是要继续读取的*@
+    </ol>
+
+</div>
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" method="POST" role="form">
+                <div class="form-body">
+                    <input type="text" name=QuestionnaireID id=QuestionnaireID value=@Model.Questionnaire.QuestionnaireID hidden="hidden">
+                    <label class="">@Model.Questionnaire.QuestionnaireName</label>
+                    <label class="">@Model.Questionnaire.Summarize</label><br />
+
+                    <!--1是单选2是多选3是填空-->
+                    @foreach (var a in Model.Questionnaire.Questions)
+                    {
+                        if (a.QuestionType == 1)
+                        {
+
+                            <label class="">@a.QuestionName</label>
+                            <div class="radio-list">
+                                @foreach (var b in a.QuestionOptions)
+                                {
+                                    <label>
+                                        <input type="radio" name=@a.QuestionName id="@a.QuestionName" value="@b.OptionName"> @b.OptionName
+                                    </label>
+                                }
+                            </div>
+                        }
+                        else if (a.QuestionType == 2)
+                        {
+
+                            <label class="">@a.QuestionName</label>
+                            <div class="checkbox-list">
+                                @foreach (var c in a.QuestionOptions)
+                                {
+
+                                    <label>
+                                        <input type="checkbox" name=@c.OptionName id=@c.OptionName>@c.OptionName
+                                    </label>
+                                }
+
+                            </div>
+
+                        }
+                        else if (a.QuestionType == 3)
+                        {
+
+                            <label class="">@a.QuestionName</label>
+
+                            <div class="col-md-9">
+                                <textarea></textarea>
+                            </div>
+
+                        }
+
+                    }
+
+
+
+                   
+                </div>
+            </form>
+
+            <div class="form-actions fluid">
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="addOption" class="btn btn-success" onclick="saveQuestion(this)">引用</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function saveQuestion(obj) {
+            
+            var QuestionnaireID = $("#QuestionnaireID").val();
+            var s = "/AdminCRUD/referenceQuestionnaire?QuestionnaireID=" + QuestionnaireID;
+           
+            
+            window.location = s;
+            
+            
+        };
+
+
+    </script>
+   

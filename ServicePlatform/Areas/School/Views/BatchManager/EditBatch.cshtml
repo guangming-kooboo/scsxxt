@@ -1,0 +1,82 @@
+﻿@using iTextSharp.text
+@model ServicePlatform.Models.PracBatch_M
+@{
+    ViewBag.Title = "WriteNews";
+    string sID = Model.SchoolID;
+}
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@*@Scripts.Render("/Content/kindeditor/kindeditor.js")
+    @Scripts.Render("/Content/kindeditor/lang/zh_CN.js")
+    @Scripts.Render("/Content/kindeditor/plugins/code/prettify.js")
+    @Styles.Render("/Content/kindeditor/themes/default/default.css")
+    @Styles.Render("/Content/kindeditor/plugins/code/prettify.css")
+    @Scripts.Render("/Content/kindeditor/others/json2.js")
+    @Scripts.Render("/Content/kindeditor/others/jquery.uploadify.min.js")
+    @Scripts.Render("/Content/kindeditor/others/paperUploadFile.js")
+    @Scripts.Render("/Content/kindeditor/others/acticleVefity.js")
+    @Scripts.Render("/Content/kindeditor/others/isHasFlash.js")*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>修改批次</title>
+
+    @*<script type="text/javascript">
+            KindEditor.ready(function (K) {
+                var editor1 = K.create('#editor', {
+                    cssPath: '/Content/kindeditor/plugins/code/prettify.css',
+                    uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                    fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                    allowFileManager: true,
+                });
+                prettyPrint();
+            });
+        </script>*@
+</head>
+@*@using (Html.BeginForm("WriteNews", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+@using (Html.BeginForm("EditBatch", "BatchManager", FormMethod.Post))
+{
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">批次管理中心</a></li>
+                <li><a href="#">新建批次</a></li>
+            </ul>
+        </div>
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>修改批次</span></div>
+            <ul class="forminfo">
+                @Html.HiddenFor(o => o.BatchID, Model.BatchID)
+                @Html.HiddenFor(o => o.PracBatchID, Model.PracBatchID)
+                <li><label>学校ID：</label>@Html.TextBoxFor(model => model.SchoolID, new { id = "SchoolID", value = @ViewBag.SchoolID, name = "SchoolID", @class = "dfinput", @readonly = "readonly" })<i>*</i></li>
+
+                <li><label>批次名称：</label>@Html.TextBoxFor(model => model.BatchName, new { id = "batchname", name = "batchname", @class = "dfinput" })<i>*(例如：2016年春季实习)</i></li>
+                <li><label>起止日期：</label>@Html.TextBoxFor(model => model.StartEnd, new { id = "starend", name = "starend", @class = "dfinput" })<i>*(例如：2016.3.1-2016.7.1)</i></li>
+
+                <li><label>当前批次：</label>
+                    @Html.DropDownListFor(o => o.IsCurrentBatch, Model.iscurrentItems, new { @class = "dfinput" })
+                @*<select id="iscurrent" name="iscurrent" class="dfinput"><option>@Model.IsCurrentBatch</option><option>否</option></select></li>*@
+                <li><label>是否生效：</label>
+                @Html.DropDownListFor(o => o.IsActive, Model.isactiveItems, new {@class= "dfinput" })
+                @*<select id="isactive" name="isactive" class="dfinput"><option>是</option><option>否</option></select>*@</li>
+                <li><label>&nbsp;</label><input class="btn" type="submit" value="确定修改" id="save" name="action" /></li>
+            </ul>
+        </div>
+
+        <div visibility:hidden><input type="text" id="flag" name="flag" value="" /></div>
+        <div visibility:hidden><input type="text" id="msgcontent" name="msgcontent" value="" /></div>
+
+    </body>
+}
+</html>
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+
+

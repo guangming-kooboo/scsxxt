@@ -1,0 +1,154 @@
+﻿
+@model ServicePlatform.Areas.App.ViewModel.Home.EnterpriseInfo_M
+@{
+    var CurrentUrl = ViewData["CurrentUrl"];
+}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>企业资讯</title>
+
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+    <script type="text/javascript">
+        function EnterpriseInfo() {
+            var myselect = document.getElementById("EntCategoryID");
+            var index = myselect.selectedIndex;
+            var value = myselect.options[index].value;
+            var url = '@(new HtmlString((string)ViewData["CurrentUrl"]))';      
+            window.location.href = url + "?uid=@Model.Uid&VolunteerSequence=@Model.VolunteerSequence&PosSequence=@Model.PosSequence&EntCategoryID=" + value;
+        }
+    </script>
+</head>
+<body>
+    <div class="main-do">
+        <div class="main-list-head">
+            <ul class="main-list-head-ul">
+                <a class="list-head-a" href="@Url.Action("PrepareVolunteer", "Home", new {area = "App", uid = Model.Uid})"><li class="main-list-head-li"><&nbsp;<span>我的预报名</span></li></a>
+                <li class="main-list-head-lis">
+                    @Html.DropDownListFor(o => o.EntCategoryID, Model.EntCategory, new { @class = "list-head-get", onchange = "EnterpriseInfo()" })
+                </li>
+                <a href=""><li class="main-list-head-lit"><img src="" /></li></a>
+            </ul>
+
+        </div>
+        <div class="list-main">
+            @foreach (var item in Model.Grogshops)
+            {
+                if (@item.Photos != null)
+                {
+                    var photo = item.Photos.Split(';');
+                    var first = photo[photo.Length - 1];
+                    foreach (var ent in Model.PositionCount)
+                    {
+                        <a href="@Url.Action("EnterpriseInfoIndex", "Home", new {area = "App", uid = Model.Uid, EntPracNo = item.EntPracNo, VolunteerSequence = Model.VolunteerSequence, PosSequence = Model.PosSequence})">
+                            @if (item.EntPracNo == ent.EntPracNo)
+                            {
+                                <div class="lists-one">
+                                    <div>
+                                        <p align="center">
+                                            <img class="" src="@first"/>
+                                        </p>
+                                    </div>
+                                    <p class="list-one-p">
+                                        <a href="">@item.Name</a>
+                                    </p>
+
+                                    <ul class="note-ull">
+                                        <li class="head-li-lefts">
+                                            <p class="list-one-list">招聘人数&nbsp;&nbsp; @ent.PositionCount 人</p>
+                                        </li>
+                                        @if (item.EntRank == "1")
+                                        {
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                        }
+                                        @if (item.EntRank == "2")
+                                        {
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                        }
+                                        @if (item.EntRank == "-1")
+                                        {
+                                            <li class="head-li-rights"><img src=""></li>
+                                        }
+                                    </ul>
+                                    <p class="list-one-pp">已报人数 @ent.YetAddVolunteerCount 人</p>
+                                    <p class="list-one-pp">可报人数 @ent.RemainRecruitingCount 人（截止日期 @ent.LastTime.ToString("yyyy-M-d dddd")</p>
+                                    <p class="list-one-pp">@item.Address</p>
+                                </div>
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        </a>
+                    }
+                }
+                else
+                {
+                    foreach (var ent in Model.PositionCount)
+                    {
+                        <a href="@Url.Action("EnterpriseInfoIndex", "Home", new {area = "App", uid = Model.Uid, EntPracNo = item.EntPracNo, VolunteerSequence = Model.VolunteerSequence, PosSequence = Model.PosSequence})">
+                            @if (item.EntPracNo == ent.EntPracNo)
+                            {
+                                <div class="lists-one">
+                                    <div>
+                                        <p align="center">
+                                            <img class="" src="" />
+                                        </p>
+                                    </div>
+                                    <p class="list-one-p">
+                                        <a href="">@item.Name</a>
+                                    </p>
+
+                                    <ul class="note-ull">
+                                        <li class="head-li-lefts">
+                                            <p class="list-one-list">招聘人数&nbsp;&nbsp; @ent.PositionCount 人</p>
+                                        </li>
+                                        @if (item.EntRank == "1")
+                                        {
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                        }
+                                        @if (item.EntRank == "2")
+                                        {
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                            <li class="head-li-rights"><img src="~/Areas/App/Content/Image/评价.png"></li>
+                                        }
+                                        @if (item.EntRank == "-1")
+                                        {
+                                            <li class="head-li-rights"><img src=""></li>
+                                        }
+                                    </ul>
+                                    <p class="list-one-pp">已报人数 @ent.YetAddVolunteerCount 人</p>
+                                    <p class="list-one-pp">可报人数 @ent.RemainRecruitingCount 人（截止日期 @ent.LastTime.ToString("yyyy-M-d dddd")）</p>
+                                    <p class="list-one-pp">@item.Address</p>
+                                </div>
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        </a>
+                    }
+                }
+            }
+        </div>
+    </div>
+
+</body>

@@ -1,0 +1,79 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.Ent_Post_M
+<style>
+    .weui-form-preview__label {
+        float: left;
+        margin-right: 1em;
+        min-width: 2em;
+        color: #000000;
+        text-align: justify;
+        text-align-last: justify;
+    }
+    .bigger {
+        font-weight: bold;
+    }
+    .weui-form-preview__value {
+        display: block;
+        overflow: hidden;
+        word-break: normal;
+        word-wrap: break-word;
+        color: #000000;
+        padding-left: 1.2em;
+</style>
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            <div>
+                @*跳转到企业详情*@
+                <a href="javascript:submit('a');"><div class="placeholder"><img src="@ViewData["root"]images/return.png" class="return"></div></a>
+            </div>
+            <div class="weui-flex__item"><div class="placeholder">岗位详情</div></div>
+            <div style="width:48px"><div class="placeholder"></div></div>
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+
+        @foreach (var item in Model.Jobs)
+            {
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">岗位名称</label>
+                        <span class="weui-form-preview__value bigger">@item.PositionName</span>
+                    </div>
+                    
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">招聘人数</label>
+                        <span class="weui-form-preview__value">@item.PosQuantity</span>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">剩余空位</label>
+                        <span class="weui-form-preview__value">@item.RemainRecruitingCount</span>
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">截止日期</label>
+                        <span class="weui-form-preview__value">@item.PosExpireDate.ToString("yyyy-M-d dddd")</span>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">岗位描述</label>
+                        <span class="weui-form-preview__value">@(new HtmlString(item.Discription.Replace("\r\n", "<br/>")))</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

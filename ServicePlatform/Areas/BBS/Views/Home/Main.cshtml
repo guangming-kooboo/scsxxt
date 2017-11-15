@@ -1,0 +1,101 @@
+﻿@using Qx.Tools
+@model ServicePlatform.Areas.BBS.ViewModels.Home.Main_M
+@{
+    Layout = ViewData["Layout"].ToString();
+    var UserID = (AccountContext)Session["AccountContext"] != null ? ((AccountContext)Session["AccountContext"]).UserID : "";
+}
+
+<div class="head " style="margin-top: 24px">
+    <div class="main-head-location">
+        <div class=head-l>
+            <a class="head-a" href="">前页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="head-a" href="/BBS/Home/Main">论坛首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="head-a" href="">顶岗实习系统</a>
+        </div>
+        <div class="head-r">
+            <img class="head-r-img" src="~/Areas/BBS/Content/Image/登录.png">
+            @if (string.IsNullOrEmpty(UserID))
+            {
+                <a class="head-a" href="/platform/home/login">登录</a>
+                <a class="head-a" href="/platform/home/regist">注册</a>
+            }
+            else
+            {
+
+                <a class="head-a" href="/BBS/ManagerCenter/">@UserID </a>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    
+    <!-- 导航-->
+    <div class="main-head">
+
+        <div class="main-head-litter">
+            <p class="main-head-p">|&nbsp;&nbsp;顶岗实习论坛</p>
+        </div>
+        <div class="navigation">
+            <ul>
+                <li class="navigation-li"><a href="@Url.Action("Main","Home",new{area="BBS"})">论坛首页</a></li>
+                <li class="navigation-li"><a class="navigation-active" href="#">论坛板块</a></li>
+                <li class="navigation-li"><a href="@Url.Action("PersonalSpace","UserCenter",new{area="BBS",id=Model.userid})">个人空间</a></li>
+                <li class="navigation-li"><a href="#">新手上路</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 搜索-->
+
+    <div class="search">
+        <form method="post" action="Search">
+            <input class="input-text" style="width: 190px;" type="text" placeholder="&nbsp;请在此输入搜索内容" name="found" />
+            <select style="width: 105px;" name="sort" class="input-text">
+                <option>搜帖子</option>
+                <option>搜板块</option>
+                <option>搜用户</option>
+            </select>
+            <input class="input-submit" type="submit" value="搜索" />
+        </form>
+    </div>
+
+
+    <!-- 实习案例交流-->
+    @foreach (var forum in Model.Zones)
+    {
+        <div class="main-part">
+            <div class="main-part-head">
+                <p class="main-part-head-p">@forum.Forum.ForumName</p>
+            </div>
+            <div class="part-main">
+                <ul class="part-ul">
+                    @foreach (var column in forum.Columns)
+                    {
+                        <li class="part-li">
+                            <a href="@Url.Action("PostList","Home",new{area="BBS",columnid=column.ID})"><img class="part-a" style="width:71px;height:72px;" src="@column.ImageUrl"></a>
+                        </li>
+                        <li class="part-p">
+                            <p class="part-p-head"><a class="part-a-head" href="@Url.Action("PostList", "Home", new { area = "BBS", columnid = column.ID })">@column.ColumnName</a>&nbsp;(@(column.TodayPost==null?0:column.TodayPost))</p>
+                            <p class="part-p-main">主题:@column.ThemeCount,帖子:@(column.PostCount==null?0:column.PostCount)</p>
+                            <p class="part-p-main">
+                                版主:
+                                @foreach (var manager in column.ForumManager)
+                                {
+                                    <a href="@Url.Action("PersonalSpace", "Home", new { area = "BBS", id = manager.ID })">@manager.Name &nbsp</a>
+                                }
+                                @if (column.ForumManager.Count == 0)
+                                {
+                                    <label>无</label>
+                                }
+                            </p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+</div>
+

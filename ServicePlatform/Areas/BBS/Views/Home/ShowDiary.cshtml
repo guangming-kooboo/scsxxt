@@ -1,0 +1,106 @@
+﻿
+@model ServicePlatform.Areas.BBS.ViewModels.Home.ShowDiary_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+
+<div class="main">
+
+<!-- 导航-->
+           @Html.Action("_Head",new{ id=Model.userid})
+           <div class="means-note">
+                <div class="means-main-head">
+                   <div class="write-note-left">
+                      <p class="means-main-head-p">查看日志</p>
+                   </div>
+                   <div class="write-note-right">
+                      <ul>
+                         <li class="write-note-right-li"><a class="write-note-right-li-a"href="@Url.Action("Diarys","Home",new{area="BBS",id=Model.diary.AuthorId})">返回日志列表</a></li>
+                         <li class="write-note-right-li"><p class="write-note-right-li-p">|</p></li>
+                      </ul>
+                   </div>
+                    
+                </div>
+               <div class="one-note-1">
+                   <ul>
+                       <li class="one-note-1-li"><p class="one-note-1-li-p">@Model.diary.DiaryTitle</p></li>
+                       <li class="one-note-1-li"><p class="one-note-1-li-ps">&nbsp;&nbsp;&nbsp;&nbsp;@Model.diary.Time&nbsp;&nbsp;</p></li>
+                   </ul>
+               </div>
+
+                <div class="one-note-2">
+                    <ul>
+                         <li class="one-note-2-li"><img src="~/Areas/BBS/Content/Image/点赞1.png"></li>
+                         <li class="one-note-2-lit"><p class="one-note-1-li-ps">赞(@Model.diary.PraiseCount)</p></li>
+                         <li class="one-note-2-li"><img src="~/Areas/BBS/Content/Image/评论.png"></li>
+                         <li class="one-note-2-lit"><p class="one-note-1-li-ps">评论(@Model.diary.ReplyCount)</p></li>
+                         <li class="one-note-2-li"><img src="~/Areas/BBS/Content/Image/分享1.png"></li>
+                         <li class="one-note-2-lit"><p class="one-note-1-li-ps"><a href="@Url.Action("ReportDiary","UserCenter",new{area="BBS"})">举报</a></p></li>
+                         <li class="one-note-2-li"><p class="one-note-1-li-ps"><a href="@Url.Action("ShareDiary","UserCenter",new{area="BBS"})"> 分享</a></p></li>
+                         <li class="one-note-2-liss"><a class="one-note-1-li-ps" href="@Url.Action("LastDiary","UserCenter",new{area="BBS"})">下一篇</a></li>
+                         <li class="one-note-2-lis">&nbsp;|&nbsp;</li>
+                         <li class="one-note-2-lis"><a class="one-note-1-li-ps" href="@Url.Action("NextDiary","UserCenter",new{area="BBS"})">上一篇</a></li>
+                    </ul>
+                  
+                </div>
+
+                <div class="one-note-main">
+                     @Model.diary.Content
+                  
+                </div>
+
+                <div class="write-discuss">
+                    <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a"href="">写个评价</a></p>
+                    <hr class="message-main-hr">
+                     <form class="form-message" method="post" action="DiaryReply">
+                          <textarea name="" class="message-input-main" placeholder="来过就给个印象嘛"></textarea></p>
+                          <input class="write-submit" type="submit" value="确&nbsp;定" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="write-submit" type="submit" value="取&nbsp;消" /></p>
+                     </form>
+                  
+                </div>
+
+                <div class="one-note-note">
+                 <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a"href="">留言&nbsp;(@Model.diary.ReplyCount)</a></p>
+                    @foreach(var replydiary in Model.replydiarys)
+                    {
+                        <hr class="message-main-hr">
+                           <div class="message-main-main">
+                                <ul>
+                                     <li class="message-main-main-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=replydiary.AuthorID})"><img class="list-main-lists-head" src="@replydiary.AuthorHeadPicture"></a></li>
+                                     <li class="message-main-main-lis"><a class="message-main-main-a" href="@Url.Action("PersonalSpace", "Home", new { area = "BBS", id = replydiary.AuthorID })">@replydiary.Author</a></li>
+                                     <li class="message-main-main-lis" ><img src="~/Areas/BBS/Content/Image/用户.png"></li>
+                                     <li class="message-main-main-li" ><p class="message-main-main-li-p">第234楼 </p></li>
+                                     <li class="message-main-main-li"><p class="message-main-main-li-p">发表于 @replydiary.Time</p></li>        
+                                </ul>
+                             
+                           </div>
+                            <div class="message-main-main-note">
+                                  <p class="message-main-main-note-p">@replydiary.Content</p>
+                            </div>
+                            <br>
+                    }
+                   </div>
+                
+               
+           </div>
+                             <br>
+
+                            <div class="jump">
+                               <a class="jump-a-border" href=""><<</a>&nbsp;
+                               <a class="jump-a-active"href="">&nbsp;1&nbsp;</a>
+                               <a class="jump-a"href="">&nbsp;2&nbsp;</a>
+                               <a class="jump-a"href="">&nbsp;3&nbsp;</a>
+                               <a class="jump-a"href="">&nbsp;4&nbsp;</a>
+                               <a class="jump-a"href="">&nbsp;..&nbsp;</a>&nbsp;
+                               <a class="jump-a-border"href="">>></a>
+                  
+ 
+                           </div>
+
+
+</div>
+
+
+
+

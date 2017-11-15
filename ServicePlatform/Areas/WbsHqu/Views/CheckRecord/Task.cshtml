@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试登陆</title>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+
+        $().ready(function() {
+                $.ajax({
+                    type: "Get",
+                    url: "/WbsHqu/CheckRecord/GetTasks",
+                    success: function (data)
+                    {
+                        if (data == "500")
+                        {
+                            alert("获取失败");
+                        }
+                        else {
+                            var html = "<select id='taskid' name='taskid' onchange='mytask()' >";
+                            $.each(data, function (index, element) {
+                                $.each(element, function (index, e) {
+                                    html += "<option  value='" + e.Id + "'>" + e.Name + "</option>";
+
+                                }
+                                )
+                            });
+                            html += "</select>";
+                            document.getElementById('result').innerHTML = html;
+                        }
+
+                    }
+                });
+                mytask();
+            }
+        );
+        function mytask() {
+            var type = $("#tasktype").val();
+            var wbsid = $("#taskid").val();
+            $.ajax({
+                type: "Get",
+                url: "/WbsHqu/CheckRecord/GetMyTask?type=" + type + "&wbsid=" + wbsid,
+                success: function (data) {
+                    if (data == "500") {
+                        alert("获取失败");
+                    }                 
+                    else {
+                        var html = "<select name='mytaskid' id='mytaskid' >";
+                        $.each(data, function (index, element) {
+                            $.each(element, function (index, e) {
+                                html += "<option  value='" + e.Id + "'>" + e.Name + "</option>";
+
+                            }
+                            )
+                        });
+                        html += "</select>";
+                        document.getElementById('result1').innerHTML = html;
+                    }
+                    if ($("#mytaskid").val() == null) {
+                        $("#mytaskid").hide();
+                       
+                    }
+
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <form action="/WbsHqu/CheckRecord/Check">
+        <label id="result"></label>
+        <select id="tasktype" name="tasktype" onchange="mytask()">
+            <option value="0" >定额</option>
+            <option value="1">定量</option>
+        </select>
+        <label name="quotataskdisId" id="result1"></label>
+        <input type="submit" name="submit" value="确定"/>
+    </form>
+</body>
+</html>

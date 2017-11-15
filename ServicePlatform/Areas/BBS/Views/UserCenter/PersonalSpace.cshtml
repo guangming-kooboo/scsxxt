@@ -1,0 +1,296 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.PersonalSpace_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+@section script{
+    <script>
+        $().ready(function () {
+            $('#uploadPhoto').hide();
+            $('#active-upload').click(function()
+            {
+                $('#uploadPhoto').show();
+            });
+        })
+
+        //上传成功后调用
+        function OnUploadFinish(file) {
+            $('#uploadPhoto').hide();
+            //alert('文件上传成功' + file);
+            location.href = "/BBS/CRUD/UploadHeadImg?file=" + file + "&id=@Model.userid";
+        }
+    </script>
+    }
+
+<div class="homepage">
+
+<!-- 导航-->
+           @Html.Action("_Head", new  { id=Model.userid})
+           <div class="home-page">
+              <div class="home-page-left">
+                 <div class="home-page-user">
+                     <div class="home-page-user-head">
+                        <p class="home-page-user-head-p">头像</p>
+                       
+                     </div>
+                     <p align="center"><a class="home-page-user-head-name"href="">@Model.userinformation.Name</a></p>
+                     <p align="center"><img class="home-page-user-head-img"src="@Model.userinformation.HeadPictureUrl" name="photo"/></p>               
+                     
+                     <div id="uploadPhoto">
+                         @Html.Partial("/Views/Templates/_FileUpload.cshtml", new ViewDataDictionary(ViewData)
+                           {
+                              { "saveDirectory","/UserFiles/BBS/Files/"},
+                              { "id","photo"},
+                              { "name","photo"}
+
+                           })
+                     </div>
+                    
+
+                     <p id="active-upload" class="home-page-user-p"align="center"><img src="~/Areas/BBS/Content/Image/上传头像.png"><a class="home-page-user-head-a">上传头像</a></p>
+                     <p class="home-page-user-p"align="center"><img src="~/Areas/BBS/Content/Image/更新资料.png"><a class="home-page-user-head-a"href="@Url.Action("UpdateInformation", "UserCenter", new { area = "BBS", id = Model.userid })">更新资料</a></p>
+                     <p class="home-page-user-p"align="center"><img src="~/Areas/BBS/Content/Image/查看留言.png"><a class="home-page-user-head-a"href="@Url.Action("MessageBoard","UserCenter",new{area="BBS",id=Model.userid})">查看留言</a></p>
+                   
+                 </div>
+
+                 <div class="personal-data">
+                    <div class="personal-data-head"> 
+                        <div class="personal-data-head-left">
+                            <p class="home-page-user-head-p">个人资料</p>
+                        </div>
+                        <div class="personal-data-head-right">
+                            <a class="personal-data-head-right-a"href="@Url.Action("PersonalInformation","UserCenter",new{area="BBS",id=Model.userid})">更多>></a>
+                          
+                        </div>
+                    </div>
+                    <p class="personal-data-main">性别&nbsp;:&nbsp;@Model.userinformation.Sex</p>
+                    <p class="personal-data-main">邮箱&nbsp;:&nbsp;@Model.userinformation.Email</p>
+                    <p class="personal-data-main">生日&nbsp;:&nbsp;@Model.userinformation.Birthday</p>
+                    <p class="personal-data-main">联系方式&nbsp;:&nbsp;@Model.userinformation.Birthday</p>
+                    <p class="personal-data-main">地址&nbsp;:&nbsp;@Model.userinformation.Address</p>
+                    <p class="personal-data-main">经历&nbsp;:&nbsp;@Model.userinformation.Experience</p>
+                   
+                 </div>
+
+                 <div class="personal-data">
+                    <div class="personal-data-head"> 
+                        <div class="personal-data-head-left">
+                            <p class="home-page-user-head-p">统计信息</p>
+                        </div>
+                        <div class="personal-data-head-right">
+                            <a class="personal-data-head-right-a"href="@Url.Action("PersonalInformation","UserCenter",new{area="BBS",id=Model.userid})">更多>></a>
+                          
+                        </div>
+                    </div>
+                    <div class="statistics">
+                       <div class="statistics-left">
+                        <p class="statistics-left-p">积分:@Model.statistics.Point</p>
+                        <p class="statistics-left-p">来访人:@Model.statistics.Visitor</p>
+                        <p class="statistics-left-p">分享:@Model.statistics.Share</p>
+                       
+                       </div>
+                       <div class="statistics-right">
+                        <p class="statistics-left-p">相册:@Model.statistics.Photo</p>
+                        <p class="statistics-left-p">好友:@Model.statistics.Friend</p>
+                        <p class="statistics-left-p">日志:@Model.statistics.diary</p>
+                        
+                      
+                       </div>
+                    </div>
+
+                 </div>   
+              </div>
+
+
+             <div class="home-page-right">
+                 <div class="home-page-right-left">
+                    <div class="home-page-note">
+                        <div class="home-page-note-head">
+                             <div class="personal-data-head-left">
+                                <p class="home-page-user-head-p">日志</p>
+                             </div>
+                             <div class="personal-data-head-right">
+                                 <a class="personal-data-head-right-a"href="@Url.Action("Diarys","UserCenter",new{area="BBS",id=Model.userid})">更多>></a>
+                          
+                             </div>
+                        </div>
+                             @foreach (var diary in Model.diarys)
+                    {
+                        <ul class="home-page-note-ul-s">
+                            <li class="home-page-note-li-l"><a class="home-page-note-li-p" href="@Url.Action("ShowDiary","UserCenter",new  {area="BBS",id=diary.ID})">@diary.DiaryTitle</a></li>
+                            <li class="home-page-note-li-l-p"><p class="home-page-note-li-p">@diary.Time</p></li>
+                        </ul>
+                    }
+                      @if (Model.diarys.Count == 0)
+                     {
+                      <ul class="home-page-note-ul-s">
+                          <li class="home-page-note-li-l" style="color:red">这里空空如也，快添加一条吧</li>
+                      </ul>
+                      }
+                             
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="home-page-share">
+                        <div class="home-page-share-head">
+                             <div class="personal-data-head-left">
+                                <p class="home-page-user-head-p">分享</p>
+                             </div>
+                             <div class="personal-data-head-right">
+                                 <a class="personal-data-head-right-a"href="@Url.Action("Share","UserCenter",new{area="BBS",id=Model.userid})">更多>></a>
+                          
+                             </div>
+                        </div>
+                @foreach (var share in Model.shares)
+                {
+                    <ul class="home-page-note-ul-s">
+                        <li class="home-page-note-li-l"><a class="home-page-note-li-p" href="@Url.Action("Share", "UserCenter", new { area = "BBS",id=share.Author })">@share.Title</a></li>
+                        <li class="home-page-note-li-l-p"><p class="home-page-note-li-p">@share.Time</p></li>
+                    </ul>
+                }
+                        @if (Model.shares.Count == 0)
+                        {
+                            <ul class="home-page-note-ul-s">
+                                <li class="home-page-note-li-l" style="color:red">这里空空如也，快添加一条吧</li>
+                            </ul>
+                        }             
+                         
+                    </div>
+
+                    <div class="home-page-message">
+                        <div class="home-page-share-head">
+                             <div class="personal-data-head-left">
+                                <p class="home-page-user-head-p">留言</p>
+                             </div>
+                             <div class="personal-data-head-right">
+                                 <a class="personal-data-head-right-a"href="@Url.Action("MessageBoard","UserCenter",new{area="BBS",id=Model.userid})">更多>></a>
+                          
+                             </div>
+                          
+                        </div>
+                        @foreach(var message in Model.message)
+                        {
+                            <div class="message-main-main">
+                                <ul class="ul-ul">
+                                     <li class="message-main-main-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=message.UserID})"><img class="list-main-lists-head" src="@message.UserHeadPictureUrl"></a></li>
+                                     <li class="message-main-main-lis"><a class="message-main-main-a" href="">@message.User</a></li>
+                                     <li class="message-main-main-lis" ><img src="~/Areas/BBS/Content/Image/用户.png"></li>
+                                     <li class="message-main-main-li" ><p class="message-main-main-li-p">第234楼 </p></li>
+                                     <li class="message-main-main-li"><p class="message-main-main-li-p">发表于 @message.Time</p></li>
+                                    
+                                </ul>
+                         
+                             
+                           </div>
+                            <div class="message-main-main-note">
+                                  <p class="message-main-main-note-p">@message.Content</p>
+                            </div>
+                              <hr class="hr-hr">
+                        }    
+                         @if (Model.message.Count == 0)
+                         {
+                             <ul class="ul-ul">
+                                 <li class="message-main-main-li" style="color:red">这里空空如也，快添加一条吧</li>
+                             </ul>
+                         }
+   
+                    </div>
+
+                    <div class="home-page-photos">
+                        <div class="home-page-share-head">
+                             <div class="personal-data-head-left">
+                                <p class="home-page-user-head-p">相册</p>
+                             </div>
+                             <div class="personal-data-head-right">
+                                 <a class="personal-data-head-right-a"href="@Url.Action("PhotoAlbum","UserCenter",new{area="BBS",id=Model.userid})">更多>></a>
+                          
+                             </div>
+                        </div>
+                         <ul class="home-page-photos-ul">
+                     @foreach (var photo in Model.photos)
+                    {
+                            <li class="main-photo-middle-left-li">
+                               <div class="main-photo-middle-left-div">
+                                   <p align="center"><a href=""><img class="main-photo-middle-left-li-img"src="@photo.PhotoUrl"></a></p><p class="main-photo-middle-left-li-p" align="center"><a class="main-photo-middle-left-li-a" href="">@photo.PhotoExplain</a></p>
+                                </div>
+                            </li>
+
+                     }
+                             @if (Model.photos.Count == 0)
+                             {
+                             <li style="color:red">这里空空如也，快添加一条吧</li>
+                             }
+                         </ul>   
+
+                    </div>
+
+                     </div>
+                      
+                 </div>
+
+
+                 <div class="home-page-right-right">
+                   <div class="home-page-friend">
+                       <div class="home-page-friend-head">
+                            <div class="personal-data-head-left">
+                                <p class="home-page-user-head-p">好友</p>
+                            </div>
+                           <div class="personal-data-head-right">
+                                <a class="personal-data-head-right-a"href="@Url.Action("Friend","UserCenter",new{area="BBS",id=Model.userid})">更多>></a>
+                          
+                           </div>
+                       </div>
+                   @foreach (var friend in Model.friend)
+                  {
+                       <ul class="home-page-friend-ul">
+                           <li class="home-page-friend-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=friend.ID})"><img class="home-page-friend-li-img" src="@friend.HeadImg"></a></li>
+                           <li class="home-page-friend-li"><p class="home-page-friend-li-p"><a class="home-page-friend-li-a" href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=friend.ID})">@friend.Name</a>&nbsp;(@friend.NickName)</p><p class="home-page-friend-li-p">@friend.Signature</p></li>
+                       </ul>
+                   }
+                       @if (Model.friend.Count == 0)
+                       {
+                           <ul class="home-page-friend-ul">
+                               <li class="home-page-friend-li" style="color:red">您还没有好友，快去加一个吧</li>
+                           </ul>
+                       }
+                       
+                     
+                   </div>
+
+                    <div class="home-page-friends">
+                       <div class="home-page-friend-head">
+                            <div class="personal-data-head-left">
+                                <p class="home-page-user-head-p">最近来访</p>
+                            </div>
+                           <div class="personal-data-head-right">
+
+                          
+                           </div>
+                       </div>
+
+                       <ul class="home-page-friends-ul">
+                           @foreach(var visitor in Model.recentVisitor)
+                           {
+                            <li class="home-page-friends-li"><p align="center"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=visitor.ID})"><img class="home-page-friends-img"src="@visitor.HeadImg"></a><p class="home-page-friends-img-p"align="center">@visitor.Time</p></p></li>
+                           }
+                           @if (Model.recentVisitor.Count == 0)
+                           {
+                             <li style="color:red">您还没有访客</li>
+                           }
+                       </ul>
+                     
+                   </div>
+                   
+                 </div>
+                
+              </div>
+           
+     
+
+
+
+
+

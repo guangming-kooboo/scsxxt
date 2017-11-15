@@ -1,0 +1,89 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.PersonalSpace_M
+
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>个人界面</title>
+
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <div class="main-do">
+        <div class="main-heads">
+            <p class="main-head-p">个人主页</p>
+            <p>
+                @if (@Model.StuInfo.Photo == null)
+                {
+                    <a href=""><img class="main-head-img" src="~/Areas/App/Content/Image/头像.png"></a>
+                }
+@*<img src = "~/Areas/App/Content/Image/头像.png" />*@
+                else
+                {
+                    <a href=""><img class="main-head-img" src="@Model.StuInfo.Photo"></a>
+                }             
+            </p>
+            <p class="main-head-name">@Model.StuInfo.Name</p>
+            <p class="main-head-name-p">@Model.StuInfo.StuResume</p>
+
+
+        </div>
+        <center>
+            <div class="main-class">
+                <ul class="main-note-ul">
+                    <!--蓝色-->
+                    <li class="main-class-li"><p align="center"><a href=""><img src="~/Areas/App/Content/Image/蓝色.png"></a></p></li>
+                    <!--橙色-->
+                    <li class="main-class-li"><p align="center"><a href=""><img src="~/Areas/App/Content/Image/橙色.png"></a></p></li>
+                    <!--红色-->
+                    <li class="main-class-li1"><p align="center"><a href=""><img src="~/Areas/App/Content/Image/进程1.png" /></a></p></li>
+                    
+                </ul>
+
+                <ul class="main-class-ul">
+                    <a class="main-class-li-a" href="@Url.Action("CheckStuBatch", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center">预报名</p></li></a>
+                    <a class="main-class-li-a" href="@Url.Action("FormalVolunteer", "Home", new {area="App",uid=Model.Uid })"> <li class="main-class-li"><p align="center">正式志愿</p></li></a>
+                    <a class="main-class-li-a" href="@Url.Action("PracticeOverView", "Home", new {area="App",uid=Model.Uid })"> <li class="main-class-li"><p align="center">实习总览</p></li></a>
+                </ul>
+                <ul class="main-class-ul">
+                    <a class="main-class-li-aa" href="@Url.Action("CheckStuBatch", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center">@Model.PerVolCount</p></li></a>
+                    <a class="main-class-li-aa" href="@Url.Action("FormalVolunteer", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center">@Model.ForVolCount</p></li></a>
+                    <a class="main-class-li-aa" href=""><li class="main-class-li"><p align="center"></p></li></a>
+                </ul>
+
+                <ul class="main-note-ul">
+                    <a href="@Url.Action("ReviseInfo", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center"><img src="~/Areas/App/Content/Image/修改信息.png"></p></li></a>
+                    <a href="@Url.Action("RevisePsw", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center"><img src="~/Areas/App/Content/Image/修改密码.png"></p></li></a>
+                    <a href="@Url.Action("AnswerQuestion", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center"><img src="~/Areas/App/Content/Image/疑问解答.png"></p></li></a>
+                </ul>
+                <ul class="main-class-ul">
+                    <li class="main-class-li"><p align="center"><a class="main-class-li-aaa" href="@Url.Action("ReviseInfo", "Home", new {area="App",uid=Model.Uid })">修改信息</a></p></li>
+                    <li class="main-class-li"><p align="center"><a class="main-class-li-aaa" href="@Url.Action("RevisePsw", "Home", new {area="App",uid=Model.Uid })">修改密码</a></p></li>
+                    <li class="main-class-li"><p align="center"><a class="main-class-li-aaa" href="@Url.Action("AnswerQuestion", "Home", new {area="App",uid=Model.Uid })">疑问解答</a></p></li>
+                </ul>
+                <br />
+
+                <ul class="main-class-ul">
+                    <a href="@Url.Action("Main", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center"><img src="~/Areas/App/Content/Image/软件升级.png"></p></li></a>
+                    <a href="@Url.Action("About", "Home", new {area="App",uid=Model.Uid })"><li class="main-class-li"><p align="center"><img src="~/Areas/App/Content/Image/关于实学.png"></p></li></a>
+                    <a href="@Url.Action("Login", "Visitor", new {area="App" })"><li class="main-class-li"><p align="center"><img src="~/Areas/App/Content/Image/注销登陆.png"></p></li></a>
+                </ul>
+                <ul class="main-class-ul">
+                    <li class="main-class-li"><p align="center"><a class="main-class-li-aaa" href="">主页</a></p></li>
+                    <li class="main-class-li"><p align="center"><a class="main-class-li-aaa" href="">关于实学</a></p></li>
+                    <li class="main-class-li"><p align="center"><a class="main-class-li-aaa" href="">注销登陆</a></p></li>
+                </ul>
+
+            </div>
+
+        </center>
+    </div>
+
+
+</body>
+</html>

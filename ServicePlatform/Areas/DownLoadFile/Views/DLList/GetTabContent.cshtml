@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "GetTabContent";
+}
+
+<div>
+    <table width="800" border="0">
+        <tr>
+            <th>资源编号</th>
+            <th>资源标题</th>
+            <th>资源发布者</th>
+            <th>资源栏目</th>
+            <th>单位名称</th>
+            <th>下载操作</th>
+        </tr>
+        @foreach (var x in (ViewData["DLCon1"] as List<ServicePlatform.Areas.DownLoadFile.Func.DLListCollectData>))
+        {
+            <tr>
+                <td>
+                    @x.DownLoadFileID
+                </td>
+                <td>
+                    @x.DownLoadFileTitle
+                </td>
+                <td>
+                    @x.DownLoadFilePublisher
+                </td>
+                <td>
+                    @x.DownLoadFileColName
+                </td>
+                <td>
+                    @x.DownLoadFileUnit
+                </td>
+                <td>
+                    <a href=@x.DownLoadFileUrl>下载</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

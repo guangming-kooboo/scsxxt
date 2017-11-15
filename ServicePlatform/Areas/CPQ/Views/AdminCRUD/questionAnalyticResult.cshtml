@@ -1,0 +1,89 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.AdminCRUD.QuestionAnalyticResult_M
+@{
+    Layout = ViewData["Layout"].ToString();
+
+}
+
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+        @*这个到时候还是要继续读取的*@
+    </ol>
+
+</div>
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" method="POST" role="form">
+                <div class="form-body">
+
+                    @if (@Model.showAnswer.QuestionType == 1)
+                    {
+
+                        <p>题目：</p><label class="">@Model.showAnswer.QuestionName</label>
+                        <div class="radio-list">
+                            @foreach (var b in @Model.showAnswer.answers)
+                            {
+                                <label>
+                                   
+                                     <input type="radio" name=@Model.showAnswer.QuestionName id="@Model.showAnswer.QuestionName" value="@b.OptionName"> @b.OptionName
+                                    <label>"共有"  @b.selectedNumber "人选择了这个答案"</label>
+                                </label>
+                            }
+                        </div>
+                    }
+                    else if (@Model.showAnswer.QuestionType == 2)
+                    {
+
+                       <p>题目：</p> <label class="">@Model.showAnswer.QuestionName</label>
+                        <div class="checkbox-list">
+                            @foreach (var c in @Model.showAnswer.answers)
+                            {
+
+                                <label>
+                                    <input type="checkbox" name=@c.OptionName id=@c.OptionName>@c.OptionName
+                                    <label>"共有"  @c.selectedNumber "人选择了这个答案"</label>
+                                </label>
+                            }
+
+                        </div>
+
+                    }
+                    else if (@Model.showAnswer.QuestionType == 3)
+                    {
+
+                        <p>题目：</p><label class="">@Model.showAnswer.QuestionName</label>
+
+                        <div class="col-md-9">
+                            <textarea>@Model.showAnswer.fill_Answer</textarea>
+                        </div>
+                        
+
+                    }
+
+
+
+
+
+                    <div class="form-actions fluid">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-success">返回</button><!--返回去action再再action里面重定向吧省的这里直接url-->
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    </div>
+
+

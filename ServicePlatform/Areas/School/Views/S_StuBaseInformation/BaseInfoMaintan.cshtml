@@ -1,0 +1,413 @@
+﻿@using ServicePlatform.Models
+
+@{
+    ViewBag.Title = "BaseInfoMaintan";
+    var fobidList = ViewBag.fobidList;
+    List<T_StuPic> StuPicList = ViewBag.ShowPics;
+    //string temp=string.Empty;
+    //string tempp = string.Empty;
+    string temp1 = string.Empty;
+    string temp2 = string.Empty;
+
+    if (ViewBag.ShowPics != null)
+    {
+        //temp = ViewBag.ShowPics;
+        //tempp = ViewBag.ShowPicsMood;
+    }
+
+    if (ViewBag.ShowVideos != null)
+    {
+        temp1 = ViewBag.ShowVideos;
+    }
+
+    if (ViewBag.StuResume != null)
+    {
+        temp2 = ViewBag.StuResume;
+    }
+    //string[] ShowPics = temp.Split(';');
+    //string[] ShowPicsMood = tempp.Split(';');
+    string[] ShowVideos = temp1.Split(';');
+    string[] StuResume = temp2.Split(';');
+
+
+    //string[] filename_p = new string[ShowPics.Length];
+    //string[] filename_v = new string[ShowVideos.Length];
+    string[] filename = new string[StuResume.Length];
+    string ReplaceStr = ViewBag.ReplaceStr;
+    string url = "/UserFiles/School/" + ViewBag.SchoolID + "/OtherFiles/StuResume/";
+    for (int i = 0; i < filename.Length; i++)
+    {
+        filename[i] = StuResume[i].Replace(url, "");
+        //filename_v[i] = ShowVideos[i].Replace(url, "");
+        //filename_p[i] = ShowPics[i].Replace(url, "");
+    }
+
+
+    double group = Math.Ceiling(Convert.ToDouble(StuPicList.Count / 3.0));
+    int groupp = Convert.ToInt32(group);
+}
+@model ServicePlatform.Models.T_Student
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    <link href="/Areas/School/Content/S_StuBaseInformation/stdShow.css" rel="stylesheet" type="text/css" />
+    <link href="/Areas/School/Content/S_StuBaseInformation/css/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/Areas/School/Content/S_StuBaseInformation/js/jquery.js"></script>
+    <script src="/Areas/School/Content/S_StuBaseInformation/css/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+    <script>
+        function check()
+        {
+            var c = document.getElementById("male");
+            if(c.checked=="checked")
+            {
+                document.getElementById("SEX").setAttribute("value", "男");
+            }
+            else
+            {
+                document.getElementById("SEX").setAttribute("value", "女");
+            }
+        }
+
+        function sendpic()
+        {
+            document.getElementById("send").click();
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- 学生基本信息-->
+    <div class="stdEssence">
+        <!--照片-->
+@using (Html.BeginForm("SaveStuHeadPic", "S_StuBaseInformation", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        <div class="myPhoto">
+            <img src='@ViewBag.MainPhoto' alt="大头照" />
+            @if (ViewBag.ForbidFlag != "true")
+            {
+            <input type="file" name="Photo" id="Photo" value="导入新相片" onchange="sendpic()" /><br />
+            <input type="submit" name="send" id="send" value="提交" hidden/>
+            }
+            <i style="color:red">推荐尺寸：410*580</i>
+        </div>
+}
+        <!--重要信息-->
+@using (Html.BeginForm("SaveStuBaseInfo", "S_StuBaseInformation", FormMethod.Post))
+{
+        <div class="mainInfo">
+            <table>
+                <tr>
+                    <th width="22%" scope="row"><span>*</span>学号：</th>
+                    <td width="78%"> <input name="stdId" type="text" readonly="readonly" value='@Html.DisplayFor(model => model.StuNo)' class="onlyRead" /></td>
+                </tr>
+
+                <tr>
+                    <th scope="row"><span>*</span>姓名：</th>
+                    <td><input name="stdName" type="text" readonly="readonly" value='@Html.DisplayFor(model => model.StuName)' class="onlyRead" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><span>*</span>性别：</th>
+                    <td>
+                        @if (ViewBag.Sex == "男")
+                        { 
+                            <label>
+                                <input type="radio" name="Sex" value="男" id="male" checked="checked" class="others" />男
+                            </label>
+                            <label>
+                                <input type="radio" name="Sex" value="女" id="female" class="others"  />女
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input type="radio" name="Sex" value="男" id="male" class="others"  />男
+                            </label>
+                            <label>
+                                <input type="radio"  name="Sex" value="女" id="female" checked="checked" class="others"/>女
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><span>*</span>电话：</th>
+                    <td><input id="stdTel" name="stdTel" type="tel"  required=""  value='@Html.DisplayFor(model => model.StuCellphone)' class="others" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><span>*</span>邮箱：</th>
+                    <td><input id="stdEmail" name="stdEmail"  required=""  type="email" value='@Html.DisplayFor(model => model.StuEMail)' class="others" /></td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+        <hr />
+        <!--补充信息-->
+        <div class="Addtional">
+            <table>
+                <tr>
+                    <th width="11%" scope="row">年级：</th>
+                    <td width="39%"><input name="stdEnrollment" type="text" readonly="readonly" value='@ViewBag.Year' class="onlyRead" /></td>
+                    <th width="11%" scope="row">专业：</th>
+                    <td width="39%"><input name="stdDepartment" type="text" readonly="readonly" value='@ViewBag.SpeName' class="onlyRead" /></td>
+                </tr>
+                <tr>
+                    <th scope="row">班级：</th>
+                    <td><input name="stdClass" type="text" readonly="readonly" required=""   value='@ViewBag.ClassName' class="onlyRead" /></td>
+                    <th scope="row">QQ：</th>
+                    <td><input id="stdQQ" name="stdQQ" type="text" required=""   value='@Html.DisplayFor(model => model.StuQQ)' class="others" /></td>
+                </tr>
+                <tr class="spacialInput">
+                    <th scope="row">身高：</th>
+                    <td><input id="stdHeight" name="stdHeight" required="" type="text" value='@Html.DisplayFor(model => model.StuHeight)' placeholder="cm" class="others" /></td>
+                    <th scope="row">体重：</th>
+                    <td><input id="stdWeight" name="stdWeight" required=""  type="text" value='@Html.DisplayFor(model => model.StuWeight)' placeholder="kg" class="others" /></td>
+                </tr>
+            </table>
+            <hr />
+            <label><span>*</span>个人简介：</label><br />
+            <textarea id="sdtAbstract" name="sdtAbstract" required=""   cols="1" rows="10">@Html.DisplayFor(model => model.StuResume)</textarea>
+        </div>
+        <hr />
+    <div class="bnt">
+        @*@if(!ViewBag.fobidList.Contains("_bt_save"))*@ 
+@if (ViewBag.ForbidFlag != "true")
+{ 
+    <div id="_bt_save">
+        <input name="save" type="submit" value="保存" style="margin-left: 290px" onclick=" check() "/>
+
+    </div>
+}
+     
+
+        <input id="userid" name="userid" type="hidden" value='@Html.DisplayFor(model => model.UserID)'/>
+        <input id="SEX" name="SEX" type="hidden" value=""/>
+    </div>
+}
+    </div>
+
+
+    <!--图片、视频等列表-->
+    <div class="imgList">
+        <div id="TabbedPanels1" class="TabbedPanels">
+            <ul class="TabbedPanelsTabGroup">
+                <li class="TabbedPanelsTab" tabindex="0">精彩图集</li>
+                <li class="TabbedPanelsTab" tabindex="1">自拍视频</li>
+                <li class="TabbedPanelsTab" tabindex="2">资源文件</li>
+            </ul>
+            <div class="TabbedPanelsContentGroup">
+                <div class="TabbedPanelsContent ">
+                    @if (ViewBag.ForbidFlag != "true")
+                    { 
+                    <form method="post" action="/S_StuBaseInformation/InprotBeatPics" enctype="multipart/form-data">
+                        <p><input type="file" multiple=multiple name="Photo" id="Photo" class="dfinput" /><input type="submit" value="上传图集" style="text-decoration:underline" class="btn"/></p>
+                    </form>
+                    }
+                    @if (StuPicList != null)
+                    {
+
+
+                        int n;//商
+                        int r;//余数
+                        int ImageListCount = 3;//预先设定的图片列表列数
+                        n = StuPicList.Count / ImageListCount;
+                        r = StuPicList.Count % ImageListCount;
+                        int iCol;
+                        //if (r == 0)
+                        //{//所有列的图片数量是一样的，写 ImageListCount个列即可
+                            //for (iCol = 0; iCol < ImageListCount; iCol++)
+                            //{
+
+                                //第一列
+                                <div class="innerList">
+                        
+                                    @for (int i = 0; i < StuPicList.Count; i = i + ImageListCount)
+                                    {
+                                        if (StuPicList[i] != null)
+                                        { 
+                                        <div class="inner">
+                                        <img src='@StuPicList[i].PicLink' alt="" />
+                                            @*<p>时间 ：15/01/21</p>*@
+                                        @if (ViewBag.ForbidFlag != "true")
+                                        {
+                                        @*<p><a href='/School/S_StuBaseInformation/DeleteBeatPics?innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/del.png" width="10"/>&nbsp;</a><a href="#" onclick="show_desc('/S_StuBaseInformation/AddPicMood/?innerid=@StuPicList[i].InnerID')"><img src="/Areas/School/Content/S_StuBaseInformation/img/mood.png" width="10" />&nbsp;</a><a href='/S_StuBaseInformation/PicReorder/?type=1&innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/forward.png" width="10" />&nbsp;</a><a href='/S_StuBaseInformation/PicReorder/?type=2&innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/back.png" width="10" /></a></p>*@
+                                         <p><a href='/School/S_StuBaseInformation/DeleteBeatPics?innerid=@StuPicList[i].InnerID'>删除| </a><a href="#" onclick="show_desc('/S_StuBaseInformation/AddPicMood/?innerid=@StuPicList[i].InnerID')">心情| </a><a href='/S_StuBaseInformation/PicReorder/?type=1&innerid=@StuPicList[i].InnerID'>前移| </a><a href='/S_StuBaseInformation/PicReorder/?type=2&innerid=@StuPicList[i].InnerID'>后移</a></p>
+                                        }
+                                        @if (StuPicList[i].PicMood == null || StuPicList[i].PicMood == "")
+                                        {
+                                            <p style="color: red;float:none">暂无描述</p>
+                                        }
+                                        else
+                                        {
+                                            <p style="color: red;float:none">@StuPicList[i].PicMood</p>
+                                        }                 
+                                        </div>
+                                        }
+                                    }         
+                                </div>
+                                
+                                    //第二列
+                                <div class="innerList">
+                        
+                                    @for (int i = 1; i < StuPicList.Count; i = i + ImageListCount)
+                                    {
+                                        if (StuPicList[i] != null)
+                                        { 
+                                        <div class="inner">
+                                        <img src='@StuPicList[i].PicLink' alt="" />
+                                            @*<p>时间 ：15/01/21</p>*@
+                                        @if (ViewBag.ForbidFlag != "true")
+                                        {
+                                        @*<p><a href='/School/S_StuBaseInformation/DeleteBeatPics?innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/del.png" width="10"/>&nbsp;</a><a href="#" onclick="show_desc('/S_StuBaseInformation/AddPicMood/?innerid=@StuPicList[i].InnerID')"><img src="/Areas/School/Content/S_StuBaseInformation/img/mood.png" width="10" />&nbsp;</a><a href='/S_StuBaseInformation/PicReorder/?type=1&innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/forward.png" width="10" />&nbsp;</a><a href='/S_StuBaseInformation/PicReorder/?type=2&innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/back.png" width="10" /></a></p>*@
+                                         <p><a href='/School/S_StuBaseInformation/DeleteBeatPics?innerid=@StuPicList[i].InnerID'>删除| </a><a href="#" onclick="show_desc('/S_StuBaseInformation/AddPicMood/?innerid=@StuPicList[i].InnerID')">心情| </a><a href='/S_StuBaseInformation/PicReorder/?type=1&innerid=@StuPicList[i].InnerID'>前移| </a><a href='/S_StuBaseInformation/PicReorder/?type=2&innerid=@StuPicList[i].InnerID'>后移</a></p>
+                                        }
+                                        @if (StuPicList[i].PicMood == null || StuPicList[i].PicMood == "")
+                                        {
+                                            <p style="color: red;float:none">暂无描述</p>
+                                        }
+                                        else
+                                        {
+                                            <p style="color: red;float:none">@StuPicList[i].PicMood</p>
+                                        }                 
+                                        </div>
+                                        }
+                                    }         
+                                </div>
+                                
+
+
+                                    //第三列   
+                                <div class="innerList">
+                        
+                                    @for (int i = 2; i < StuPicList.Count; i = i + ImageListCount)
+                                    {
+                                        if (StuPicList[i] != null)
+                                        { 
+                                        <div class="inner">
+                                        <img src='@StuPicList[i].PicLink' alt="" />
+                                            @*<p>时间 ：15/01/21</p>*@
+                                        @if (ViewBag.ForbidFlag != "true")
+                                        {
+                                        @*<p><a href='/School/S_StuBaseInformation/DeleteBeatPics?innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/del.png" width="10"/>&nbsp;</a><a href="#" onclick="show_desc('/S_StuBaseInformation/AddPicMood/?innerid=@StuPicList[i].InnerID')"><img src="/Areas/School/Content/S_StuBaseInformation/img/mood.png" width="10" />&nbsp;</a><a href='/S_StuBaseInformation/PicReorder/?type=1&innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/forward.png" width="10" />&nbsp;</a><a href='/S_StuBaseInformation/PicReorder/?type=2&innerid=@StuPicList[i].InnerID'><img src="/Areas/School/Content/S_StuBaseInformation/img/back.png" width="10" /></a></p>*@
+                                         <p><a href='/School/S_StuBaseInformation/DeleteBeatPics?innerid=@StuPicList[i].InnerID'>删除| </a><a href="#" onclick="show_desc('/S_StuBaseInformation/AddPicMood/?innerid=@StuPicList[i].InnerID')">心情| </a><a href='/S_StuBaseInformation/PicReorder/?type=1&innerid=@StuPicList[i].InnerID'>前移| </a><a href='/S_StuBaseInformation/PicReorder/?type=2&innerid=@StuPicList[i].InnerID'>后移</a></p>
+                                        }
+                                        @if (StuPicList[i].PicMood == null || StuPicList[i].PicMood == "")
+                                        {
+                                            <p style="color: red;float:none">暂无描述</p>
+                                        }
+                                        else
+                                        {
+                                            <p style="color: red;float:none">@StuPicList[i].PicMood</p>
+                                        }                 
+                                        </div>
+                                        }
+                                    }         
+                                </div>
+
+                                
+
+                           // }
+                        //}//ending of if 
+
+                    }@*ending of [if (StuPicList != null)]*@                   
+                        
+                   
+                </div>
+
+
+                <div class="TabbedPanelsContent">
+@if (ViewBag.ForbidFlag != "true")
+{ 
+                    <form method="post" action="/S_StuBaseInformation/ImportVedios" enctype="multipart/form-data">
+                        <p><input type="file" multiple=multiple name="Video" id="Video" class="dfinput" /><input type="submit" value="上传视频" style="text-decoration:underline" class="btn"/></p>
+                    </form>
+}
+                    <p><font color="red">推荐格式:.mp4 .ogg .webm,其他格式暂不支持，要转码，戳这里-></font><a href="http://home.baofeng.com/zm/zm.html">暴风转码</a></p>
+                    <!--视频列表-->
+                    @if (temp1 != "")
+                    {
+                    <div class="videoList">
+                        @for (int i = 0; i < ShowVideos.Length; i++)
+                        {
+                        <div class="videoInner">
+                            <video width="100%" height="100%" controls=controls>
+                                <source src='@ShowVideos[i]' type="video/mp4" />
+                                <source src='@ShowVideos[i]' type="video/ogg" />
+                                <source src='@ShowVideos[i]' type="video/webm" />
+                                @*<object data='@ShowVideos[i]' width="320" height="240">
+                <embed width="320" height="240" src='@ShowVideos[i]' />
+            </object>*@
+                            </video>
+@if (ViewBag.ForbidFlag != "true")
+{
+                            <a href='/School/S_StuBaseInformation/DeleteVedios?fileurl=@ShowVideos[i]'>
+                                删除
+                                @*<img src="/Areas/School/Content/S_StuBaseInformation/img/4.jpg" alt="" />
+            <p>测试数据，测试数据，测试数据，文字超过一行后隐藏！</p>*@
+                            </a>
+}
+                        </div>
+                        }
+                  </div>  <!--/videoList end-->
+                    }
+                </div>
+
+
+                <div class="TabbedPanelsContent">
+@if (ViewBag.ForbidFlag != "true")
+{ 
+                    <form method="post" action="/S_StuBaseInformation/ImportResume" enctype="multipart/form-data">
+                        <p><input type="file" multiple=multiple name="Resume" id="Resume" class="dfinput" /><input type="submit" value="上传资源文件" style="text-decoration:underline" class="btn"/></p>
+                    </form>
+}
+                    <!--相关资源-->
+                    @if (temp2 != "")
+                    { 
+                    <ul class="sourceEnpris">
+                        @for (int i = 0; i < StuResume.Length; i++)
+                        { 
+                        <li><span>&#8226;</span><a href='@StuResume[i]' target="_blank">@filename[i]</a>
+@if (ViewBag.ForbidFlag != "true")
+{
+                        <div style="text-align: right; float:right">
+                            <a href='/School/S_StuBaseInformation/DeleteResume?fileurl=@StuResume[i]'>删除</a>
+                            </div>
+}
+                        </li>
+                        }
+                    </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+    </script>
+
+
+
+    <script>
+
+        function show_desc(url) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['420px', '300px'],
+                title: "添加心情",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + '\<form action=' + url + ' method="post">' + '\<\label>心情描述:   <\/lable>' + '\<\input type="text" class="dfinput" name="picmood" id="picmood" value="">' + '\<br />' + '\<br />' + '\<br />' + '\<br />' + '\<br />' + '\<br />' + '\<\input type="submit" value="添加心情" class="btn" style="float:right">' + '\<\/form>' + '\<\/div>'
+            });
+        }
+    </script>
+
+</body>
+</html>
+

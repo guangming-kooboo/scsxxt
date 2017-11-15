@@ -1,0 +1,460 @@
+﻿@{
+    //ViewBag.SchoolID
+    //  ViewBag.PositionID
+    // &SchoolID=@ViewBag.SchoolID&PositionID=@ViewBag.PositionID
+    // ViewBag.actionFlag
+    var actionURL = ViewBag.actionURL;
+    var actionFlag = ViewBag.actionFlag;
+    var SchoolID = ViewBag.SchoolID;
+    var PositionID = ViewBag.PositionID;
+    //传给分页
+
+    ViewBag.link += @"?actionFlag=" + actionFlag +
+    "&PositionID=" + PositionID +
+    "&SchoolID=" + SchoolID;
+
+
+
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Areas/Platform/Content/Admin/css/style.css" rel="stylesheet" />
+    <script src="~/Areas/Platform/Content/Admin/js/jquery.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
+
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#SchoolID").change(AutoSubmit);
+            $("#PositionID").change(AutoSubmit);
+            $("#VolunteerSequence").change(AutoSubmit);
+            $("#PosSequence").change(AutoSubmit);
+           // $("#StuSex").change(AutoSubmit);
+
+            $("#SchoolID").val("@ViewData["SchoolID"]");
+            $("#PositionID").val("@ViewData["PositionID"]");
+            $("#VolunteerSequence").val("@ViewData["VolunteerSequence"]");
+            $("#PosSequence").val("@ViewData["PosSequence"]");
+           // $("#StuSex").val("@ViewData["StuSex"]");
+        })
+
+        function AutoSubmit()
+        {
+           // alert("正在提交")
+            location.href = "/Enterprise/Home/@actionURL?actionFlag=@actionFlag&SchoolID=" + $("#SchoolID").val() + "&PositionID=" + $("#PositionID").val() + "&VolunteerSequence=" + $("#VolunteerSequence").val() + "&PosSequence=" + $("#PosSequence").val();// + "&StuSex=" + $("#StuSex").val();
+        }
+        function Search() {
+            var keyword = $("#keyword").val();
+            if (keyword == "") {
+                alert("请输入搜索关键字");
+            } else {
+                location.href = "/Enterprise/Home/@actionURL?actionFlag=@actionFlag&SchoolID=" + $("#SchoolID").val() + "&PositionID=" + $("#PositionID").val() + "&VolunteerSequence=" + $("#VolunteerSequence").val() + "&PosSequence=" + $("#PosSequence").val() +"&keyword=" + $("#keyword").val()
+              
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+
+    function mssj(a, b, c) {
+
+        layer.open({
+            type: 1, //page层
+            area: ['300px', '250px'],
+            title: '安排面试时间',
+            shade: 0.6, //遮罩透明度
+            moveType: 1, //拖拽风格，0是默认，1是传统拖动
+            shift: 2, //0-6的动画形式，-1不开启
+            content: '<form action="/Enterprise/Home/T_PracticeVolunteer_ArrangeTime" method="post">'
+                + '<div style="padding:50px;">' + '<br/>'
+                + '<input type="hidden" name="PracticeNo" id="PracticeNo" value=' + a + '  /> '
+                 + '<input type="hidden" name="EntPracNo" id="EntPracNo" value=' + b + '  /> '
+                  + '<input type="hidden" name="PosID" id="PosID" value=' + c + '  /> '
+                    + '<input type="hidden" name="SchoolID" id="SchoolID"  value="@SchoolID" /> '
+                     + '<input type="hidden" name="actionFlag" id="actionFlag"  value="@actionFlag" /> '
+                    + '<input type="text" placeholder="请输入日期" name="InterviewTime" id="InterviewTime" class="laydate-icon" onclick="laydate({istime: true, format: \'YYYY-MM-DD hh:mm:ss\'})" />' + '<br/><br/>'
+                    + '<button type="submit" class="btn">提交</button></div>'
+                 + '</form>'
+            });   //alert('正在提交' + $("#PracticeNo").val() + $("#InterviewTime").val())
+        }
+
+
+        function msjg(a,b,c)
+        {
+           // alert('成功');
+            layer.open({
+                type: 1, //page层
+                area: ['450px', '420px'],
+                title: '录入面试结果',
+                shade: 0.6, //遮罩透明度
+                moveType: 1, //拖拽风格，0是默认，1是传统拖动
+                shift: 2, //0-6的动画形式，-1不开启
+                content: '<form action="/Enterprise/Home/T_PracticeVolunteer_Interview" method="post">'
+                    + '<div style="padding:50px;margin-top: -80px;">' + '<br/>'
+                    + '<input type="hidden" name="PracticeNo" id="PracticeNo"  value=' + a + '  /> '
+                     + '<input type="hidden" name="EntPracNo" id="EntPracNo"  value=' + b + '  /> '
+                      + '<input type="hidden" name="PosID" id="PosID"  value=' + c + '  /> '
+                          + '<input type="hidden" name="SchoolID" id="SchoolID" c value="@SchoolID" /> '
+                            + '<input type="hidden" name="actionFlag" id="actionFlag"  value="@actionFlag" /> '
+                    + '' + '<br/><br/>'
+                     + '<input type="text" name="Interviewee"class="dfinput" placeholder="面试官 如张三"/>' + '<br/><br/>'
+                     + '<input type="text" name="InterviewScore"class="dfinput" placeholder="面试分数 如98"/>' + '<br/><br/>'
+                      + '<textarea  name="InterviewRecord"class="textinput">面试记录</textarea>' + '<br/><br/>'
+                    + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn">提交</button></div>'
+                 + '</form>'
+            });
+           // alert('成功2');
+        }
+        function bmxxwh(a, b, c,d,e) {
+            // alert('成功');
+            layer.open({
+                type: 1, //page层
+                area: ['450px', '350px'],
+                title: '部门信息维护',
+                shade: 0.6, //遮罩透明度
+                moveType: 1, //拖拽风格，0是默认，1是传统拖动
+                shift: 2, //0-6的动画形式，-1不开启
+                content: '<form action="/Enterprise/Home/T_StuBatchReg_DepartChange" method="post">'
+                    + '<div style="padding:50px;">' + '<br/>'
+                    + '<input type="hidden" name="PracticeNo" id="PracticeNo"  value=' + a + '  /> '
+                     + '<input type="hidden" name="EntPracNo" id="EntPracNo"  value=' + b + '  /> '
+                      + '<input type="hidden" name="PosID" id="PosID" value=' + c + '  /> '
+                          + '<input type="hidden" name="SchoolID" id="SchoolID"  value="@SchoolID" /> '
+                          + '<input type="hidden" name="actionFlag" id="actionFlag"  value="@actionFlag" /> '
+                    + '' + '<br/><br/>'
+                    + '<input type="text" name="PracticeDept" class="dfinput" placeholder="部门 "value="' + d + '"/>' + '<br/><br/>'
+                     + '<input type="text" name="PracticeDivDept"class="dfinput"  placeholder="分部门 "value="' + e + '"/>' + '<br/><br/>'
+                    + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn">提交</button></div>'
+                 + '</form>'
+            });
+            // alert('成功2');
+        }
+        function ghgw(a, b, c) {
+            // alert('成功');
+            layer.open({
+                type: 1, //page层
+                area: ['450px', '350px'],
+                title: '更换岗位',
+                shade: 0.6, //遮罩透明度
+                moveType: 1, //拖拽风格，0是默认，1是传统拖动
+                shift: 2, //0-6的动画形式，-1不开启
+                content: '<form action="/Enterprise/Home/T_PracticeVolunteer_ChangePosition" method="post">'
+                    + '<div style="padding:50px;">' + '<br/>'
+                    + '<input type="hidden" name="PracticeNo" id="PracticeNo"  value=' + a + '  /> '
+                     + '<input type="hidden" name="EntPracNo" id="EntPracNo" value=' + b + '  /> '
+                      + '<input type="hidden" name="PosID" id="PosID"value=' + c + '  /> '
+                          + '<input type="hidden" name="SchoolID" id="SchoolID"  value="@SchoolID" /> '
+
+                    + '' + '<br/><br/>'
+
+                     + '@(new HtmlString(ServicePlatform.Lib.PageHelper.GetSelectHtml((List<SelectListItem>)ViewBag.PracticePositionItem, "newPosID")))' + '<br/><br/>'
+                    + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn">提交</button></div>'
+                 + '</form>'
+            });
+            // alert('成功2');
+        }
+
+        function msjl(content) {
+            //信息框-例1
+            layer.alert(content, { icon: 1 });
+    }
+    </script>
+
+    @Html.Partial("_LayerLinks")
+    @Html.Partial("_LaydateTimePick")
+
+</head>
+
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">后台首页</a></li>
+            <li><a href="#">@ViewBag.Title</a></li>
+
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        <div class="tools">
+
+            <ul class="toolbar">
+
+
+                <li>
+                    <label>&nbsp;&nbsp;选择学校&nbsp;&nbsp;</label>
+                </li>
+                <li>
+                    @Html.DropDownList("SchoolID", (List<SelectListItem>)ViewBag.PassedPracticeSchoolItem, new { style = "width: 120px;", @class = "dfinput" })
+                    @*<select id="SchoolID" >
+
+                            <option>条件1</option>
+                            <option>条件2</option>
+                        </select>*@
+                </li>
+
+
+                <li>
+                    <label>&nbsp;&nbsp;选择岗位&nbsp;&nbsp;</label>
+                </li>
+                <li>
+                    @Html.DropDownList("PositionID", (List<SelectListItem>)ViewBag.PracticePositionItem, new { style = "width: 80px;", @class = "dfinput" })
+                </li>
+                <li>
+                    <label>&nbsp;&nbsp;志愿顺序&nbsp;&nbsp;</label>
+                </li>
+                <li>
+                    @Html.DropDownList("VolunteerSequence", (new List<SelectListItem>() { @*new SelectListItem() { Selected = true, Text = "全部", Value = "-1" },*@ new SelectListItem() { Text = "第一志愿", Value = "1" }, new SelectListItem() { Text = "第二志愿", Value = "2" } }), new { style = "width: 120px;", @class = "dfinput" })
+                </li>
+
+                <li>
+                    <label>&nbsp;&nbsp;岗位顺序&nbsp;&nbsp;</label>
+                </li>
+                <li>
+                    @Html.DropDownList("PosSequence", (new List<SelectListItem>() { @*new SelectListItem() { Selected = true, Text = "全部", Value = "-1" },*@ new SelectListItem() { Text = "第一岗位", Value = "1" }, new SelectListItem() { Text = "第二岗位", Value = "2" } }), new { style = "width: 120px;", @class = "dfinput" })
+                </li>
+                @*<li>
+                    <label>&nbsp;&nbsp;选择性别&nbsp;&nbsp;</label>
+                </li>
+                <li>
+                    @Html.DropDownList("StuSex",
+                   (new List<SelectListItem>() { /*new SelectListItem() { Selected = true, Text = "全部", Value = "-1" } ,*/new SelectListItem() { Text = "女", Value = "女" }, new SelectListItem() { Text = "男", Value = "男" } }), new { style = "width: 80px;", @class = "dfinput" }
+
+                   )
+                </li>*@
+                <li>
+                    <input type="text" class="dfinput" id="keyword" placeholder="班级/专业/学号/姓名/性别 搜索" /><button onclick="Search()" class="btn btn-primary">搜索</button>
+
+                </li>
+
+            </ul>
+
+
+            @*<ul class="toolbar1">
+                    <li><span><img src="/Areas/Platform/Content/Admin/images/t05.png" /></span>设置</li>
+                </ul>*@
+
+        </div>
+
+        <table class="tablelist">
+            <thead>
+                <tr>
+
+                    @for (var i = 0; i < ViewBag.headerTitle.Count; i++)
+                    {
+                        <th>@ViewBag.headerTitle[i]</th>
+                    }
+                    <th>操作</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (var i = 0; i < ViewBag.dataList.Count; i++)
+                {
+
+                    <tr>
+
+                        @for (var j = 0; j < ViewBag.dataList[i].Count; j++)
+                        {
+                            <td>  @ViewBag.dataList[i][j]</td>
+                        }
+
+                        <td>
+                            @using xyj.Lib
+                            @using ServicePlatform.Models
+                            @{
+
+                                var item = PageHelper.ParseLinkParmsToDic(ViewBag.linkParms[i]);
+
+                                switch ((string)ViewBag.actionFlag)
+                                {
+
+                                    case "面试管理":
+                                        {
+                                            <a href='/School/S_StuBaseInformation/BaseInfoMaintan?userid=@item["UserID"]&ForbidFlag=true' target="_blank" class="tablelink">学生信息</a>
+                                            if (item["VolunteerStatus"] == "0")
+                                            { //安排时间
+                                                <a onclick="mssj('@item["PracticeNo"]', '@item["EntPracNo"]', '@item["PosID"]')" class="tablelink">安排时间</a>
+                                                //直接录取
+                                                <a href='/Enterprise/Home/T_PracticeVolunteer_Interview_OK?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">直接录取</a>
+                                                //拒绝录取
+                                                <a href='/Enterprise/Home/T_PracticeVolunteer_Interview_NotOK?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">拒绝录取</a>
+
+                                            }
+                                            else if (item["VolunteerStatus"] == "1")
+                                            {//重新安排时间
+                                                <a onclick="mssj('@item["PracticeNo"]','@item["EntPracNo"]','@item["PosID"]')" class="tablelink">重新安排时间</a>
+                                                //录入面试结果
+                                                <a onclick="msjg('@item["PracticeNo"]','@item["EntPracNo"]','@item["PosID"]')" class="tablelink">录入面试结果</a>
+                                                //直接录取
+                                                <a href='/Enterprise/Home/T_PracticeVolunteer_Interview_OK?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">直接录取</a>
+                                                //拒绝录取
+                                                 <a href='/Enterprise/Home/T_PracticeVolunteer_Interview_NotOK?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">拒绝录取</a>
+
+                                            }
+                                            else if (item["VolunteerStatus"] == "2")
+                                            {
+
+                                                //查看面试记录
+                                                <a onclick="msjl('@((item["InterviewRecord"]).Replace("\r\n","<br/>"))')" class="tablelink">查看面试记录</a>
+                                                //录取  不录取
+                                                <a href='/Enterprise/Home/T_PracticeVolunteer_Interview_OK?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">录取</a>
+                                                <a href='/Enterprise/Home/T_PracticeVolunteer_Interview_NotOK?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">不录取</a>
+
+                                                // <a href='@(ViewBag.Action[i][0] + "?" + ViewBag.Action[i][1] + "=" + LibHelper.ReflectionHelper.GetObjPropertieValue(item, ViewBag.Action[i][1]))  ' class="tablelink">@ViewBag.Action[i][2]</a>
+
+                                            }
+                                            else if (item["VolunteerStatus"] == "3")
+                                            {
+                                                <label>该学生未通过面试</label>
+                                            }
+                                            else if (item["VolunteerStatus"] == "4")
+                                            {
+                                                <label>等待学生同意录取</label>
+                                            }
+
+                                            else if (item["VolunteerStatus"] == "6")
+                                            {
+                                                <label>学生拒绝,分配失败</label>
+                                            }
+                                            else if (item["VolunteerStatus"] == "7")
+                                            {
+                                                <label>已被其他企业录取</label>
+                                            }
+                                        }
+                                        break;
+                                    case "实习结果管理":
+                                        {
+                                            string PracticeNo = item["PracticeNo"];
+                                            //录入实习鉴定表
+                                            @*<label><a href='/Enterprise/Home/T_EntBatchReg_PracticeIdentification_Student?PracticeNo=@item["PracticeNo"]' class="tablelink">实习鉴定表[学生]</a></label>
+                                                <label><a href='/Enterprise/Home/T_EntBatchReg_PracticeIdentification_Teacher?PracticeNo=@item["PracticeNo"]' class="tablelink">实习鉴定表[教师]</a></label>*@
+                                            //实习材料查看
+                                            <label><a href="/School/S_MyWorkPlat/MyWorkPlat?focus=tab1&StuPracNo=@PracticeNo&ForbidFlag=true" target="_blank" class="tablelink">实习材料</a></label>
+                                            //录入实习鉴定表
+                                            <label><a href='/Enterprise/Home/T_EntBatchReg_PracticeIdentification?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">实习鉴定表</a></label>
+                                            //录入实习评价
+                                            @*<label><a href='/Enterprise/Home/T_EntBatchReg_PracticelGrade?PracticeNo=@item["PracticeNo"]&EntPracNo=@item["EntPracNo"]&PosID=@item["PosID"]&SchoolID=@ViewBag.SchoolID' class="tablelink">录入实习评价</a></label>*@
+
+                                    if (item["VolunteerStatus"] == "5")
+                                    {
+                                    }
+                                    else if (item["VolunteerStatus"] == "7")
+                                    {
+                                    }
+                                    else if (item["VolunteerStatus"] == "8")
+                                    {
+
+                                    }
+                                }
+                                break;
+                            case "岗位指派管理":
+                                {
+                                    SchoolContext sc = new SchoolContext();
+                                    string PracticeNo = item["PracticeNo"];
+
+                                    var old = (from t in sc.StuBatchReg
+                                               where t.PracticeNo == PracticeNo
+                                               select t).FirstOrDefault();
+
+                                    //更换岗位
+                                    <a onclick="ghgw('@item["PracticeNo"]','@item["EntPracNo"]','@item["PosID"]')" class="tablelink">更换岗位</a>
+                                        }
+                                        break;
+                                    case "部门信息维护":
+                                        {
+                                            SchoolContext sc = new SchoolContext();
+                                            string PracticeNo = item["PracticeNo"];
+
+                                            var old = (from t in sc.StuBatchReg
+                                                       where t.PracticeNo == PracticeNo
+                                                       select t).FirstOrDefault();
+
+                                            //部门信息维护
+                                            <a onclick="bmxxwh('@item["PracticeNo"]','@item["EntPracNo"]','@item["PosID"]','@old.PracticeDept','@old.PracticeDivDept')" class="tablelink">部门信息维护</a>
+                                        }
+                                        break;
+                                    case "实习材料查看":
+                                        {
+                                            string PracticeNo = item["PracticeNo"];
+                                            //实习材料查看
+                                            <a href="/School/S_MyWorkPlat/MyWorkPlat?focus=tab1&StuPracNo=@PracticeNo&ForbidFlag=true" target="_blank" class="tablelink">实习材料查看</a>
+
+                                        }
+                                        break;
+                                }
+
+                            }
+
+
+                        </td>
+                    </tr>
+                                }
+
+
+
+
+
+            </tbody>
+        </table>
+        <!--分页开始-->
+        @Html.Partial("_CutPage")
+        <!--分页结束-->
+
+
+        <div class="tip">
+            <div class="tiptop"><span>提示信息</span><a></a></div>
+
+            <div class="tipinfo">
+
+                <div class="tipright">
+
+                    <p>是否确认对信息的修改 ？</p>
+                    <ul>
+                        <li><input type="text" class="dfinput" placeholder="用户名" /></li>
+                        <li><input type="text" class="dfinput" placeholder="密码" /></li>
+                    </ul>
+
+
+                    <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                </div>
+            </div>
+
+            <div class="tipbtn">
+                <input name="" type="button" class="sure" value="确定" />&nbsp;
+                <input name="" type="button" class="cancel" value="取消" />
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+</body>
+
+</html>

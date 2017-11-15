@@ -1,0 +1,18 @@
+﻿@using iTextSharp.text
+@using Qx.Tools.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.ProofMaterial_M
+@{
+    ViewBag.Title = "ProofMaterial";
+}
+@if (Model.note.HasValue())
+{
+
+    <h2 > @(new HtmlString(Model.note)) </h2>
+    <hr/>
+
+}
+@foreach (var item in Model._contentArray)
+{
+    <img src="@item"/>
+    <br />
+}

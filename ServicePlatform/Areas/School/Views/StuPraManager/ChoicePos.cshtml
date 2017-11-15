@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "EntEnrollInformation";
+}
+
+
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+<html>
+<head>
+    <title>添加岗位</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script>
+        function jump(Entprano, PosID) {
+            var volunteer = document.getElementById("volunteer").value;
+            var vorder = document.getElementById("vorder").value;
+            var userid = '@ViewBag.UserID';
+            var url = '/School/StuPosManager/AddEnrollToStuOP?UserID=' + userid + '&Entprano=' + Entprano + '&PosID=' + PosID + '&PosID=' + PosID + '&volunteer=' + volunteer + '&vorder=' + vorder;
+            window.location = url;
+        }
+    </script>
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生岗位管理</a></li>
+            <li><a href="#">添加岗位</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+        @using (Html.BeginForm("SaveFinalPosToStu", "StuPraManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>当前操作的学生:@ViewBag.StuName  ||  用户名:@ViewBag.UserID</span></div>
+            <input type="hidden" value='@ViewBag.UserID' name="UserID" id="UserID" />
+            <div class="formtitle"><span>选择企业/岗位: </span></div>
+
+            @Html.Partial("_EntPosition")
+
+            <br />
+            <br />
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </label><input type="submit" class="btn" value="保存" />
+
+        }
+
+    </div>
+</body>
+</html>

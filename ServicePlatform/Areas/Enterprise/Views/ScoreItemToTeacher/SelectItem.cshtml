@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Core.Services.Entity.T_SchoolReviewerTask>
+
+@{
+    ViewBag.Title = "我负责的评分项列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script>
+    function AfterSelectSchools() {
+        var entPracNo = $("#EntPracNo").val();
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItemToTeacher/GetEntItems",
+            data: { EntPracNo: entPracNo },
+            dataType: "json",
+            success: function (reslut) {
+
+                var tb = "";
+                $.each(reslut, function (i, item) {
+                    tb += "<tr>" +
+                        "<td>" + item.ItemName + "</td>" +
+                        "<td>" + item.ItemWeight + "</td>" +
+                        "<td>" + item.ItemSequence + "</td>" +
+                        "<td> " +
+                         " <a href='/Enterprise/ScoreItemLinkStudent/SelectStudent?TaskID=" + item.TaskID + "&EntPracNo=" + entPracNo + "'>学生列表</a>"
+                    "</td>" +
+                    "</tr>";
+                });
+                $("#arrangeList").html(tb);
+                $("#tip").html("准备就绪!");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择班级");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+</script>
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("_SelectSchool")
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    评分项
+                </th>
+                <th>
+                    比重
+                </th>
+                <th>
+                    排序
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="arrangeList">
+            @*@foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.T_SchoolReviewItem.ItemName
+                    </td>
+                    <td>
+                        @item.T_SchoolReviewItem.ItemWeight
+                    </td>
+                    <td>
+                        @item.T_SchoolReviewItem.ItemSequence
+                    </td>
+                    <td>
+                        <a href="/School/ScoreItemLinkStudent/SelectStudent?id=@item.TaskID">学生列表</a>|
+                        @Html.ActionLink("删除", "Delete", new { id = item.ItemID })
+                    </td>
+                </tr>
+            }*@
+        </tbody>
+    </table>
+</div>

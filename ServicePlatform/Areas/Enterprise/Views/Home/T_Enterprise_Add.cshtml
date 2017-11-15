@@ -1,0 +1,395 @@
+﻿@model ServicePlatform.Areas.Enterprise.Models.Home.T_Enterprise_Edict
+@using ServicePlatform.Models;
+@using ServicePlatform.Lib;
+@{
+    ViewBag.Title = "编辑企业资料";
+   
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>编辑企业资料</title>
+    <link href="~/Areas/Enterprise/Content/Admin/css/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            //获取市列表
+            $("#Province").change(function() {
+                getCity($(this).val());
+                document.getElementById('province').setAttribute("value", $(this).val());
+            });
+            //获取镇列表
+            $("#City").change(function() { getTown($(this).val()); });
+            //获取企业类型列表
+            $("#EntCategoryID").change(function() { getEntRank($(this).val()); });
+        });
+
+        function getCity(value) {
+            //$("#City").html(""); //清空
+            $.ajax({
+                type: "post",
+                url: "/Enterprise/Home/GetCityList",
+                data: { provinveCode: value },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        $("#City option").remove();
+                        $.each(data.Pos, function (i, item) {
+                            $("#City").append("<option value='" + item.CityID + "'>" + item.CityName + "</option>");
+                        });
+                        getTown(item[0].CityID);
+                    }
+                    else {
+                        $("#City option").remove();
+                        $("#City").append("<option value=''>--请选择--</option>")
+
+                    }
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+        function getTown(value1) {
+            $.ajax({
+                type: "post",
+                url: "/Enterprise/Home/GetTownList",
+                data: { cityCode: value1 },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        $("#Town option").remove();
+                        $.each(data.Pos, function (i, item) {
+                            $("#Town").append("<option value='" + item.CountyID + "'>" + item.CountyName + "</option>");
+                        });
+                    }
+                    else {
+                        $("#Town option").remove();
+                        $("#Town").append("<option value=''>--请选择--</option>")
+
+                    }
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+        function getEntRank(value)
+        {
+            $.ajax({
+                type: "post",
+                url: "/Enterprise/Home/GetEntRankList",
+                data: { EntCategoryID: value },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        $("#EntRank option").remove();
+                        $.each(data.Pos, function (i, item) {
+                            $("#EntRank").append("<option value='" + item.EntRankID + "'>" + item.EntRankName + "</option>");
+                        });
+                    }
+                    else {
+                        $("#EntRank option").remove();
+                        $("#EntRank").append("<option value=''>--请选择--</option>")
+
+                    }
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+
+
+        function Delete(DLFileID) {
+            windows.location.href=
+            //使用Ajax传递需要删除的新闻编号
+            $.ajax({
+                type: 'POST',
+                url: '/DLCenter/DeleteDL',
+                data: {
+                    DLFileID: DLFileID,
+                },
+                beforeSend: function () {
+                    $('#DLTableBox').datagrid('loading');
+                },
+                success: function (data) {
+                    if (data) {
+                        alert("删除成功！")
+                    }
+                }
+            });
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">添加记录</a></li>
+        </ul>
+    </div>
+
+
+    <form action="@ViewBag.flag " method="post" enctype="multipart/form-data">
+
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>添加记录</span></div>
+
+            <ul class="forminfo">
+                <li>
+                    <label>企业编号</label>
+                    <input name="Ent_No" type="text" value="@Model.Enterprise.Ent_No" class="dfinput" />
+                    <i>*请输入 企业编号</i>
+                </li>
+                <li>
+                    <label>企业名称</label>
+                    <input name="Ent_Name" type="text" value="@Model.Enterprise.Ent_Name" class="dfinput" />
+                    <i>*请输入 企业名称</i>
+                </li>
+
+                @*<li>
+                    <label>所在省：</label>
+
+
+                    @Html.DropDownList("ProvinceID", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.CodeTableContext(), "C_Province", "ServicePlatform.Models"), new { id = "Province", @class = "dfinput" })
+                </li>
+                <li>
+                    <label>所在市：</label>
+                    @Html.DropDownList("CityID", new List<SelectListItem>(), new { id = "City", @class = "dfinput" })
+                </li>
+                <li>
+                    <label>所在(区/县)：</label>
+                    @Html.DropDownListFor(m => m.CountyID, new List<SelectListItem>() as IEnumerable<SelectListItem>, new {id = "Town", @class = "dfinput"})
+                </li>*@
+
+                @*隐藏字段用于在js调用，设置url路径*@
+
+
+                <li>
+                    <label>企业地址</label>
+                    <input name="EntAddress" type="text" value="@Model.Enterprise.EntAddress" class="dfinput" />
+                    <i>*请输入 企业地址</i>
+                </li>
+
+                <li>
+                    <label>企业类型代码</label>
+                    @Html.DropDownList("EntCategoryID", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.CodeTableContext(), "C_EntCategory", "ServicePlatform.Models"), new { @class = "dfinput" })
+                    <i>*请输入 企业类型代码</i>
+                </li>
+                <li>
+
+                    <label>企业级别</label>
+                    @Html.DropDownList("EntRank", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.CodeTableContext(), "C_EntRank", "ServicePlatform.Models", 2), new { @class = "dfinput" })
+
+                    <i>*请选择 企业级别</i>
+                </li>
+
+
+                </li>
+
+                <li>
+                    <label>邮箱</label>
+                    <input name="Email" type="text" value="@Model.Enterprise.Email" class="dfinput" />
+                    <i>*请输入 邮箱</i>
+                </li>
+                <li>
+                    <label>联系方式</label>
+                    <input name="Contectinfo" type="text" value="@Model.Enterprise.Contectinfo" class="dfinput" />
+                    <i>*请输入 联系方式</i>
+                </li>
+
+                <input name="UserID" type="hidden"  value="@Model.Enterprise.UserID" class="dfinput" />
+
+                <li>
+                    <label>企业视频</label>
+                    <input name="EntVideos" value="@Model.Enterprise.EntVideos" type="text" class="dfinput" />
+                    <i>*请填写优酷视频的引用地址 （如 http://player.youku.com/player.php/sid/XMzI2NTc4NTMy/v.swf ）</i>
+                </li>
+
+            <li>
+                <label>企业简介</label>
+                @Html.Partial("/Views/Templates/_KindEditor.cshtml", new ViewDataDictionary()
+                {
+                    {"css", ""},
+                    {"id", "EntResume"},
+                    {"name", "EntResume"},
+                    {"value", Model.Enterprise.EntResume}
+                })
+
+            <li>
+                <label>企业Logo</label>
+                <br/>
+                <table>
+                    <tbody>
+                    @foreach (var item in Model.LogoList)
+                    {
+                        <tr>
+                            <td><a href="@item.DLFileUrl" target="_blank">@item.T_Content.ContentTitle</a></td>
+                            <td><a href="/DownLoadFile/Home/Delete?id=@item.DLFileID&returnUrl=/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Enterprise.Ent_No">删除</a></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td><a href="/DownLoadFile/DLCenter/DLTable?id=206&pageId=M5-1" target="_blank">（点击上传新Logo 4:3的png图片）</a></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </li>
+
+
+            <li>
+                    <label>轮播广告图</label>
+                    <br />
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model.AdList)
+                            {
+                                <tr>
+                                    <td><a href="@item.DLFileUrl" target="_blank">@item.T_Content.ContentTitle</a></td>
+                                    <td><a href="/DownLoadFile/Home/Delete?id=@item.DLFileID&returnUrl=/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Enterprise.Ent_No">删除</a></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td><a href="/DownLoadFile/DLCenter/DLTable?id=201&pageId=M5-1" target="_blank">（点击上传新广告图 宽1920px高482px的jpg图片）</a></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </li>
+             
+                <li>
+                    <label>企业介绍图集</label>
+                    <br/>
+                    <table>
+                        <tbody>
+                        @foreach (var item in Model.PicList)
+                        {
+                            <tr>
+                                <td><a href="@item.DLFileUrl" target="_blank">@item.T_Content.ContentTitle</a></td>
+                                <td><a href="/DownLoadFile/Home/Delete?id=@item.DLFileID&returnUrl=/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Enterprise.Ent_No">删除</a></td>
+                            </tr>
+                        }
+                        <tr>
+                            <td><a href="/DownLoadFile/DLCenter/DLTable?id=202&pageId=M5-1" target="_blank">（点击上传新图集 5:3的jpg图片）</a></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </li>
+
+              
+
+
+                @*<li>
+                    <label>企业PPT集</label>
+                    <br />
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model.PPTList)
+                            {
+                                <tr>
+                                    <td><a href="@item.DLFileUrl" target="_blank">@item.T_Content.ContentTitle</a></td>
+                                    <td><a href="/DownLoadFile/Home/Delete?id=@item.DLFileID&returnUrl=/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Enterprise.Ent_No">删除</a></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td><a href="/DownLoadFile/DLCenter/DLTable?id=204&pageId=M5-1" target="_blank">（点击上传新文件）</a></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </li>*@
+
+
+
+            <li>
+                <label>企业资源文件</label>
+                <br/>
+                <table>
+                    <tbody>
+                    @foreach (var item in Model.ResourceList)
+                    {
+                        <tr>
+                            <td><a href="@item.DLFileUrl" target="_blank">@item.T_Content.ContentTitle</a></td>
+                            <td><a href="/DownLoadFile/Home/Delete?id=@item.DLFileID&returnUrl=/Enterprise/Home/T_Enterprise_Edict?Ent_No=@Model.Enterprise.Ent_No">删除</a></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td><a href="/DownLoadFile/DLCenter/DLTable?id=205&pageId=M5-1" target="_blank">（点击上传新文件）</a></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </li>
+
+
+
+
+
+
+
+
+            @* <li>
+                        <label>注册时间</label>
+                        <input name="RegisterTime" type="text" value="@data.RegisterTime" class="dfinput" />
+                        <i>*请输入 注册时间</i>
+                    </li>
+
+
+                        <li>
+                        <label>登录名</label>
+                        <input name="UserID" type="text" value="@data.UserID" class="dfinput" />
+                        <i>*请输入 登录名</i>
+                    </li>
+                    <li>
+                        <label>企业状态</label>
+                        <input name="EntState" type="text" value="@data.EntState" class="dfinput" />
+                        <i>*请输入 企业状态</i>
+                    </li>
+                    <li>
+                        <label>更新时间</label>
+                        <input name="UpdateTime" type="text" value="@data.UpdateTime" class="dfinput" />
+                        <i>*请输入 更新时间</i>
+                    </li>
+                    <li>
+                        <label>是否锁定</label>
+                        @Html.DropDownList("InfoLocked", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.CodeTableContext(), "C_EditStatus", "ServicePlatform.Models"), new { @class = "dfinput" });
+
+                        <i>*请选择 是否锁定</i>
+                    </li>*@
+
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" /></li>
+                
+                <li><label>&nbsp;</label><input onclick="window.open('/Enterprise/Home/Index?Ent_No=@Model.Enterprise.Ent_No')" type="button" class="btn" value="预览" /></li>
+            </ul>
+
+
+        </div>
+    </form>
+
+</body>
+
+</html>
+
+
+
+
+

@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        <a href="/WbsHqu/WbsTask/Index">&lt&lt返回工作量列表</a>
+    </ol>
+</div>
+<label>
+    定量任务名称:&nbsp;
+    @Html.TextBox("定量任务名称", "", new { @class = "form-control input-sm", PlaceHolder = "请输入要查询的定量任务名称" })
+</label>
+
+<script>
+    function Search() {
+        var Params = v("定量任务名称");
+        return Params;
+    }
+    function fn(id) {
+        if (confirm("确定删除吗")) {
+            location.href = "/WbsHqu/QuantifyTask/Delete?id=" + id;
+        } else {
+            return;
+        }
+    }
+</script>

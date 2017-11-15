@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加记录</title>
+
+    <link href="~/Areas/School/Content/Home/css/style.css" rel="stylesheet" />
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">后台首页</a></li>
+            <li><a href="#">添加评分项</a></li>
+
+        </ul>
+    </div>
+
+
+    <form action="/Enterprise/ScoreSetup/ScoreItem_Add" method="post">
+        <input name="EntPracNo" value="@ViewBag.EntPracNo" type="text" class="hidden" />
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>添加评分项</span></div>
+
+            <ul class="forminfo">
+               
+                @using ServicePlatform.Lib
+                @using ServicePlatform.Models
+                @using ServicePlatform.Config
+                @{
+                    var Ent_No = (Session["Vars"] as Vars).getUserUnit();
+                    var sql = @"select T_PracBatch.*
+                                    from T_EntBatchReg
+                                    inner join T_PracBatch on T_EntBatchReg.PracBatchID=T_PracBatch.PracBatchID
+                                    inner join T_School on T_PracBatch.SchoolID=T_School.SchoolID
+                                    where T_EntBatchReg.Ent_No='" + Ent_No + "' AND T_PracBatch.IsCurrentBatch='是'";
+                                                                @(new HtmlString(PageHelper.GetSelectHtml(PageHelper.GetSelectListItem<T_PracBatch>(new SchoolContext(), sql, 3, 2, ViewBag.SchoolID), "SchoolID", "hidden")))
+                }
+
+                <li>
+                    <label>条目编号</label>
+                    <input name="ItemNo" type="text" class="dfinput" />
+                    <i>*请输入 条目编号</i>
+                </li>
+                <li>
+                    <label>条目名称</label>
+                    <input name="ItemName" type="text" class="dfinput" />
+                    <i>*请输入 条目名称</i>
+                </li>
+
+                <li>
+                    <label>权重</label>
+                    <input name="ItemWeight" type="text" class="dfinput" />
+                    <i>*请输入 权重</i>
+                </li>
+                <li>
+                    <label>显示顺序</label>
+                    <input name="ItemSequence" type="text" class="dfinput" />
+                    <i>*请输入显示顺序</i>
+                </li>
+
+
+
+
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" onclick="window.close();" /></li>
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+

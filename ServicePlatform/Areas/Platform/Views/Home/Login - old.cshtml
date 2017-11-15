@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+
+
+
+
+
+
+<html>
+<head>
+    <title>登录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />
+
+    <link href="~/Areas/Platform/Content/Home/Login/LoginCss.css" rel="stylesheet" />
+</head>
+<body>
+    <form action="/Platform/Home/Login" method="post">
+        <input name="__RequestVerificationToken" type="hidden" value="FDvE57o47pHg7sqVN_Qfw2p7zENrLtq8vBNm7sbuz10BpVPss4CpcKyF67P6QnSzjvoPp63vOnFOYD_VpCe3CB59k_WfWInEW9uzOxWvRN41" />        <div class="top">
+            <img src="~/Areas/Platform/Content/Home/Login/logo.png" class="logo" />
+            <span class="text">顶岗实习管理系统</span>
+            <span class="textF">国家级旅游实验教学示范中心</span>
+            <span class="textF">华侨大学 · 旅游学院</span>
+        </div>
+        <div class="user">
+            <img src="~/Areas/Platform/Content/Home/Login/user.jpg" />
+            <div class="userbottom">
+                <div class="left">
+                    <input type="text" name="UnitID" value="@ViewBag.UnitID" style="visibility:hidden" />
+
+                    <div class="logintext" style="margin-top: 40px"><span>用户名：</span> 
+                    <input autocomplete="off" data-val="true" data-val-required="用户名 字段是必需的。" id="username" name="UserID" placeholder="工号/学号" type="text" value="" /></div>
+                    <div class="logintext"><span style="margin-right:5px">密&nbsp&nbsp&nbsp码：</span><input autocomplete="off" data-val="true" data-val-required="密码 字段是必需的。" id="password" name="UserPwd" placeholder="密码" type="password" /></div>
+                    <div class="forget"><a href="/Platform/Home/Forget">忘记密码？</a></div>
+                    <div class="submitBottom"><input type="submit" value="登录" /><input id="chongzhi" style="background: -moz-linear-gradient(top, white 0%, #a9dbf5 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,white), color-stop(100%,#a9dbf5));background: -webkit-linear-gradient(top, white 0%,#a9dbf5 100%);background: -o-linear-gradient(top, white 0%,#a9dbf5 100%);background: -ms-linear-gradient(top, white 0%,#a9dbf5 100%);background: linear-gradient(to bottom, white 0%,#a9dbf5 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=white, endColorstr='#a9dbf5',GradientType=0 ); color:black" type="button" value="重输" /></div>
+                </div>
+                <img src="~/Areas/Platform/Content/Home/Login/center.png" />
+                <div class="right">
+                    <div class="textlogo"><img src="~/Areas/Platform/Content/Home/Login/ads_03.png" /></div>
+                    <div class="textlogodown"><span>如果您还没有注册过</span></div>
+                    <div class="textlogodowndown" id="zhuce"><input type="button" value="立即注册" /></div>
+                </div>
+            </div>
+        </div>
+        <div class="foot"><span>copyright © 2015-2020 华侨大学 版权所有</span></div>
+    </form>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
+    <script src="~/Areas/Platform/Content/Home/Login/Common.js"></script>
+
+    <script src="/Scripts/jquery.nicescroll.min.js"></script>
+
+    <script type="text/javascript">
+
+        $("#zhuce").click(function () {
+            window.location.href = "/Platform/Home/Regist";
+        });
+        $("#chongzhi").click(function () {
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

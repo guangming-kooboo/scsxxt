@@ -1,0 +1,206 @@
+﻿@{
+    ViewBag.Title = "C_StuEvaluateEntItem1";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>学生评价企业条目维护</title>
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="~/Areas/CodeManager/Content/C_StuEvaluateEntItem/js/StuEvaluateEntItem.js"></script>
+
+    <script language="javascript" type="text/javascript">
+        function detail() {
+            var SelectRow = $('#StuEvaluateEntItemtablebox').datagrid("getSelected");
+            var SelectId = SelectRow.ItemNo;
+            var s = "/CodeManager/Code/detailStuEvaluateEntItem?id=" + SelectId + "";
+            window.location = s;
+        }
+        function update() {
+            var SelectRow = $('#StuEvaluateEntItemtablebox').datagrid("getSelected");
+            var SelectId = SelectRow.ItemNo;
+
+            var s = "/CodeManager/Code/updateStuEvaluateEntItem?id=" + SelectId + "";
+            window.location = s;
+        }
+    </script>
+
+
+    <style type="text/css">
+        .datagrid-cell {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: center;
+        }
+    </style>
+
+</head> 
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生评价企业维护</a></li>
+            <li><a href="#">条目类型列表</a></li>
+        </ul>
+    </div>
+    <!--用于显示表格-->
+    <div id="StuEvaluateEntItemtablebox">
+        <table id="StuEvaluateEntItemtable"></table>
+        <div id="HomeToolBar">
+            <div id="TButton" style="padding:5px;">
+                <div>
+                    <a href="/CodeManager/Code/AddStuEvaluateEntItem" class="easyui-linkbutton" iconcls="icon-add">添加</a>
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="obj.remove();">删除</a>
+                    <a href="#" class="easyui-linkbutton" id="TB1" iconcls="icon-edit" onclick="update();">修改</a>
+                    <a href="#" class="easyui-linkbutton" id="TB2" iconcls="icon-tip" onclick="detail();">详情</a>
+
+                </div>
+            </div>
+            @*<div>
+                    查询新闻：<input type="text" name="SearchNews" style="width=100px;" />
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="obj.search();">查询</a>
+                </div>*@
+            <label>
+                请根据批次选择：
+            </label>
+            <select style="width:150px" name="BatchName" class="dfinput" id="changee">
+                <option value="--请选择--">--请选择--</option>
+                @foreach (var item in ViewBag.piciid)
+                {
+                    <option value="@item.BatchName">@item.BatchName</option>
+
+                }
+            </select>
+
+
+
+
+
+            <script>
+                // $(function () {
+
+
+               
+
+
+                $("#changee").bind("change", function () {
+
+                    var $name = $("#changee").val();
+                    $('#StuEvaluateEntItemtablebox').datagrid('load', {
+
+                        classAttribute: "fasong",
+                        classValue: $name,
+                    });
+
+
+                })
+            </script>
+                
+               
+        
+
+                </div>
+            </div>
+    <label>
+        将这些条目复制到批次：
+    </label>
+    <select style="width:150px" name="PracBatch1Name" class="dfinput" id="PracBatch1Name">
+        <option value="--请选择--">--请选择--</option>
+       
+    </select>
+
+    <input type="button" id="sure" value="复 制" class="btn">
+   <script>
+
+
+       $('#PracBatch1Name').unbind('click').click(function () {
+           var str = $("#PracBatch1Name option").map(function () { return $(this).val(); }).get().join(",") + ",";
+
+           $.ajax({
+               type: 'POST',
+               url: '/Code/receajaxUnsetStuEvaluateEntItem',
+               data: {
+                   //DeleteRow: DeletedID.join(','),
+                   DeleteRow: str,
+
+
+               },
+               success: function (data) {
+                   if (data != "Same") {
+
+
+                       var speno1 = data.split(",");
+                       jQuery("#PracBatch1Name").empty();
+                       
+                       for (var i = 0; i < speno1.length - 1; i++) {
+
+                           jQuery("#PracBatch1Name").append("<option >" + speno1[i] + " </option>");
+                           jQuery("#PracBatch1Name").val(speno1[i]);
+
+
+                       }
+                   }
+                   
+
+               },
+       });
+       
+           $('#sure').unbind('click').click(function () {
+               $piciIDTo = $("#PracBatch1Name").val();
+               var $piciIDBei = $("#changee").val();
+               if ($piciIDTo == "--请选择--" || $piciIDBei == "--请选择--") {
+                   alert("请先选择批次号");
+               }
+               else {
+
+                   if (confirm("确定要复制到该批次？")) {
+                       $.ajax({
+                           type: 'POST',
+                           url: '/Code/receajaxFuzhiStuEvaluateEntItem',
+                           data: {
+                               //DeleteRow: DeletedID.join(','),
+                               DeleteRow: $piciIDTo,
+                               DeleteRow1: $piciIDBei,
+
+
+
+                           },
+                           success: function (data) {
+                               if (data = "chenggong") {
+
+                                   alert("恭喜，已经全部复制完毕！")
+
+                               }
+                               else {
+                                   alert("出现错误，请手动录入！")
+                               }
+
+                           },
+                       });
+
+
+                   }
+               }
+
+           });
+
+          
+
+
+ });
+    
+    </script>
+
+        </body>
+
+        </html>
+

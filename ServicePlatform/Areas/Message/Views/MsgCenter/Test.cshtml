@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>可以输入也可以下拉选择的select</title>
+    <meta name="keywords" content="jquery" />
+    <meta name="description" content="Helloweba演示平台，演示XHTML、CSS、jquery、PHP案例和示例" />
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://www.helloweba.com/demo/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="jquery.editable-select.min.css" />
+    <style type="text/css">
+.demo{width:360px;margin:50px auto 10px auto;padding:10px;}
+.demo p{line-height:30px;}
+.demo h3{font-size:24px;text-align:center;padding:10px}
+@media (max-width: 480px){
+	.demo{width:360px;margin:50px auto 10px auto;padding:10px;}
+	.demo img{width:90%}
+	.demo h3{font-size:1.5em;line-height:1.9em}
+}
+
+    </style>
+</head>
+
+<body>
+    <div id="header">
+    </div>
+
+    <div id="main">
+        <h2 class="top_title"><a href="http://www.jb51.net/view-blog-348.html">可以输入也可以下拉选择的select</a></h2>
+        <div class="demo">
+            <p>输入内容试试，支持中文</p>
+            <select id="editable-select" class="form-control">
+                <option>Alfa Romeo</option>
+                <option>Audi</option>
+                <option>中国人民银行</option>
+                <option>中国人民</option>
+                <option>中国</option>
+                <option>BMW</option>
+                <option>Citroen</option>
+                <option>Fiat</option>
+                <option>Ford</option>
+                <option>Jaguar</option>
+                <option>Jeep</option>
+                <option>Lancia</option>
+                <option>Land Rover</option>
+                <option>Mercedes</option>
+                <option>Mini</option>
+                <option>Nissan</option>
+                <option>Opel</option>
+                <option>Peugeot</option>
+                <option>Porsche</option>
+                <option>Renault</option>
+            </select>
+        </div>
+    </div>
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.editable-select.min.js"></script>
+    <script type="text/javascript">
+        $('#editable-select').editableSelect({
+            effects: 'slide'
+        });
+        $('#html').editableSelect();
+    </script>
+
+    <div id="footer">
+    </div>
+</body>
+</html>

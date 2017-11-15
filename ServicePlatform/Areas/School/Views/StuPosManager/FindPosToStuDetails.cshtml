@@ -1,0 +1,192 @@
+﻿@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@{
+    int index_1 = 0;
+    int index_2 = 0;
+
+    //string[] PosName_1 = ViewBag.PosName_1;//志愿1
+    //string[] PosName_2 = ViewBag.PosName_2;//志愿二
+    //string[] Desc_1 = ViewBag.Desc_1;//岗位描述
+    //string[] Desc_2 = ViewBag.Desc_2;//岗位描述
+    //string[] Time_1 = ViewBag.Time_1;//截止时间
+    //string[] Time_2 = ViewBag.Time_2;//截止时间
+    //string[] EntName_1 = ViewBag.EntName_1;
+    //string[] EntName_2 = ViewBag.EntName_2;
+
+    //string[] HasEnrollNum_1 = ViewBag.HasEnrollNum_1;
+    //string[] HasEnrollNum_2 = ViewBag.HasEnrollNum_2;
+
+    List<T_PracticeVolunteer> q_PerEnroll_part = ViewBag.q_PerEnroll_part;
+}
+<html>
+<head>
+    <title>查看详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("FindPosToStuDetailsOperation1", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>第一志愿:</span></div>
+            <div>
+                <input type="submit" value="删除第一志愿" class="btn" name="action" />
+                <input type="submit" value="设为第二志愿" class="btn" name="action" />
+                <input type="submit" value="添加岗位" class="btn" name="action" />
+                <input type="hidden" value='@ViewBag.NowOpStu' name="NowOpStu" id="NowOpStu" />
+            </div>
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">公司<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                    @foreach (var item in q_PerEnroll_part)
+                    {
+                        if (item.VolunteerSequence == 1)
+                        {
+                            <tr class="odd">
+                                <td>
+                                    @ViewBag.EntName_1[index_1]
+                                </td>
+                                @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                                <td>
+                                    @ViewBag.PosName_1[index_1]
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosSequence)
+                                </td>
+                                <td>
+                                    @ViewBag.Desc_1[index_1]
+                                </td>
+                                <td>
+                                    @ViewBag.Time_1[index_1]
+                                </td>
+                                <td>
+                                    @ViewBag.HasEnrollNum_1[index_1]
+                                </td>
+                                <td>
+                                    <button id="test2" type="button" onclick="show('@ViewBag.Desc_1[index_1++]')">查看</button>|
+                                    @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) |*@
+                                    @Html.ActionLink("删除岗位", "DeletePreEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })|
+                                    @if(item.PosSequence==1)
+                                    {
+                                        @Html.ActionLink("设为第二岗位", "SetVolSecond", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("设为第一岗位", "SetVolFirst", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+
+
+
+        @using (Html.BeginForm("FindPosToStuDetailsOperation2", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>第二志愿: </span></div>
+            <div>
+                <input type="submit" value="删除第二志愿" class="btn" name="action" />
+                <input type="submit" value="设为第一志愿" class="btn" name="action" />
+                <input type="submit" value="添加岗位" class="btn" name="action" />
+                <input type="hidden" value='@ViewBag.NowOpStu' name="NowOpStu" id="NowOpStu" />
+            </div>
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">公司<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                    @foreach (var item in q_PerEnroll_part)
+                    {
+                        if (item.VolunteerSequence == 2)
+                        {
+                            <tr class="odd">
+                                <td>
+                                    @ViewBag.EntName_2[index_2]
+                                </td>
+                                @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                                <td>
+                                    @ViewBag.PosName_2[index_2]
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosSequence)
+                                </td>
+                                <td>
+                                    @ViewBag.Desc_2[index_2]
+                                </td>
+                                <td>
+                                    @ViewBag.Time_2[index_2]
+                                </td>
+                                <td>
+                                    @ViewBag.HasEnrollNum_2[index_2]
+                                </td>
+                                <td>
+                                    <button id="test2" type="button" onclick="show('@ViewBag.Desc_2[index_2++]')">查看</button>|
+                                    @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) |*@
+                                    @Html.ActionLink("删除岗位", "DeletePreEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })|
+                                    @if (item.PosSequence == 1)
+                                    {
+                                        @Html.ActionLink("设为第二岗位", "SetVolSecond", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("设为第一岗位", "SetVolFirst", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+
+
+
+    </div>
+
+
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['300px', '180px'],
+                title: "岗位说明",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+            });
+        }
+    </script>
+</body>
+</html>

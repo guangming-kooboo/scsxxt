@@ -1,0 +1,70 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.AdminCRUD.AddQuestionOther_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+        <li><a href=@Url.Action("editQuestionnaire", "Admin", new { area = "CPQ", ReportID = "CPQ编辑问卷", Params = "10385-14093-201608290428;;" })>编辑问卷页面</a><i class="fa fa-angle-right"></i></li>
+        @*这个到时候还是要继续读取的*@
+    </ol>
+
+</div>
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>@ViewBag.Title
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" role="form">
+                <div class="form-body">
+                    <input type="text" name=QuestionID id=QuestionID value=@Model.QuestionID hidden="hidden">
+
+
+                    <div class="form-group" id="optionParent1">
+                        <label class="col-md-3 control-label">题目内容</label>
+                        <div class="col-md-9">
+                            <input type="text" name="QuestionName" id="QuestionName" placeholder="请输入题目内容" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                </form>
+            </div>
+                <div class="form-actions fluid">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="addOption" class="btn btn-success" onclick="saveQuestion()">保存问题</button>
+
+                    </div>
+                </div>
+
+</div>
+
+        </div>
+    
+<script>
+
+    function saveQuestion() {
+
+        var Question =  $("#QuestionID").val() + ";" + $("#QuestionName").val();
+        var s = "/AdminCRUD/addQuestionOther_form?QuestionContent=3;" + Question;
+        window.location = s;
+
+    }
+
+</script>

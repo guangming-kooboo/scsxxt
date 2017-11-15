@@ -1,0 +1,190 @@
+﻿@model ServicePlatform.Models.T_News
+
+@Styles.Render("/Areas/News/Content/CSSModel/addNews.css")
+@Scripts.Render("/Content/KindEditor/kindeditor.js")
+@Scripts.Render("/Content/KindEditor/lang/zh_CN.js")
+@Scripts.Render("/Content/KindEditor/plugins/code/prettify.js")
+@Styles.Render("/Content/KindEditor/themes/default/default.css")
+@Styles.Render("/Content/KindEditor/plugins/code/prettify.css")
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@{
+    //这里获取下来列表数据
+    ServicePlatform.Models.ContentContext sb = new ServicePlatform.Models.ContentContext();
+    //获取新闻种类作为下拉列表
+    var newstype = from oc in sb.C_NewsType select oc;
+    ViewData["NewtypeList"] = new SelectList(newstype, "TypeID", "TypeName");
+    //获取新闻栏目作为下拉列表
+    var newcolumn = from oa in sb.C_ContentColumn select oa;
+    ViewData["NewcolumnList"] = new SelectList(newcolumn, "ContColumnID", "ContColumnName");
+
+    int gettimeData = Convert.ToInt32(ViewData["FromContentTime"]);//获取该条新闻的时间
+    string GetDatetime = Convert.ToString(ServicePlatform.Areas.News.ToolHelper.HandleTime.ConvertIntDateTime(gettimeData));
+    string TransforTime = ServicePlatform.Areas.News.ToolHelper.EasyuiToDateTime.ToDateTime(GetDatetime);
+    ViewBag.ctime = TransforTime;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateNews</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+    <script type="text/javascript">
+        KindEditor.ready(function (K) {
+            var editor2 = K.create('#editor1', {
+                cssPath: '/Content/KindEditor/plugins/code/prettify.css',
+                uploadJson: '/Content/KindEditor/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/KindEditor/asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+                afterCreate: function () {
+                    var self = this;
+                    K.ctrl(document, 13, function () {
+                        self.sync();
+                        K('form[name=article]')[0].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function () {
+                        self.sync();
+                        K('form[name=article]')[0].submit();
+                    });
+                }
+            });
+            prettyPrint();
+        });
+    </script>
+
+</head>
+<body>
+    <div id="AddContainer">
+
+        <div id="AddNewTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="/News/NewsCenter/HomePageTable">首页</a></li>
+                    <li><a href="#">新闻修改</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="TabContent1">
+            @using (Html.BeginForm("UpdateNews", "NewsCenter", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div id="TabContainer1" class="easyui-tabs" style="width:800px;height:460px;">
+                    <div title="新闻基本信息" style="padding:20px;" id="UpdateNewBasic">
+                        <!--新闻基本信息添加，包括新闻ID、新闻标题、新闻类别等-->
+                        <div id="UpdateNewsContent">
+
+                            @Html.HiddenFor(model => model.NewsID)
+
+                            <div class="editor-label" style="margin-top:5px;">
+                                新闻标题：
+                            </div>
+                            <div class="editor-field" style="margin-top:5px;">
+                                <input tyepe="text" id="ContentTitle" name="ContentTitle" value=@ViewData["FromContentTitle"] />
+                                <div id="FillError3" style="font-family:'楷体';font-weight:bold;color:red;display:none;">您输入的新闻标题不能为空</div>
+                            </div>
+
+                            <div class="editor-label" style="margin-top:5px;">
+                                @Html.LabelFor(model => model.NewsTypeID)
+                            </div>
+                            <div class="editor-field" style="margin-top:5px;">
+                                @Html.DropDownListFor(model => model.NewsTypeID, ViewData["NewtypeList"] as SelectList, "--请选择--", null)
+                                @Html.ValidationMessageFor(model => model.NewsTypeID)
+                            </div>
+
+                            <div class="editor-label" style="margin-top:5px;">
+                                @Html.LabelFor(model => model.NewsAuthor)
+                            </div>
+                            <div class="editor-field" style="margin-top:5px;">
+                                @Html.EditorFor(model => model.NewsAuthor)
+                                @Html.ValidationMessageFor(model => model.NewsAuthor)
+                            </div>
+
+                            <div class="editor-label" style="margin-top:5px;">
+                                新闻发布者：
+                            </div>
+                            <div class="editor-field" style="margin-top:5px;">
+                                <input tyepe="text" id="ContentPublisher" name="ContentPublisher" value=@ViewData["FromContentPublish"] />
+                            </div>
+
+                            <!--日期时间输入框-->
+                            <div class="editor-label" style="margin-top:5px;">
+                                时间输入框：
+                            </div>
+                            <div id="TabNewsTime" style="margin-top:5px;">
+                                <input type="text" class="easyui-datetimebox" id="GnewPubdate" name="GnewPubdate" data-options="required:true" value='@ViewBag.ctime' style="width:150px">
+                            </div>
+
+                            <div class="editor-label" style="margin-top:5px;">
+                                @Html.LabelFor(model => model.NewsColumnID)
+                            </div>
+                            <div class="editor-field" style="margin-top:5px;">
+                                @Html.DropDownListFor(model => model.NewsColumnID, ViewData["NewcolumnList"] as SelectList, "--请选择--", null)
+                                @Html.ValidationMessageFor(model => model.NewsColumnID)
+                            </div>
+
+                        </div>
+                    </div>
+                    <div title="图片新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="UpdateNewPic">
+                        <!--图片新闻图片上传-->
+                        请上传图片新闻：<input type="file" id="NewsPicUpload1" name="NewsPicUpload1" />
+                        @Html.Hidden("HideInfo", new { @id = "HideInfo" });
+                    </div>
+                    <div title="视频新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="UpdateNewVedio">
+                        <!--视频新闻上传-->
+                        请上传视频新闻：<input type="file" id="NewsVideoUpload1" name="NewsVideoUpload1" />
+
+                    </div>
+                    <div title="图文新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="UpdateNewHtml">
+                        <label>图文新闻</label>
+                        @*@Html.TextAreaFor(model => model.Html, new { @id = "TextNews", @name = "TextNews", @style = "width:700px;height:250px;visibility:hidden;", @class = "textinput" })
+                            @Html.ValidationMessageFor(model => model.Html)*@
+
+                        @Html.TextAreaFor(model => model.Html, new { id = "editor1", name = "editor1", style = "height: 375px;width:680px;" })
+                        @Html.ValidationMessageFor(model => model.Html)
+
+                    </div>
+                    <div title="链接新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="UpdateNewLink">
+                        <!--新闻链接-->
+                        <div class="editor-label" style="margin-top:5px;">
+                            @Html.LabelFor(model => model.LinkUrl)
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            @Html.EditorFor(model => model.LinkUrl)
+                            @Html.ValidationMessageFor(model => model.LinkUrl)
+                        </div>
+                    </div>
+                    <div title="资源地址" data-options="closable:true" style="overflow:auto;padding:20px;" id="UpdateNewDownload">
+                        <!--下载资源-->
+                        <div class="editor-label" style="margin-top:5px;">
+                            @Html.LabelFor(model => model.Download)
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            @Html.EditorFor(model => model.Download)
+                            @Html.ValidationMessageFor(model => model.Download)
+                        </div>
+                    </div>
+                </div>
+                <div id="TabSubmitButton1">
+                    <input class="SubmitButton" type="submit" value="提  交" name="sub1" />
+                    <input class="SubmitButton" type="submit" value="保存草稿" name="sub2" style="margin-left:100px;" />
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

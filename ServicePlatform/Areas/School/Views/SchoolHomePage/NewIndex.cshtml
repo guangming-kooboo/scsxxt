@@ -1,0 +1,498 @@
+﻿@model Core.Services.Entity.T_School
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>高校首页</title>
+    <link rel="stylesheet" type="text/css" href="/Areas/School/SchoolContent/SchoolHomePage/NewHome/css/Practice_school.css" />
+    <script src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/js/jquery-1.10.2.min.js"></script>
+    <script src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/js/slider.js"></script>
+    <script type="text/javascript" src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/js/jquery.js"></script>
+    <script type="text/javascript" src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/js/imageflow.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var bannerSlider = new Slider($('#banner_tabs'), {
+                time: 5000,
+                delay: 400,
+                event: 'hover',
+                auto: true,
+                mode: 'fade',
+                controller: $('#bannerCtrl'),
+                activeControllerCls: 'active'
+            });
+            $('#banner_tabs .flex-prev').click(function () {
+                bannerSlider.prev()
+            });
+            $('#banner_tabs .flex-next').click(function () {
+                bannerSlider.next()
+            });
+        })
+
+        /*--学生轮播---*/
+        var Speed_1 = 5; //速度(毫秒)
+        var Space_1 = 20; //每次移动(px)
+        var PageWidth_1 = 455 * 2; //翻页宽度
+        var interval_1 = 3000; //翻页间隔时间
+        var fill_1 = 0; //整体移位
+        var MoveLock_1 = false;
+        var MoveTimeObj_1;
+        var MoveWay_1 = "right";
+        var Comp_1 = 0;
+        var AutoPlayObj_1 = null;
+        function GetObj(objName) { if (document.getElementById) { return eval('document.getElementById("' + objName + '")') } else { return eval('document.all.' + objName) } }
+        function AutoPlay_1() { clearInterval(AutoPlayObj_1); AutoPlayObj_1 = setInterval('ISL_GoDown_1();ISL_StopDown_1();', interval_1) }
+        function ISL_GoUp_1() { if (MoveLock_1) return; clearInterval(AutoPlayObj_1); MoveLock_1 = true; MoveWay_1 = "left"; MoveTimeObj_1 = setInterval('ISL_ScrUp_1();', Speed_1); }
+        function ISL_StopUp_1() {
+            if (MoveWay_1 == "right") { return }; clearInterval(MoveTimeObj_1); if ((GetObj('ISL_Cont_1').scrollLeft - fill_1) % PageWidth_1 != 0) { Comp_1 = fill_1 - (GetObj('ISL_Cont_1').scrollLeft % PageWidth_1); CompScr_1() } else { MoveLock_1 = false }
+            AutoPlay_1()
+        }
+        function ISL_ScrUp_1() {
+            if (GetObj('ISL_Cont_1').scrollLeft <= 0) { GetObj('ISL_Cont_1').scrollLeft = GetObj('ISL_Cont_1').scrollLeft + GetObj('List1_1').offsetWidth }
+            GetObj('ISL_Cont_1').scrollLeft -= Space_1
+        }
+        function ISL_GoDown_1() { clearInterval(MoveTimeObj_1); if (MoveLock_1) return; clearInterval(AutoPlayObj_1); MoveLock_1 = true; MoveWay_1 = "right"; ISL_ScrDown_1(); MoveTimeObj_1 = setInterval('ISL_ScrDown_1()', Speed_1) }
+        function ISL_StopDown_1() {
+            if (MoveWay_1 == "left") { return }; clearInterval(MoveTimeObj_1); if (GetObj('ISL_Cont_1').scrollLeft % PageWidth_1 - (fill_1 >= 0 ? fill_1 : fill_1 + 1) != 0) { Comp_1 = PageWidth_1 - GetObj('ISL_Cont_1').scrollLeft % PageWidth_1 + fill_1; CompScr_1() } else { MoveLock_1 = false }
+            AutoPlay_1()
+        }
+        function ISL_ScrDown_1() {
+            if (GetObj('ISL_Cont_1').scrollLeft >= GetObj('List1_1').scrollWidth) { GetObj('ISL_Cont_1').scrollLeft = GetObj('ISL_Cont_1').scrollLeft - GetObj('List1_1').scrollWidth }
+            GetObj('ISL_Cont_1').scrollLeft += Space_1
+        }
+        function CompScr_1() {
+            if (Comp_1 == 0) { MoveLock_1 = false; return }
+            var num, TempSpeed = Speed_1, TempSpace = Space_1; if (Math.abs(Comp_1) < PageWidth_1 / 2) { TempSpace = Math.round(Math.abs(Comp_1 / Space_1)); if (TempSpace < 1) { TempSpace = 1 } }
+            if (Comp_1 < 0) {
+                if (Comp_1 < -TempSpace) { Comp_1 += TempSpace; num = TempSpace } else { num = -Comp_1; Comp_1 = 0 }
+                GetObj('ISL_Cont_1').scrollLeft -= num; setTimeout('CompScr_1()', TempSpeed)
+            } else {
+                if (Comp_1 > TempSpace) { Comp_1 -= TempSpace; num = TempSpace } else { num = Comp_1; Comp_1 = 0 }
+                GetObj('ISL_Cont_1').scrollLeft += num; setTimeout('CompScr_1()', TempSpeed)
+            }
+        }
+        function picrun_ini() {
+            GetObj("List2_1").innerHTML = GetObj("List1_1").innerHTML;
+            GetObj('ISL_Cont_1').scrollLeft = fill_1 >= 0 ? fill_1 : GetObj('List1_1').scrollWidth - Math.abs(fill_1);
+            GetObj("ISL_Cont_1").onmouseover = function () { clearInterval(AutoPlayObj_1) }
+            GetObj("ISL_Cont_1").onmouseout = function () { AutoPlay_1() }
+            AutoPlay_1();
+        }
+        /*====多栏目======*/
+        window.onload = function () {
+            var oDiv = document.getElementById("tab");
+            var oLi = oDiv.getElementsByTagName("div")[0].getElementsByTagName("li");
+            var aCon = oDiv.getElementsByTagName("div")[1].getElementsByTagName("div");
+            var timer = null;
+            for (var i = 0; i < oLi.length; i++) {
+                oLi[i].index = i;
+                oLi[i].onmouseover = function () {
+                    show(this.index);
+                }
+            }
+            function show(a) {
+                index = a;
+                var alpha = 0;
+                for (var j = 0; j < oLi.length; j++) {
+                    oLi[j].className = "";
+                    aCon[j].className = "";
+                    aCon[j].style.opacity = 0;
+                    aCon[j].style.filter = "alpha(opacity=0)";
+                }
+                oLi[index].className = "cur";
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    alpha += 2;
+                    alpha > 100 && (alpha = 100);
+                    aCon[index].style.opacity = alpha / 100;
+                    aCon[index].style.filter = "alpha(opacity=" + alpha + ")";
+                    alpha == 100 && clearInterval(timer);
+                },
+                5)
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-------------------顶部高校名及快速入口-------->
+    <header>
+        <div id="School_logo">
+            <img src="@Model.SchoolLogo" class="logo" />
+            <div id="name">
+                <p style="font-size: 28px;">@Model.SchoolName</p>
+                <a>http://jz.faisco.com/</a>
+            </div>
+            <div id="in">
+                <a id="register" class="same" href="/Platform/Home/Login?UnitID=@ViewData["SchoolID"]">
+                    <span class="in_title">登录</span>
+                    <span class="tubiao" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/tubiao.png) 4px -105px;"></span>
+                </a>
+                <a id="login" class="same">
+                    <span class="in_title">消息</span>
+                    <span class="tubiao" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/tubiao.png) 2px -61px;"></span>
+                </a>
+                <form action="post">
+                    <input type="submit" name="ensure2" value="" style="width:36px;height:36px;background: url(img/tubiao.png);" />
+                    <input type="text" id="products" name="products" placeholder="请输入关键词试试" class="search-style" />
+                </form>
+            </div>
+        </div>
+    </header>
+    <!----------轮播---------->
+    <div id="banner_tabs" class="flexslider">
+        <ul class="slides">
+            <li>
+                <a title="" target="_blank" href="#">
+                    <img width="1920" height="482" alt="" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/banner1.jpg) no-repeat center;" src="images/alpha.png">
+                </a>
+            </li>
+            <li>
+                <a title="" href="#">
+                    <img width="1920" height="482" alt="" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/banner2.jpg) no-repeat center;" src="images/alpha.png">
+                </a>
+            </li>
+            <li>
+                <a title="" href="#">
+                    <img width="1920" height="482" alt="" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/banner3.jpg) no-repeat center;" src="images/alpha.png">
+                </a>
+            </li>
+        </ul>
+        <ul class="flex-direction-nav">
+            <li><a class="flex-prev" href="javascript:;">Previous</a></li>
+            <li><a class="flex-next" href="javascript:;">Next</a></li>
+        </ul>
+        <ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
+            <li><a>1</a></li>
+            <li><a>2</a></li>
+            <li><a>2</a></li>
+        </ol>
+    </div>
+    <!---------------高校介绍-------------->
+    <div class="Out_Introduce">
+        <div class="Company_Introduce">
+            <div class="Introduce_Left">
+                <p class="title">高校介绍</p>
+                <p style="padding: 10px;">&ensp;&ensp;华侨大学（Huaqiao University）是由“中侨委”于1960年在周恩来总理直接关怀下创办的中央部属高校，是国家重点建设大学、福建省重点建设高校、福建省高水平大学  ，入选国家特色重点学科项目、“外专千人计划” 、“1+2+1中美人才培养计划”创新人才培养实验基地 ，是福建省继厦门大学之后第二所设有研究生院并具有教授、副教授评审权的高等学府，具有“推荐免试研究生”资格，是首批获得“本科教学工作水平优秀评估”以及新中国最早实行董事会制度的大学。</p>
+            </div>
+            <div class="video">
+                <embed src="http://player.youku.com/player.php/sid/XMzI2NTc4NTMy/v.swf" width="400" height="250" allowfullscreen="true" quality="high"
+                       type="application/x-shockwave-flash">
+                </embed>
+            </div>
+        </div>
+    </div>
+    <!---------优秀师资------->
+    <div style="width:100%;height: auto; background-color:#f5f5f3;">
+        <div class="School_view">
+            <div class="title">
+                <p>师资队伍</p>
+                <a><p class="more">更多>></p></a>
+            </div>
+
+            <div id="LoopDiv">
+                <input id="S_Num" type="hidden" value="8" />
+                <div id="starsIF" class="imageflow">
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher1.jpg" longdesc="" width="280" height="300" alt="杨颖" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher2.jpg" longdesc="" width="280" height="300" alt="霍思燕" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher3.jpg" longdesc="" width="280" height="300" alt="马苏" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher4.jpg" longdesc="" width="280" height="300" alt="杜淳" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher5.jpg" longdesc="" width="280" height="300" alt="冯绍峰" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher1.jpg" longdesc="" width="280" height="300" alt="沙溢" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher2.jpg" longdesc="" width="280" height="300" alt="廖凡" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher3.jpg" longdesc="" width="280" height="300" alt="保剑锋" />
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/teacher4.jpg" longdesc="" width="280" height="300" alt="姚晨" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------优秀学生------->
+    <div class="School_view" style="width: 1005px;height: 260px;padding-top: 20px;">
+        <div class="title">
+            <p>优秀学生</p>
+            <a><p class="more">更多>></p></a>
+        </div>
+        <div class="plan_tg">
+            <div class="blk_18">
+                <a class="LeftBotton" onmousedown="ISL_GoUp_1()" onmouseup="ISL_StopUp_1()" onmouseout="ISL_StopUp_1()" href="javascript:void(0);" target="_self"></a>
+                <div class="pcont" id="ISL_Cont_1">
+                    <div class="ScrCont">
+                        <div id="List1_1">
+                            <!--piclist begin-->
+                            <div class="p1">
+                                <ul>
+                                    <li class="left"><img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/plan_01.jpg" /></li>
+                                    <li class="right">
+                                        <p><b>李晓峰 </b></p>
+                                        <p>14级 土木工程专业</p>
+                                        <p>事迹：去年国奖获得者，任华侨大学厦门校区第5届校学生会副主席，第7届艺术团副团长,得到万达集团等知名企业的邀请...</p>
+                                        <p><a href="#">阅读更多推广信息>></a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p1">
+                                <ul>
+                                    <li class="left"><img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/plan_02.jpg" /></li>
+                                    <li class="right">
+                                        <p><b>郑珊 </b></p>
+                                        <p>14级 土木工程专业</p>
+                                        <p>事迹：去年国奖获得者，任华侨大学厦门校区第5届校学生会副主席，第7届艺术团副团长,得到万达集团等知名企业的邀请...</p>
+                                        <p><a href="#">阅读更多推广信息>></a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p1">
+                                <ul>
+                                    <li class="left"><img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/plan_03.jpg" /></li>
+                                    <li class="right">
+                                        <p><b>熊英雷 </b></p>
+                                        <p>14级 土木工程专业</p>
+                                        <p>事迹：去年国奖获得者，任华侨大学厦门校区第5届校学生会副主席，第7届艺术团副团长,得到万达集团等知名企业的邀请...</p>
+                                        <p><a href="#">阅读更多推广信息>></a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p1">
+                                <ul>
+                                    <li class="left"><img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/plan_04.jpg" /></li>
+                                    <li class="right">
+                                        <p><b>刘晓</b></p>
+                                        <p>14级 土木工程专业</p>
+                                        <p>事迹：“第四届新纪元管理经营培训计划”香港中文大学获得毕业证书、作为主力成员获得其中多项桂冠...</p>
+                                        <p><a href="#">阅读更多推广信息>></a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p1">
+                                <ul>
+                                    <li class="left"><img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/plan_05.jpg" /></li>
+                                    <li class="right">
+                                        <p><b>郑晓珊 </b></p>
+                                        <p>13级 土木工程专业</p>
+                                        <p>事迹：对学生会的工作十分熟悉，能出色地完成学校下派的各项任务，曾多次被评为校级“优秀学生干部...</p>
+                                        <p><a href="#">阅读更多推广信息>></a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p1">
+                                <ul>
+                                    <li class="left"><img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/plan_06.jpg" /></li>
+                                    <li class="right">
+                                        <p><b>郑晓珊 </b></p>
+                                        <p>14级 管理学院</p>
+                                        <p>事迹：为学院开展学生工作做出贡献；负责多期预备党员、积极分子培训工作...</p>
+                                        <p><a href="#">阅读更多推广信息>></a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- piclist end -->
+                        </div>
+                        <div id="List2_1"></div>
+                    </div>
+                </div>
+                <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self"></a>
+            </div>
+            <div class="c"></div>
+            <script type="text/javascript">
+        <!--
+        picrun_ini()
+        //-->
+            </script>
+        </div>
+    </div>
+    <!---------实习批次----------->
+    <div class="School_view text" style="height:245px;padding-top: 30px;">
+        <div class="title">
+            <p>实习批次</p>
+            <a><p class="more">更多>></p></a>
+        </div>
+        <ul class="text_nav">
+            <li>>>批次</li>
+            <li>>>季度</li>
+            <li>>>实习人数</li>
+            <li>>>实习地点</li>
+        </ul>
+        <ul>
+            <li>第一批</li>
+            <li>秋季</li>
+            <li>339人</li>
+            <li>厦门</li>
+        </ul>
+        <ul>
+            <li>第二批</li>
+            <li>秋季</li>
+            <li>325人</li>
+            <li>厦门</li>
+        </ul>
+        <ul>
+            <li>第三批</li>
+            <li>春季</li>
+            <li>432人</li>
+            <li>泉州</li>
+        </ul>
+    </div>
+    <!--------多栏目：新闻，资料，公告------------>
+    <div id="tab" style="margin: 0 auto;">
+        <!--<div style="width: 980px;height:50px;border-bottom: 1px solid #b2b2b4;"></div>-->
+        <div class="tabList">
+            <ul>
+                <li class="cur">学院新闻</li>
+                <li>班级新闻</li>
+                <li>企业新闻</li>
+                <li>招聘信息</li>
+            </ul>
+        </div>
+        <div class="tabCon">
+            <div class="cur">
+                <span style="float: left;">
+                    <img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/wall2.jpg" id="defaultImg">
+                    <br />
+                    <img src='/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/wall1_s.jpg' onmouseover="showDaTu('/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/wall1.jpg')">
+                    <img src='/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/wall2_s.jpg' onmouseover="showDaTu('/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/wall2.jpg')">
+                    <img src='/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/wall3_s.jpg' onmouseover="showDaTu('/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/wall3.jpg')">
+                    <br />
+                </span>
+                <span style="float:right;width:600px;">
+                    @*<p class="first">·海关新规六月实施：旅客入境行李超范围将被暂存</p>
+                    <p>	·今年已7省上调最低工资标准 最高最低省差920元</p>
+                    <p>	·北京政务公开要点发布 重大决策3日内公开解读</p>
+                    <p>	·菲新总统:或与中国合作修铁路 不会搁置南海问题</p>
+                    <p>	·日本在野党将联合提交不信任案 “对决”安倍政府</p>
+                    <p>	·外国城市怎样收交通拥堵费 伦敦：每天11英镑</p>
+                    <p>	·婴儿溺毙地中海照震撼人心:小手指天 宛如睡梦中</p>
+                    <p>	·今年已7省上调最低工资标准 最高最低省差920元</p>
+                    <p>	·北京政务公开要点发布 重大决策3日内公开解读</p>
+                    <p>	·菲新总统:或与中国合作修铁路 不会搁置南海问题</p>
+                    <p style="float:right;color: blue;">更多>></p>*@
+                    @foreach (var m in (ViewData["AcademyNotice"] as IEnumerable<ServicePlatform.Models.T_Content>))
+                    {
+                        string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @m.ContentID + "";
+                        <a href=@tlink>@m.ContentTitle</a>
+                    }
+                </span>
+            </div>
+            <div>
+                <span style="float: left;width:400px;">
+                    <p>·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>	·俞正声主持召开全国政协第四十四次主席会议</p>
+                    <p>	·刘云山从严从实推进党的基层组织建设</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班=</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班=</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                </span>
+                <span style="float: left;width: 500px;">
+                    <p>·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>·李克强同埃及总理互致贺电 庆祝中埃建交60周年</p>
+                    <p>	·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>	·俞正声主持召开全国政协第四十四次主席会议</p>
+                    <p>	·刘云山从严从实推进党的基层组织建设</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班式并讲话</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班式并讲话</p>
+                    <p style="float:right;color: blue;">更多>></p>
+                </span>
+            </div>
+            <div>
+                <span style="float: left;width:400px;">
+                    <p>·刘云山从严从实推进党的基层组织建设</p>
+                    <p>	·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>	·俞正声主持召开全国政协第四十四次主席会议</p>
+                    <p>	·刘云山从严从实推进党的基层组织建设</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班=</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班=</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                </span>
+                <span style="float: left;width: 500px;">
+                    <p>·刘云山从严从实推进党的基层组织建设</p>
+                    <p>·李克强同埃及总理互致贺电 庆祝中埃建交60周年</p>
+                    <p>	·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>	·俞正声主持召开全国政协第四十四次主席会议</p>
+                    <p>	·刘云山从严从实推进党的基层组织建设</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班式并讲话</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班式并讲话</p>
+                    <p style="float:right;color: blue;">更多>></p>
+                </span>
+            </div>
+            <div>
+                <span style="float: left;width:400px;">
+                    <p>·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>	·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>	·俞正声主持召开全国政协第四十四次主席会议</p>
+                    <p>	·刘云山从严从实推进党的基层组织建设</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班=</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班=</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                </span>
+                <span style="float: left;width: 500px;">
+                    <p>·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>·李克强同埃及总理互致贺电 庆祝中埃建交60周年</p>
+                    <p>	·张德江为构建中美新型大国关系增加正能量</p>
+                    <p>	·俞正声主持召开全国政协第四十四次主席会议</p>
+                    <p>	·刘云山从严从实推进党的基层组织建设</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班式并讲话</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·张高丽坚定不移推进供给侧结构性改革</p>
+                    <p>	·王岐山出席派驻纪检组组长培训班开班式并讲话</p>
+                    <p style="float:right;color: blue;">更多>></p>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!----------联系我们--------------->
+    <div class="Callus">
+        <div style="width: 980px;height:20px;border-bottom: 1px solid #ccc;"></div>
+        <p class="call_title">联系我们</p>
+        <div class="call_left">
+            <div class="each_tips">
+                <span class="call_logo" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/tubiao.png) -145px 0;"></span>
+                <p>服务热线<br /><span>4008-121-121</span></p>
+            </div>
+            <div class="each_tips">
+                <span class="call_logo" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/tubiao.png) -145px -73px;"></span>
+                <p>服务邮箱<br /><span>service@huazhu.com</span></p>
+            </div>
+            <div class="each_tips">
+                <span class="call_logo" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/tubiao.png) -145px -150px;"></span>
+                <p>电话<br /><span>1590786532</span></p>
+            </div>
+            <div class="each_tips">
+                <span class="call_logo" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/tubiao.png) -145px -255px;"></span>
+                <p>传真<br /><span>12345678910</span></p>
+            </div>
+            <div class="each_tips">
+                <span class="call_logo" style="background: url(/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/tubiao.png) -145px -356px;"></span>
+                <p>地址<br /><span>@Model.Address</span></p>
+            </div>
+        </div>
+        <div class="call_right">
+            <!----------地图--------->
+          @Html.Partial("_Map",new ViewDataDictionary()
+          {
+         {"keyword",Model.Address} 
+          }
+
+         )
+            <!----------地图--------->
+            @*<img src="/Areas/School/SchoolContent/SchoolHomePage/NewHome/img/map.jpg" style="float: left;"/>*@
+        </div>
+
+
+       
+
+    </div>
+    <!----------底部--------->
+    <footer>
+        <p></p>
+    </footer>
+</body>
+</html>

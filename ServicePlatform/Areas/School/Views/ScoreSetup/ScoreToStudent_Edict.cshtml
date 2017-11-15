@@ -1,0 +1,76 @@
+﻿@model ServicePlatform.Models.T_SchoolStudentReviewLink
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>录入成绩</title>
+
+    <link href="~/Areas/School/Content/Home/css/style.css" rel="stylesheet" />
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">后台首页</a></li>
+            <li><a href="#">录入成绩</a></li>
+
+        </ul>
+    </div>
+   
+
+    <form action="/School/ScoreSetup/ScoreToStudent_Edict" method="post">
+        <input name="PracBatchID" type="text" value="@Model.PracBatchID" class="hidden" />
+        <input name="SchoolReviewerUserID" value="@Model.SchoolReviewerUserID" type="text" class="hidden" />
+        <input name="PracticeNo" type="text" value="@Model.PracticeNo" class="hidden" />
+        <input name="ItemID" type="text" value="@Model.ItemID"  class="hidden" />
+        <div class="formbody">
+
+            <div class="formtitle"><span>录入成绩</span></div>
+
+            <ul class="forminfo">
+             
+
+
+
+                <li>
+                    <label>分数</label>
+                    <input name="ReviewScore" type="text" value="@Model.ReviewScore" class="dfinput" />
+                    <i>*请输入 分数</i>
+                </li>
+
+                <li>
+                    <label>评分理由</label>
+                    <input name="ReviewComment" type="text" value="@Model.ReviewComment"  class="dfinput" />
+                    <i>*请输入 评分理由</i>
+                </li>
+
+
+
+
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" onclick="window.close();" /></li>
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+

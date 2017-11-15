@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "MeetingAndOfferDetails";
+}
+
+@{
+    ViewBag.Title = "ScanTheTalentPool";
+}
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    List<T_JobWanted> JobList = ViewBag.JobList;
+
+    List<T_Student> StudentList = ViewBag.StudentList;
+
+    Dictionary<string, List<int>> StuInfoList = ViewBag.StuInfoList;
+
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+<html>
+<head>
+    <title>岗位招聘详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <script>
+        function jump1(userid, schoolid) {
+            var flag = "readonly";
+            var url = '/Enterprise/EmployerManager/ScanStuPraInfo?userid=' + userid + '&schoolid=' + schoolid + '&flag=' + flag;
+            window.open(url);
+            //window.location = url;
+        }
+
+        function jump2(userid, schoolid) {
+            var url = '/Enterprise/EmployerManager/ScanStuResumeInfo?userid=' + userid + '&schoolid=' + schoolid;
+            window.open(url);
+            //window.location = url;
+        }
+
+        function jump3(userid, schoolid) {
+            var url = '/Enterprise/EmployerManager/ScanStuResumeInfo?userid=' + userid + '&schoolid=' + schoolid;
+            window.open(url);
+            //window.location = url;
+        }
+    </script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">招聘管理</a></li>
+            <li><a href="#">面试Offer详情</a></li>
+
+        </ul>
+
+    </div>
+
+    <div class="rightinfo">
+
+        <div class="formtitle"><span>岗位招聘详情:  </span></div>
+        <font style="color:red">@ViewBag.ErrorMsg</font>
+
+        <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+            <tr class="title">
+                @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                <td bgcolor="#CCCCCC">学校<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">学号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">姓名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">面试时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">面试记录<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">面试成绩<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">录取情况<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">来源<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            </tr>
+            <tbody>
+                @if (JobList != null)
+                {
+                    for (int i = 0; i < StudentList.Count(); i++)
+                    {
+
+                        <tr class="odd">
+                            <td>
+                                @StudentList[i].SchoolName
+                            </td>
+                            <td>
+                                @StudentList[i].StuNo
+                            </td>
+                            <td>
+                                @StudentList[i].StuName
+                            </td>
+                            <td>
+                                @DateTimeFormat.ConvertIntDateTime(JobList[i].ReviewTime).ToString()
+                            </td>
+                            <td>
+                                @JobList[i].ReviewRecord
+                            </td>
+                            <td>
+                                @JobList[i].ReviewScore
+                            </td>
+                            <td>
+                                @JobList[i].JobStatusName
+                            </td>
+                            <td>
+                                @JobList[i].Flag
+                            </td>
+                            <td>
+                                @if (!(StuInfoList[StudentList[i].StuNo].Contains(10)))
+                                {
+                                    <a href='/School/StuManager/ViewDetail?userid=@StudentList[i].UserID' target="_blank">基本资料 </a>
+                                }
+                                @if (!(StuInfoList[StudentList[i].StuNo].Contains(20)))
+                                {
+                                    <button onclick="jump1('@StudentList[i].UserID','@StudentList[i].SchoolID')" class="mybtn">实习资料 </button>
+                                }
+                                @if (!(StuInfoList[StudentList[i].StuNo].Contains(50)))
+                                {
+                                    <button onclick="jump3('@StudentList[i].UserID','@StudentList[i].SchoolID')" class="mybtn">查看简历 </button>
+                                }
+                                
+                                <a href='/Enterprise/EmployerManager/MeetingMaOp?practiceno=@JobList[i].PracticeNo&entno=@JobList[i].Ent_No&posid=@JobList[i].PositionID'>面试管理</a> 
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <div class="none"></div>
+
+</body>
+</html>
+
+
+

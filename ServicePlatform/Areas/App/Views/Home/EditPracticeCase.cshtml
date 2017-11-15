@@ -1,0 +1,71 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.EditPracticeCase_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>编写案例</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="main-do">
+        <form method="post">
+            <div class="main-head-do">
+                <p class="main-head-p">编写案例</p>
+            </div>
+
+            <div class="write-mine">
+                <div class="write-mine-two">
+                    <center>
+                        @Html.TextBoxFor(o => o.CaseName, new { @class = "write-theone", placeholder = "案例标题" })
+                    </center>
+                </div>
+                @*@Html.TextBoxFor(o =>Model.CaseName, new { @class = "write-theone", placeholder = "案例标题" })*@
+                @foreach (var item in Model.Case)
+                {
+                    <input type="hidden" value="@item.CaseNo" name="CaseNo"/>
+    <div class="write-mine-div">
+        <input type="hidden" value="@item.ItemNo" name="ItemNo">
+        <p>
+            <span>|</span>&nbsp;&nbsp;
+            @item.ItemName
+        </p>
+        <textarea name="ItemContent">@item.ItemContent</textarea>
+    </div>
+                }
+                    <hr size="2px" color="purple" width="94%"/>
+                <div class="camera-photo">
+                    @if (Model.Case.FirstOrDefault().Pic != null)
+                    {
+                        var photos = Model.Case.FirstOrDefault().Pic.Split(';');
+                        var photo = photos[photos.Length - 1];
+                        for (int i = 0; i < photos.Length; i++)
+                        {
+                            <p align="" style="float: left;">
+                                <img src="@photos[i]" />
+                            </p>
+                        }
+                    }
+                    else
+                    {
+                        <p align="">
+                            <img src="~/Areas/App/Content/Image/没有上传.png" />
+                        </p>
+                    }
+
+                </div>
+                
+            </div>
+
+            <a href="">
+                <div class="">
+                    <input class="do-its" type="submit" value="保存案例" />
+                </div>
+            </a>
+        </form>
+
+    </div>
+</body>

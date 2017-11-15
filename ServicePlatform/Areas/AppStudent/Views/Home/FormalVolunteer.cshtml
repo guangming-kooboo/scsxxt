@@ -1,0 +1,464 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.FormalVolunteer_M
+@section css{
+   <style>
+    .placeholder2 {
+        margin: 5px;
+        padding: 0 10px;
+        height: 2em;
+        line-height: 2em;
+    }
+
+    .line1 {
+        height: 1px;
+        background-color: #d9d9d9;
+        margin: 0 4%;
+    }
+
+    .weui-cell__ft1 {
+        position: absolute;
+        right: -80px;
+        height: 44px;
+        line-height: 44px;
+        background: #F6383A;
+        color: #ffffff;
+        width: 80px;
+        text-align: center;
+            margin-top: 0;
+    }
+
+    .weui-cell1 {
+        padding: 9px 15px;
+        font-size: 0.85em;
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .rpad {
+        padding-right: 0.60em;
+    }
+</style>
+
+}
+<script>
+    /*
+     * ÃèÊö£ºhtml5Æ»¹ûÊÖ»úÏò×ó»¬¶¯É¾³ýÌØÐ§
+     */
+    window.addEventListener('load', function() {
+        var initX; //´¥ÃþÎ»ÖÃ
+        var moveX; //»¬¶¯Ê±µÄÎ»ÖÃ
+        var X = 0; //ÒÆ¶¯¾àÀë
+        var objX = 0; //Ä¿±ê¶ÔÏóÎ»ÖÃ
+        window.addEventListener('touchstart', function(event) {
+            var obj = event.target.parentNode;
+            if (obj.className == "weui-cell") {
+                initX = event.targetTouches[0].pageX;
+                objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+            }
+            if (objX == 0) {
+                window.addEventListener('touchmove', function(event) {
+                    var obj = event.target.parentNode;
+                    if (obj.className == "weui-cell") {
+                        moveX = event.targetTouches[0].pageX;
+                        X = moveX - initX;
+                        if (X >= 0) {
+                            obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+                        } else if (X < 0) {
+                            var l = Math.abs(X);
+                            obj.style.WebkitTransform = "translateX(" + -l + "px)";
+                            if (l > 80) {
+                                l = 80;
+                                obj.style.WebkitTransform = "translateX(" + -l + "px)";
+                            }
+                        }
+                    }
+                });
+            } else if (objX < 0) {
+                window.addEventListener('touchmove', function(event) {
+                    var obj = event.target.parentNode;
+                    if (obj.className == "weui-cell") {
+                        moveX = event.targetTouches[0].pageX;
+                        X = moveX - initX;
+                        if (X >= 0) {
+                            var r = -80 + Math.abs(X);
+                            obj.style.WebkitTransform = "translateX(" + r + "px)";
+                            if (r > 0) {
+                                r = 0;
+                                obj.style.WebkitTransform = "translateX(" + r + "px)";
+                            }
+                        } else { //Ïò×ó»¬¶¯
+                            obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+                        }
+                    }
+                });
+            }
+
+        })
+        window.addEventListener('touchend', function(event) {
+            var obj = event.target.parentNode;
+            if (obj.className == "weui-cell") {
+                objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+                if (objX > -40) {
+                    obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+                    objX = 0;
+                } else {
+                    obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+                    objX = -80;
+                }
+            }
+        })
+    })
+</script>
+<script>
+    $("body").click(function() {
+        $(".weui-cell").css("transform", "translateX(0px)");
+    });
+</script>
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            <div>
+                <a href="javascript:submit('a');">
+                    <div class="placeholder"><img src="@ViewData["root"]images/return.png" class="return"></div>
+                </a>
+            </div>
+            <div class="weui-flex__item"><div class="placeholder">我的正式志愿</div></div>
+            @if (Model.CareerStatus == 10)
+            {
+                <div class="placeholder">
+                    <a href='javascript:submit("-",{id:"0"});' class="weui-input">确定</a>
+                </div>
+            }
+            else
+            {
+                <div class="placeholder"></div>
+            }
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>
+                        <big>第一志愿</big>
+                    </p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>第一岗位</p>
+                </div>
+            </div>
+            @foreach (var item in Model.Volunteer1_1)
+            {
+                <div class="line1"></div>
+                <div class="weui-cell" style="transform: translateX(0px);">
+                    <div class="weui-cell__bd"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.EntName  </a></div>
+                    <div class="weui-cell__ft rpad"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.PositionName  </a></div>
+                    @if (Model.CareerStatus == 10)
+                    {
+                        <div class="weui-cell__ft1">
+                            <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-2"});'><div style="color: #ffffff">删除</div></a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="weui-cell__ft1">不能删除哦</div>
+                    }
+                </div>
+
+                <div class="weui-cell1" style="transform: translateX(0px);">
+
+                    <div class="weui-cell__bd ">@item.VolStatusName</div>
+                    <div class="weui-flex__item">
+                        @switch (item.VolunteerStatus)
+                        {
+                            case 0:
+                                <div class="weui-cell__ft">未安排面试</div>
+                                break;
+                            case 1:
+                                <div class="weui-cell__ft">@item.InterviewTime.ToString("yyyy-M-d dddd")</div>
+                                break;
+                            case 2:
+                                <div class="weui-cell__ft" style="padding-right: 12px">@item.InterviewScore</div>
+                                break;
+                            case 3:
+                                <div class="weui-cell__ft">未通过面试</div>
+                                break;
+                            case 4:
+                                if (Model.data == null)
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"1"});'>同意</a>
+                                        &nbsp;|&nbsp;
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-1"});'>拒绝</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        已被其他岗位录取
+                                    </div>
+                                }
+                                break;
+                            case 5:
+                                <div class="weui-cell__ft">学生同意,录取成功</div>
+                                break;
+                            case 6://已拒绝该岗位
+                                <div class="weui-cell__ft">已拒绝该岗位</div>
+                                break;
+                            default:
+                                <div class="weui-cell__ft">已被其他岗位录取</div>
+                                break;
+                        }
+                    </div>
+                </div>
+                <div class="pubilice-uppad"></div>
+            }
+            <div class="weui-cell ">
+                <div class="weui-cell__bd ">
+                    <p>第二岗位</p>
+                </div>
+            </div>
+            @foreach (var item in Model.Volunteer1_2)
+            {
+                <div class="line1"></div>
+                <div class="weui-cell" style="transform: translateX(0px);">
+                    <div class="weui-cell__bd"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.EntName  </a></div>
+                    <div class="weui-cell__ft rpad"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.PositionName  </a></div>
+                    @if (Model.CareerStatus == 10)
+                    {
+                        <div class="weui-cell__ft1">
+                            <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-2"});'><div style="color: #ffffff">删除</div></a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="weui-cell__ft1">不能删除哦</div>
+                    }
+                </div>
+
+                <div class="weui-cell1" style="transform: translateX(0px);">
+
+                    <div class="weui-cell__bd ">@item.VolStatusName</div>
+                    <div class="weui-flex__item">
+                        @switch (item.VolunteerStatus)
+                        {
+                            case 0:
+                                <div class="weui-cell__ft">未安排面试</div>
+                                break;
+                            case 1:
+                                <div class="weui-cell__ft">@item.InterviewTime.ToString("yyyy-M-d dddd")</div>
+                                break;
+                            case 2:
+                                <div class="weui-cell__ft" style="padding-right: 12px">@item.InterviewScore</div>
+                                break;
+                            case 3:
+                                <div class="weui-cell__ft">未通过面试</div>
+                                break;
+                            case 4:
+                                if (Model.data == null)
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"1"});'>同意</a>
+                                        &nbsp;|&nbsp;
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-1"});'>拒绝</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        已被其他岗位录取
+                                    </div>
+                                }
+                                break;
+                            case 5:
+                                <div class="weui-cell__ft">学生同意,录取成功</div>
+                                break;
+                            case 6://已拒绝该岗位
+                                <div class="weui-cell__ft">已拒绝该岗位</div>
+                                break;
+                            default:
+                                <div class="weui-cell__ft">已被其他岗位录取</div>
+                                break;
+                        }
+                    </div>
+                </div>
+
+                <div class="pubilice-uppad"></div>
+            }
+        </div>
+
+
+
+
+
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p><big>第二志愿</big></p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>第一岗位</p>
+                </div>
+            </div>
+            @foreach (var item in Model.Volunteer2_1)
+            {
+                <div class="line1"></div>
+                <div class="weui-cell" style="transform: translateX(0px);">
+                    <div class="weui-cell__bd"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.EntName  </a></div>
+                    <div class="weui-cell__ft rpad"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.PositionName  </a></div>
+                    @if (Model.CareerStatus == 10)
+                    {
+                        <div class="weui-cell__ft1">
+                            <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-2"});'><div style="color: #ffffff">删除</div></a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="weui-cell__ft1">不能删除哦</div>
+                    }
+                </div>
+
+                <div class="weui-cell1" style="transform: translateX(0px);">
+
+                    <div class="weui-cell__bd ">@item.VolStatusName</div>
+                    <div class="weui-flex__item">
+                        @switch (item.VolunteerStatus)
+                        {
+                            case 0:
+                                <div class="weui-cell__ft">未安排面试</div>
+                                break;
+                            case 1:
+                                <div class="weui-cell__ft">@item.InterviewTime.ToString("yyyy-M-d dddd")</div>
+                                break;
+                            case 2:
+                                <div class="weui-cell__ft" style="padding-right: 12px">@item.InterviewScore</div>
+                                break;
+                            case 3:
+                                <div class="weui-cell__ft">未通过面试</div>
+                                break;
+                            case 4:
+                                if (Model.data == null)
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"1"});'>同意</a>
+                                        &nbsp;|&nbsp;
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-1"});'>拒绝</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        已被其他岗位录取
+                                    </div>
+                                }
+                                break;
+                            case 5:
+                                <div class="weui-cell__ft">学生同意,录取成功</div>
+                                break;
+                            case 6://已拒绝该岗位
+                                <div class="weui-cell__ft">已拒绝该岗位</div>
+                                break;
+                            default:
+                                <div class="weui-cell__ft">已被其他岗位录取</div>
+                                break;
+                        }
+                    </div>
+                </div>
+
+                <div class="pubilice-uppad"></div>
+            }
+
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>第二岗位</p>
+                </div>
+            </div>
+
+            @foreach (var item in Model.Volunteer2_2)
+            {
+                <div class="line1"></div>
+                <div class="weui-cell" style="transform: translateX(0px);">
+                    <div class="weui-cell__bd"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.EntName  </a></div>
+                    <div class="weui-cell__ft rpad"><a href='javascript:submit("b",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID"});'>@item.PositionName  </a></div>
+                   @if (Model.CareerStatus == 10)
+                   {
+                       <div class="weui-cell__ft1">
+                           <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-2"});'><div style="color: #ffffff">删除</div></a>
+                       </div>
+                   }
+                   else
+                   {
+                    <div class="weui-cell__ft1">不能删除哦</div>
+                   }
+                </div>
+
+                <div class="weui-cell1" style="transform: translateX(0px);">
+
+                    <div class="weui-cell__bd ">@item.VolStatusName</div>
+                    <div class="weui-flex__item">
+                        @switch (item.VolunteerStatus)
+                        {
+                            case 0:
+                                <div class="weui-cell__ft">未安排面试</div>
+                                break;
+                            case 1:
+                                <div class="weui-cell__ft">@item.InterviewTime.ToString("yyyy-M-d dddd")</div>
+                                break;
+                            case 2:
+                                <div class="weui-cell__ft" style="padding-right: 12px">@item.InterviewScore</div>
+                                break;
+                            case 3:
+                                <div class="weui-cell__ft">未通过面试</div>
+                                break;
+                            case 4:
+                                if (Model.data == null)
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"1"});'>同意</a>
+                                        &nbsp;|&nbsp;
+                                        <a href='javascript:submit("-",{EntPracNo:"@item.EntPracNo",PosID:"@item.PosID",id:"-1"});'>拒绝</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="weui-cell__ft" style="padding-right: 12px">
+                                        已被其他岗位录取
+                                    </div>
+                                }
+                                break;
+                            case 5:
+                                <div class="weui-cell__ft">学生同意,录取成功</div>
+                                break;
+                            case 6://已拒绝该岗位
+                                <div class="weui-cell__ft">已拒绝该岗位</div>
+                                break;
+                            default:
+                                <div class="weui-cell__ft">已被其他岗位录取</div>
+                                break;
+                        }
+                    </div>
+                </div>
+
+                <div class="pubilice-uppad"></div>
+            }
+        </div>
+
+
+
+    </div>
+</div>

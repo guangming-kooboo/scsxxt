@@ -1,0 +1,215 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.TaskDetail_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+
+
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("WorkLoad", "THome", new { area = "AppTeacher2" })">
+                    <div>
+                        <div class="placeholder colortitle">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </div>
+                </a>
+                <div class="weui-flex__item colortitle">
+                    <div class="placeholder">工作量详情</div>
+                </div>
+                <div style="width: 40px">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells ">
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">实习批次:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.Name" readonly class="weui-input">
+                    </div>
+                </div>
+
+                @*定额任务  定量任务  任务  计分项*@
+
+                @if (Model.type == 0)
+            {
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">工作量类型:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" value="定额任务" readonly class="weui-input">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">任务</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" value="@Model._taskname" readonly class="weui-input">
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">工作量类型</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" value="定量任务" readonly class="weui-input">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">计分项</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" value="@Model._taskname" readonly class="weui-input">
+                        </div>
+                    </div>
+                }
+                @*状态*@
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">状态</label>
+                    </div>
+                    @switch (@Model.state)
+                    {
+                        case 0:
+                            <div class="weui-cell__bd">
+                                <input type="text" value="待审核" readonly class="weui-input">
+                            </div>
+                            break;
+                        case 1:
+                            <div class="weui-cell__bd">
+                                <input type="text" value="审核通过" readonly class="weui-input">
+                            </div>
+                            break;
+                        case 2:
+                            <div class="weui-cell__bd">
+                                <input type="text" value="审核不通过" readonly class="weui-input">
+                            </div>
+                            break;
+                        default:
+                            <div class="weui-cell__bd">
+                                <input type="text" value="" readonly class="weui-input">
+                            </div>
+                            break;
+                    }
+                </div>
+
+                @if (Model.type == 0)
+            {
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>占比： @Model._AppQuotadis.AbsoluteWeight</p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (Model.type == 1)
+            {
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="placeholder">备注</div>
+                        <div class="weui-flex__item">
+                            <div class="placeholder"></div>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" readonly="readonly" rows="6">@Model._AppQuantifycom.CompleteNote</textarea>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="weui-gallery" id="gallery" style="opacity: 1; display: none">
+                <span class="weui-gallery__img" id="galleryImg" style="background-image: url()"></span>
+                <div class="weui-gallery__opr">
+                </div>
+            </div>
+
+            <div class="weui-uploader__bd" style="width: 100%">
+                <ul class="weui-uploader__files">
+                    @if (Model.type == 0)
+                    {
+                        if (Model._AppQuotadis.Certificate != null)
+                        {
+                            var photo = Model._AppQuotadis.Certificate.Split(';');
+                            for (int item = 0; item < photo.Count(); item++)
+                            {
+                                <li class="weui-uploader__file1 Photo"><img style="background-image: url(@photo[item]); background-size: 100% auto" width="90%" height="190px" src="@photo[item]"></li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="weui-uploader__file1"><img style="background-image: url()" src=""></li>
+                        }
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(Model._AppQuantifycom.Certificate))
+                        {
+                            var photo = Model._AppQuantifycom.Certificate.Split(';');
+                            for (int item = 0; item < photo.Count(); item++)
+                            {
+                                <li class="weui-uploader__file1 Photo"><img style="background-image: url(@photo[item]); background-size: 100% auto" width="90%" height="190px" src="@photo[item]"></li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="weui-uploader__file1"><img style="background-image: url()" src=""></li>
+                        }
+                    }
+                </ul>
+            </div>
+            <!--
+            页面特有
+            -->
+            <script src="~/Areas/AppTeacher2/Content/js/zepto.js"></script>
+            <script>
+                $gallery = $("#gallery"),
+                    $galleryImg = $("#galleryImg"),
+                    $uploaderFiles = $(".Photo");
+                $uploaderFiles.on("click", "img", function () {
+                    $galleryImg.attr("style", this.getAttribute("style"));
+
+
+                    $gallery.fadeIn(100);
+                    $gallery.on("click", function () {
+                        $gallery.fadeOut(100);
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>

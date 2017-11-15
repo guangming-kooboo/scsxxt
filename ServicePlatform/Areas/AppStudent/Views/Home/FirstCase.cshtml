@@ -1,0 +1,102 @@
+﻿<style>
+    .weui-navbar {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        position: absolute !important;
+        z-index: 500;
+        top: 0;
+        width: 100%;
+        background-color: # fafaf;
+    }
+</style>
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex">
+            <div style="width:60px">
+                @*跳到主页*@
+                <a href="javascript:submit('b');">
+                    <div class="placeholder colortitle"><img src="@ViewData["root"]images/return.png" class="return"></div>
+                </a>
+            </div>
+            <div class="weui-flex__item colortitle"><div class="placeholder">添加案例/周记</div></div>
+            <div>
+                @*跳到主页*@
+                <a href="javascript:submit('a');">
+                    <div class="placeholder">添加</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-tab">
+            <div class="weui-navbar">
+                <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+                    周记
+                </a>
+                <a class="weui-navbar__item" href="#tab2">
+                    案例
+                </a>
+            </div>
+            <div class="weui-tab__bd">
+                <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div><div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div><div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+
+                    <div class="weui-flex">
+                        <div><div class="placeholder"></div></div>
+                        <div class="weui-flex__item"><div class="placeholder">点击按钮编写第一篇周记</div></div>
+                        <div><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                </div>
+                <div id="tab2" class="weui-tab__bd-item">
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div><div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div><div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div><div class="placeholder"></div></div>
+                        <div class="weui-flex__item"><div class="placeholder">点击按钮编写第一篇案例</div></div>
+                        <div><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item"><div class="placeholder"></div></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

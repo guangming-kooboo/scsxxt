@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<title>weui</title>
+		 <link rel="stylesheet" href="css/jquery-weui.css"/>
+    <link rel="stylesheet" href="css/weui.min.css" />
+    <link rel="stylesheet" href="css/pubilice.css"/>
+		 <script src="js/jquery-2.1.4.js"></script>
+		 <script src="js/fastclick.js"></script>
+		 <script>
+		  $(function() {
+		    FastClick.attach(document.body);
+		  });
+		 </script>
+		 <script src="js/jquery-weui.js"></script>
+		
+	<!----------------页面特有 ---------------------------->
+ 
+    <link rel="stylesheet" href="css/Dindex.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+    	.weui-cell__ft1{
+    		 position:absolute;
+    		 right:-80px;
+    		 height:44px;
+    		 line-height:44px;
+    		 background:#F6383A;
+    		 color:#ffffff;
+    		 width:80px;
+    		 text-align: center;
+    	}
+
+    </style>
+	<script>
+	 /*
+	  * ÃèÊö£ºhtml5Æ»¹ûÊÖ»úÏò×ó»¬¶¯É¾³ýÌØÐ§
+	  */
+	 window.addEventListener('load', function() {
+	  var initX; //´¥ÃþÎ»ÖÃ
+	  var moveX; //»¬¶¯Ê±µÄÎ»ÖÃ
+	  var X = 0; //ÒÆ¶¯¾àÀë
+	  var objX = 0; //Ä¿±ê¶ÔÏóÎ»ÖÃ
+	  window.addEventListener('touchstart', function(event) {
+	   event.preventDefault();
+	   var obj = event.target.parentNode;
+	   if (obj.className == "weui-cell") {
+	    initX = event.targetTouches[0].pageX;
+	    objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+	   }
+	   if (objX == 0) {
+	    window.addEventListener('touchmove', function(event) {
+	     event.preventDefault();
+	     var obj = event.target.parentNode;
+	     if (obj.className == "weui-cell") {
+	      moveX = event.targetTouches[0].pageX;
+	      X = moveX - initX;
+	      if (X >= 0) {
+	       obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+	      } else if (X < 0) {
+	       var l = Math.abs(X);
+	       obj.style.WebkitTransform = "translateX(" + -l + "px)";
+	       if (l > 80) {
+	        l = 80;
+	        obj.style.WebkitTransform = "translateX(" + -l + "px)";
+	       }
+	      }
+	     }
+	    });
+	   } else if (objX < 0) {
+	    window.addEventListener('touchmove', function(event) {
+	     event.preventDefault();
+	     var obj = event.target.parentNode;
+	     if (obj.className == "weui-cell") {
+	      moveX = event.targetTouches[0].pageX;
+	      X = moveX - initX;
+	      if (X >= 0) {
+	       var r = -80 + Math.abs(X);
+	       obj.style.WebkitTransform = "translateX(" + r + "px)";
+	       if (r > 0) {
+	        r = 0;
+	        obj.style.WebkitTransform = "translateX(" + r + "px)";
+	       }
+	      } else { //Ïò×ó»¬¶¯
+	       obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+	      }
+	     }
+	    });
+	   }
+	 
+	  })
+	  window.addEventListener('touchend', function(event) {
+	   event.preventDefault();
+	   var obj = event.target.parentNode;
+	   if (obj.className == "weui-cell") {
+	    objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+	    if (objX > -40) {
+	     obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+	     objX = 0;
+	    } else {
+	     obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+	     objX = -80;
+	    }
+	   }
+	  })
+	 })
+	 </script>
+	<!------------------------------------------------>	
+    
+	</head>
+<body ontouchstart>
+	 <nav id="menu" class="menu">
+      <a href="" target="_blank">
+        <header class="menu-header">
+          <img src="images/head.jpg">
+          <span class="menu-header-title">jason</span>
+        </header>
+      </a>
+
+      <section class="menu-section">
+        <!--<h3 class="menu-section-title">菜单</h3>-->
+        <ul class="menu-section-list">
+          <li><img src="images/h1.png"><a href="" target="_blank">私人任务</a></li>
+          <li><img src="images/h2.png"><a href="" target="_blank">办公任务</a></li>
+          <li><img src="images/h3.png"><a href="" target="_blank">任务池</a></li>
+          <li><img src="images/h4.png"><a href="" target="_blank">我接收的任务</a></li>
+          <li><img src="images/h1.png"><a href="" target="_blank">我分配的任务</a></li>
+          <li><img src="images/h2.png"><a href="" target="_blank">公共任务</a></li>
+          <li><img src="images/h3.png"><a href="" target="_blank">我的组</a></li>
+          <li><img src="images/h4.png"><a href="" target="_blank">我的消息</a></li>
+        </ul>
+      </section>
+
+      <!--<section class="menu-section">
+        <h3 class="menu-section-title">Docs</h3>
+        <ul class="menu-section-list">
+          <li><a href="" target="_blank">Installation</a></li>
+          <li><a href="" target="_blank">Usage</a></li>
+          <li><a href="" target="_blank">API</a></li>
+          <li><a href="" target="_blank">npm-scripts</a></li>
+        </ul>
+      </section>
+
+      *-->
+    </nav>
+	 <main id="panel" class="panel">
+	  	 
+
+	<div class="weui-tab__bd">
+		<div class="weui-tab__bd-item weui-tab__bd-item--active">
+       <div class="weui-cells__title">未完成</div>
+       <div class="weui-cells weui-cells_checkbox">
+    	
+    	<div class="weui-cell" style="transform: translateX(0px);">
+	           
+         <div class="weui-cell__hd">
+           
+            <i class="weui-icon-circle"></i>
+          </div>
+    
+	       <div class="weui-cell__bd">明天早上开会</div>
+	        <div class="weui-cell__ft">10；00AM 2/22</div>
+	        <div class="weui-cell__ft1">删除 </div>
+	      </div>
+      
+        <div class="weui-cell" style="transform: translateX(0px);">
+	  
+         <div class="weui-cell__hd">
+            
+           <i class="weui-icon-circle"></i>
+          </div>
+    	
+	       <div class="weui-cell__bd">明天早上开会</div>
+	        <div class="weui-cell__ft">10；00AM 2/22</div>
+	        <div class="weui-cell__ft1">删除 </div>
+	      </div>
+      
+     </div>
+        <div class="weui-cells__title">已完成</div>
+         <div class="weui-cells weui-cells_checkbox">
+    	  <div class="weui-cell" style="transform: translateX(0px);">
+	           
+         <div class="weui-cell__hd">
+            <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+            <i class="weui-icon-checked"></i>
+          </div>
+    
+	       <div class="weui-cell__bd">明天早上开会</div>
+	        <div class="weui-cell__ft">10；00AM 2/22</div>
+	        <div class="weui-cell__ft1">删除 </div>
+	      </div>
+      
+        <div class="weui-cell" style="transform: translateX(0px);">
+	  
+         <div class="weui-cell__hd">
+            <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+            <i class="weui-icon-checked"></i>
+          </div>
+    	
+	       <div class="weui-cell__bd">明天早上开会</div>
+	        <div class="weui-cell__ft">10；00AM 2/22</div>
+	        <div class="weui-cell__ft1">删除 </div>
+	      </div>
+      
+     </div>
+    
+   </div>
+    </div>
+   
+    <div class="weui-tabbar">
+        <div class="weui-tabbar__item">
+        <a href="javascript:;" class="weui-btn weui-btn_primary">新建任务</a>
+        </div>
+	</div>
+	 </main>
+	<!----------------页面特有 ---------------------------->
+    <script src="js/index.js"></script>
+    <script>
+      mocha.setup('bdd');
+      var exports = null;
+      function assert(expr, msg) {
+        if (!expr) throw new Error(msg || 'failed');
+      }
+    </script>
+    <script src="js/slideout.js"></script>
+    <script src="js/test.js"></script>
+    <script>
+      window.onload = function() {
+        document.querySelector('.js-slideout-toggle').addEventListener('click', function() {
+          slideout.toggle();
+        });
+
+        document.querySelector('.menu').addEventListener('click', function(eve) {
+          if (eve.target.nodeName === 'A') { slideout.close(); }
+        });
+
+        var runner = mocha.run();
+      };
+    </script>
+
+    	<!--------------- ---------------------------->
+</body>
+</html>

@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "updateCounty";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改县区信息</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">地区代码管理</a></li>
+                <li><a href="#">修改城市</a></li>
+            </ul>
+        </div>
+
+    
+
+            <div class="formtitle"><span>修改城市</span></div>
+            
+
+    <form method="POST" action="/CodeManager/Code/ReupdateCounty">
+
+        <ul class="forminfo">
+
+            <li>
+                <label>省份选择</label>
+                <select style="width:100px" name="ProvinceName" id="ProvinceName" class="dfinput">
+                    <option value="--请选择--">--请选择--</option>
+                    @foreach (var item in ViewBag.pnameall)
+                    {
+                        if (@item.ProvinceName == @ViewBag.Pname)
+                        {
+                        <option value="@item.ProvinceName" selected="selected">@item.ProvinceName</option> }
+
+                        else
+                        {
+                            <option value="@item.ProvinceName">@item.ProvinceName</option>
+                        }
+
+
+                    }
+                </select>
+            </li>
+            <li>
+                <label>
+                    请根据城市选择：
+                </label>
+                <select style="width:100px" name="CityName" class="dfinput" id="chengshi">
+                    <option value=@ViewBag.Cname>@ViewBag.Cname</option>
+
+                </select>
+
+            </li>
+
+
+            <li>
+                <label>县区编号(6个数字):</label>
+                <input type="text" name="CountyID" id="CountyID" class="dfinput" value="@ViewBag.update.CountyID">
+            </li>
+
+
+            <li>
+                <label>县区名称:</label>
+                <input type="text" id="CountyName" name="CountyName" class="dfinput" value="@ViewBag.update.CountyName">
+            </li>
+
+
+
+            <li>
+
+                <label>&nbsp;</label><input type="submit" value="保  存" class="btn">
+
+            </li>
+        </ul>
+
+
+
+    </form>
+
+
+     
+    <script>
+        $("#ProvinceName").bind("click", function () {
+
+
+            jQuery("#chengshi option").remove();
+
+            var ProvinceName = $("#ProvinceName").val();
+            if (ProvinceName == "--请选择--") {
+                jQuery("#chengshi").val("--请选择--");
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Code/receajaxchangeAddCounty',
+                    data: {
+                        //DeleteRow: DeletedID.join(','),
+                        DeleteRow: ProvinceName,
+
+
+                    },
+                    success: function (data) {
+                        if (data != "cuowu") {
+
+
+                            var speno1 = data.split(",");
+
+                            for (var i = 0; i < speno1.length - 1; i++) {
+
+                                jQuery("#chengshi").append("<option >" + speno1[i] + " </option>");
+                                jQuery("#chengshi").val(speno1[i]);
+
+
+                            }
+                        }
+                        else {
+                            jQuery("#chengshi").val("--请选择--");
+                        }
+
+                    },
+                });
+            }
+
+
+        });
+    </script>
+
+</body>
+</html>
+
+
+

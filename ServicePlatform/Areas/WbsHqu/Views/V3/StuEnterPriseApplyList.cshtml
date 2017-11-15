@@ -1,0 +1,14 @@
+﻿@{
+    Layout = ViewData["Layout"].ToString();
+}
+<label>
+    学生申请企业:&nbsp;
+    @Html.TextBox("学生申请企业", "", new { @class = "form-control input-sm", PlaceHolder = "请输入要查询的学生申请企业" })
+</label>
+
+<script>
+    function Search() {
+        var Params = v("学生申请企业");
+        return Params;
+    }
+</script>

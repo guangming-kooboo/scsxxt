@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "updateContentType";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改内容类型</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">内容类型维护</a></li>
+                <li><a href="#">修改内容类型</a></li>
+            </ul>
+        </div>
+
+    
+
+            <div class="formtitle"><span>修改内容类型</span></div>
+            
+
+    <form method="POST" action="/CodeManager/Code/ReupdateContentType">
+
+        <ul class="forminfo">
+
+
+
+
+            <li>
+                <label>内容类型编号:</label>
+                <input type="text" name="ConTypeID" id="ConTypeID" class="dfinput" value="@ViewBag.update.ConTypeID">
+            </li>
+
+
+            <li>
+                <label>内容类型名称:</label>
+                <input type="text" id="ConTypeName" name="ConTypeName" class="dfinput" value="@ViewBag.update.ConTypeName">
+            </li>
+
+
+
+            <li>
+
+                <label>&nbsp;</label><input type="submit" value="保  存" class="btn">
+
+            </li>
+        </ul>
+
+
+
+    </form>
+     
+    
+
+</body>
+</html>
+
+
+
+

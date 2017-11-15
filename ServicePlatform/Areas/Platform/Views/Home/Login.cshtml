@@ -1,0 +1,145 @@
+﻿@model ServicePlatform.Areas.Platform.Models.Home.Login
+@{
+    ViewBag.Title = "登录";
+}
+
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+
+    <!-- IE 兼容 -->
+    <!--[if lt IE 9]>
+        <script src="assets/js/ie/html5shiv.js"></script>
+        <![endif]-->
+    <!--[if lte IE 8]>
+        <script src="assets/js/ie/json2.min.js"></script>
+        <![endif]-->
+    <link href="~/Areas/Platform/Content/Home/Login/Login.css" rel="stylesheet" />
+   
+    <link href="~/Areas/Platform/Content/Home/Login/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Areas/Platform/Content/Home/Login/SpryAssets/SpryTabbedPanels.js"></script>
+    <script>
+        function OnChangeTab() {
+          //  alert("OnChangeTab")
+            $("#SchoolID").val("");
+            $("#Ent_No").val("");
+
+          //  alert($("#SchoolID").val())
+          //  alert($("#Ent_No").val())
+        }
+    </script>
+</head>
+
+<body>
+    <!-- header -->
+    <header id="header" class="">
+        <nav class="top-nav">
+            <div class="top-nav-div clearfix">
+                <ul>
+                    <!-- 下拉demo -->
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    <li>|</li>
+                    <!-- 下拉demo -->
+                    <li>
+                        <a href="#">登录</a>
+                    </li>
+                    <li>|</li>
+                    <li><a href="#">服务</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="top-blank clearfix">
+            <!-- logo -->
+            <div class="LOGODiv">
+                 <img src="/Areas/Platform/Content/Home/Login/img/logo.png" width="50" height="50" alt="旅游学院顶岗实习管理系统">
+                <p>顶岗实习管理系统</p>
+            </div>
+        </div>
+    </header>
+    <div id="wrapper">
+        <!--登录信息-->
+        <div class="login">
+            <p>欢迎登录</p>
+            <div style="clear:both;"></div>
+            <form  method="POST" >
+                <div class="TYPE">
+                    <div id="TabbedPanels1" class="TabbedPanels">
+                        <ul class="TabbedPanelsTabGroup">
+                            <li onclick="OnChangeTab()" class="TabbedPanelsTab" tabindex="0">高&nbsp;&nbsp;校</li>
+                            <li onclick="OnChangeTab()"   class="TabbedPanelsTab" tabindex="1">企&nbsp;&nbsp;业</li>
+                            <li onclick="OnChangeTab()"  class="TabbedPanelsTab" tabindex="2">平&nbsp;&nbsp;台</li>
+                        </ul>
+                        <div class="TabbedPanelsContentGroup">
+                            <div class="TabbedPanelsContent">
+                                <div class="information">
+                                    <label for="userType">高&nbsp;&nbsp;校</label>
+                                     @Html.DropDownListFor(o => o.SchoolID, Model.SchoolItems,new { @class = "Adjust"})
+                                </div>
+                            </div>
+                            <div class="TabbedPanelsContent">
+                                <div class="information">
+                                    <label for="userType">企&nbsp;&nbsp;业</label>
+                                    @Html.DropDownListFor(o => o.Ent_No, Model.EntItems, new {@class = "Adjust"})
+                                </div>
+                            </div>
+                            <div class="TabbedPanelsContent">
+                                
+                            </div>
+                        </div><!--/TabbedPanelsContentGroup-->
+                    </div>
+                </div><!--/TYPE-->
+                <div style="clear:both;"></div>
+                <div class="information">
+                    <label for="username">账&nbsp;&nbsp;号</label>
+                    @Html.TextBoxFor(o=>o.UserID)
+                    @Html.ValidationMessageFor(o => o.UserID)
+                </div>
+                <div style="clear:both;"></div>
+                <div class="information">
+                    <label for="password">密&nbsp;&nbsp;码</label>
+                    @Html.PasswordFor(o => o.UserPwd)
+                    @Html.ValidationMessageFor(o => o.UserPwd)
+                </div>
+                <div style="clear:both;"></div>
+                <input type="submit" name="submit" value="登录" class="checkcode submit" />
+
+                <input name="code" type="hidden" value="" class="nodisplay">
+            </form>
+        </div>
+
+        <!--A.D.-->
+        <div class="PlatAd">
+             <img src="/Areas/Platform/Content/Home/Login/img/4.jpg" />
+        </div>
+    </div>
+    <!--页脚-->
+    <footer id="footer">
+        <ul>
+            <li><a href="#">关于顶岗实习管理系统</a></li>
+            <li><a href="#">操作指南</a></li>
+            <li><a href="#">信息服务</a></li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

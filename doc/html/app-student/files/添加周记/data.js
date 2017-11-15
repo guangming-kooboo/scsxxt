@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"添加周记.html",
+  "generationDate":new Date(1483078092439.8),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"212b6c2edc1d47809721548eede13ba9",
+    "type":"Axure:Page",
+    "name":"添加周记",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"2e5ece3b85254556858385c872a904f6",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":130,
+              "y":36},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"140c39259e9c487ba0d47c10cb702771",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":130,
+                  "y":36},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/添加周记/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "2e5ece3b85254556858385c872a904f6":{
+      "scriptId":"u0"},
+    "140c39259e9c487ba0d47c10cb702771":{
+      "scriptId":"u1"}}});

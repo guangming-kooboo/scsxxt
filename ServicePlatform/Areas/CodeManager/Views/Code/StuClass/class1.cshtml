@@ -1,0 +1,181 @@
+﻿
+@model IEnumerable<ServicePlatform.Models.T_Class>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>班级维护</title>
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+   <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="~/Areas/CodeManager/Content/StuClass/js/classPage.js"></script>
+    
+    <script language="javascript" type="text/javascript">
+        function detail() {
+            var SelectRow = $('#classtablebox').datagrid("getSelected");
+            var SelectId = SelectRow.ClassID;
+            var s = "/CodeManager/Code/ClassDetail?id=" + SelectId + "";
+            window.location = s;
+        }
+        function update() {
+            var SelectRow = $('#classtablebox').datagrid("getSelected");
+            var SelectId = SelectRow.ClassID;
+
+            var s = "/CodeManager/Code/UpdateClass?id=" + SelectId + "";
+            window.location = s;
+        }
+    </script>
+
+
+    <style type="text/css">
+        .datagrid-cell {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">学生代码维护表</a></li>
+                <li><a href="#">班级列表</a></li>
+            </ul>
+        </div>
+    <!--用于显示表格-->
+    <div id="classtablebox">
+        <table id="classtable"></table>
+        <div id="HomeToolBar">
+            <div id="TButton" style="padding:5px;">
+                <div>
+                    <a href="/CodeManager/Code/Addc" class="easyui-linkbutton" iconcls="icon-add">添加</a>
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="obj.remove();">删除</a>
+                    <a href="#" class="easyui-linkbutton" id="TB1" iconcls="icon-edit" onclick="update();">修改</a>
+                    <a href="#" class="easyui-linkbutton" id="TB2" iconcls="icon-tip"  onclick="detail();">详情</a>
+                    
+                </div>
+            </div>
+            @*<div>
+                    查询新闻：<input type="text" name="SearchNews" style="width=100px;" />
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="obj.search();">查询</a>
+                </div>*@
+            <label>
+                请根据年级选择：
+            </label>
+            <select style="width:100px" name="entruyear" class="dfinput" id="change">
+                <option value="--请选择--">--请选择--</option>
+                @foreach (var item in ViewBag.entryyear)
+                {
+                    <option value="@item">@item</option>
+
+                }
+            </select>
+            <label>
+                请根据专业选择：
+            </label>
+            <select style="width:100px" name="zhuanye" class="dfinput" id="chengshi">
+                <option value="--请选择--">--请选择--</option>
+
+            </select>
+            <script>
+                $("#change").bind("change", function () {
+
+
+                    jQuery("#chengshi option").remove();
+
+                    var change = $("#change").val();
+                    if (change == "--请选择--") {
+                        jQuery("#chengshi").val("--请选择--");
+                    }
+                    else {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Code/receajaxchangeAddspe',
+                            data: {
+                                //DeleteRow: DeletedID.join(','),
+                                DeleteRow: change,
+
+
+                            },
+                            success: function (data) {
+                                if (data != "cuowu") {
+
+
+                                    var speno1 = data.split(",");
+
+                                    for (var i = 0; i < speno1.length - 1; i++) {
+
+                                        jQuery("#chengshi").append("<option >" + speno1[i] + " </option>");
+                                        jQuery("#chengshi").val(speno1[i]);
+
+
+
+                                    }
+                                    jQuery("#chengshi").append("<option  selected=‘selected’>" + "--请选择--" + " </option>");
+                                    var $name = $("#chengshi").val() + ";" + $("#change").val();
+                                    if ($("#change").val() == "--请选择--") { }
+                                    else {
+                                        $('#classtablebox').datagrid('load', {
+
+                                            classAttribute: "fasong",
+                                            classValue: $name,
+                                        });
+                                    }
+                                }
+                                else {
+                                    jQuery("#chengshi").val("--请选择--");
+                                    var $name = $("#chengshi").val() + ";" + $("#change").val();
+                                    if ($("#change").val() == "--请选择--") { }
+                                    else {
+                                        $('#classtablebox').datagrid('load', {
+
+                                            classAttribute: "fasong",
+                                            classValue: $name,
+                                        });
+                                    }
+                                }
+
+                            },
+                        });
+                    }
+
+
+                });
+
+                $("#chengshi").bind("change", function () {
+
+                    var $name = $("#chengshi").val() + ";" + $("#change").val();
+                    if ($("#change").val() == "--请选择--") { }
+                    else {
+                        $('#classtablebox').datagrid('load', {
+
+                            classAttribute: "fasong",
+                            classValue: $name,
+                        });
+                    }
+
+                })
+
+            </script>
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

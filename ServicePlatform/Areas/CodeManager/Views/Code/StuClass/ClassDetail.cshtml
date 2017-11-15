@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "ClassDetail";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>班级详情</title>
+    
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">学生代码维护表</a></li>
+                <li><a href="#">班级详情</a></li>
+            </ul>
+        </div>
+    
+
+            <div class="formtitle"><span>班级详情</span></div>
+            
+
+    
+        <ul class="forminfo">
+      <li>
+          <label for="SchoolName">学校名称</label>
+            
+          <select style="width:100px" name="SchoolName" id="SchoolName" class="dfinput">
+
+              <option value="@ViewBag.schoolname">@ViewBag.schoolname</option>
+
+          </select>
+     </li> <li>      
+                <label for="entryyear">年级</label>
+            
+                <select style="width:100px" name="entryyear" id="entryyear"class="dfinput">
+                   
+                        <option value="@ViewBag.classDetail.EntryYear">@ViewBag.classDetail.EntryYear</option>
+
+                </select>
+    </li> <li>       
+                <label for="entryno">专业编号</label>
+            
+                <select style="width:100px" name="entryno" id="entryno"class="dfinput">
+                   
+                        <option value="@ViewBag.classDetail.SpeNo">@ViewBag.classDetail.SpeNo</option>
+                </select>
+           
+</li><li>
+
+           
+                <label for="ClassNo">班级编号</label>
+                <input type="text" name="ClassNo" id="ClassNo" value="@ViewBag.classDetail.ClassID"readonly="readonly"class="dfinput">
+             </li><li>        
+            
+               <label for="ClassName">班级名称</label><br />
+                <input type="text" name="ClassName" id="ClassName"value="@ViewBag.classDetail.ClassName" readonly="readonly"class="dfinput">
+      </li><li>      
+                
+                 <label>&nbsp;</label>  <button class="btn">返回</button>
+      </li>      
+</ul>
+    
+
+
+    <script>
+
+        $("button").bind("click", function () {
+            var s = "class1";
+            window.location=s;
+
+
+        })
+
+
+
+
+    </script>
+
+
+</body>
+</html>

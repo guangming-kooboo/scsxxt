@@ -1,0 +1,99 @@
+﻿@model Qx.Report.Models.Report
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>@ViewBag.Title
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" method="POST" role="form">
+                <div class="form-body">
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">编号</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(o => o.ReportID, new { @class = "form-control" })
+                            <span class="help-block">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">名称</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(o => o.ReportName, new { @class = "form-control" })
+                            <span class="help-block">
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Sql脚本</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(o => o.SqlStr, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">标题</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(o => o.HeadFields, new { @class = "form-control" })
+                       
+                            <span class="help-block">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">每页显示条数</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(o => o.RecordsPerPage, new { @class = "form-control" })
+
+                            <span class="help-block">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">参数说明</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(o => o.ParaNames, new { @class = "form-control" })
+
+                            <span class="help-block">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">要显示的列索引</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(o => o.ColunmToShow, new { @class = "form-control" })
+
+                            <span class="help-block">
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">操作列</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(o => o.OperateColum, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-actions fluid">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-success">保存</button>
+                        <button type="button" onclick="history.go(-1)" class="btn btn-default">返回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

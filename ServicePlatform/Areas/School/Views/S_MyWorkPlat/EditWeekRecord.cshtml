@@ -1,0 +1,96 @@
+﻿@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+@{
+    ViewBag.Title = "MyWorkPlat";
+
+    T_WeekRecord tw = ViewBag.Edit;
+
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的工作台</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    @Html.Partial("_KindEditorLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.idTabs.min.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/select-ui.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">实习过程管理</a></li>
+            <li><a href="#">我的工作台</a></li>
+            @if (ViewBag.Commit == "false")
+            {
+                <li><a href="#">查看周记</a></li>
+            }
+            else
+            {
+                <li><a href="#">编辑周记</a></li>
+            }
+
+
+        </ul>
+    </div>
+
+    <div class="formbody">
+
+        <div id="usual1" class="usual">
+
+            <div id="tab1" class="tabson">
+
+                    <div id="_form_weekrec">
+                        @using (Html.BeginForm("SubmitEditWeekRecord", "S_MyWorkPlat", FormMethod.Post, new { }))
+                        {
+                             if (ViewBag.Commit == "false")
+                             {
+                                  <div class="formtitle"><span>查看周记: </span></div>
+                             }
+                            else
+                            {
+                                    <div class="formtitle"><span>编辑周记: </span></div>
+                            }
+                            <ul class="forminfo">
+                                <li><label>标题</label><input name="title" id="title" type="text" class="dfinput" value='@tw.RecordTitle'/><i>*</i></li>
+                                <li><input name="practiceno" id="practiceno" type="hidden" class="dfinput" value='@ViewBag.PraticeNo' /><i></i></li>
+                                <li><input name="recordno" id="recordno" type="hidden" class="dfinput" value='@ViewBag.Recordno' /><i></i></li>
+
+@if (ViewBag.Commit != "false")
+{
+     <li><label>文章内容</label><textarea name="content" id="editor" class="textinput">@tw.RecordContent</textarea></li>
+
+
+}
+else
+{
+    <li><label>文章内容</label><label>@(new HtmlString(tw.RecordContent))</label></li>
+
+}
+                                  @if(ViewBag.Commit!="false")
+                                {
+                                    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交修改" /></li>
+                                }
+                                
+                            </ul>
+                        }
+                    </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

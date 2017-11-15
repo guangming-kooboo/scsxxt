@@ -1,0 +1,106 @@
+﻿@using ServicePlatform.Models
+@{
+    ViewBag.Title = "T_EntBatchReg_Ass";
+    List<C_EntEvaluateStuItem> C_EntEvaluateStuItemList = ViewBag.C_EntEvaluateStuItemList;
+    List<C_EntEvaStuGradeLevelItem> C_EntEvaStuGradeLevelItemList = ViewBag.C_EntEvaStuGradeLevelItemList;
+
+            //ViewBag.PracticeNo = PracticeNo;
+            //ViewBag.EntPracNo = EntPracNo;
+    //ViewBag.PosID = PosID;
+    //ViewBag.SchoolID = SchoolID;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>实习评价</title>
+
+    <link href="~/Areas/Enterprise/Content/Home/T_EntBatchReg_PracticelGrade/PracticelGrade.css" rel="stylesheet" />
+   
+</head>
+
+<body>
+    <form action="/Enterprise/Home/T_EntBatchReg_PracticelGrade" method="post">
+        <input type="text" name="PracticeNo" hidden="hidden" value="@ViewBag.PracticeNo" class="" />
+        <input type="text" name="EntPracNo" hidden="hidden" value="@ViewBag.EntPracNo" class="" />
+        <input type="text" name="PosID" hidden="hidden" value="@ViewBag.PosID" class="" />
+        <input type="text" name="SchoolID" hidden="hidden" value="@ViewBag.SchoolID" class="" />
+        <label>实习部门：</label><input type="text" name="PracticeDept" class="" />
+        <label>实习分部门：</label><input type="text" name="PracticeDivDept" class="" />
+        <br />
+        <label>起止时间：</label><input type="text" name="PracticeStartEnd" class="" />
+
+
+        <hr />
+
+
+        <table cellspacing="0">
+            <tr>
+                <th width="180" scope="col">评价项目</th>
+                <th width="231" scope="col">表现等级</th>
+                <th width="481" scope="col">评价描述</th>
+            </tr>
+
+            @{
+                for (int i = 0; i < C_EntEvaluateStuItemList.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@C_EntEvaluateStuItemList[i].ItemName</th>
+                        <td>
+                            <div style="overflow:hidden ">
+                                <div style="float:left; width:140px;margin-top:10px;">
+                                    <div id="starBg" class="star_bg">
+
+                                        @{
+                    for (int j = 0; j < C_EntEvaStuGradeLevelItemList.Count; j++)
+                    {
+                        <input type="radio" id="@("starScore"+(i+1)+(j+1))" class="score score_1" value="1" name="score2" />
+    <a href="#@("starScore"+(i+1)+(j+1))" class="star star_@(j+1)" title="差"><label for="starScore21">差</label></a>
+                    }
+}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <textarea name="@(C_EntEvaluateStuItemList[i].PracBatchID + "_" + C_EntEvaluateStuItemList[i].ItemNo + "_" + "content")" class="judge" placeholder=""></textarea>
+                        </td>
+                    </tr>
+                }
+            }
+
+            <tr>
+                <th scope="row">礼貌仪容</th>
+                <td>
+                    <div style="overflow:hidden ">
+                        <div style="float:left; width:140px;margin-top:10px;">
+                            <div id="starBg" class="star_bg">
+                                <input type="radio" id="starScore21" class="score score_1" value="1" name="score2" />
+                                <a href="#starScore21" class="star star_1" title="差"><label for="starScore21">差</label></a>
+                                <input type="radio" id="starScore22" class="score score_2" value="2" name="score2" />
+                                <a href="#starScore22" class="star star_2" title="较差"><label for="starScore22">较差</label></a>
+                                <input type="radio" id="starScore23" class="score score_3" value="3" name="score2" />
+                                <a href="#starScore23" class="star star_3" title="普通"><label for="starScore23">普通</label></a>
+                                <input type="radio" id="starScore24" class="score score_4" value="4" name="score2" />
+                                <a href="#starScore24" class="star star_4" title="较好"><label for="starScore24">较好</label></a>
+                                <input type="radio" id="starScore25" class="score score_5" value="5" name="score2" />
+                                <a href="#starScore25" class="star star_5" title="好"><label for="starScore25">好</label></a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td><textarea name="Judge" class="judge" placeholder=""></textarea></td>
+            </tr>
+
+
+
+
+        </table>
+        <input name="save" type="submit" value="保存" class="save" />
+
+    </form>
+</body>
+</html>
+
+

@@ -1,0 +1,429 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.PracticeOverView_M
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>实习总览</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="main-do">
+        <div class="company-head">
+            <div class="left">
+                <a href="@Url.Action("PersonalSpace", "Home", new {area = "App",uid = Model.uid})">&nbsp;&nbsp;<span><</span>&nbsp;返回</a>
+            </div>
+            <div class="middle">
+                <p>实习总览</p>
+            </div>
+            <div class="right">
+                <p></p>
+            </div>
+        </div>
+        <div class="process-read">
+
+        <div class="left">
+            <!--企业查看-->
+            <div class="one">
+                <p class="a">企业查看&nbsp;<span>共<a href="@Url.Action("AllEnterprise", "Home", new {area = "App", uid = Model.uid})">@Model.EntCount</a>家</span></p><br>
+                <p class="b">已提交<a href="">@Model.YetSubmit.Count</a>家，未提交<a href="">@Model.NoSubmit</a>家
+                </p>
+            </div>
+            <!--录用情况-->
+            <div class="two">
+                <!--报名结束-->
+                @if (@Model.CareerStatus == 11||@Model.CareerStatus==14||@Model.CareerStatus==15||@Model.CareerStatus==13)
+                {
+                    <!--已被企业录取-->
+                    if (@Model.FinalVolunteerCount != 0)
+                    {
+                        <p class="a">录用情况</p>
+                        <br>
+                        <p class="b">恭喜你被<a href="@Url.Action("EnterpriseIndex", "Home", new {area = "App",Ent_No=@Model.FormalVolunteer.Ent_No, uid = Model.uid})">@Model.FormalVolunteer.EntName</a>录用
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="a">录用情况</p><br>
+                        <p class="b">还没有企业录取哟！</p>
+                    }
+                }
+                <!--正在报名-->
+                @if (@Model.CareerStatus == 10)
+                {
+                    <p class="a">录用情况</p><br>
+                    <p class="b">还没有企业录取哟！</p>
+                }
+            </div>
+            <!--实习周记-->
+            <div class="three">
+                @if (@Model.DiaryCount != 0)
+                {
+                    <p class="a">实习周记&nbsp;</p><br>
+                    <p class="b">已提交<a href="@Url.Action("DiaryList", "Home", new {area = "App", uid = Model.uid})">@Model.DiaryCount</a>篇
+                    </p>
+                }
+                else
+                {
+                    <p class="a">实习周记</p>
+                    <p class="b">你还不能写周记<a href=""></a><a href=""></a>
+                    </p>
+                }
+
+            </div>
+            <!--实习报告-->
+            <div class="four">
+                   @if (@Model.AllComment.PracticeReport != null)
+                    {
+                        <p class="a">实习报告</p><br/>
+                        <p class="b"><a href="@Url.Action("PracticeReport", "Home", new {area = "App", uid = Model.uid})">查看</a>实习报告</p>
+                    }
+                    else
+                    {
+                        <p class="a">实习报告</p><br/>
+                        <p class="b">还未提交实习报告</p>
+                    }           
+            </div>
+            <!--实习鉴定-->
+            <div class="five">
+                @if (@Model.CareerStatus == 14)
+                {
+                    <p class="a">实习鉴定</p><br>
+                    <p class="b"><a href="@Url.Action("IdentificationTable", "Home", new {area = "App", uid = Model.uid})"></a>点击查看</p>
+                }
+                else
+                {
+                    <p class="a">实习鉴定</p><br>
+                    <p class="b">还没有鉴定表</p>
+                }
+            </div>
+            <!--评价企业-->
+            <div class="six">
+                @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                {
+                    if (@Model.EvaluateEnt != null)
+                    {
+                        <p class="a">评价企业</p><br/>
+                        <p class="b"><a href="@Url.Action("DetailEvaluateEnterprise", "Home", new {area = "App", uid = Model.uid})"></a>查看评价</p>
+                    }
+                    else
+                    {
+                        <p class="a">评价企业</p><br />
+                        <p class="b">你还没有对企业进行评价哦！</p>
+                    }
+                }
+                else
+                {
+                    <p class="a">评价企业</p><br />
+                    <p class="b">你还不能评价企业</p>
+                }
+            </div>
+            <!--成绩查看-->
+            <div class="seven">
+                @if (@Model.AllComment.ReviewScore == null)
+                {
+                    <p class="a">成绩查看</p><br>
+                    <p class="b">请耐心等待</p>
+                }
+                else
+                {
+                    <p class="a">成绩查看</p><br>
+                    <p class="b">总成绩： @Model.AllComment.ReviewScore</p>
+                }            
+            </div>
+            <!--简历管理-->
+            <div class="eight">
+                <p class="a">简历管理</p><br>
+                <p class="b">请优化您的<a href="@Url.Action("Resume","Home",new {uid=@Model.uid})">简历</a>
+                </p>
+            </div>
+            <!--企业找我-->
+            <div class="nine">
+                <p class="a">企业找我</p><br>
+                <p class="b">有<a href="">@Model.EntFindStu.Count</a>家企业找我，请查看！
+                </p>
+            </div>
+        </div>
+            <div class="middle">
+                <!--企业查看-->
+                <div class="one">
+                    @if (@Model.PrepareVolunteerCount != 0||@Model.FormalVolunteerCount!=0)
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/></p>
+                    }
+                    else
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览no.png" /></p>
+                    }
+                </div>
+                <!--我也报名-->
+                <div class="two">
+                    @if (@Model.FormalVolunteerCount != 0)
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/></p>
+                    }
+                    else
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                        </p>
+                    }
+                </div>
+                <!--录用情况-->
+                <div class="three">
+                    @if (@Model.FinalVolunteerCount != 0)
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                        </p>
+                    }
+                    else
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                        </p>
+                    }
+                </div>
+                <!--实习周记-->
+                <div class="four">
+                    @if (@Model.DiaryCount != 0)
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/></p>
+                    }
+                    else
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                        </p>
+                    }
+                </div>
+                <!--实习案例-->
+                <div class="five">
+                    @if (@Model.PracticeCaseCount != 0)
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/></p>
+                    }
+                    else
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                        </p>
+                    }
+                </div>
+                <!--实习报告-->
+                <div class="six">
+                    @if (@Model.AllComment.PracticeReport != null)
+                    {
+                        <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                        </p>
+                    }
+                    else
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                        </p>
+                    }
+                </div>
+                <!--岗位评价-->
+                <div class="seven">
+                    @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                        </p>
+                    }
+                    else
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览no.png" />
+                        </p>
+                    }
+                </div>
+                <!--实习鉴定-->
+                <div class="eight">
+                    @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                        </p>
+                    }
+                    else
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览no.png" />
+                        </p>
+                    }
+                </div>
+                <!--评价企业-->
+                <div class="nine">
+                    @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                    {
+                        if (@Model.EvaluateEnt != null)
+                        {
+                            <p align="center">
+                                <img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                            </p>
+                        }
+                        else
+                        {
+                            <p align="center">
+                                <img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                            </p>
+                        }
+                    }
+                    else
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览no.png" />
+                        </p>
+                    }
+                </div>
+                <!--评价学校-->
+                <div class="ten">
+                    @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                    {
+                        if (@Model.EvaluateSchool != null)
+                        {
+                            <p align="center">
+                                <img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                            </p>
+                        }
+                        else
+                        {
+                            <p align="center">
+                                <img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                            </p>
+                        }
+                    }
+                    else
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览no.png" />
+                        </p>
+                    }
+                </div>
+                <!--成绩查看-->
+                <div class="elven">
+                    @if (@Model.AllComment.ReviewScore == null)
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览no.png" />
+                        </p>
+                    }
+                    else
+                    {
+                        <p align="center">
+                            <img src="~/Areas/App/Content/Image/实习总览finish.png" />
+                        </p>
+                    }
+                </div>
+                <!--简历管理-->
+                <div class="twelve">
+                    <p align="center"><img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                    </p>
+                </div>
+                <!--招聘信息-->
+                <div class="thirteen">
+                    <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                    </p>
+                </div>
+                <!--企业找我-->
+                <div class="fourteen">
+                    <p align="center"><img src="~/Areas/App/Content/Image/实习总览finish.png"/>
+                    </p>
+                </div>
+                <!--我找企业-->
+                <div class="fifteen">
+                    <p align="center"><img src="~/Areas/App/Content/Image/实习总览no.png"/>
+                    </p>
+                </div>
+            </div>
+        <div class="right">
+            <!--我也报名-->
+            <div class="one">
+                <!--正在报名-->
+                @if (@Model.CareerStatus == 10)
+                {
+                    <p class="a">我也报名 (正在报名)</p>
+                    <p class="b">正式报名<a href="@Url.Action("FormalVolunteer", "Home", new {area = "App", uid = Model.uid})">@Model.FormalVolunteerCount</a>个，
+                预报名<a href="@Url.Action("PrepareVolunteer", "Home", new {area = "App", uid = Model.uid})">@Model.PrepareVolunteerCount</a>个
+                    </p>
+                }
+                @if (@Model.CareerStatus == 11||@Model.CareerStatus==14||@Model.CareerStatus==15||@Model.CareerStatus==13)
+                {
+                    <p class="a">我也报名 (报名结束)</p>
+                    <p class="b">正式报名<a href="@Url.Action("FormalVolunteer", "Home", new {area = "App", uid = Model.uid})">@Model.FormalVolunteerCount</a>家，
+                预报名<a href="@Url.Action("PrepareVolunteer", "Home", new {area = "App", uid = Model.uid})">@Model.PrepareVolunteerCount</a>家
+                    </p>
+                }
+            </div>
+            <!--实习案例-->
+            <div class="two">
+                @if (@Model.PracticeCaseCount != 0)
+                {
+                    <p class="a">实习案例</p>
+                    <br>
+                    <p class="b">已提交<a href="@Url.Action("PracticeCaseList", "Home", new {area = "App", uid = Model.uid})">@Model.PracticeCaseCount</a>篇
+                    </p>
+                }
+                else
+                {
+                    <p class="a">实习案例<span><a href=""></a></span></p>
+                    <br>
+                    <p class="b">你还没有实习案例<a href=""></a><a href=""></a>
+                    </p>
+                }
+            </div>
+            <!--岗位评价-->
+            <div class="three">
+                @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                {
+                    <p class="a">岗位评价</p>
+                    <br>
+                    <p class="b">
+                        <a href="@Url.Action("PositionEvlTable", "Home", new {area = "App", uid = Model.uid})">查看</a>企业评价
+                    </p>
+                }
+                else
+                {
+                    <p class="a">岗位评价</p>
+                    <br>
+                    <p class="b">
+                        <a href=""></a>企业还没有对你评价
+                    </p>
+                }
+
+            </div>
+            <!--评价学校-->
+            <div class="four">
+                @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                {
+                    if (@Model.EvaluateSchool != null)
+                     {
+                         <p class="a">评价学校</p><br/>
+                         <p class="b"><a href="@Url.Action("DetailEvaluateSchool", "Home", new {area = "App", uid = Model.uid})"></a>查看评价</p>
+                     }
+                     else
+                     {
+                         <p class="a">评价学校</p><br />
+                         <p class="b">你还没有评价</p>
+                     }
+                }
+                else
+                {
+                    <p class="a">评价学校</p><br />
+                    <p class="b">你还不能评价学校</p>
+                }
+            </div>
+            <!--招聘信息-->
+            <div class="five">
+                <p class="a">招聘信息</p>
+                <p class="b">目前有<a href="@Url.Action("AllEnterprise", "Home", new {area = "App", uid = Model.uid})">@Model.EntCount</a>家企业可以选择
+                </p>
+            </div>
+            <!--我找企业-->
+            <div class="eight">
+                <p class="a">我找企业</p>
+                <p class="b">我找了<a href="">@Model.StuFindEnt.Count</a>家企业
+                </p>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,402 @@
+﻿@model ServicePlatform.Areas.Platform.Models.Home.Index
+@{
+    ViewBag.Title = "顶岗实习管理系统"; 
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+  
+  
+    <link href="~/Areas/Platform/Content/Home/Index/SystemPlat.css" rel="stylesheet" />
+    <link href="~/Areas/Platform/Content/Home/Index/SpryAssets/SpryCollapsiblePanel.css" rel="stylesheet" />
+    <link href="~/Areas/Platform/Content/Home/Index/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" />
+    <script src="~/Areas/Platform/Content/Home/Index/JS/jquery-1.11.1.min.js"></script>
+    <script src="~/Areas/Platform/Content/Home/Index/SpryAssets/SpryTabbedPanels.js"></script>
+    <script src="~/Areas/Platform/Content/Home/Index/SpryAssets/SpryCollapsiblePanel.js"></script>
+
+</head>
+
+<body>
+    <!--header-->
+    <header id="header" clase="">
+        <div class="TopDiv">
+            <div class="LOGODiv">
+                <img src="/Areas/Platform/Content/Home/Index/img/logo.png" width="50" height="50" alt="旅游学院顶岗实习管理系统" />
+                <p>旅游学院顶岗实习管理系统</p>
+            </div>
+            <nav class="top-nav clearfix">
+                <div class="top-nav-div ">
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/">帮助</a></li>
+                        <li><a href="/Platform/Home/Login"><img src="/Areas/Platform/Content/Home/Index/img/user.png" />登录</a></li>
+                        <li><a href="/Platform/Home/Regist">注册</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!---endofheader-->
+    <!-- 轮播大图 -->
+    <div id="slides" class="slide-banner">
+        <ul class="slides_container">
+            <li class="banner-img" style="background:url(/Areas/Platform/Content/Home/Index/img/banner/banner2.jpg) ;background-position: center; background-size:contain;"></li>
+            <li class="banner-img" style="background:url(/Areas/Platform/Content/Home/Index/img/banner/banner1.jpg);  background-position: center;background-size:contain;"></li>
+            @*<li class="banner-img" style="background:url(/Areas/Platform/Content/Home/Index/img/banner/banner3.jpg);  background-position: center;background-size:contain;"></li>*@
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+    @*<div class="Good">
+        <p>我们已经累计为<span>3,000</span>位实习生，<span>400</span>所高校，<span>2,000</span>家企业服务。</p>
+    </div>*@
+
+    <!--内容主体部分-->
+    <div id="wrapper">
+        <!-- 一楼  -->
+        @*<div class="First">
+            <div class="inner">
+                <img src="/Areas/Platform/Content/Home/Index/img/unversity.png" />
+                <p>获得更多高校关注</p>
+                <p>了解更多实习咨询</p>
+                <a href="#">了解更多>></a>
+            </div>
+            <div class="inner">
+                <img src="/Areas/Platform/Content/Home/Index/img/Enpri.png" />
+                <p>想知道企业信息</p>
+                <p>想拥有更正确地企业服务</p>
+                <a href="#">了解更多>></a>
+            </div>
+            <div class="inner">
+                <img src="/Areas/Platform/Content/Home/Index/img/student.png" />
+                <p>想获得更多实习相关材料</p>
+                <p>在这里，我们满足你的需求</p>
+                <a href="#">了解更多>></a>
+            </div>
+        </div>*@
+
+        <!-- 二楼  -->
+        <div class="Second">
+            <!--参与学校-->
+            <div class="UnitList">
+                <div class="title">
+                    <img src="/Areas/Platform/Content/Home/Index/img/SchoolIco.jpg" />
+                    <p>入驻高校 
+                    <span>高校强强进军，只为打造更合理的实习管理模式。</span>  </p>                 
+                    <a href="#">更多>></a>
+                </div>
+                <div class="listinner">
+                    <ul>
+                        @{
+                            for(int i = 0; i < Model.SchoolList.Count; i++)
+                            {
+                                <li>
+                                    <a href="/School/Home/SchoolIndex?SchoolID=@Model.SchoolList[i].SchoolID">
+                                        <img src="@Model.SchoolList[i].SchoolLogo" />
+                                    </a>
+                                </li>
+                            //临时充满入驻企业空位---begin
+                               <li>
+                                    <a href="/School/Home/SchoolIndex?SchoolID=@Model.SchoolList[i].SchoolID">
+                                        <img src="@Model.SchoolList[i].SchoolLogo" />
+                                    </a>
+                                </li>
+                               <li>
+                                    <a href="/School/Home/SchoolIndex?SchoolID=@Model.SchoolList[i].SchoolID">
+                                        <img src="@Model.SchoolList[i].SchoolLogo" />
+                                    </a>
+                                </li>
+                               <li>
+                                    <a href="/School/Home/SchoolIndex?SchoolID=@Model.SchoolList[i].SchoolID">
+                                        <img src="@Model.SchoolList[i].SchoolLogo" />
+                                    </a>
+                                </li>
+                              @*<li>
+                                    <a href="/School/Home/SchoolIndex?SchoolID=@Model.SchoolList[i].SchoolID">
+                                        <img src="@Model.SchoolList[i].SchoolLogo" />
+                                    </a>
+                                </li>*@
+                            //临时充满入驻企业空位---end
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+
+            <!--参与企业-->
+            <div class="UnitList">
+                <div class="title">
+                    <img src="/Areas/Platform/Content/Home/Index/img/EnterpriseIcon.png" />
+                    <p>
+                        入驻企业
+                        <span>众多知名企业汇编，提供一个更直接的实习对接机会。</span>
+                    </p>
+                    <a href="#">更多>></a>
+                </div>
+                <div class="listinnerEnter">
+                    <ul>
+                        @{
+                            for (int i = 0; i < Model.EnterpriseList.Count; i++)
+                            {
+                                <li>
+                                    <a href="/Enterprise/Home/Index?Ent_No=@Model.EnterpriseList[i].Ent_No">
+                                        <img src="@Model.EnterpriseList[i].EntLogo" />
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+
+            <!--新闻动态-->
+            <div class="UnitList">
+                <div class="title">
+                    <img src="/Areas/Platform/Content/Home/Index/img/earth.png"/>
+                    <p>
+                        新闻动态
+                        <span>精彩实习动态，怎舍得错过。</span>
+                    </p>
+                    <a href="#">更多>></a>
+                </div>
+
+                @{
+                    foreach (var item in Model.PlateInfoList801)
+                    {
+                        var date = ServicePlatform.Lib.DateTimeFormat.ConvertIntDateTime(item.T_Content.PubDate.Value).Date;
+                        <div class="news">
+                            <div class="data">
+                                <h1>@date.Day</h1>
+                                <h2>@(date.Year+"."+date.Month)</h2>
+                            </div>
+                            <div class="topic">
+                                <a href="#">
+                                    <p>@item.T_Content.ContentTitle</p>
+                                    <p>@(new HtmlString(item.T_Content.T_News.NewsAuthor))</p>
+                                </a>
+                            </div>
+                        </div>
+                    }
+
+                }
+                
+
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+
+        <!-- 三楼  -->
+        <div class="Third">
+            <div class="left">
+                <div>
+                    <div class="left-title">                        
+                        <img src="/Areas/Platform/Content/Home/Index/img/76.jpg"/>
+                        <p>热门岗位展示</p>
+                        <a href="#">更多>></a>
+                    </div>
+                    <div class="content">
+                        <div class="content-left">
+                            <img src="/Areas/Platform/Content/Home/Index/img/15.jpg" />
+                        </div>
+                        <div class="content-right">
+                            <ul class="list">
+
+                                @{
+                                    foreach (var item in Model.PlateInfoList802)
+                                    {
+                                        <li>
+                                            <span>●</span><a href="#">@item.T_Content.ContentTitle</a>
+                                        </li>
+                                    }
+                                }
+                            
+                            </ul>
+                        </div>  <!--/content-right-->
+                    </div><!--/left-titile-->
+                </div>
+                <div>
+                    <div class="left-title">                        
+                        <img src="/Areas/Platform/Content/Home/Index/img/book.png"/>
+                        <p>就业指导</p>
+                        <a href="#">更多>></a>
+                    </div>
+                    <div class="content">
+                        <div class="content-left">
+                            <img src="/Areas/Platform/Content/Home/Index/img/5.jpg" />
+                        </div>
+                        <div class="content-right">
+                            <ul class="list">
+                                @{
+                                    foreach (var item in Model.PlateInfoList803)
+                                    {
+                                        <li>
+                                            <span>●</span><a href="#">@item.T_Content.ContentTitle</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>  <!--/content-right-->
+                    </div><!--/left-titile-->
+                </div>
+
+            </div>
+
+            <div class="right">
+                <!--选项卡式面板-->
+                <div id="TabbedPanels1" class="TabbedPanels">
+                    <ul class="TabbedPanelsTabGroup">
+                        <li class="TabbedPanelsTab" tabindex="0">成功案例</li>
+                        <li class="TabbedPanelsTab" tabindex="1">实习模式改革</li>
+                    </ul>
+                    <div class="TabbedPanelsContentGroup">
+                        <div class="TabbedPanelsContent">
+                            <!--图片列表-->
+                            <div class="imgList">
+                                <div class="imgLeft">
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/6.jpg" />
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/7.jpg" />
+                                </div><!--/imgLeft-->
+
+                                <div class="imgRight">
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/2.jpg" />
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/1.jpg" />
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/3.jpg" />
+                                </div><!--/imgRight-->
+                            </div><!--/imgList-->
+                        </div>
+                        <div class="TabbedPanelsContent">
+                            <!--图片列表-->
+                            <div class="imgList">
+                                <div class="imgLeft">
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/7.jpg" />
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/6.jpg" />
+                                </div><!--/imgLeft-->
+
+                                <div class="imgRight">
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/1.jpg" />
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/2.jpg" />
+                                    <img src="/Areas/Platform/Content/Home/Index/img/case/3.jpg" />
+                                </div><!--/imgRight-->
+
+                            </div><!--/imgList-->
+                        </div>
+
+                    </div><!--/TabbedPanelsContentGroup End-->
+                </div> <!--/right-->
+            </div>
+
+        </div>
+    </div>
+    <footer id="footer">
+        <!--四楼：选择我们的原因-->
+        <div class="Source">
+            <p>选择我们的几大理由</p><hr />
+            <ul>
+                <li>
+                    <div class="reason" style="background-image:url(/Areas/Platform/Content/Home/Index/img/why.png);  background-position: center; background-repeat:no-repeat;"><span>01</span></div>
+                    <div class="SourceReason">
+                        <h2>多高校入驻</h2>
+                        <h3>400多所高校入驻，为2000多名学生提供实习机会</h3>
+                    </div>
+                </li>
+                <li>
+                    <div class="reason" style="background-image:url(/Areas/Platform/Content/Home/Index/img/why.png);  background-position: center; background-repeat:no-repeat;"><span>02</span></div>
+                    <div class="SourceReason">
+                        <h2>多企业加盟</h2>
+                        <h3>2000多家加盟企业，为莘莘学子提供近百种，上千个实习岗位。</h3>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="reason" style="background-image:url(/Areas/Platform/Content/Home/Index/img/why.png);  background-position: center; background-repeat:no-repeat;"><span>03</span></div>
+                    <div class="SourceReason">
+                        <h2>平台化管理</h2>
+                        <h3>高校和企业均有门槛条件，为校企合作双方把关，提高顶岗实习品质。</h3>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="reason" style="background-image:url(/Areas/Platform/Content/Home/Index/img/why.png);  background-position: center; background-repeat:no-repeat;"><span>04</span></div>
+                    <div class="SourceReason">
+                        <h2>支持个性化</h2>
+                        <h3>每个高校和企业可以保留各自特性化的实习规则，充分支持各单位自主决策权利</h3>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="reason" style="background-image:url(/Areas/Platform/Content/Home/Index/img/why.png);  background-position: center; background-repeat:no-repeat;"><span>05</span></div>
+                    <div class="SourceReason">
+                        <h2>三网融合</h2>
+                        <h3>实习网络、就业网络、借鉴网络，三网融合，促进实习就业，各高校、企业互动。</h3>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="reason" style="background-image:url(/Areas/Platform/Content/Home/Index/img/why.png);  background-position: center; background-repeat:no-repeat;"><span>06</span></div>
+                    <div class="SourceReason">
+                        <h2>高度扩展性</h2>
+                        <h3>入驻单位可委托平台代理运行，也可自主运行，兼顾经济性、共享性与私密性。</h3>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--合作媒体-->
+
+        @*<div class="Source media">
+            <p>合作媒体</p><hr />
+            <ul>
+                <li>
+                    <a href="#"><img src="/Content/logo.png" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/Content/logo.png" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/Content/logo.png" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/Content/logo.png" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/Content/logo.png" /></a>
+                </li>
+            </ul>
+        </div>*@
+
+    </footer>
+
+    <!-- js -->
+    <script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+    </script>
+    <script type="text/javascript">
+
+var CollapsiblePanel1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel1");
+    </script>
+    <script src="~/Areas/Platform/Content/Home/Index/JS/lib/Slides-SlidesJS-3/source/jquery.slides.min.js"></script>
+ 
+    <!-- 页面自定义js -->
+    <script type="text/javascript">
+$().ready(function(){
+		//$("#slides ul").slidesjs({
+			$("#slides ul").slidesjs();
+
+
+			$(".main-nav-link a").click(function(){
+				$(".main-nav-link .current").removeClass("current");
+				$(this).addClass("current");
+			});
+
+			$("#slides1 ul").slidesjs();
+
+		});
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+    </script>
+</body>
+</html>
+

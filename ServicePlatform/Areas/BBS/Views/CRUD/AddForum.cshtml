@@ -1,0 +1,44 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.CRUD.AddForum_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>@ViewBag.Title
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" method="POST" role="form">
+                <div class="form-body">
+                    @Html.HiddenFor(o => o.forumid)
+                    <div class="form-group">
+                        @Html.LabelFor(o => o.forumname, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(o => o.forumname, new { @class = "form-control" })                  
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        @Html.LabelFor(o => o.forumexplain, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(o => o.forumexplain, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+            
+                  
+                   
+                </div>
+                <div class="form-actions fluid">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-success">保存</button>
+                        <button type="button" class="btn btn-default back">返回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

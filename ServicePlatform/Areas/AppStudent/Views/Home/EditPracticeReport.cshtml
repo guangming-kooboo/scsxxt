@@ -1,0 +1,34 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.EditPracticeReport_M
+@Html.Partial("student_menu")
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="javascript:submit('b');">@*返回主页*@
+                    <div style="width: 60px">
+                        <div class="placeholder colortitle">
+                            <img src="@ViewData["root"]images/return.png" class="return">
+                        </div>
+                    </div>
+                </a>
+                <div class="weui-flex__item colortitle">
+                    <div class="placeholder">修改实习报告</div>
+                </div>
+                <a href="javascript:submit('a');">@*确认修改*@
+                    <div>
+                        <div class="placeholder" style="color: floralwhite">确认</div>
+                    </div>
+                </a>
+        </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" rows="10" name="PracticeReport" id="PracticeReport">@Model._AllComment.PracticeReport</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+

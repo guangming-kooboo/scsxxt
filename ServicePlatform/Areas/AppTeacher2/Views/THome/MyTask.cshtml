@@ -1,0 +1,233 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.MyTask_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    <style>
+        .weui-cell__ft1 {
+            position: absolute;
+            right: -160px;
+            height: 50px;
+            line-height: 50px;
+            background: #F6383A;
+            color: #ffffff;
+            width: 80px;
+            text-align: center;
+            top: 0px;
+        }
+        .weui-cell__ft {
+            position: absolute;
+            right: -80px;
+            height: 50px;
+            line-height: 50px;
+            background:gray;
+            color: #ffffff;
+            width: 80px;
+            text-align: center;
+            top: 0px;
+        }
+            .weui-cell__ft2{
+                 text-align:right;
+                 color: #999;
+        }
+    </style>
+    <script>
+ /*
+  * ÃèÊö£ºhtml5Æ»¹ûÊÖ»úÏò×ó»¬¶¯É¾³ýÌØÐ§
+  */
+ window.addEventListener('load', function() {
+  var initX; //´¥ÃþÎ»ÖÃ
+  var moveX; //»¬¶¯Ê±µÄÎ»ÖÃ
+  var X = 0; //ÒÆ¶¯¾àÀë
+  var objX = 0; //Ä¿±ê¶ÔÏóÎ»ÖÃ
+  window.addEventListener('touchstart', function(event) {
+   var obj = event.target.parentNode;
+   if (obj.className == "weui-cell") {
+    initX = event.targetTouches[0].pageX;
+    objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+   }
+   if (objX == 0) {
+    window.addEventListener('touchmove', function(event) {
+     var obj = event.target.parentNode;
+     if (obj.className == "weui-cell") {
+      moveX = event.targetTouches[0].pageX;
+      X = moveX - initX;
+      if (X >= 0) {
+       obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+      } else if (X < 0) {
+       var l = Math.abs(X);
+       obj.style.WebkitTransform = "translateX(" + -l + "px)";
+       if (l > 160) {
+        l = 160;
+        obj.style.WebkitTransform = "translateX(" + -l + "px)";
+       }
+      }
+     }
+    });
+   } else if (objX < 0) {
+    window.addEventListener('touchmove', function(event) {
+     var obj = event.target.parentNode;
+     if (obj.className == "weui-cell") {
+      moveX = event.targetTouches[0].pageX;
+      X = moveX - initX;
+      if (X >= 0) {
+       var r = -160 + Math.abs(X);
+       obj.style.WebkitTransform = "translateX(" + r + "px)";
+       if (r > 0) {
+        r = 0;
+        obj.style.WebkitTransform = "translateX(" + r + "px)";
+       }
+      } else { //Ïò×ó»¬¶¯
+       obj.style.WebkitTransform = "translateX(" + -160 + "px)";
+      }
+     }
+    });
+   }
+
+  })
+  window.addEventListener('touchend', function(event) {
+   var obj = event.target.parentNode;
+   if (obj.className == "weui-cell") {
+    objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+    if (objX > -40) {
+     obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+     objX = 0;
+    } else {
+     obj.style.WebkitTransform = "translateX(" + -160 + "px)";
+     objX = -160;
+    }
+   }
+  })
+ })
+    </script>
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+        });
+        $("body").click(function () {
+            $(".weui-cell").css("transform", "translateX(0px)");
+        });
+    </script>
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Msg();
+        });
+        function ChangeState(stateid, msgid) {
+            var userid = $("#userid").val();
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "http://wx.52xyj.cn/Msg/Open/ChangeMsgStates?uid=" + userid + "&msgId=" + msgid + "&stateid=" + stateid,
+                success:function(data) {
+                    if (data == 500) {
+                        return alert("请求失败");
+                    } else {
+                        Msg();
+                    }
+                }
+            });
+        }
+        function DeleteMsg(msgid) {          
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "http://wx.52xyj.cn/Msg/Open/DeleteMsg?msgid="+ msgid,
+                success: function (data) {
+                    if (data == 500) {
+                        return alert("请求失败");
+                    } else {
+                        Msg();
+                    }
+                }
+            });
+        }
+        function Msg() {
+            var uid = $("#userid").val();
+            $.ajax({
+                type: "post",
+                url: "http://wx.52xyj.cn/Msg/Open/MyInBoxMsgList1?uid="+uid,
+                dataType: "json",
+                success:function(data) {
+                    if (data == 500) {
+                        return alert("请求出错");
+                    } else {
+                        if (data.data.length > 0) {
+                            var html = "";
+                            $.each(data, function (index, element) {
+                                $.each(element, function (index, item) {
+                                    html += (" <div class='weui-cell' style='transform: translateX(0px);'>");
+                                    if (item.StateId == "001") {
+                                        html += ("<div class='weui-cell__bd''><a  href='/AppTeacher2/THome/MsgDetail?MsgID=" + item.MsgID + " '> " + item.Subjects + "<span class='weui-badge' style='top: -4px;margin-left: 5px;'>1</span></a></div>");
+                                        html += ("<div class='weui-cell__ft2''><a  href='/AppTeacher2/THome/MsgDetail?MsgID=" + item.MsgID + " '> " + item.SendTime + "</a></div>");
+                                        html += ("<a  style='color:#ffffff;' onclick='ChangeState(\"" + item.StateId + "\",\"" + item.MsgID + "\")'> <div class='weui-cell__ft''>标为已读</div></a>");
+                                        html += ("<a  style='color:#ffffff;' onclick='DeleteMsg(\"" + item.MsgID + "\")'><div class='weui-cell__ft1''>删除</div></a>");
+                                    } else {
+                                        html += ("<div class='weui-cell__bd''><a  name='MsgID' value='" + item.MsgID + "' href='/AppTeacher2/THome/MsgDetail?MsgID=" + item.MsgID + " '> " + item.Subjects + "</a></div>");
+                                        html += ("<div class='weui-cell__ft2''><a  href='/AppTeacher2/THome/MsgDetail?MsgID=" + item.MsgID + " '> " + item.SendTime + "</a></div>");
+                                        html += ("<a  style='color:#ffffff;' onclick='ChangeState(\"" + item.StateId + "\",\"" + item.MsgID + "\")'> <div class='weui-cell__ft''>标为未读</div></a>");
+                                        html += ("<a  style='color:#ffffff;' onclick='DeleteMsg(\"" + item.MsgID + "\")'><div class='weui-cell__ft1''>删除</div></a>");
+                                    }                                   
+                                    html += ("</div>");
+                                });
+                            });
+                            document.getElementById('msglist').innerHTML = html;
+                        }
+                        else {
+                            var html2 = "";
+                            html2 += (" <div class='weui-cell'>");
+                            html2 += ("<div class='weui-cell__bd''>你还没有消息呢</div>");
+                            html2 += ("</div>");
+                            document.getElementById('msglist').innerHTML = html2;
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("HomePage", "THome", new {area = "AppTeacher2"})">
+                    <div>
+                        <div class="placeholder">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return"/>
+                        </div>
+                    </div>
+                </a>
+                <div class="weui-flex__item ">
+                    <div class="placeholder">我的消息</div>
+                </div>
+                <div style="width: 48px">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" value="@Model.uid" id="userid" name="userid"/>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells deletegap" id="msglist">
+                
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@model ServicePlatform.Models.T_DownLoadFiles
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@{
+    ServicePlatform.Models.ContentContext sb = new ServicePlatform.Models.ContentContext();
+
+    string subSystem = (Session["Vars"] as ServicePlatform.Config.Vars).getSubSystem();//获取当前用户登陆的子系统
+
+    var dlfcolumn = from oa in sb.C_ContentColumn
+                    where oa.SybSystem == subSystem && oa.ContTypeID == ServicePlatform.Lib.ContentType.DownLoadFile
+                    select oa;
+    ViewData["DLFcolumnList"] = new SelectList(dlfcolumn, "ContColumnID", "ContColumnName");
+    string DefaultTimeValue = ServicePlatform.Areas.News.ToolHelper.CurrentTimeToEasyuiValue.getValue();
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddDLF</title>
+
+</head>
+<body>
+
+        <div id="DLFContent">
+            @using (Html.BeginForm("ADD", "AddDLF", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div id="ContentPlan">
+                    <div id="DLContentLeft">
+                        <div class="LeftLayout">资源标题：</div>
+                        <div class="LeftLayout">资源发布人：</div>
+                        <div class="LeftLayout">日期输入：</div>
+                        <div class="LeftLayout">发布栏目：</div>
+                        <div class="LeftLayout">上传资源：</div>
+                    </div>
+
+                    <div id="DLContentRight">
+                        <div class="RightLayout"><input tyepe="text" id="DLFTitle" name="DLFTitle" /></div>
+                        <div class="RightLayout"><input tyepe="text" id="DLFPulish" name="DLFPulish" /></div>
+                        @*<div class="RightLayout"><input class="easyui-datetimebox" id="DLFPubdate" name="DLFPubdate" data-options="required:true" value=@DefaultTimeValue style="width:150px"></div>*@
+                        <div class="RightLayout"><input class="easyui-datetimebox" name="DLdate" data-options="required:true" value=@DefaultTimeValue style="width:150px"></div>
+                        <div class="RightLayout">
+                            @Html.DropDownListFor(model => model.DLFileColumnID, ViewData["DLFcolumnList"] as SelectList, "--请选择--", null)
+                            @Html.ValidationMessageFor(model => model.DLFileColumnID)
+                        </div>
+                        <div class="RightLayout">
+                            <input type="file" id="DLFUpload" name="DLFUpload" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="TabSubmitButton">
+                    <input class="SubmitButton" type="submit" value="提  交" />
+                </div>
+
+            }
+        </div>
+
+    </div>
+</body>
+</html>

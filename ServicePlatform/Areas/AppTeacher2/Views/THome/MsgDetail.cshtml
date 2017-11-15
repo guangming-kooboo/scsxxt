@@ -1,0 +1,133 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.MsgDetail_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+    <script src="~/Include/Jquery/jquery.min.js"></script>
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Msgdetail();
+        });
+        function Msgdetail() {
+            var Msgid = $("#msgid").val();
+            var uid = $("#userid").val();
+                $.ajax({
+                    type: "post",
+                    url: "http://wx.52xyj.cn/Msg/Open/MsgDetail?msgid=" + Msgid + "&uid=" + uid,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data == 500) {
+                            return alert("请求出错");
+                        } else {
+                            $("#Subjects").html(data.data.Subjects);
+                            $("#Contents").html(data.data.Contents);
+                            $("#SendTime").html(data.data.SendTime);
+                            $("#StateName").html(data.data.StateName);
+                            $("#UserName").html(data.data.UserName);
+                            $("#TypeName").html(data.data.TypeName);
+                            $("#StateName").html(data.data.StateName);                          
+                          }
+                    }
+                });
+        }
+    </script>
+
+</head>
+<body ontouchstart>
+<input type="hidden" value="@Model.MsgID" id="msgid" name="msgid"/>
+    <input type="hidden" value="@Model.uid" id="userid" name="userid" />
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item1">
+            <div class="weui-flex ">
+                <div>
+                    <a href="@Url.Action("MyTask", "THome", new {area = "AppTeacher2"})">
+                        <div class="placeholder colortitle">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </a>
+                </div>
+                <div class="weui-flex__item colortitle"><div class="placeholder">消息详情</div></div>
+                <div style="width:40px"><div class="placeholder"></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">消息标题</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text" id="Subjects" readonly="readonly" class="weui-input"></label>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">消息内容</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text" id="Contents" readonly="readonly" class="weui-input"></label>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">发送人</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text" id="UserName" readonly="readonly" class="weui-input"></label>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">发送时间</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text"  id="SendTime" readonly="readonly" class="weui-input"></label>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">消息类型</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text" id="TypeName" readonly="readonly" class="weui-input"></label>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">消息状态</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label type="text" id="StateName" readonly="readonly" class="weui-input"></label>
+                </div>
+            </div>
+
+        </div>
+        <div class="weui-cells weui-cells_form">
+            
+
+        </div>
+    </div>
+</body>
+</html>

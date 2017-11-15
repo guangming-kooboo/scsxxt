@@ -1,0 +1,351 @@
+﻿@{
+    ViewBag.Title = "IWantPrac";
+}
+
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticePosition>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    
+    List<T_PracticePosition> ThisEntPosList = ViewBag.ThisEntPosList;
+
+    string[] Num = ViewBag.Num;
+    List<T_PracticeVolunteer> PerEnrollTable = ViewBag.PerEnrollTable;
+    string[] Pre_EnrollNum = ViewBag.Pre_EnrollNum;
+
+    List<T_PracticeVolunteer> RealEnrollTable_V1 = ViewBag.RealEnrollTable_V1;
+    string[] EnrollNum_V1 = ViewBag.EnrollNum_V1;
+
+    List<T_PracticeVolunteer> RealEnrollTable_V2 = ViewBag.RealEnrollTable_V2;
+    string[] EnrollNum_V2 = ViewBag.EnrollNum_V2;
+    
+    IEnumerable<SelectListItem> EntList = ViewData["EntList"] as IEnumerable<SelectListItem>;
+
+    string NowOpEntID = ViewBag.NowOpEntID;
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+<html>
+<head>
+    <title>学生列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script>
+        function gradeChange()
+        {
+            var entid = document.getElementById("batch").value;
+            //var grade = entid.options[entid.selectedIndex].grade;
+            var url = '/School/S_PraEnrollManager/IWantPrac/?Entid=' + entid;
+            window.location = url;
+        }
+    </script>
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">实习报名管理</a></li>
+            <li><a href="#">我要报名</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("IWantPrac", "S_PraEnrollManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>选择企业: </span></div>
+        <select id="batch" name="batch" class="dfinput" onchange="gradeChange()">
+        @foreach (var item in EntList)
+        {
+            <option value="@item.Value" selected='@item.Selected'>
+                @item.Text
+            </option>
+        }
+        </select>
+            @*<input type="submit" value="查询" class="btn"/>*@
+        }
+            <div class="formtitle"><span>岗位列表:  </span></div>
+
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">企业名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">招聘人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">岗位说明<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                        @for (int i = 0; i < ThisEntPosList.Count;i++ )
+                        { 
+                        <tr class="odd">
+                            <td>
+                                @ViewBag.SelectedEntName
+                            </td>
+                            @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                            <td>
+                                @ThisEntPosList[i].PositionName
+                            </td>
+                            <td>
+                                @ThisEntPosList[i].PosQuantity
+                            </td>
+                            @*<td>
+                                @ThisEntPosList[i].PosDesc
+                            </td>*@
+                            <td>
+                                @DateTimeFormat.ConvertIntDateTime(ThisEntPosList[i].PosExpireDate).ToShortDateString()
+                            </td>
+                            <td>
+                                @Num[i]
+                            </td>
+                            <td>
+
+                                @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PositionID },null) |*@
+                                <a id="test2" href="#" onclick="show('@ThisEntPosList[i].PosDesc.Replace("\r\n","").Replace("\r","")')">查看岗位</a>|
+                                <a href="#" onclick="get('@ViewBag.NowBatch', '@ThisEntPosList[i].EntPracNo', '@ThisEntPosList[i].PositionID')"><font color="red">预报名</font></a>
+                                @*@Html.ActionLink("预报名", "PreEnroll", null, new { @onclick = "get('" + ViewBag.NowBatch + "','" + item.EntPracNo + "','" + item.PositionID + "');" }, null) |*@
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        @*}*@
+
+        <br />
+        <div class="formtitle"><span>选择志愿/岗位顺序:<font color="red" size="32">当前只是预报名，请在预报名表中确认后点击正式报名！</font>  </span></div>
+        <select id="volunteer" name="volunteer" class="dfinput">
+
+            <option value="firstv">第一志愿</option>
+            <option value="secondv">第二志愿</option>
+        </select>
+
+        <select id="vorder" name="vorder" class="dfinput">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+
+        @*@using (Html.BeginForm("RealEnroll", "S_PraEnrollManager", FormMethod.Post, new { id = "_form", onsubmit = "return false;" }))
+        {*@
+            <div class="formtitle"><span>预报名: </span></div>
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@                
+                    <td bgcolor="#CCCCCC">企业名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">志愿顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                    @for (int i = 0; i < PerEnrollTable.Count; i++)
+                    { 
+                        <tr class="odd">
+                            @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                            <td>
+                                @PerEnrollTable[i].EntName
+                            </td>
+                            <td>
+                                @PerEnrollTable[i].VolunteerSequenceName
+                            </td>
+                            <td>
+                                @PerEnrollTable[i].PosName
+                            </td>
+                            <td>
+                                @PerEnrollTable[i].PosSequence
+                            </td>
+                            @*<td>
+                                @PerEnrollTable[i].PosDesc
+                            </td>*@
+                            <td>
+                                @DateTimeFormat.ConvertIntDateTime(PerEnrollTable[i].PosExpireDate).ToShortDateString()
+                            </td>
+                            <td>
+                                @Pre_EnrollNum[i]
+                            </td>
+                            <td>
+                                <a id="test2" href="#" onclick="show('@PerEnrollTable[i].PosDesc.Replace("\r\n", "<br/>")')">查看岗位</a>|
+                                <a target="view_window"  href="@Url.Action("TurnEnt","S_PraEnrollManager",new {area="School",EntPraNo=@PerEnrollTable[i].EntPracNo})">查看企业</a>|
+                                @*@Html.ActionLink("查看", "ViewDetail", "S_PraEnrollManager", new { entpracno = item.EntPracNo, posid = item.PosID }, null) |*@
+                                <a href="/School/S_PraEnrollManager/RealEnroll?pracno=@PerEnrollTable[i].PracticeNo&entpracno=@PerEnrollTable[i].EntPracNo&posid=@PerEnrollTable[i].PosID&nowopentid=@NowOpEntID" onsubmit="return false;"><font color="red">正式报名</font>|</a>
+                                
+                                @Html.ActionLink("删除预报名", "DeletePreEnroll", "S_PraEnrollManager", new { pracno = PerEnrollTable[i].PracticeNo, entpracno = PerEnrollTable[i].EntPracNo, posid = PerEnrollTable[i].PosID, nowopentid = NowOpEntID }, null)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        @*}*@
+
+
+
+    </div>
+
+
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("PreEnroll", "S_PraEnrollManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>第一志愿:</span></div>
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    
+                    <td bgcolor="#CCCCCC">企业名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                    @for (int i = 0; i < RealEnrollTable_V1.Count; i++)
+                    { 
+                            <tr class="odd">
+                                @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+
+                                <td>
+                                    @RealEnrollTable_V1[i].EntName
+                                </td>
+                                <td>
+                                    @RealEnrollTable_V1[i].PosName
+                                </td>
+                                <td>
+                                    @RealEnrollTable_V1[i].PosSequence
+                                </td>
+                                @*<td>
+                                    @RealEnrollTable_V1[i].PosDesc
+                                </td>*@
+                                <td>
+                                    @DateTimeFormat.ConvertIntDateTime(RealEnrollTable_V1[i].PosExpireDate).ToShortDateString()
+                                </td>
+                                <td>
+                                    @EnrollNum_V1[i]
+                                </td>
+                                <td>
+                                    <a id="test2" href="#" onclick="show('@RealEnrollTable_V1[i].PosDesc.Replace("\r\n", "<br/>")')">查看岗位</a>|
+                                    <a target="view_window" href="@Url.Action("TurnEnt","S_PraEnrollManager",new {area="School",EntPraNo=@RealEnrollTable_V1[i].EntPracNo})">查看企业</a>|
+                                    @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) |*@
+                                    @Html.ActionLink("删除正式报名", "DeletePreEnroll", new { pracno = RealEnrollTable_V1[i].PracticeNo, entpracno = RealEnrollTable_V1[i].EntPracNo, posid = RealEnrollTable_V1[i].PosID, nowopentid = NowOpEntID })
+                                </td>
+                            </tr>                    
+                    }
+                </tbody>
+            </table>
+        }
+
+
+
+        @using (Html.BeginForm("RealEnroll", "S_PraEnrollManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>第二志愿: </span></div>
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    
+                    <td bgcolor="#CCCCCC">企业名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                    @for (int i = 0; i < RealEnrollTable_V2.Count; i++)
+                    {
+                        <tr class="odd">
+                            @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+
+                            <td>
+                                @RealEnrollTable_V2[i].EntName
+                            </td>
+                            <td>
+                                @RealEnrollTable_V2[i].PosName
+                            </td>
+                            <td>
+                                @RealEnrollTable_V2[i].PosSequence
+                            </td>
+                            @*<td>
+                                @RealEnrollTable_V2[i].PosDesc
+                            </td>*@
+                            <td>
+                                @DateTimeFormat.ConvertIntDateTime(RealEnrollTable_V2[i].PosExpireDate).ToShortDateString()
+                            </td>
+                            <td>
+                                @EnrollNum_V2[i]
+                            </td>
+                            <td>
+                                @*/Enterprise/Home/T_Enterprise_Show
+                                <a id="test2" href="#" onclick="window.location.href = '/Enterprise/Home/T_Enterprise_Show?Ent_No='+@RealEnrollTable_V2[i] ">查看</a>|*@
+                                <a id="test2" href="#" onclick="show('@RealEnrollTable_V2[i].PosDesc.Replace("\r\n", "<br/>")')">查看岗位</a>|
+                                <a target="view_window" href="@Url.Action("TurnEnt","S_PraEnrollManager",new {area="School",EntPraNo=@RealEnrollTable_V2[i].EntPracNo})">查看企业</a>|
+                                @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) |*@
+                                @Html.ActionLink("删除正式报名", "DeletePreEnroll", new {pracno = RealEnrollTable_V2[i].PracticeNo, entpracno = RealEnrollTable_V2[i].EntPracNo, posid = RealEnrollTable_V2[i].PosID, nowopentid = NowOpEntID})
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+
+
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+
+        function get(pracno, entpracno, posid)
+        {
+            var nowopentid=document.getElementById("batch").value;
+            var vol = document.getElementById("volunteer").value;
+            var order = document.getElementById("vorder").value;
+            var url = "/School/S_PraEnrollManager/PreEnroll?pracno=" + pracno + "&entpracno=" + entpracno + "&posid=" + posid + "&vol=" + vol + "&order=" + order + "&nowopentid=" + nowopentid;
+            window.location = url;
+        }
+
+    </script>
+
+    <div class="none"></div>
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+                layer.open({
+                    type: 1,
+                    area: ['300px', '180px'],
+                    title:"岗位说明",
+                    shadeClose: true, //点击遮罩关闭
+                    offset: ['200px', '500px'],
+                    content: '\<\div style="padding:20px;">'+PosDesc+'\<\/div>'
+            });
+        }
+    </script>
+   </body>
+    </html>
+
+
+

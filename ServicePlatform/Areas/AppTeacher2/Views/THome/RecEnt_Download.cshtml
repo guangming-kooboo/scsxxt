@@ -1,0 +1,87 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.RecEnt_Download_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+
+
+    <script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+    </script>
+
+
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("EnterpriseInfo", "THome", new {area = "AppTeacher2", Ent_No = @Model.Ent_No})">
+                    <div>
+                        <div class="placeholder colortitle">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </div>
+                </a>
+                <div class="weui-flex__item colortitle">
+                    <div class="placeholder">资源下载</div>
+                </div>
+                <div style="width: 48px">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-uploader__bd" style="width: 100%">
+                <ul class="weui-uploader__files">
+                    @if (Model._Files.Count > 0)
+                    {
+                        foreach (var item in Model._Files)
+                        {
+                            <li class="weui-uploader__file1 Photo"><img style="background-image: url(@item.DLFileUrl); background-size: 100% auto" width="90%" src="@item.DLFileUrl"></li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="weui-uploader__file1">企业暂没上传文件</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="weui-gallery" id="gallery" style="opacity: 1; display: none">
+        <span class="weui-gallery__img" id="galleryImg" style="background-image: url()"></span>
+        <div class="weui-gallery__opr">
+        </div>
+    </div>
+    <script src="~/Content/AppStudentV3/js/zepto.js"></script>
+    <script>
+                    $gallery = $("#gallery"),
+                    $galleryImg = $("#galleryImg"),
+                        $uploaderFiles = $(".Photo");
+                    $uploaderFiles.on("click", "img", function () {
+                        $galleryImg.attr("style", this.getAttribute("style"));
+
+
+                        $gallery.fadeIn(100);
+                        $gallery.on("click", function () {
+                            $gallery.fadeOut(100);
+                        });
+                    });
+    </script>
+</body>
+</html>

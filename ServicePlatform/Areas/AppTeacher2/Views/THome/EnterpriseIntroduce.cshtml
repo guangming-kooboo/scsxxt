@@ -1,0 +1,115 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.EnterpriseIntroduce_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+
+
+    <script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+    <!--
+       特有
+    -->
+    <style>
+        .weui-form-preview__label {
+            float: left;
+            margin-right: 1em;
+            min-width: 4em;
+            color: #000000;
+            text-align: justify;
+            text-align-last: justify;
+        }
+
+        .weui-form-preview__value {
+            display: block;
+            overflow: hidden;
+            word-break: normal;
+            word-wrap: break-word;
+            color: #999;
+            padding-left: 1.2em;
+    </style>
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("EnterpriseInfo","THome",new{area="AppTeacher2",Ent_No=Model._EntpriseDetail.Ent_No})">
+                    <div>
+                        <div class="placeholder">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </div>
+                </a>
+                    <div class="weui-flex__item">
+                        <div class="placeholder">企业详情 </div>
+                    </div>
+                    <div style="width: 48px">
+                        <div class="placeholder"></div>
+                    </div>
+</div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        @if (Model._EntpriseDetail.EntPhotos == null)
+            {
+            <img style="width: 100%" src="~/Areas/AppTeacher2/Content/images/nopic_385x240.png" />
+        }
+        else
+        {
+            var photo = Model._EntpriseDetail.EntPhotos.Split(';');
+            var firstphoto = photo[photo.Length - 1];
+            <img style="width: 100%; height: 200px" src="@firstphoto">
+        }
+
+        
+
+            <div class="weui-cells deletegap">
+                <div class="weui-cell">
+                    <div style="color:#179B16;font-size:1.3em;font-weight: bold;width:100%">@Model._EntpriseDetail.Ent_Name</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">地址:</label>
+                        <span class="weui-form-preview__value">@Model._EntpriseDetail.EntAddress</span>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">电话:</label>
+                        <span class="weui-form-preview__value">@Model._EntpriseDetail.Contectinfo</span>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">邮件:</label>
+                        <span class="weui-form-preview__value">@Model._EntpriseDetail.Email</span>
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">简介:</label>
+                        <span class="weui-form-preview__value">@(new HtmlString(Model._EntpriseDetail.EntResume))</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

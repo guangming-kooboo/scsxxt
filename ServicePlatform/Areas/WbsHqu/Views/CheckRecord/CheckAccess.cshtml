@@ -1,0 +1,20 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.CheckRecord_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.HiddenFor(o => o.FinishID)
+
+@Html.InputFor(o => o.TaskName,"",true)
+
+@Html.HiddenFor(o => o.TaskType)
+
+@Html.HiddenFor(o => o.State)
+
+@Html.HiddenFor(o => o.CreateTime)
+
+@Html.InputFor(o => o.CheckOpinion)
+
+@Html.HiddenFor(o => o.UserID)
+
+@Html.HiddenFor(o => o.OwerID)

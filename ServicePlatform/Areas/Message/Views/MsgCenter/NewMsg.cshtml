@@ -1,0 +1,123 @@
+﻿@model ServicePlatform.Models.T_SysMsg
+@using ServicePlatform.Areas.Permission.Models
+@{
+    ViewBag.Title = "NewMsg";
+    IEnumerable<SelectListItem> RoleList = ViewData["RoleList"] as IEnumerable<SelectListItem>;
+
+    IEnumerable<SelectListItem> UserList = ViewData["UserList"] as IEnumerable<SelectListItem>;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>写消息</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Message/Content/jquery.editable-select.min.css" />
+    <script type="text/javascript" src="/Areas/Message/Content/jquery.editable-select.min.js"></script>
+    <script type="text/javascript" src="/Areas/Message/Content/jquery-1.9.1.min.js"></script>
+    @Html.Partial("_KindEditorLinks")
+
+    <script type="text/javascript">
+        function Change(obj) {
+            var s = document.getElementsByName("Rec");
+            for (var i = 0; i < s.length; i++) {
+                if (s[i].id == obj) {
+                    document.getElementById("usertype").disabled = true;
+                    document.getElementById("editable-select").disabled = false;
+
+                }
+                else {
+                    document.getElementById("editable-select").disabled = true;
+                    document.getElementById("usertype").disabled = false;
+                }
+            }
+        }
+
+        function check()
+        {
+            //var sHTML = $("#summernote").code();
+            //document.getElementById("msgcontent").setAttribute("value", sHTML);
+            var a = document.getElementById("editable-select");
+            if(a.disabled==true)
+            {
+                document.getElementById("flag").setAttribute("value", "true");
+            }
+            else
+            {
+                document.getElementById("flag").setAttribute("value", "false");
+            }
+        }
+
+        function aa()
+        {
+            alert('get');
+        }
+    </script>
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">消息中心</a></li>
+            <li><a href="#">写消息</a></li>
+        </ul>
+    </div>
+@using (Html.BeginForm("NewMsg", "MsgCenter", FormMethod.Post))
+{
+    <div class="formbody">
+
+        <div class="formtitle"><span>写消息</span></div>
+            <ul class="forminfo">
+                @*<li><label>消息类型：</label>@Html.DropDownListFor(model => model.MsgTypeID, ViewData["MsgTypeName"] as SelectList, new { id = "msgtid", name = "msgtid", @class = "dfinput" })<i>*</i></li>*@
+                <li><label>消息内容：</label>@Html.TextAreaFor(model => model.MsgContent, new { id = "editor", name = "editor", style = "height: 375px;" })</li>
+                <li>
+                        <label>发送对象：</label>
+                    @*<cite>*@
+                            <input name="Rec" type="radio" value="" checked="checked" onclick="Change('1')" id="1" />角色
+                        <select id="usertype" name="usertype" class="dfinput">
+                            @foreach (var item in RoleList)
+                            {
+                                <option value='@item.Value' selected='@item.Selected'>
+                                    @item.Text
+                                </option>
+                            }
+                        </select>
+                            
+                        @*</cite>*@@*<label></label>*@
+                </li>
+                    <li><label>&nbsp;</label>
+                        
+                        <input name="Rec" type="radio" value="" onclick="Change('2')" id="2" />个人
+                        <select id="editable-select" class="dfinput" name="userid" disabled>
+                            @foreach (var item in UserList)
+                            {
+                                <option value='@item.Value' selected='@item.Selected'>
+                                    @item.Text
+                                </option>
+                            }
+                        </select>
+                     
+                    </li>
+                    @*文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea>*@
+                    <li><label>&nbsp;</label><input class="btn" type="submit" value="保存草稿" id="save" name="action" onclick="check()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="btn" type="submit" value="发送" id="send" name="action" onclick="check()" /></li>
+</ul>
+    </div>
+
+    <div visibility:hidden><input type="text" id="flag" name="flag" value="" /></div>
+    <div visibility:hidden><input type="text" id="msgcontent" name="msgcontent" value="" /></div>
+    }
+
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/Areas/Message/Content/jquery.editable-select.min.js"></script>
+    <script type="text/javascript">
+        $('#editable-select').editableSelect({
+            effects: 'slide'
+        });
+        $('#html').editableSelect();
+    </script>
+
+</body>
+</html>
+    

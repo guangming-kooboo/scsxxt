@@ -1,0 +1,261 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.WorkLoad_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+
+
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+    <script type="text/javascript">
+        function Task() {
+            var myselect = document.getElementById("WbsTaskID");
+            var index = myselect.selectedIndex;
+            var value = myselect.options[index].value;
+
+            var typeitem = document.getElementById("TypeID");
+            var typeindex = typeitem.selectedIndex;
+            var typevalue = typeitem.options[typeindex].value;
+            window.location.href = "/AppTeacher2/THome/WorkLoad" + "?WbsTaskID=" + value + "&type=" + typevalue;
+        }
+    </script>
+
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("HomePage", "THome", new { area = "AppTeacher2" })">
+                    <div>
+                        <div class="placeholder colortitle">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </div>
+                </a>
+                <div class="weui-flex__item colortitle">
+                    <div class="placeholder">工作量</div>
+                </div>
+                <div style="width: 40px">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells weui-cells_form deletegap">
+
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">工作量:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @Html.DropDownListFor(o => o.WbsTaskID, Model._Tasks, new { @class = "weui-select", name = "WbsTaskID", onchange = "Task()" })
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">工作量类型:</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @Html.DropDownListFor(o => o.type, Model._Type, new { @class = "weui-select", id = "TypeID", onchange = "Task()" })
+                    </div>
+                </div>
+                @if (Model.type == "0")
+                {
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">定额比例:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" value="@Model._total" readonly class="weui-input">
+                        </div>
+                    </div>
+                }
+                @if (Model.type == "1")
+                {
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">定量比例:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" value="@Model._total" readonly class="weui-input">
+                        </div>
+                    </div>
+                }
+                @if (Model.type == "2")
+                {
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">全部比例:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" value="@Model._total" readonly class="weui-input">
+                        </div>
+                    </div>
+                }
+            </div>
+            @if (Model.type == "0")
+            {
+                <div class="weui-cells" style="background-color: #ebeeef">
+                    <div class="weui-cell">定额</div>
+                </div>
+            }
+            @if (Model.type == "1")
+            {
+                <div class="weui-cells" style="background-color: #ebeeef">
+                    <div class="weui-cell">定量</div>
+                </div>
+            }
+            @if (Model.type == "2")
+            {
+                <div class="weui-cells" style="background-color: #ebeeef">
+                    <div class="weui-cell">全部</div>
+                </div>
+            }
+
+            @if (Model._tasklist == null || !Model._tasklist.Any())
+            {
+                <div class="weui-cell">
+
+
+                    <div class="weui-cell__bd">
+                        <input type="text" value="暂无工作量列表，快去完成吧" readonly class="weui-input">
+                    </div>
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model._tasklist)
+                {
+                    {
+
+                        if (item.TaskType == 0)/*定额*/
+                        {
+                            <div class="weui-cells weui-cells_form">
+                                <a href="@Url.Action("TaskDetail", "THome", new {area = "AppTeacher2", finishid = item.FinishID, type = item.TaskType, state = item.State})">
+                                    <div class="weui-cell">
+                                        <div class="weui-cell__hd">
+                                            <label class="weui-label">任务</label>
+                                        </div>
+                                        <div class="weui-cell__bd">
+                                            <input type="text" value="@item.TaskName" readonly class="weui-input">
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="@Url.Action("TaskDetail", "THome", new {area = "AppTeacher2", finishid = item.FinishID, type = item.TaskType, state = item.State})">
+                                    <div class="weui-cell">
+                                        <div class="weui-cell__hd">
+                                            <label class="weui-label">时间</label>
+                                        </div>
+                                        <div class="weui-cell__bd">
+                                            <input type="text" value="@item.CreateTime" readonly class="weui-input">
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">审核情况</label>
+                                    </div>
+                                    @switch (item.State)
+                                    {
+                                        case 0:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="待审核" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                        case 1:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="审核通过" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                        case 2:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="审核不通过" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                        default:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                    }
+                                </div>
+                            </div>
+                        }
+                        if (item.TaskType == 1)/*定量*/
+                        {
+                            <div class="weui-cells weui-cells_form">
+                                <a href="@Url.Action("TaskDetail", "THome", new {area = "AppTeacher2", finishid = item.FinishID, type = item.TaskType, state = item.State})">
+                                    <div class="weui-cell">
+                                        <div class="weui-cell__hd">
+                                            <label class="weui-label">计分标准</label>
+                                        </div>
+                                        <div class="weui-cell__bd">
+                                            <input type="text" value="@item.TaskName" readonly class="weui-input">
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="@Url.Action("TaskDetail", "THome", new {area = "AppTeacher2", finishid = item.FinishID, type = item.TaskType, state = item.State})">
+                                    <div class="weui-cell">
+                                        <div class="weui-cell__hd">
+                                            <label class="weui-label">时间</label>
+                                        </div>
+                                        <div class="weui-cell__bd">
+                                            <input type="text" value="@item.CreateTime" readonly class="weui-input">
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">审核情况</label>
+                                    </div>
+
+                                    @switch (item.State)
+                                    {
+                                        case 0:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="待审核" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                        case 1:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="审核通过" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                        case 2:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="审核不通过" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                        default:
+                                            <div class="weui-cell__bd">
+                                                <input type="text" value="" readonly class="weui-input">
+                                            </div>
+                                            break;
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>

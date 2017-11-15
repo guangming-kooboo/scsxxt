@@ -1,0 +1,47 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Visitor.Login2_M
+
+<div class="weui-flex">
+    <div class="weui-flex__item"><div class="placeholder"><br></div></div>
+</div>
+<div class="weui-flex">
+
+    <div class="weui-flex__item"><div class="placeholder"><img src="@ViewData["root"]/images/u8.png" width=40%></div></div>
+
+</div>
+
+<div class="weui-flex">
+    <div class="weui-flex__item"><div class="placeholder">实学(测试版)</div></div>
+</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">账号</label></div>
+        <div class="weui-cell__bd">
+            @Html.DropDownListFor(o => o.UserID,Model._student, new { @class = "weui-input", placeholder = "请输入帐号" })
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">学校</label>
+        </div>
+        <div class="weui-cell__bd">
+            @Html.DropDownListFor(o => o.UnitID, Model._UnitItems, new { @class = "weui-select" })
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+        <div class="weui-cell__bd">
+            @Html.PasswordFor(o => o.UserPwd, new { @class = "weui-input", placeholder = "请输入密码" })
+        </div>
+    </div>
+</div>
+
+<div class="pubilice-uppad">
+    <a href="javascript:submit('c');" class="weui-btn weui-btn_primary">登录</a>
+</div>
+<div class="weui-flex">
+    <div><div class="placeholder" onclick="submit('a')">忘记密码？</div></div>
+    <div class="weui-flex__item"><div class="placeholder"> </div></div>
+    <div><div class="placeholder"></div></div>
+</div>

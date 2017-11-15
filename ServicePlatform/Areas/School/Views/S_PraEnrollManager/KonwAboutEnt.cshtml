@@ -1,0 +1,132 @@
+﻿@*@model IEnumerable<ServicePlatform.Models.T_Enterprise>*@
+@using ServicePlatform.Models;
+@{
+    ViewBag.Title = "了解企业";
+    IEnumerable<SelectListItem> EntCategory = ViewData["Enttype"] as IEnumerable<SelectListItem>;
+
+    List<Qx.Scsxxt.Extentsion.Entity.T_Enterprise> EnterPriseList = ViewBag.EntList;
+    int ListIndex = 0;
+}
+
+
+@Scripts.Render("/Areas/School/Content/S_StuBaseInformation/js/jquery.js")
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>了解企业</title>
+    <link href="/Areas/School/Content/S_PraEnrollManager/css/Company.css" rel="stylesheet" type="text/css" />
+    <script src="~/Include/laypage/laypage.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //调用分页 biuuu_city_list ent_list
+                laypage({
+                    cont: 'biuuu_city_list',
+                    pages: pages,
+                    jump: function (obj) {
+                        document.getElementById('ent_list').innerHTML = thisDate(obj.curr);
+                    }
+                })
+            });
+            function get() {
+                var a = document.getElementById("Enttype").value;
+                var b = document.getElementById("PracID").value;
+                //window.alert(b);
+                window.location = '/School/S_PraEnrollManager/KonwAboutEnt?EntType=' + a + '&PracBatchID=' + b;
+            }
+    </script>  
+</head>
+
+<body>
+    <form class="company" action="/School//S_PraEnrollManager/KonwAboutEnt" method="post">
+        <label>单位类型：</label>
+        <select id="Enttype" name="Enttype" onchange="get()">
+            @foreach (var item in EntCategory)
+            {
+                <option value="@item.Value" selected='@item.Selected'>
+                    @item.Text
+                </option>
+            }
+        </select>
+        <input type="text" value="" id="" name="search" placeholder="请输入公司名称" class="" />
+        <input type="text" value=@ViewBag.PracBatchID id="PracID" name="PracID" class="" hidden=hidden />
+        <input type="submit" value="搜索" />
+    </form>
+    <hr />
+    
+
+    <div id="biuuu_city"></div>
+    <div class="wrapper">
+        <div id="ent_list" class="inner_out">
+
+            @*@for (int i = 0; i < EnterPriseList.Count;i++ )
+            {
+            <div class="inner">
+                <a href="/Enterprise/Home/Index?Ent_No=@EnterPriseList[i].Ent_No">
+                    <img src='@EnterPriseList[i].EntLogo' />
+                    <p>@EnterPriseList[i].Ent_Name</p>
+                </a>
+            </div>
+            }*@
+
+
+        </div>
+        <!--页尾导航-->
+        @*<div class="last">
+            <span>共 @EnterPriseList.Count() 条</span>
+            <input name="first" type="button" value="首页">
+            <a href="#"><<</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">>></a>
+            <input name="last" type="button" value="末页">
+            <span>第</span>
+            <input name="page" type="text" />
+            <span>页</span>
+            <input name="ensure1" type="button" value="确定" />
+        </div>*@
+        <!--/页尾导航-->
+    </div>
+    <ul id="biuuu_city_list" class="wrapper"></ul>
+
+    <script type="text/javascript">
+        var data_count = '@ViewBag.DataNum';
+        @(new HtmlString(ViewBag.Html_id))
+        @(new HtmlString(ViewBag.Html_name))
+        @(new HtmlString(ViewBag.Html_pic))
+
+        var cmp = parseInt(data_count)
+
+        var nums = 8; //每页出现的数量
+        if (cmp <= nums)
+        {
+            nums = cmp;
+        }
+        var pages = Math.ceil(data_count / nums); //得到总页数
+        var thisDate = function (curr) {
+            //此处只是演示，实际场景通常是返回已经当前页已经分组好的数据
+            var str = '', last = curr * nums - 1;
+            last = last >= data_count ? (data_count - 1) : last;
+            for (var i = (curr * nums - nums) ; i <= last; i++) {
+                str+='<div class="inner">';
+                str+='<a href="/Enterprise/Home/Index?Ent_No='+id[i]+'" target="_blank">'
+                str+='<img src='+logo[i]+' />';
+                str += '<p>' + entname[i] + '</p>';
+                str+='</a>';
+                str += '</div>';
+    
+
+                //str += '<li>' + name[i].length + '</li>';
+            }
+            return str;
+        };
+
+
+    </script>  
+</body>
+</html>

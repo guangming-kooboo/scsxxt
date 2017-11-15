@@ -1,0 +1,261 @@
+﻿@using Qx.Tools.CommonExtendMethods;
+@model ServicePlatform.Areas.BBS.ViewModels.Home.PostPage_M
+
+@{
+    Layout = ViewData["Layout"].ToString();
+    var pageIndex = (int)ViewData["pageIndex"];
+    var maxIndex = (int)ViewData["maxIndex"];
+    var perCount = (int)ViewData["perCount"];
+    var startIndex = (pageIndex - 1) * perCount + 1;
+    var endIndex = startIndex + perCount - 1;
+    var ExtraParam = (string)ViewData["ExtraParam"];
+}
+
+
+
+@section script{
+<script>
+    function jumpTo(index) {
+        location.href = '@ViewData["currentUrl"]?pageIndex=' + index + '&perCount=@ViewData["perCount"]' + '&id=@Model.post.ID';
+    };
+    function GoReply()
+    {
+        $("#active-upload").focus();
+    }
+    function GoReplyPost(id,i)
+    {
+        $('#replyid').val(id);
+        $('#active-upload').focus();
+    }
+    $().ready(function () {
+        $('#uploadFile').hide();
+        $('#active-upload').click(function () {
+            $('#uploadFile').show();
+        });
+    })
+
+    //上传成功后调用
+    function OnUploadFinish(file) {
+        $('#uploadFile').hide();
+        $('#files').val(file);
+        $('#active-upload').val("附件已上传，点击修改")
+    }
+</script>
+    }
+
+<div class="main">
+
+    <!-- 导航-->
+    @Html.Action("_Search")
+    <!-- 列表-->
+    <div class="list">
+        <div class="list-head">
+            <div class="list-head-left">
+                <p class="list-head-left-p">|<a class="list-head-left-p" href="@Url.Action("PostList","Home",new{area="BBS",columnid=Model.post.ColumnID})">&nbsp;@Model.post.Column</a>>><a class="list-head-left-p" href="@Url.Action("PostList","Home",new{area="BBS",columnid=Model.post.ColumnID,themeid=Model.post.ThemeId})">@Model.post.Theme</a>>><a class="list-head-left-p" href="">&nbsp;@Model.post.PostTitle</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-main-head">
+        <div class="list-main-head-left">
+            <ul>
+                <li class="list-main-head-left-li"> <p class="list-main-head-left-p">点击&nbsp;:&nbsp;@Model.post.ClickCount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></li>
+                <li class="list-main-head-left-li"> <p class="list-main-head-left-p">回复&nbsp;:&nbsp;@Model.post.Reply&nbsp;&nbsp;</p></li>
+                <li class="list-main-head-left-li-img"> <img src="~/Areas/BBS/Content/Image/1.png"></li>
+                <li class="list-main-head-left-lis"><p class="list-main-head-left-head-p">@Model.post.PostTitle</p></li>
+            </ul>
+        </div>
+        <div class="list-main-head-right">
+            <ul class="list-main-head-right-ul">
+                <li class="list-main-head-right-li"><a class="list-main-head-right-li-a" href="@Url.Action("PostPage","Home",new{area="BBS",id=Model.post.ID,flag="readAuthor"})">只看楼主</a></li>
+                @*<li class="list-main-head-right-li"><a class="list-main-head-right-li-a" href="@Url.Action("Collect","Home",new{area="BBS",id=Model.post.ID})"><img src="~/Areas/BBS/Content/Image/2.png">收藏</a></li>*@
+                <li class="list-main-head-right-li"><a class="list-main-head-right-li-a" onclick="GoReply()">我要回复</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="note-main">
+
+        <div class="note-main-note">
+            <ul>
+                <li class="note-main-note-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=Model.post.AuthorID})"><img class="note-main-note-head" src="@Model.post.AuthorHeadPictureUrl"></a><p align="center"><a class="note-main-note-li-aa" href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=Model.post.AuthorID})">@Model.post.Author</a></p></li>
+                <li class="note-main-note-li"><p class="note-main-note-li-p">楼主</p> </li>
+                <li class="note-main-note-li"><p class="note-main-note-li-p-p">发表于&nbsp;&nbsp;&nbsp;@Model.post.Time</p></li>
+                <li class="note-main-note-li"><p class="note-main-note-li-p-p"><a class="note-main-note-li-a" href="@Url.Action("PostReport","CRUD",new{area="BBS",id=Model.post.ID})">举报</a></p></li>
+                <li class="note-main-note-li">
+                    <div class="note-main-note-li-location">
+                        <a href=""><img class="note-main-note-li-location-img" src="~/Areas/BBS/Content/Image/回复.png"></a>
+                        <a class="note-main-note-li-location-a" onclick="GoReply()">回复</a>
+                    </div>
+                </li>
+                <li class="note-main-note-li">
+                    <div class="note-main-note-li-locations">
+
+                        <a href=""><img class="note-main-note-li-location-img" src="~/Areas/BBS/Content/Image/分享.png"></a>
+                        <a class="note-main-note-li-location-a" href="@Url.Action("SharePost","CRUD",new{area="BBS",id=Model.post.ID})">分享</a>
+                    </div>
+
+                </li>
+                <li class="note-main-note-li">
+                    <div class="note-main-note-li-locations">
+
+                        <a href="@Url.Action("PostPraise","CRUD",new{area="BBS",postid=Model.post.ID})"><img class="note-main-note-li-location-img" src="~/Areas/BBS/Content/Image/点赞.png"></a>
+                        <a class="note-main-note-li-location-a" href="">@Model.post.PraiseCount</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="note-main-main">
+                        <p class="note-main-main-p">@(new HtmlString(Model.post.PostContent))</p>
+                        @if(Model.post.file.HasValue())
+                        { 
+                        <hr>
+                        <p class="note-main-main-p">附件&nbsp;:&nbsp;&nbsp;<a href="@Model.post.file">点击下载</a></p>
+                        }
+                    </div>
+                </li>
+            </ul>
+            <hr>
+            @if(Model.bestReply!=null)
+            { 
+            <p class="best-p">最佳回答</p>
+            <ul>
+                <li class="note-main-note-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=Model.bestReply.AuthorID})"><img class="note-main-note-head" src="@Model.bestReply.HeadPictureUrl"></a><p align="center"><a class="note-main-note-li-aa" href="@Url.Action("PersonalSpace","UserCenter",new{area="BBS",id=Model.bestReply.ID})">@Model.bestReply.Author</a></p></li>
+                <li class="note-main-note-li"><p class="note-main-note-li-p"><a class="note-main-note-li-aa" href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=Model.bestReply.AuthorID})">@Model.bestReply.Author </a>@(new HtmlString(Model.bestReply.FatherID == null ? "" : "回复" + Model.bestReply.FatherID))</p> </li>
+                <li class="note-main-note-li"><p class="note-main-note-li-p-p">发表于&nbsp;&nbsp;&nbsp;@Model.bestReply.Time</p></li>
+                <li class="note-main-note-li">
+                    <div class="note-main-note-li-location">
+                        <a href=""><img class="note-main-note-li-location-img" src="~/Areas/BBS/Content/Image/回复.png"></a>
+                        <a class="note-main-note-li-location-a" onclick="GoReplyPost('@Model.bestReply.ID')">回复</a>
+                    </div>
+                </li>
+                <li class="note-main-note-li">
+                    <div class="note-main-note-li-locations">
+
+                        <a href=""@Url.Action("ReplyPraise", "CRUD", new { area = "BBS", replyid = Model.bestReply.ID })"><img class="note-main-note-li-location-img" src="~/Areas/BBS/Content/Image/点赞.png"></a>
+                        <a class="note-main-note-li-location-a" href="">@Model.bestReply.PraiseCount</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="note-main-main">
+                        <p class="note-main-main-p">@(new HtmlString(Model.bestReply.Content))</p>
+                        @if(Model.bestReply.file.HasValue())
+                        {
+                        <hr>
+                        <p class="note-main-main-p">附件&nbsp;:&nbsp;&nbsp;<a href="@Model.bestReply.file">点击下载</a></p>
+                         }
+                    </div>
+                </li>
+            </ul>
+            <hr>
+            }
+            <p class="best-p">其他回答</p>
+            @foreach (var item in Model.reply)
+            {
+                <ul>
+                    
+                    <li class="note-main-note-li"><a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=item.AuthorID})"><img class="note-main-note-head" src="@item.HeadPictureUrl"></a><p align="center"><a class="note-main-note-li-aa" href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=item.AuthorID})">@item.Author</a></p></li>
+                    <li class="note-main-note-li">
+
+                    <p class="note-main-note-li-p-p">第@(startIndex++)楼</p>
+                    </li>
+                    <li class="note-main-note-li"><p class="note-main-note-li-p"><a class="note-main-note-li-aa" href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=item.AuthorID})">@item.Author  </a></p> </li>
+                    <li class="note-main-note-li"><p class="note-main-note-li-p-p">@(new HtmlString(item.FatherID == null ? "" : "回复" + item.FatherID)) &nbsp;&nbsp;&nbsp; 发表于&nbsp;&nbsp;&nbsp;@item.Time</p></li>
+                    <li class="note-main-note-li">
+                        <div class="note-main-note-li-location" >
+                            <a href=""><img class="note-main-note-li-location-img" src="~/Areas/BBS/Content/Image/回复.png"></a>
+                            <a class="note-main-note-li-location-a" onclick="GoReplyPost('@item.ID')">回复</a>
+                        </div>
+                    </li>
+                    <li class="note-main-note-li">
+                        <div class="note-main-note-li-locations" >
+
+                            <a href="@Url.Action("ReplyPraise", "CRUD", new { area = "BBS", replyid = item.ID })"><img class="note-main-note-li-location-img" src="~/Areas/BBS/Content/Image/点赞.png"></a>
+                            <a class="note-main-note-li-location-a" href="">@item.PraiseCount</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="note-main-main">
+                            <p class="note-main-main-p">@(new HtmlString(item.Content))</p>
+                            @if(item.file.HasValue())
+                            { 
+                            <hr>
+                            <p class="note-main-main-p">附件&nbsp;:&nbsp;&nbsp;<a href="@item.file">点击下载</a></p>
+                            }
+                        </div>
+                    </li>
+                </ul>
+                <hr>
+            }
+
+
+
+        </div>
+
+        @if ((int)ViewData["maxIndex"] > 1)
+        {
+            <div class="jump">
+                <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+                @if (pageIndex != 1)
+                {
+                    <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+                }
+                <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+                @if (pageIndex != maxIndex)
+                {
+                    <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+                }
+                <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+            </div>
+        }
+
+        <div class="write">
+            <div class="write-head">
+                <p class="write-head-p">我来回复</p>
+
+            </div>
+            <div class="write-form">
+                <form action="/BBS/CRUD/ReplyPost?PostID=@Model.post.ID" method="post">
+                    @Html.Partial("/Views/Templates/_KindEditor.cshtml", new ViewDataDictionary()
+                            {
+                               { "css","write-input-main"},
+                               { "id","reply"},
+                               { "name","reply"},
+                               { "value","想说点什么"}
+                            })
+                  </p>
+                    <input type="hidden" name="replyid" id="replyid" />
+                    <input type="hidden"  name="file" id="files" />
+                    <input class="write-submit" type="submit" value="发表回复" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="write-submit"  type="button" value="添加附件" id="active-upload" />
+                </form>
+                <div id="uploadFile">
+                    @Html.Partial("/Views/Templates/_FileUpload.cshtml", new ViewDataDictionary()
+                           {
+                              { "saveDirectory","/UserFiles/BBS/Files/"},
+                                { "id","file"},
+                              { "name","file"}
+
+                           })
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+                  

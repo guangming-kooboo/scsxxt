@@ -1,0 +1,7 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using ServicePlatform.Models;
+@model Webdiyer.WebControls.Mvc.PagedList<T_PracBatch>
+@{ Html.RenderPartial("BatchListTable"); }
+<div class="pagin">
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "paginList", PagerItemTemplate = "<li class=\"paginItem\"><a style='display:none'>{0}</a></li>" }).AjaxOptions(a => a.SetUpdateTargetId("articles"))
+</div>

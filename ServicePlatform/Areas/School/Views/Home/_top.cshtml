@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>顶部导航</title>
+<link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //顶部导航切换
+        $(".nav li a").click(function () {
+            $(".nav li a.selected").removeClass("selected")
+            $(this).addClass("selected");
+        })
+    })
+</script>
+
+
+</head>
+
+<body style="background: url(/Areas/School/Content/Home/img/topbg.gif) repeat-x;">
+
+    <div class="topleft">
+        <a href="/Home/Index" target="_parent"><img src="/Areas/School/Content/Home/img/logo.png" title="系统首页" /></a>
+    </div>
+        
+    <ul class="nav">
+    <li><a href="default.html" target="rightFrame" class="selected"><img src="/Areas/School/Content/Home/img/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
+    <li><a href="imgtable.html" target="rightFrame"><img src="/Areas/School/Content/Home/img/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
+    <li><a href="imglist.html"  target="rightFrame"><img src="/Areas/School/Content/Home/img/icon03.png" title="模块设计" /><h2>模块设计</h2></a></li>
+    <li><a href="tools.html"  target="rightFrame"><img src="/Areas/School/Content/Home/img/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
+    <li><a href="computer.html" target="rightFrame"><img src="/Areas/School/Content/Home/img/icon05.png" title="文件管理" /><h2>文件管理</h2></a></li>
+    <li><a href="tab.html"  target="rightFrame"><img src="/Areas/School/Content/Home/img/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
+    </ul>
+            
+    <div class="topright">    
+    <ul>
+    <li><span><img src="/Areas/School/Content/Home/img/help.png" title="帮助" class="helpimg" /></span><a href="#">帮助</a></li>
+    <li><a href="#">关于</a></li>
+    <li><a href="/Admin/Home/LoginOut" target="_parent">退出</a></li>
+    </ul>
+     @*@{
+         if (  ((Session["vars"] as ServicePlatform.Config.VarsConfig)).MyUserID == "")
+         {
+             ViewBag.user = "警告：登录已过期！";
+             ViewBag.count = "0";
+         }
+         else
+         {
+             ViewBag.user =  ((Session["vars"] as ServicePlatform.Config.VarsConfig)).MyUserID;
+             ViewBag.count=   ((Session["vars"] as ServicePlatform.Config.VarsConfig)).MyMsgCount;
+         }
+     }*@
+    <div class="user">
+    <span>当前用户:@ViewBag.user</span>
+    <i>新消息</i>
+    <b>@ViewBag.count</b>
+    </div>    
+    
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Core.Services.Entity.T_SchoolReviewItem>
+
+@{
+    ViewBag.Title = "评分项列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <button class="btn btn-primary" onclick="location.href = '/School/ScoreItem/Create'">添加评分项</button>
+   
+    <table class="table">
+        <tr>
+            <th>
+                评分项
+            </th>
+            <th>
+                比重
+            </th>
+            <th>
+                排序
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ItemName
+                </td>
+                <td>
+                    @item.ItemWeight
+                </td>
+                <td>
+                    @item.ItemSequence
+                </td>
+                <td>
+                    <a href="/School/ScoreItemToTeacher/Index?id=@item.ItemID">分配教师</a>|
+                    @Html.ActionLink("删除", "Delete", new { id = item.ItemID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    
+    @Html.Label((int)Model.Sum(a => a.ItemWeight) == 100 ? "" : "注意:权重和不等于100！！！", new { style = "color: red" })
+   
+</div>

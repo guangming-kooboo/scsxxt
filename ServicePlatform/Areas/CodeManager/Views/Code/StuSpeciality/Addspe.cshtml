@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Addspe";
+}
+
+
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加专业</title>
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+   <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/CodeManager/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/CodeManager/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">学生代码维护表</a></li>
+                <li><a href="#">添加专业</a></li>
+            </ul>
+        </div>
+    <div class="formtitle"><span>添加专业</span></div>
+    
+     <form method="post" action="/Code/reciveAddSpe" name="myform" id="myform">
+     <ul class="forminfo">
+    
+                 
+                                          
+            <li>           
+                            <label>学校名称</label>
+
+                <input name="SchoolName" id="SchoolName" value="@ViewBag.schoolname" class="dfinput" placeholder="例如：华侨大学" />
+                        
+
+         </li>
+
+                      
+           <li>              
+                            <label>年级</label>
+
+                         <input name="EntryYear" id="EntryYear" class="dfinput" placeholder="例如：2013（4个数字）" />
+                       
+         </li>
+          <li>
+                        
+                            <label>专业编号</label>
+              <input type="text" name="SpeNo" id="SpeNo" class="dfinput" placeholder="例如：120901（6个数字）">
+                        
+         </li>
+            <li>             
+                            <label>专业名称</label>
+                <input type="text" name="SpeName" id="SpeName" class="dfinput" placeholder="例如：对外汉语专业">
+                        
+         </li>
+            <li>            
+                            <label>&nbsp;</label><input type="submit" value="提  交"  class="btn"/>
+          </li>              
+                    </ul>
+                </form>
+      
+        
+    
+        
+        
+       
+    </body>
+</html>
+

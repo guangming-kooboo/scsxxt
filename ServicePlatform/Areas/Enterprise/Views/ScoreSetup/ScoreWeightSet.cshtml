@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "T_PracBatch_ScoreWeight";
+}
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>查看评分比重</title>
+
+    <link href="/Areas/Enterprise/Content/Admin/css/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+  
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">查看评分比重</a></li>
+        </ul>
+    </div>
+
+
+    <form action="/School/ScoreSetup/ScoreWeightSet" method="post">
+
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>设置评分比重</span></div>
+
+            <ul class="forminfo">
+
+
+                <li>
+                    <label>选择高校</label>
+                    @using ServicePlatform.Lib
+                    @using ServicePlatform.Models
+                    @using ServicePlatform.Config
+                    @{
+                        var Ent_No = (Session["Vars"] as Vars).getUserUnit();
+                        var sql = @"select T_PracBatch.*
+                                    from T_EntBatchReg
+                                    inner join T_PracBatch on T_EntBatchReg.PracBatchID=T_PracBatch.PracBatchID
+                                    inner join T_School on T_PracBatch.SchoolID=T_School.SchoolID
+                                    where T_EntBatchReg.Ent_No='" + Ent_No + "' AND T_PracBatch.IsCurrentBatch='是'";
+                                                                @(new HtmlString(PageHelper.GetSelectHtml(PageHelper.GetSelectListItem<T_PracBatch>(new SchoolContext(), sql, 3, 2), "SchoolID", "dfinput")))
+                    }
+
+                    @*<script type="text/javascript">
+                $("#EntPracNo").change(function () {
+                    alert($(this).val());
+                        //location.href = "T_PracticePosition_ListShow?schoolName=" + $(this).val();
+                    }
+
+                    )
+            </script>*@
+
+                    <i>*请选择高校</i>
+                </li>
+
+              
+               
+               
+                    <li>
+                        <label>学校比重 </label>
+                             <input id="EntReviewWeight"  type="text" readonly="readonly" class="dfinput" />
+                       
+                    </li>
+
+                <li>
+                    <label>企业比重</label>
+                    <input id="SchoolReviewWeight" type="text" readonly="readonly" class="dfinput" />
+
+                </li>
+              
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+
+    <script type="text/javascript">
+
+
+
+        $("#SchoolID").change(function () {
+                if ($(this).val() == -1)
+                    return;
+            $.ajax({
+                type: "post",
+                url: " /Enterprise/ScoreSetup/Get_ScoreWeight",
+                data: { SchoolID: $(this).val() },
+                dataType: "text",
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#EntReviewWeight").val(100 - data);
+                        $("#SchoolReviewWeight").val(data);
+
+                    }
+                    else {
+                        alert('获取失败，请重试');
+
+                    }
+                },
+                error: function (data) {
+                    alert('获取失败，请重试');
+                }
+            });
+        }
+        )
+
+
+        
+    </script>
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

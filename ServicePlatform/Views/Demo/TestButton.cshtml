@@ -1,0 +1,16 @@
+﻿@model List<Qx.Permission.Entity.Button>
+@{
+    ViewBag.Title = "TestButton";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TestButton</h2>
+@foreach (var button in Model)
+{
+    <h1>@button.ButtonID</h1>
+    <p id="@button.ButtonID">我将被移除</p>
+    <h1>@button.Name</h1>
+    <h1>@button.Menu.MenuExtension.Menu.Name</h1>
+    <hr/>
+}
+

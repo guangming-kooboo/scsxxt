@@ -1,0 +1,99 @@
+﻿@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+@{
+    IEnumerable<SelectListItem> Enterprise = ViewData["Enterprise"] as IEnumerable<SelectListItem>;
+    IEnumerable<SelectListItem> Position = ViewData["Position"] as IEnumerable<SelectListItem>;
+}
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+
+    //    $("#EntryYear").change(function () {
+    //        //获取岗位
+    //        getPos($(this).val());
+    //    });
+    //})
+    $(document).ready(function () {
+
+        $("#Enterprise").change(function () {
+            //获取岗位
+            getPos($(this).val());
+        });
+
+        //$("#GetPosList").mouseenter(function () {
+        //    //获取岗位
+        //    getPos($("#Enterprise").val());
+        //});
+
+    })
+
+    function getPos(value) {
+        //$("#City").html(""); //清空
+        $.ajax({
+            type: "post",
+            url: "GetPosList",
+            //data: "p=" + provinveCode + "&date=" + new Date(),
+            data: { EntNo: value, schoolid:'@ViewData["schoolid"]'},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data.count > 0) {
+                    $("#Position option").remove();
+                    $("#Position").append("<option value='" + "Sel_All" + "'>" + "全部" + "</option>");
+                    $.each(data.Pos, function (i, item) {
+                        $("#Position").append("<option value='" + item.PositionID + "'>" + item.PositionName + "</option>");
+                    });
+                }
+                else {
+                    $("#Position option").remove();
+                    $("#Position").append("<option value=''>--请选择--</option>")
+                    $("#nowoperation").attr({ "disabled": "disabled" });
+                }
+            },
+            error: function (data) {
+                //alert(data);
+            }
+        });
+    }
+
+</script>
+
+
+<ul class="forminfo">
+    @*<li><label>学校：</label><input value='@ViewBag.SchoolName' class="dfinput" readonly /><i></i></li>*@
+    @*<li><label>企业：</label>@Html.DropDownList("Enterprise", Enterprise, new { @class = "dfinput", id = "Enterprise", name = "Enterprise" })<i></i></li>
+    <li><label>岗位：</label>@Html.DropDownList("Position", Position, new { @class = "dfinput", id = "Position", name = "Position" })<i></i></li>*@
+    <li>
+        <label>企业：</label>
+        <select id="Enterprise" name="Enterprise" class="dfinput">
+            @foreach (var item in Enterprise)
+            {
+                <option value="@item.Value" selected='@item.Selected'>
+                    @item.Text
+                </option>
+            }
+        </select>
+        <i>@ViewBag.Extra_ForE</i>
+    <li>
+    <li>
+        <label>岗位：</label>
+        <select id="Position" name="Position" class="dfinput">
+            @if (Position.Count() > 0)
+            {
+                <option value="Sel_All" selected="Sel_All">
+                    全部
+                </option>
+            }
+
+            @foreach (var item in Position)
+            {
+                <option value="@item.Value" selected='@item.Selected'>
+                    @item.Text
+                </option>
+            }
+        </select>
+        <i>@ViewBag.Extra_ForP</i>
+    <li>
+</ul>

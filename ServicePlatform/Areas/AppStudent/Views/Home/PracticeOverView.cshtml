@@ -1,0 +1,380 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.PracticeOverView_M
+@section css{
+    <script src="~/Content/AppStudentV3/js/jquery-2.1.4.js"></script>
+    @*<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var colorOver = 'rgb(169,169,169)';
+            var colorOut = 'rgb(200,200,200)';
+
+            var padLeft = '8px';
+            var padRight = '8px';
+
+            var defpadLeft = $('#menu li a').css('paddingLeft');
+            var defpadRight = $('#menu li a').css('paddingRight');
+
+            $('#menu li').click(function () {
+                window.location = $(this).find('a').attr('href');
+
+            }).mouseover(function () {
+
+                $(this).find('a')
+                .animate({ paddingLeft: padLeft, paddingRight: padRight }, { queue: false, duration: 100 })
+                .animate({ backgroundColor: colorOver }, { queue: false, duration: 200 });
+
+            }).mouseout(function () {
+
+                $(this).find('a')
+                .animate({ paddingLeft: defpadLeft, paddingRight: defpadRight }, { queue: false, duration: 100 })
+                .animate({ backgroundColor: colorOut }, { queue: false, duration: 200 });
+            });
+
+            $('#sidebar').mousemove(function (e) {
+
+                var mheight = parseInt($('#menu li').height() * $('#menu li').length);
+
+                var top_value = Math.round(((s_top - e.pageY) / 100) * mheight / 2);
+
+                $('#menu').animate({ top: top_value }, { queue: false, duration: 600 });
+            });
+
+
+        });
+
+    </script>*@
+}
+@section scripts{
+    <style>
+        body {
+            padding: 0;
+            margin: 0 0;
+        }
+
+        /*#sidebar {
+        height:100%;
+        overflow:hidden;
+        position:relative;
+        width: 100%
+
+        } */
+
+        #menu {
+            width: 100%;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            top: 15px;
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+            #menu p {
+                padding: 5px 18px;
+                text-align: left;
+                display: block;
+                cursor: hand;
+                cursor: pointer;
+                color: rgb(69,69,69);
+                font-family: "微软雅黑";
+                font-size: 15px;
+            }
+
+            #menu li {
+                padding: 10px 0;
+                text-align: left;
+                display: block;
+                cursor: hand;
+                cursor: pointer;
+            }
+
+                #menu li img {
+                    width: 15px;
+                    height: 15px;
+                    left: 10px;
+                    top: 2px;
+                    padding-right: 4px;
+                    position: relative;
+                }
+
+                #menu li p {
+                    color: rgb(69,69,69);
+                    font-family: "微软雅黑";
+                    font-size: 14px;
+                    font-weight:;
+                    display: inline;
+                    background: url() repeat rgb(240,240,240);
+                    padding: 11px 15px 11px 20px;
+                    text-decoration: none;
+                }
+
+                    #menu li p:hover {
+                        background: url() repeat rgb(230,230,230);
+                        padding: 11px 15px 11px 20px;
+                    }
+
+
+
+
+
+                #menu li span {
+                    font-family: "微软雅黑";
+                    font-size: 10px;
+                    color: rgb(146,146,146);
+                    padding-left: 10px;
+                }
+
+                #menu li a {
+                    font-family: "微软雅黑";
+                    font-size: 9px;
+                    color: #1aad19;
+                }
+
+        .placeholder {
+            margin: 5px;
+            padding: 0 10px;
+            text-align: center;
+        }
+    </style>
+}
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="weui-navbar__item colortitle " style="background:#1aad19;">
+        <div class="weui-flex ">
+            @*跳到个人中心*@
+            <a href="javascript:window.history.go(-1);">
+                <div><div class="placeholder colortitle"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+            </a>
+            <div class="weui-flex__item colortitle"><div class="placeholder">实习进程</div></div>
+            <div style="width:40px"><div class="placeholder"></div></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+
+
+        <div id="sidebar">
+            <ul id="menu">
+
+                <p>① 报名阶段</p>
+                <li>
+                    <p>企业查看<span><a href="@Url.Action("AllEnt_List","Home",new {area="AppStudent"})">共 @Model.EntCount 家</a></span></p>
+                </li>
+                @if (@Model.CareerStatus == 10)
+                {
+                    <li><p>我也报名(正在报名)<span>正式报名<a href="#">@Model.FormalVolunteerCount</a>家/预报名<a href="#">@Model.PrepareVolunteerCount</a>家</span></p></li>
+                }
+                @if (@Model.CareerStatus == 11 || @Model.CareerStatus == 14 || @Model.CareerStatus == 15 || @Model.CareerStatus == 13)
+                {
+                    <li>
+                        <p>
+                            我也报名(已结束)<span>正式报名<a href="#">@Model.FormalVolunteerCount</a>家/预报名<a href="#">@Model.PrepareVolunteerCount</a>家</span>
+                        </p>
+                    </li>
+                }
+                @if (Model.CareerStatus == 11 || @Model.CareerStatus == 14 || @Model.CareerStatus == 15 || @Model.CareerStatus == 13)
+                {
+                    <!--已被企业录取-->
+                    if (Model.FinalVolunteerCount != 0)
+                    {
+                        <li> <p>录用情况<span>恭喜你被<a href="#"> @Model.FormalVolunteer.EntName @Model.FormalVolunteer.PositionName </a> 录用</span><img src="@ViewData["root"]images/yes.png"></p></li>
+                    }
+                    else
+                    {
+                        <li><p>录用情况<span>抱歉<a href="#"> 你还没有被录用</a></span><img src="@ViewData["root"]images/no.png"></p></li>
+                    }
+                }
+                @if (Model.CareerStatus == 10)
+                {
+                    <li><p>录用情况<span>抱歉<a href="#"></a>你还没有被录用</span><img src="@ViewData["root"]images/no.png"></p></li>
+                }
+                <p>② 实习阶段</p>
+                @if (Model.CareerStatus != 10)
+                {
+                    if (Model.FinalVolunteerCount != 0)
+                    {
+                        <a href="@Url.Action("DiaryList", "Home", new {area = "AppStudent"})">
+                            <li>
+                                <p>
+                                    实习周记<span style="color: #1aad19">已提交  @Model.DiaryCount 篇</span>
+                                </p></li>
+                        </a>
+                    }
+                    else
+                    {
+                        <li>
+                            <p>
+                                实习周记<span>抱歉<a href="#">你还不能写周记</a></span><img src="@ViewData["root"]images/no.png">
+                            </p>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            实习周记<span>抱歉<a href="#">你还不能写周记</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                @if (Model.CareerStatus != 10)
+                {
+                    if (Model.FinalVolunteerCount != 0)
+                    {
+                        <a href="@Url.Action("CaseList","Home",new {area="AppStudent"})">
+                            <li><p>实习案例<span style="color: #1aad19">已提交  @Model.PracticeCaseCount 篇 </span ></p ></li >
+                        </a>
+                    }
+                    else
+                    {
+                        <li>
+                            <p>
+                                实习案例<span>抱歉<a href="#">你还不能写案例</a></span><img src="@ViewData["root"]images/no.png">
+                            </p>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            实习案例<span>抱歉<a href="#">你还不能写案例</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                @if (@Model.AllComment.PracticeReport != null)
+                {
+                    <li>
+                        <p>
+                            实习报告<span><a href="@Url.Action("PracticeReportDetail","Home",new {area="AppStudent"})">已完成</a></span><img src="@ViewData["root"]images/yes.png">
+                        </p>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            实习报告<span><a href="#">还未提交实习报告</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                {
+                    <li>
+                        <p>
+                            岗位评价<span><a href="@Url.Action("PositionEvlTable","Home",new {area="AppStudent"})">已完成</a></span><img src="@ViewData["root"]images/yes.png">
+                        </p>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            岗位评价<span>企业<a href="@Url.Action("PositionEvlTable","Home",new {area="AppStudent"})">还未对你做评价</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                @if (@Model.CareerStatus == 14)
+                {
+                    <li>
+                        <p>
+                            实习鉴定<span><a href="@Url.Action("IdentificationTable","Home",new {area="AppStudent"})">已完成</a></span><img src="@ViewData["root"]images/yes.png">
+                        </p>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            实习鉴定<span><a href="@Url.Action("IdentificationTable","Home",new {area="AppStudent"})">你还没有实习鉴定表</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                <p>③ 评估阶段</p>
+                @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                {
+                    if (@Model.EvaluateEnt != null)
+                    {
+                        <li>
+                            <p>
+                                评价企业<span><a href="@Url.Action("EvaluateEnterpriseDetail","Home",new {area="AppStudent"})">已完成</a></span><img src="@ViewData["root"]images/yes.png">
+                            </p>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <p>
+                                评价企业<span><a href="@Url.Action("EvaluateEnterpriseDetail","Home",new {area="AppStudent"})">你还没有对企业进行评价哦</a></span><img src="@ViewData["root"]images/no.png">
+                            </p>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            评价企业<span><a href="@Url.Action("EvaluateEnterpriseDetail","Home",new {area="AppStudent"})">你还不能评价企业</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                @if (@Model.CareerStatus == 14 || @Model.CareerStatus == 15)
+                {
+                    if (@Model.EvaluateSchool != null)
+                    {
+                        <li>
+                            <p>
+                                评价学校<span><a href="@Url.Action("EvaluateSchoolDetail","Home",new {area="AppStudent"})">已完成</a></span><img src="@ViewData["root"]images/yes.png">
+                            </p>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <p>
+                                评价学校<span><a href="">你还没有评价</a></span><img src="@ViewData["root"]images/no.png">
+                            </p>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            评价学校<span><a href="">你还不能评价学校</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                @if (@Model.AllComment.ReviewScore == null)
+                {
+                    <li>
+                        <p>
+                            成绩查看<span><a href="#">总成绩：0</a></span><img src="@ViewData["root"]images/no.png">
+                        </p>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <p>
+                            成绩查看<span><a href="#">总成绩：@Model.AllComment.ReviewScore</a></span><img src="@ViewData["root"]images/yes.png">
+                        </p>
+                    </li>
+                }
+
+                @*<p>④ 招聘阶段</p>
+            <li><p>简历管理<span>请优化您的<a href="#">简历</a></span><img src="@ViewData["root"]images/no.png"></p></li>
+            <li><p>招聘信息<span>目前有<a href="#">@Model.EntCount</a>家企业可以选择</span><img src="@ViewData["root"]images/no.png"></p></li>
+            <li><p>企业找我<span>有<a href="#">@Model.EntFindStu.Count</a>家企业找我，请查看！</span><img src="@ViewData["root"]images/no.png"></p></li>
+            <li><p>我找企业<span>我找了<a href="#">0</a>家企业</span><img src="@ViewData["root"]images/no.png"></p></li>*@
+
+
+            </ul>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- 头部引用开始 -->
+@Html.Partial("_Head-Admin")
+<!-- 头部引用结束 -->
+<body>
+  
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">数据表</a></li>
+            <li><a href="#">基本内容</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        <div class="tools">
+
+            <ul class="toolbar">
+                <li class="click"><span><img src="/Includes/Admin/images/t01.png" /></span>添加</li>
+                <li class="click"><span><img src="/Includes/Admin/images/t02.png" /></span>修改</li>
+                <li><span><img src="/Includes/Admin/images/t03.png" /></span>删除</li>
+                <li><span><img src="/Includes/Admin/images/t04.png" /></span>统计</li>
+            </ul>
+
+
+            <ul class="toolbar1">
+                <li><span><img src="/Includes/Admin/images/t05.png" /></span>设置</li>
+            </ul>
+
+        </div>
+
+
+        <table class="tablelist">
+            <thead>
+            <tr>
+                <!--显示表头开始-->
+                @for (var i = 0; i < ViewBag.headerTitle.Count; i++)
+                                        {
+                <th>@ViewBag.headerTitle[i]</th>
+                                        }
+                <th>操作</th>
+                <!--显示表头结束-->
+                
+            </tr>
+            </thead>
+            <tbody>
+                <!--显示数据开始-->
+                @for (var i = 0; i < ViewBag.dataList.Count; i++)
+                                    {
+                                <!--行开始-->
+                @(new HtmlString("<tr>"))
+                                     <!--数据列开始-->
+                                        for (var j = 0; j < ViewBag.dataList[i].Count; j++)
+                                        {
+                @(new HtmlString("<td>" + ViewBag.dataList[i][j] + "</td>"))
+                                        }
+                                    <!--数据列结束-->
+                                    <!--操作列开始-->
+                @(new HtmlString("<td>"))
+                                        foreach (var op in ViewBag.operate)
+                                        {
+                @(new HtmlString(string.Format(
+                                          @"<a href='{0}'>{1}</a>"
+                                            , op.Value + "?" + ViewBag.linkParms[i], op.Key)));
+                                        }
+                @(new HtmlString("</td>"))
+                                     <!--操作列结束-->
+                @(new HtmlString("</tr>"))
+                                <!--行结束-->
+                                    }
+            <!--显示数据结束-->
+            </tbody>
+        </table>
+
+        <!--分页控件开始-->
+        @Html.Partial("_CutPage-Admin")
+        <!--分页控件结束-->
+      
+    </div>
+    
+</body>
+</html>

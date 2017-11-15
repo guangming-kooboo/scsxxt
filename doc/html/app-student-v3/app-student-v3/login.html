@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>WeUI</title>
+     <link rel="stylesheet" href="css/weui.min.css" />
+     <link rel="stylesheet" href="css/jquery-weui.css"/>
+     <link rel="stylesheet" href="css/pubilice.css"/>
+
+<script src="js/jquery-2.1.4.js"></script>
+<script src="js/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script src="js/jquery-weui.js"></script>
+
+  
+</head>
+<body ontouchstart="">
+	    <div class="weui-flex">
+            <div class="weui-flex__item"><div class="placeholder"><br></div></div>
+        </div>
+        <div class="weui-flex">
+            
+            <div class="weui-flex__item"><div class="placeholder"><img src="images/u8.png" width=40%></div></div>
+           
+        </div>
+       
+        <div class="weui-flex">
+            <div class="weui-flex__item"><div class="placeholder">实学</div></div>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">账号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input"  placeholder="请输入帐号">
+                </div>
+            </div> 
+            
+             <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">学校</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="select2">
+                        <option value="1">    </option>
+                        <option value="2">中国</option>
+                        <option value="3">美国</option>
+                        <option value="4">英国</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input"  placeholder="请输入密码">
+                </div>
+            </div>     
+        </div>
+
+         <div class="pubilice-uppad">
+        <a href="javascript:;" class="weui-btn weui-btn_primary">登录</a>
+        </div>
+        <div class="weui-flex addgap">
+            <div><div class="placeholder" id="show-actions">忘记密码？</div></div>
+            <div class="weui-flex__item"><div class="placeholder"> </div></div>
+            <div><div class="placeholder"></div></div>
+       </div>
+<script>
+      $(document).on("click", "#show-actions", function() {
+        $.actions({
+         
+          onClose: function() {
+            console.log("close");
+          },
+          actions: [
+            {
+              text: "找回密码",
+              className: "color-primary",
+              onClick: function() {
+                $.alert("111");
+              }
+            },
+            {
+              text: "短信验证登录",
+              className: "color-warning",
+              onClick: function() {
+                $.alert("你选择了“编辑”");
+              }
+            }
+          ]
+        });
+      });
+
+    
+    </script>
+
+</body>
+</html>

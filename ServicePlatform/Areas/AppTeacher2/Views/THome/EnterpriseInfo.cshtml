@@ -1,0 +1,142 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.EnterpriseInfo_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+ 
+    <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+</head>
+<body ontouchstart>
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("EnterpriseList", "THome", new {area = "AppTeacher2"})">
+                    <div>
+                        <div class="placeholder ">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </div>
+                </a>
+                <div class="weui-flex__item ">
+                    <div class="placeholder">企业信息详情 </div>
+                </div>
+                <div style="width: 48px">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            @if (string.IsNullOrEmpty(Model._EnterpriseDetail.EntPhotos))
+            {
+                <img style="width: 100%"  src = "/Areas/AppTeacher2/Content/images/nopic_385x240.png" />
+            }
+            else
+            {
+                var photo = Model._EnterpriseDetail.EntPhotos.Split(';');
+                var firstphoto = photo[photo.Length - 1];
+                <img style="width: 100%; height: 200px" src="@firstphoto">
+            }         
+            <div class="weui-flex">
+                <div>
+                    <div class="placeholder">企业详情栏目</div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"></div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+            <div class="weui-grids">
+                <a href="@Url.Action("EnterpriseIntroduce", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_article.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">企业介绍</p>
+                </a>
+
+                <a href="@Url.Action("PositionDetail", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_search_bar.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">岗位查看</p>
+                </a>
+
+                <a href="@Url.Action("RecEnt_TrainingPlan", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No, DLFileColumnID = 7826})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_cell.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">培养计划</p>
+                </a>
+
+
+                <a href="@Url.Action("RecEnt_Salary", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No, DLFileColumnID = 9000})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_panel.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">实习补贴</p>
+                </a>
+
+                <a href="@Url.Action("RecEnt_StaffAcc", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No, DLFileColumnID = 4000})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_tab.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">员工食宿</p>
+                </a>
+
+                <a href="@Url.Action("RecEnt_Staff", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No, DLFileColumnID = 5000})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_actionSheet.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">员工天地</p>
+                </a>
+
+                <a href="@Url.Action("RecEnt_SucceedCase", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No, DLFileColumnID = 6000})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_toast.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">成功案列</p>
+                </a>
+
+                <a href="@Url.Action("RecEnt_Download", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No, DLFileColumnID = 7878})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_nav_icons.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">资源下载</p>
+                </a>
+
+                <a href="@Url.Action("RecEnt_FAQ", "THome", new {area = "AppTeacher2", Ent_No = Model._EnterpriseDetail.Ent_No, DLFileColumnID = 1234})" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="~/Areas/AppTeacher2/Content/images/icon_intro.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">疑问解答</p>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,61 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@model ServicePlatform.Areas.WbsHqu.ViewModels.StuScoreApply_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+@Html.HiddenFor(o => o.PracticeNo)
+
+@Html.HiddenFor(o => o.UserID)
+
+@Html.InputFor(o => o.ApplyReviewScore)
+@Html.InputFor(o => o.WeekRecordScore)
+@Html.InputFor(o => o.PracticeCaseScore)
+
+@Html.RichBoxFor(o => o.ApplyContents)
+
+@Html.HiddenFor(o => o.StateID)
+
+@Html.HiddenFor(o => o.PracticeStartEnd)
+
+
+@Html.HiddenFor(o => o.WeekRecordComment)
+
+
+
+@Html.HiddenFor(o => o.PracticeCaseComment)
+
+@Html.HiddenFor(o => o.PracUnitComment)
+
+@Html.HiddenFor(o => o.SchoolComment)
+
+@Html.HiddenFor(o => o.TutorComment)
+
+@Html.HiddenFor(o => o.PracticeContent)
+
+@Html.HiddenFor(o => o.PracticeReport)
+
+@Html.HiddenFor(o => o.StuEvaEntScore)
+
+@Html.HiddenFor(o => o.StuEvaSchoolScore)
+
+@Html.HiddenFor(o => o.PracticeReportFile)
+
+@Html.HiddenFor(o => o.EvidenceFile)
+
+@Html.HiddenFor(o => o.ReviewScore)
+
+@Html.HiddenFor(o => o.AuditOpinion)
+
+@*@foreach (var photo in Model.Columns)
+    {
+        <div class="col-lg-offset-3">
+            <img name="Photo" style="width:436px;" id="photoView_@photo.ColumnID" src="">
+        </div>
+    }
+    <script>
+            function OnUploadFinish(filePath,id) {
+                $('#photoView_'+id).attr("src", filePath);
+            };
+    </script>*@

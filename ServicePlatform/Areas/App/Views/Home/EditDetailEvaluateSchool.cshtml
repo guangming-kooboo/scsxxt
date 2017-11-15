@@ -1,0 +1,67 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.EditDetailEvaluateSchool_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>评价学校</title>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+</head>
+<body>
+
+<form method="POST">
+    <div class="appraisal-head">
+        <div class="left">
+            <a href="@Url.Action("Main", "Home", new {area = "App", uid = Model.uid})"><</a>
+        </div>
+
+        <div class="middle">
+            <p>评价学校</p>
+        </div>
+
+
+        <div class="right">
+            <input class="done" type="submit" value="确定"/>
+            @*<a href="">提交</a>*@
+        </div>
+    </div>
+
+    <div class="school-evaluation">
+        <p><span>▶</span>&nbsp;华侨大学
+        </p>
+        <div>
+            @*      @foreach (var item in Model.evaluateschool)
+                {                                 
+                            <input type="hidden" value="@item.ItemNo" name="ItemNo">
+                            <ul>
+                                <li class="title">@item.ItemName</li>
+                                @*<li class="chose">
+                                    @Html.DropDownListFor(o => @item.ItemGradeNo, Model._StuEvaSchoolGradeLevelItem, new { @id=item.ItemGradeNo+item.ItemNo,@class = "chose" })
+                                @*</li>
+                                <li class="tt">@Html.TextAreaFor(o => @item.ItemContent, new { @class = "tt" }) </li>
+                           </ul>  
+                }*@
+            @for (int i = 0; i < Model.evaluateschool.Count; i++)
+            {
+                var dropDownId = "DropDown-"+ Model.evaluateschool[i].ItemNo ;
+               var contentId = "Content-"+ Model.evaluateschool[i].ItemNo;
+                <input type="hidden" value="@Model.evaluateschool[i].ItemNo" name="ItemNo">
+                <ul>
+                    <li class="title">@Model.evaluateschool[i].ItemName</li>
+                    @*<li class="chose">*@
+                    @Html.DropDownList(dropDownId, Model._StuEvaSchoolGradeLevelItem, new {id = dropDownId,name= "dropDownId", @class = "chose"})
+                    @*</li>*@
+                    <li class="tt">@Html.TextArea(contentId,new { id= contentId, name= "contentId", @class = "tt"}) </li>
+                </ul>
+                <script type="text/javascript">
+                    $("#@dropDownId").val('@Model.evaluateschool[i].ItemGradeNo');
+                    $("#@contentId").val('@Model.evaluateschool[i].ItemContent');
+                </script>
+            }
+        </div>
+    </div>
+
+</form>
+</body>

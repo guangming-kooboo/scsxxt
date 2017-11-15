@@ -1,0 +1,124 @@
+﻿@using System.Web.UI.WebControls
+@model Core.Services.Entity.T_PracBatch
+@{
+    ViewBag.Title = "T_PracBatch_ScoreWeight";
+}
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>设置评分比重</title>
+
+    <link href="/Areas/Enterprise/Content/Admin/css/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">设置评分比重</a></li>
+        </ul>
+    </div>
+
+
+    <form action="/School/ScoreSetup/ScoreWeightSet" method="post">
+
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>设置评分比重</span></div>
+
+            <ul class="forminfo">
+                @Html.Label(ViewData["tip"] + "", new {style = "color:red;width: 100px"})<br/>
+
+                    <li>
+                        <label>学校评分占比</label>
+                             <input id="SchoolReviewWeight" name="SchoolReviewWeight" type="text" value="@Model.SchoolReviewWeight" class="dfinput" />
+                        <i>*请输入比重（0-100）</i>
+                    </li>
+
+               
+                <li><label>&nbsp;</label><input id="submit" type="submit" class="btn" value="提交" /></li>
+
+            </ul>
+           
+
+        </div>
+    </form>
+
+
+
+    <script type="text/javascript">
+
+        
+
+        $("#PracBatchID").change(function () {
+         
+            $.ajax({
+                type: "post",
+                url: " /School/ScoreSetup/Get_ScoreWeight",
+                data: { PracBatchID: $(this).val() },
+                dataType: "text",
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#SchoolReviewWeight").val(data);
+
+                    }
+                    else {
+                        alert('获取失败，请重试');
+
+                    }
+                },
+                error: function (data) {
+                    alert('获取失败，请重试');
+                }
+            });
+        }
+        )
+
+
+        $("#submit").click(function () {
+
+            $.ajax({
+                type: "post",
+                url: " /School/ScoreSetup/Save_ScoreWeight",
+                data: { PracBatchID: $('#PracBatchID').val(), SchoolReviewWeight: $('#SchoolReviewWeight').val() },
+                dataType: "text",
+                success: function (data) {
+                    alert(data)
+                             
+                },
+                error: function (data) {
+                    alert(data.toString())
+                 
+                }
+            });
+        }
+       )
+    </script>
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+﻿@Styles.Render("/Areas/News/Content/CSSModel/newsDetail.css")
+@Scripts.Render("/UserFiles/HtmlTools/KindEditor/kindeditor.js")
+@Scripts.Render("/UserFiles/HtmlTools/KindEditor/lang/zh_CN.js")
+@Scripts.Render("/UserFiles/HtmlTools/KindEditor/plugins/code/prettify.js")
+@Styles.Render("/UserFiles/HtmlTools/KindEditor/themes/default/default.css")
+@Styles.Render("/UserFiles/HtmlTools/KindEditor/plugins/code/prettify.css")
+
+<script type="text/javascript">
+    KindEditor.ready(function (K) {
+        var editor1 = K.create('#editor,#editor0,#editor1,#editor2,#editor3,#editor4,#editor5,#editor6,#editor7,#editor8,#editor9', {
+            width:"50%",
+            height: "400px",
+            cssPath: '/UserFiles/HtmlTools/KindEditor/plugins/code/prettify.css',
+            uploadJson: '/UserFiles/HtmlTools/KindEditor/asp.net/upload_json.ashx',
+            fileManagerJson: '/UserFiles/HtmlTools/KindEditor/asp.net/file_manager_json.ashx',
+            allowFileManager: true,
+            afterCreate: function () {
+                var self = this;
+                K.ctrl(document, 13, function () {
+                    self.sync();
+                    K('form[name=article]')[0].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function () {
+                    self.sync();
+                    K('form[name=article]')[0].submit();
+                });
+            }
+        });
+        prettyPrint();
+    });
+</script>

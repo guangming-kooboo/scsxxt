@@ -1,0 +1,57 @@
+﻿@model Core.Services.Entity.ViewModels.V_UnitCollection
+
+
+@{
+    ViewBag.Title = "已通过审批的单位列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+
+   
+    <table class="table">
+        <tr>
+            <th>
+                单位号
+            </th>
+            <th>
+                名称
+            </th>
+           
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.EnterpriseList)
+        {
+            <tr>
+              
+                <td>
+                    @item.Ent_No
+                </td>
+               
+                <td>
+                    @item.Ent_Name
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+
+        @foreach (var item in Model.SchoolList)
+        {
+            <tr>
+
+                <td>
+                    @item.SchoolID
+                </td>
+
+                <td>
+                    @item.SchoolName
+                </td>
+                <td></td>
+            </tr>
+        }
+    </table>
+
+ 
+</div>

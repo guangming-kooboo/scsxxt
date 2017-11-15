@@ -1,0 +1,80 @@
+﻿@using Qx.Tools
+@{
+    var UserID = (AccountContext)Session["AccountContext"] != null ? ((AccountContext)Session["AccountContext"]).UserID : "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/BBS/Content/CSS/css.css" rel="stylesheet"/>
+    <script src="~/Content/H/js/jquery-2.1.1.min.js"></script>
+    @RenderSection("css", required: false)
+    <style type="text/css">
+      
+       
+    </style>
+</head>
+<body>
+    <!-- 顶上一条-->
+    <div class="head ">
+        <div class="main-head-location">
+            <div class=head-l>
+                <a class="head-a" href="">前页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="head-a" href="/BBS/Home/Main">论坛首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="head-a" href="">顶岗实习系统</a>
+            </div>
+            <div class="head-r">
+                <img class="head-r-img" src="~/Areas/BBS/Content/Image/登录.png">
+                @if (string.IsNullOrEmpty(UserID))
+                {
+                    <a class="head-a" href="/platform/home/login">登录</a>
+                    <a class="head-a" href="/platform/home/regist">注册</a>
+                }
+                else
+                {
+
+                    <a class="head-a" href="/BBS/ManagerCenter/">@UserID </a>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    
+
+
+
+    <!-- 尾部-->
+    <div class="tail">
+        <div id="linknav">
+            <ul>
+                <li><a href="#">关于我们&nbsp;&nbsp;</a>|</li>
+                <li><a href="#">&nbsp;&nbsp;法律申明&nbsp;&nbsp;</a>|</li>
+                <li><a href="#">&nbsp;&nbsp;廉政举报&nbsp;&nbsp;</a>|</li>
+                <li><a href="#">&nbsp;&nbsp;友情链接中国站&nbsp;&nbsp;</a></li>
+            </ul>
+        </div>
+        <p align="center">© 2009-2016 Aliyun.com 版权所有 ICP证：浙B2-20080101</p>
+    </div>
+    <script>
+    function t(sName) {
+        return $("[name='" + sName + "']").find("option:selected").text();
+    }
+    function v(sName) {
+        return $("[name='" + sName + "']").val();
+    }
+    function JumpTo(index) {
+        var url = "@ViewData["currentUrl"]?ReportID=@ViewData["ReportID"]&Params=@ViewData["Params"]&pageIndex="+index+"&perCount=@ViewData["perCount"]";
+        location.href = url;
+    }
+    </script>
+    @RenderSection("script", required: false)
+</body>
+</html>
+

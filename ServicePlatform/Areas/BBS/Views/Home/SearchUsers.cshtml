@@ -1,0 +1,68 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.Home.SearchUsers_M
+@{
+    Layout = ViewData["Layout"].ToString();
+    int pageIndex = (int)ViewData["pageIndex"];
+    int maxIndex = (int)ViewData["maxIndex"];
+}
+@section script{
+    <script>
+    function jumpTo(index) {
+        location.href = '@ViewData["currentUrl"]?pageIndex=' +index+ '&perCount=@ViewData["perCount"]'+'&keyword=@Model.keyword';
+    };
+
+    </script>
+}
+
+<div class="main">
+  @Html.Action("_Search", new { type = "user" })
+    <!-- 导航-->
+
+    <div class="user-select">
+        @Html.Action("_SearchLeft")
+
+        <div class="list-main-lists-select-user">
+            @foreach (var item in Model.searchUser)
+            {
+                <ul>
+                    <li class="list-main-lists-li"><a href="@Url.Action("PersonalSpace", "Home", new {area="BBS",id=item.ID})"><img class="user-img" src="@item.HeadImg"></a></li>
+                    <li class="list-main-lists-li">
+
+                    <li class="user-p">
+                        <p class="user-p-head"><a class="part-a-head" href="@Url.Action("PersonalSpace", "Home", new {area="BBS",id=item.ID})">@item.Name</a></p>
+                        <p class="user-p-main">性别&nbsp;:&nbsp;@item.Sex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;头衔&nbsp;:&nbsp;@item.Grade</p>
+                        <p class="part-p-main-p">注册时间&nbsp;:&nbsp;@item.RegisterDate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后登录时间&nbsp;:&nbsp;@item.LastLogin</p>
+                    </li>
+
+                </ul>
+                <hr class="user-hr">
+            }
+
+
+
+
+
+        </div>
+
+    </div>
+    @if ((int)ViewData["maxIndex"] > 1)
+    {
+        <div class="jump">
+            <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+            @if (pageIndex != 1)
+            {
+                <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+            }
+            <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+            @if (pageIndex != maxIndex)
+            {
+                <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+            }
+            <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+        </div>
+    }
+
+
+
+</div>
+

@@ -1,0 +1,90 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.TVisitor.RevisePsw_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+
+
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+
+</head>
+<body ontouchstart="">
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item1">
+            <div class="weui-flex ">
+                <div>
+                    <a href="@Url.Action("Login", "TVisitor", new {area = "AppTeacher2"})">
+                        <div class="placeholder colortitle">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </a>
+                </div>
+                <div class="weui-flex__item colortitle">
+                    <div class="placeholder">重置密码</div>
+                </div>
+                <div style="width: 40px">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-tab__bd">
+
+        <form method="POST">
+            <div class="weui-cells weui-cells_form deletegap">
+                <div class="weui-cell">
+
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">用户名</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input id="Userid" name="Userid" class="weui-input" placeholder="用户名">
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">学校</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @Html.DropDownListFor(o => o.unitid, Model._SchoolIItems, new { @class = "weui-select" })
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">新密码</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input id="NewPsw1" name="NewPsw1" class="weui-input" type="password" placeholder="新密码">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">确认密码</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input id="NewPsw2" name="NewPsw2" class="weui-input" type="password" placeholder="确定密码">
+                    </div>
+                </div>
+            </div>
+            <div class="pubilice-uppad"></div>
+            <input type="submit" class="weui-btn weui-btn_primary" value="确定" />
+        </form>
+    </div>
+
+</body>
+</html>

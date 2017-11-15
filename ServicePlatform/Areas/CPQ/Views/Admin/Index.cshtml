@@ -1,0 +1,12 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.Admin.Index_M
+@{
+    
+    Layout = ViewData["Layout"].ToString();
+}
+
+
+<h2>问卷子系统导航</h2>
+
+
+
+<a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=@Model.ownerID+";" })>已创建的问卷列表</a>

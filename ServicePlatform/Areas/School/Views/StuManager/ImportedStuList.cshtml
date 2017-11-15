@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "ImportedStuList";
+}
+
+@model IEnumerable<ServicePlatform.Models.T_Student>
+
+@{
+    ViewBag.Title = "学生列表";
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+<html>
+<head>
+    <title>学生列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生管理中心</a></li>
+            <li><a href="#">学生列表</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+@using (Html.BeginForm("ExportExcel", "StuManager", FormMethod.Post))
+{
+    <input type="submit" id="export" name="action" class="btn" value="导出该班级学生信息" />
+    <input type="hidden" id="schoolid" name="schoolid" class="btn" value='@ViewBag.Schoolid' />
+    <input type="hidden" id="classno" name="classno" class="btn" value='@ViewBag.ClassNo' />
+    <input type="hidden" id="speno" name="speno" class="btn" value='@ViewBag.SpeNo' />
+    @*<input type="button" id="btnall" name="btnall" class="btn" value="全选" onclick="checkall()" />
+    <label>全文检索：</label><input type="text" class="dfinput" value="请输入检索内容" id="jiansuo" name="jiansuo" /><input type="submit" class="btn" value="检索" onclick="" name="action" /><label>按消息类型（10：用户注册、11：项目评估、12：项目招标、13：系统消息）</label>
+    <input type="text" value="" id="piliang" name="piliang" class="dfinput" style="display:none" />
+    <input type="text" value="" id="piliangmark" name="piliangmark" class="dfinput" style="display:none" />*@
+}
+
+    <div class="formtitle"><span>专业：@ViewBag.SpeName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 班级：@ViewBag.ClassName</span></div>
+        @using (Html.BeginForm("StuRegToBatch", "StuManager", FormMethod.Post))
+        {
+            <input type="submit" id="reg" name="action" class="btn" value="为学生注册批次" />
+            <input type="hidden" id="schoolid" name="schoolid" class="btn" value='@ViewBag.Schoolid' />
+            <input type="hidden" id="classno" name="classno" class="btn" value='@ViewBag.ClassNo' />
+            <input type="hidden" id="speno" name="speno" class="btn" value='@ViewBag.SpeNo'/>
+            <input style="text-align: center;" arget="view_window" type="text" name="speno" class="btn" value='添加' onclick="window.location.href = '/School/StuManager/AddSignerStu?classid=@ViewBag.ClassNo&speno=@ViewBag.SpeNo'"/>
+            @*<a href="@Url.Action("AddSignerStu","StuManager",new {area="School",classid=ViewBag.ClassNo,speno=ViewBag.SpeNo })" class="btn" target="view_window">添加</a>*@
+        }
+      
+        @*<input type="button" id="" name="action" class="btn" target="view_window" value="添加" />*@
+@using (Html.BeginForm("MessionDetails", "StuManager", FormMethod.Post))
+{
+    <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+        <tr class="title">
+            @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+            <td bgcolor="#CCCCCC">学号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">姓名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">电话<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            @*<td bgcolor="#CCCCCC">性别<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+            @*<td bgcolor="#CCCCCC">专业<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC" >班级<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+            <td bgcolor="#CCCCCC" onclick="">操作</td>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="odd">
+                    @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StuNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StuName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StuCellphone)
+                    </td>
+                    @*<td>
+                        @ViewBag.SpeName
+                    </td>
+                    <td>
+                        @ViewBag.ClassName
+                    </td>*@
+                    <td>
+                        @Html.ActionLink("查看详情", "ViewDetail", new { userid=item.UserID ,Href="#"}, new { target = "_blank" }) |
+                        @Html.ActionLink("编辑", "ModifyImportedStuInfo", new { stuno = item.StuNo, stuname = item.StuName, classid = item.StuClass, userid = item.UserID, Href = "#" }, new { target = "_blank" }) |
+                        @Html.ActionLink("删除", "DeleteImportedStu", new { stuno = item.StuNo, classno = item.StuClass, userid = item.UserID, Href = "#" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+
+        function checkall() {
+            var check = document.getElementsByName("check_approve");
+            if (check[0].checked == true) {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = false;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "全选");
+            }
+            else {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = true;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "取消全选");
+            }
+        }
+    </script>
+
+    <div class="none"></div>
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.PracticeReport_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>编写周记</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="main-do">
+       
+        <div class="main-head-volunteer">
+            <div class="head-left">
+                <a class="list-head-b" href="@Url.Action("Main", "Home", new {area = "App", uid = Model.uid})">&nbsp;< &nbsp;</a>
+            </div>
+            <div class="head-middle">
+                <p class="main-head-p">实习报告</p>
+            </div>
+            
+        </div>
+            @*@Html.TextAreaFor(o => @Model.AllComment.PracticeReport, new { @class = "note-textarea", placeholder = "报告内容" })*@
+        <textarea readonly="readonly" class = "note-textarea">@Model.AllComment.PracticeReport</textarea>
+    </div>
+</body> 

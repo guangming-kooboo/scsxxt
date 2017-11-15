@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "T_PracticePosition_Add";
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加记录</title>
+    @Html.Partial("_LayerLinks")
+    @Html.Partial("_LaydateTimePick")
+    <link href="/Areas/Enterprise/Content/Admin/css/style.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">添加记录</a></li>
+        </ul>
+    </div>
+
+
+    <form action="/Enterprise/Home/T_PracticePosition_Add" method="post">
+
+        <input name="objName" value="ServicePlatform.Models.T_PracticePosition" type="text" hidden="hidden" class="dfinput" />
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>添加记录</span></div>
+
+            <ul class="forminfo">
+                <li>
+                    <label>高校</label>
+                    @using ServicePlatform.Lib
+                    @using ServicePlatform.Models
+                    @using ServicePlatform.Config
+                    @{
+                        var Ent_No = (Session["Vars"] as Vars).getUserUnit();
+                        var sql = @"select T_EntBatchReg.*
+                                    from T_EntBatchReg
+                                    inner join T_PracBatch on T_EntBatchReg.PracBatchID=T_PracBatch.PracBatchID
+                                    inner join T_School on T_PracBatch.SchoolID=T_School.SchoolID
+                                    where T_EntBatchReg.Ent_No='" + Ent_No + "' AND T_PracBatch.IsCurrentBatch='是'";
+                                                                @(new HtmlString(PageHelper.GetSelectHtml(PageHelper.GetSelectListItem<T_EntBatchReg>(new SchoolContext(), sql, 4, 2), "EntPracNo", "dfinput")))
+                    }
+          
+                @*<script type="text/javascript">
+                    $("#EntPracNo").change(function () {
+                        alert($(this).val());
+                            //location.href = "T_PracticePosition_ListShow?schoolName=" + $(this).val();
+                        }
+
+                        )
+                </script>*@
+
+                    <i>*请选择 高校</i>
+                </li>
+                <li>
+                    <label>岗位名称</label>
+                    @Html.DropDownList("PositionID", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.CodeTableContext(), "C_Position", "ServicePlatform.Models",1, 0), new { @class = "dfinput" })
+                  
+                    <i>*请选择 岗位名称</i>
+                </li>
+               
+                <li>
+                    <label>岗位描述</label>
+                    <textarea class="textinput" name="PosDesc" >岗位描述</textarea>
+                   
+                    <i>*请输入 岗位描述</i>
+                </li>
+                <li>
+                    <label>招生数量</label>
+                    <input name="PosQuantity" type="text" class="dfinput" />
+                    <i>*请输入 招生数量</i>
+                </li>
+
+                <li>
+                    <label>发布日期</label>
+                    <input name="PubDate" id="PubDate"  type="text" placeholder="请输入日期" class="laydate-icon" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+                   
+                    <i>*请输入 发布日期</i>
+                </li>
+                <li>
+                    <label>截止日期</label>
+                   
+                    <input name="PosExpireDate" id="PosExpireDate" type="text" placeholder="请输入日期" class="laydate-icon" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+                    <i>*请输入 截止日期</i>
+                </li>
+
+                
+
+
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" /></li>
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+  
+
+</body>
+
+</html>
+
+
+
+
+

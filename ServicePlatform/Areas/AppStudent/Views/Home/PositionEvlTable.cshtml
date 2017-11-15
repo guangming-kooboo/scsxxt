@@ -1,0 +1,146 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.PositionEvlTable_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            @*跳转到主页*@
+            <a href="javascript:window.history.go(-1);">
+                <div><div class="placeholder colortitle"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+            </a>
+            <div class="weui-flex__item colortitle"><div class="placeholder">岗位评价表现表</div></div>
+            <div style="width:48px"><div class="placeholder"></div></div>
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-cells_form">
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">学生姓名</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.StuName" readonly="readonly" class="weui-input"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">学生年级</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.StuAllInfo.EntryYear" readonly="readonly" class="weui-input"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">学生专业</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.StuAllInfo.SpeName" readonly="readonly" class="weui-input"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">学生班级</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.StuAllInfo.ClassName" readonly="readonly" class="weui-input" />
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">实习单位</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.EntName" readonly="readonly" class="weui-input" />
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">学习岗位</div>
+
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.PositionName" readonly="readonly" class="weui-input" />
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">实习部门</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @if (!string.IsNullOrEmpty(Model.PracticeDept))
+                        {
+                            <input type="text" value="@Model.PracticeDept" readonly="readonly" class="weui-input" />
+                        }
+                        else
+                        {
+                            <input type="text" value="无" readonly="readonly" class="weui-input" />
+                        }
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">实习分部</div>
+                    </div>
+                    <div class="weui-cell__bd">
+                        @if (!string.IsNullOrEmpty(Model.PracticeDivDept))
+                        {
+                            <input type="text" value="@Model.PracticeDivDept" readonly="" class="weui-input" />
+                        }
+                        else
+                        {
+                            <input type="text" value="无" readonly="" class="weui-input" />
+                        }
+                    </div>
+
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <div class="weui-label">实习时间</div>
+
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model.AllComment.PracticeStartEnd" readonly="readonly" class="weui-input" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">考核项</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label">等级</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label">出勤/守时</label>
+                </div>
+            </div>
+
+                @foreach (var item in Model.EntEvaStu)
+                {
+                     <div class="weui-cell">
+                         <div class="weui-cell__hd">
+                             <label class="weui-label">@item.ItemName</label>
+                         </div>
+                         <div class="weui-cell__bd">
+                             <input class="weui-input" type="text" placeholder="@item.ItemGrade" readonly="readonly">
+                         </div>
+                         <div class="weui-cell__bd">
+                             <input class="weui-input" type="text" placeholder="@item.ItemContent" readonly="readonly">
+                         </div>
+                     </div>
+                 }
+            
+        </div>
+    </div>
+</div>
+
+

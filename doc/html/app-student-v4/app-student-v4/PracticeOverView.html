@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>WeUI</title>
+     <link rel="stylesheet" href="css/jquery-weui.css">
+        <link rel="stylesheet" href="css/weui.min.css"/> 
+	    <link rel="stylesheet" href="css/pubilice.css">
+     <script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery.color.js"></script>
+<script>
+		  $(function() {
+		    FastClick.attach(document.body);
+		  });
+		</script> 
+<!---------------此页面特有-------------------->
+<script type="text/javascript">
+
+$(document).ready(function() {  
+
+  //Background color, mouseover and mouseout
+  var colorOver = 'rgb(169,169,169)';
+  var colorOut = 'rgb(200,200,200)';
+
+  //Padding, mouseover
+  var padLeft = '8px';
+  var padRight = '8px';
+  
+  //Default Padding
+  var defpadLeft = $('#menu li a').css('paddingLeft');
+  var defpadRight = $('#menu li a').css('paddingRight');
+    
+  //Animate the LI on mouse over, mouse out
+  $('#menu li').click(function () { 
+    //Make LI clickable
+    window.location = $(this).find('a').attr('href');
+    
+  }).mouseover(function (){
+    
+    //mouse over LI and look for A element for transition
+    $(this).find('a')
+    .animate( { paddingLeft: padLeft, paddingRight: padRight}, { queue:false, duration:100 } )
+    .animate( { backgroundColor: colorOver }, { queue:false, duration:200 });
+
+  }).mouseout(function () {
+  
+    //mouse oout LI and look for A element and discard the mouse over transition
+    $(this).find('a')
+    .animate( { paddingLeft: defpadLeft, paddingRight: defpadRight}, { queue:false, duration:100 } )
+    .animate( { backgroundColor: colorOut }, { queue:false, duration:200 });
+  }); 
+  
+  //Scroll the menu on mouse move above the #sidebar layer
+  $('#sidebar').mousemove(function(e) {
+
+    //Sidebar Offset, Top value
+    //var s_top = parseInt($('#sidebar').offset().top);   
+    
+    //Sidebar Offset, Bottom value
+    //var s_bottom = parseInt($('#sidebar').height() + s_top);
+  
+    //Roughly calculate the height of the menu by multiply height of a single LI with the total of LIs
+    var mheight = parseInt($('#menu li').height() * $('#menu li').length);
+  
+    //I used this coordinate and offset values for debuggin
+    //$('#debugging_mouse_axis').html("X Axis : " + e.pageX + " | Y Axis " + e.pageY);
+    //$('#debugging_status').html(Math.round(((s_top - e.pageY)/100) * mheight / 2));
+      
+    //Calculate the top value
+    //This equation is not the perfect, but it 's very close  
+    var top_value = Math.round(( (s_top - e.pageY) /100) * mheight / 2);
+    
+    //Animate the #menu by chaging the top value
+    $('#menu').animate({top: top_value}, { queue:false, duration:600});
+  });
+
+  
+});
+  
+</script>
+
+<style>
+body {
+padding:0;
+margin:0 0;
+}
+
+/*#sidebar {
+height:100%;
+overflow:hidden;
+position:relative;
+width: 100%
+
+} */
+
+#menu {
+width:100%;
+list-style:none;
+padding:0;
+margin:0;
+top:15px;
+position:relative;
+height:100%;
+width:100%;
+}
+#menu p{
+padding:5px 18px;
+text-align:left;
+display:block;
+cursor:hand;
+cursor:pointer;
+color:rgb(69,69,69);
+font-family:"微软雅黑";
+font-size:13px;
+
+}
+
+#menu li {
+padding:10px 0;
+text-align:left;
+display:block;
+cursor:hand;
+cursor:pointer;
+
+}
+#menu li img {
+width: 15px;
+height: 15px;
+left: 10px;
+top: 2px;
+padding-right: 4px;
+position: relative;
+
+}
+#menu li p {
+
+
+color:rgb(69,69,69);
+font-family:"微软雅黑";
+font-size:12px;
+font-weight:;
+display:inline;
+background:url() repeat rgb(240,240,240);padding:11px 15px 11px 20px;
+text-decoration:none;
+}
+#menu li p:hover 
+{
+  background:url() repeat rgb(230,230,230);padding:11px 15px 11px 20px;
+}
+
+
+
+
+
+#menu li span {
+font-family:"微软雅黑";
+font-size:10px;
+color:rgb(146,146,146);
+padding-left: 10px;
+}
+
+#menu li a {
+font-family:"微软雅黑";
+font-size:9px;
+color:#1aad19;
+}
+.placeholder {
+        margin: 5px;
+        padding: 0 10px; 
+        text-align: center;
+       
+}
+</style>
+<!----------------------------------------->
+</head>
+<body ontouchstart>
+
+<div class="weui-navbar">
+	<div class="weui-navbar__item1 colortitle " style="background:#1aad19;">
+  	<div class="weui-flex ">
+            <div ><div class="placeholder colortitle"><img src="images/return.png" class="return"></div></div>
+            <div class="weui-flex__item colortitle"><div class="placeholder">实习进程</div></div>
+            <div style="width:40px"><div class="placeholder"></div></div>
+    </div>
+  </div>  
+</div>
+
+
+<div class="weui-tab__bd">
+   <div class="weui-tab__bd-item weui-tab__bd-item--active"> 
+    
+  
+    <div id="sidebar">
+     <ul id="menu">
+
+      <p>① 报名阶段</p> 
+      <li><p>企业查看<span>共<a href="#">2</a>家/已提交<a href="#">2</a>家/未提交<a href="#">23</a>家</span><img src="images/yes.png"></p></li>
+      <li><p>我也报名(已结束)<span>正式报名<a href="#">3</a>家/预报名<a href="#">3</a>家</span><img src="images/yes.png"></p></li>
+      <li><p>录用情况<span>恭喜你被<a href="#">华大紫荆餐厅</a>录用</span><img src="images/yes.png"></p></li>
+      <p>② 实习阶段</p> 
+      <li><p>实习周记<span>已提交<a href="#">1</a>篇</span><img src="images/yes.png"></p></li>
+      <li><p>实习案例<span>已提交<a href="#">1</a>篇</span><img src="images/yes.png"></p></li>
+      <li><p>实习报告<span><a href="#">查看</a>实习报告</span><img src="images/yes.png"></p></li>
+      <li><p>岗位评价<span><a href="#">查看</a>企业评价</span><img src="images/no.png"></p></li>
+      <li><p>实习鉴定<span><a href="#">点击查看</a></span><img src="images/no.png"></p></li>
+      <p>③ 评估阶段</p> 
+      <li><p>评价企业<span><a href="#">点击查看</a></span><img src="images/yes.png"></p></li>
+      <li><p>评价学校<span><a href="#">点击查看</a></span><img src="images/yes.png"></p></li>
+      <li><p>成绩查看<span><a href="#">总成绩：0</a></span><img src="images/yes.png"></p></li>
+      <p>④ 招聘阶段</p> 
+      <li><p>简历管理<span>请优化您的<a href="#">简历</a></span><img src="images/no.png"></p></li>
+      <li><p>招聘信息<span>目前有<a href="#">2</a>家企业可以选择</span><img src="images/no.png"></p></li>
+      <li><p>企业找我<span>有<a href="#">0</a>家企业找我，请查看！</span><img src="images/no.png"></p></li>
+      <li><p>找我企业<span>我找了<a href="#">0</a>家企业</span><img src="images/no.png"></p></li>
+
+     
+    </ul>
+  </div>
+
+  </div>
+</div>
+</body>
+</html>

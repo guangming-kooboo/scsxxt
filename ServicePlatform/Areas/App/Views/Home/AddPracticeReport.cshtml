@@ -1,0 +1,36 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.AddPracticeReport_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>编写周记</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="main-do">
+        <form runat="server" id="form1" method="post" enctype="multipart/form-data">
+
+            <div class="main-head-volunteer">
+                <div class="head-left">
+                    <a class="list-head-b" href="@Url.Action("Main", "Home", new {area = "App", uid = Model.UserID})">&nbsp;< &nbsp;</a>
+                </div>
+                <div class="head-middle">
+                    <p class="main-head-p">实习报告</p>
+                </div>
+                <div class="head-right">
+                    @*<a class="list-head-ok" href="" type="submit">确定</a>*@
+                    <input class="done" type="submit" value="确定" style="background-color: rgb(187,119,255)"/>
+                </div>
+            </div>       
+            @Html.TextAreaFor(o => o.PracticeReport, new { @class = "note-textarea",placeholder = "报告内容" })
+
+            <hr size="2px" color="purple" width="94%" />
+
+      
+        </form>
+
+    </div>
+</body>

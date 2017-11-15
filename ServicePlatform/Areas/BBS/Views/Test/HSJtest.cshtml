@@ -1,0 +1,22 @@
+﻿@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+<h2>@ViewBag.Title</h2>
+
+<input type="text" name="test" />
+
+ 
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+        var Params = v("test");
+        Query(Params, "@ViewData["Url"]");
+    }
+</script>
+
+
+
+

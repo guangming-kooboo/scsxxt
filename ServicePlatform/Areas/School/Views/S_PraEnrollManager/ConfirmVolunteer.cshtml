@@ -1,0 +1,381 @@
+﻿@{
+    ViewBag.Title = "ModifyEnroll";
+}
+@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+
+<html>
+<head>
+    <title>修改报名</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $("#bold").css("font-weight", "bold");
+            $("#bold").css("color", "green");
+        });
+        
+    </script>
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">实习报名管理</a></li>
+            <li><a href="#">修改报名</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("PreEnroll", "S_PraEnrollManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>第一志愿:</span></div>
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">公司<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    @*<td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">面试日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">面试成绩<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">当前状态<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.VolunteerSequence == 1)
+                        {
+                            if(item.VolunteerStatus==5)
+                            {
+                                <tr class="odd" id="bold">
+                                @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EntName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosSequence)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.PosDesc)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewTimeString)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewScore)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VolunteerStatusName)
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge*@
+                                    @if (item.VolunteerStatus>=4)
+                                    { 
+                                    <a onclick="show('@(new HtmlString(item.InterviewRecord.HasValue()?item.InterviewRecord.Replace("\r\n","<br/>"):"未填写"))')">查看面试记录</a> @ViewBag.Fenge
+                                    }
+
+                                    @if (item.VolunteerStatus == 4 && ViewBag.ReadOnly == "false")
+                                    {
+                                        
+                                        @Html.ActionLink("招聘确认", "ConfrimEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge
+                                        @Html.ActionLink("拒绝招聘", "DenyEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                    else if (ViewBag.ReadOnly == "true")
+                                    {
+                                      
+                                        <h5>招聘结束</h5>
+                                    }
+                                </td>
+                            </tr>
+                            }
+                            else
+                            {
+                                <tr class="odd">
+                                @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EntName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosSequence)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.PosDesc)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewTimeString)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewScore)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VolunteerStatusName)
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge*@
+                                    @if (item.VolunteerStatus>=4)
+                                    { 
+                                    <a onclick="show('@(new HtmlString(item.InterviewRecord.HasValue()?item.InterviewRecord.Replace("\r\n","<br/>"):"未填写"))')">查看面试记录</a> @ViewBag.Fenge
+                                    }
+
+                                    @if (item.VolunteerStatus == 4 && ViewBag.ReadOnly == "false")
+                                    {
+                                        
+                                        @Html.ActionLink("招聘确认", "ConfrimEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge
+                                        @Html.ActionLink("拒绝招聘", "DenyEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                    else if (ViewBag.ReadOnly == "true")
+                                    {
+                                        @*@Html.ActionLink("招聘确认", "ConfrimEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge*@
+
+                                        <h5>招聘结束</h5>
+                                    }
+                                </td>
+                            </tr>
+                            }                      
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+
+
+
+        @using (Html.BeginForm("RealEnroll", "S_PraEnrollManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>第二志愿: </span></div>
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">公司<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    @*<td bgcolor="#CCCCCC">截止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">面试日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">面试成绩<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    @*<td bgcolor="#CCCCCC">已报人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                    <td bgcolor="#CCCCCC">当前状态<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC" onclick="">操作</td>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.VolunteerSequence == 2)
+                        {
+
+                                if(item.VolunteerStatus == 5)
+                                {
+                                <tr class="odd" id="bold">
+                                @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                                <td style="width: 300px;">
+                                    @if(item.VolunteerStatus == 5)
+                                    {
+                                        <i style="color:red">√</i> @Html.DisplayFor(modelItem => item.EntName)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.EntName)
+                                    }
+                                </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PosName)
+                                    </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosSequence)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.PosDesc)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewTimeString)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewScore)
+                                </td>
+                                <td style="width: 150px;">
+                                    @Html.DisplayFor(modelItem => item.VolunteerStatusName)
+                                </td>
+                                <td style="width: 200px;">
+                                    @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge*@
+                                    @if (item.VolunteerStatus >= 4)
+                                    {
+                                        <a onclick="show('@(new HtmlString(item.InterviewRecord.HasValue()?item.InterviewRecord.Replace("\r\n","<br/>"):"未填写"))')">查看面试记录</a> @ViewBag.Fenge
+                                    }
+
+                                    @if (item.VolunteerStatus == 4 && ViewBag.ReadOnly == "false")
+                                    {
+
+                                        @Html.ActionLink("招聘确认", "ConfrimEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge
+                                        @Html.ActionLink("拒绝招聘", "DenyEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                    else if (ViewBag.ReadOnly == "true")
+                                    {
+                                        <h5>招聘结束</h5>
+                                    }
+                                </td>
+                            </tr>
+                                }
+                                else
+                                {
+                                <tr class="odd">
+                                @*<td><input type="checkbox" value="" name="check_approve" /></td>*@
+                                <td>
+                                    @if(item.VolunteerStatus == 5)
+                                    {
+                                        <i style="color:yellow">确认录取</i> @Html.DisplayFor(modelItem => item.EntName)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.EntName)
+                                    }
+                                </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PosName)
+                                    </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PosSequence)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.PosDesc)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewTimeString)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InterviewScore)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VolunteerStatusName)
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("查看", "ViewDetail", new { entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge*@
+                                    @if (item.VolunteerStatus >= 4)
+                                    {
+                                        <a onclick="show('@(new HtmlString(item.InterviewRecord.HasValue()?item.InterviewRecord.Replace("\r\n","<br/>"):"未填写"))')">查看面试记录</a> @ViewBag.Fenge
+                                    }
+
+                                    @if (item.VolunteerStatus == 4 && ViewBag.ReadOnly == "false")
+                                    {
+
+                                        @Html.ActionLink("招聘确认", "ConfrimEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID }) @ViewBag.Fenge
+                                        @Html.ActionLink("拒绝招聘", "DenyEnroll", new { pracno = item.PracticeNo, entpracno = item.EntPracNo, posid = item.PosID })
+                                    }
+                                    else if (ViewBag.ReadOnly == "true")
+                                    {
+                                        <h5>招聘结束</h5>
+                                    }
+                                </td>
+                            </tr>
+                                }
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+
+
+
+    </div>
+    @if(ViewBag.ReadOnly == "true")
+    { 
+    <fieldset>
+        <legend style="color:red">提示</legend>
+        <div>
+            <h1>您的招聘已经结束,当前状态下只能查看本页面.如有问题，请与本校管理员联系！</h1>
+        </div>
+    </fieldset>
+    }
+
+
+
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+
+        //function findRow() {
+        //    if (confirm("确认将所选学生加入该批次吗？")) {
+        //        var check = document.getElementsByName("check_approve");
+        //        var result = "";
+        //        var table = document.getElementById('msgcontent');
+        //        var rows = table.rows.length;
+        //        for (var j = 0; j < check.length; j++) {
+        //            if (check[j].checked) {
+        //                //result += table.rows[j + 1].cells[4].innerText + "!";
+        //                result += table.rows[j + 1].cells[1].innerHTML + "!";
+        //            }
+        //        }
+        //        var objsel = document.getElementById("piliang");
+        //        objsel.setAttribute("value", result);
+        //    }
+        //}
+
+        //function checkall() {
+        //    var check = document.getElementsByName("check_approve");
+        //    if (check[0].checked == true) {
+        //        for (var j = 0; j < check.length; j++) {
+        //            check[j].checked = false;
+        //        }
+        //        document.getElementsByName('btnall').setAttribute("value", "全选");
+        //    }
+        //    else {
+        //        for (var j = 0; j < check.length; j++) {
+        //            check[j].checked = true;
+        //        }
+        //        document.getElementsByName('btnall').setAttribute("value", "取消全选");
+        //    }
+        //}
+
+        function getvol(pracno, entpracno, posid) {
+            var vol = document.getElementById("volunteer").value;
+            var order = document.getElementById("vorder").value;
+            var url = "/School/S_PraEnrollManager/PreEnroll?pracno=" + pracno + "&entpracno=" + entpracno + "&posid=" + posid + "&vol=" + vol + "&order=" + order;
+            window.location = url;
+        }
+
+    </script>
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['300px', '180px'],
+                title: "面试记录",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+            });
+        }
+    </script>
+
+
+
+    <div class="none"></div>
+</body>
+</html>

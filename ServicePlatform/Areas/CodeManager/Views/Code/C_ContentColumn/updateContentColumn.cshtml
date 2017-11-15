@@ -1,0 +1,114 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改内容栏目信息</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">内容栏目管理</a></li>
+                <li><a href="#">修改内容栏目</a></li>
+            </ul>
+        </div>
+
+    
+
+            <div class="formtitle"><span>修改内容栏目</span></div>
+            
+
+    <form method="POST" action="/CodeManager/Code/ReupdateContentColumn">
+
+        <ul class="forminfo">
+
+
+
+
+          
+            <li>
+                <label>内容栏目编号（4个数字）:</label>
+                <input type="text" name="ContColumnID" id="ContColumnID" class="dfinput" value="@ViewBag.update.ContColumnID">
+            </li>
+
+            <li>
+                <label>内容栏目名称:</label>
+                <input type="text" name="ContColumnName" id="ContColumnName" class="dfinput" value="@ViewBag.update.ContColumnName">
+            </li>
+
+
+            <li>
+
+                <label>所属内容类型选择:</label>
+                <select style="width:100px" name="ContTypeName" id="ContTypeName" class="dfinput">
+                    
+                    @foreach (var item in ViewBag.temp1)
+                    {
+                        if (@item.ConTypeName == @ViewBag.contypeName)
+                        {
+                            <option value="@item.ConTypeName" selected="selected">@item.ConTypeName</option> }
+
+                        else
+                        {
+                            <option value="@item.ConTypeName">@item.ConTypeName</option>
+                        }
+
+
+                    }
+                </select>
+
+                
+            </li>
+            <li>
+                <label>所属单位选择：</label>
+                <select style="width:100px" name="SybSystem" id="SybSystem" class="dfinput">
+
+                    @foreach (var item in ViewBag.system)
+                    {
+                        if (@item == @ViewBag.update.SybSystem)
+                        {
+                            <option value="@item" selected="selected">@item</option> }
+
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+
+
+                    }
+                </select>
+            </li>
+
+
+            <li>
+
+                <label>&nbsp;</label><input type="submit" value="保  存" class="btn">
+
+            </li>
+        </ul>
+
+
+
+    </form>
+     
+    
+
+</body>
+</html>
+
+

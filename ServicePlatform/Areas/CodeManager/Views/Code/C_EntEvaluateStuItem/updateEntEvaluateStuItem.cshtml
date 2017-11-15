@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "updateEntEvaluateStuItem";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改条目</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+
+
+
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">企业评价学生代码管理</a></li>
+            <li><a href="#">修改条目</a></li>
+        </ul>
+    </div>
+
+    <div class="formbody">
+
+        <div class="formtitle"><span>修改条目</span></div>
+
+
+        <form method="post" action="/Code/ReupdateEntEvaluateStuItem" name="myform" id="myform">
+
+            <ul class="forminfo">
+
+                <li>
+                    <label>批次编号:</label>
+                    <select style="width:200px" name="BatchName" id="BatchName" class="dfinput">
+
+                        @foreach (var item in ViewBag.piciid)
+                        {
+                            if (@item.BatchName == @ViewBag.update)
+                            {
+                                <option value="@item.BatchName" selected="selected">@item.BatchName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.BatchName">@item.BatchName</option>
+                            }
+
+                        }
+                    </select>
+                </li>
+
+
+
+                <li>
+                    <label>条目次序（两位数）:</label>
+                    <input type="text" name="ItemSequence" id="ItemSequence" class="dfinput" value="@ViewBag.update1.ItemSequence">
+                </li>
+                <li>
+                    <label>条目编号:</label>
+                    <input type="text" name="ItemNo" id="ItemNo" class="dfinput" value="@ViewBag.update1.ItemNo">
+                </li>
+
+
+                <li>
+                    <label>条目名称:</label>
+                    <input type="text" id="ItemName" name="ItemName" class="dfinput" value="@ViewBag.update1.ItemName">
+                </li>
+
+
+
+                <li>
+                    <label>&nbsp;</label><input type="submit" value="保  存" class="btn" />
+
+                </li>
+            </ul>
+
+        </form>
+        <script>
+            $("#ItemSequence").bind("blur", function () {
+
+                var ItemSequence = $("#ItemSequence").val();
+                var BatchName = $("#BatchName").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Code/receajaxGetEntEvaluateStuItemPID',
+                    data: {
+                        //DeleteRow: DeletedID.join(','),
+                        DeleteRow: BatchName,
+
+
+
+
+                    },
+                    success: function (data) {
+                        var PracBatchID = data;
+
+                    },
+                });
+
+
+                if (ItemSequence != null) {
+                    if (ItemSequence.length == 1) {
+                        ItemSequence = "0" + ItemSequence;
+                    }
+                    $("#ItemNo").val(PracBatchID + "-" + ItemSequence)
+
+
+                }
+
+
+            });
+
+
+        </script>
+
+
+
+    </div>
+
+
+
+
+</body>
+</html>
+

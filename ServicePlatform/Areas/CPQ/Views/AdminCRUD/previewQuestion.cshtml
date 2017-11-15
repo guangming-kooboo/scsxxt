@@ -1,0 +1,82 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.AdminCRUD.PreviewQuestion_M
+@{
+    Layout = ViewData["Layout"].ToString();
+
+}
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+        <li><a href=@Url.Action("editQuestionnaire", "Admin", new { area = "CPQ", ReportID = "CPQ编辑问卷", Params = "10385-14093-201608290428;;" })>编辑问卷页面</a><i class="fa fa-angle-right"></i></li>
+    </ol>
+
+</div>
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" method="POST" role="form">
+                <div class="form-body">
+                    
+                        @if (@Model.Question.QuestionType == 1)
+                        {
+
+                            <label class="">@Model.Question.QuestionName</label>
+                            <div class="radio-list">
+                                @foreach (var b in @Model.Question.QuestionOptions)
+                                {
+                                    <label>
+                                        <input type="radio" name=@Model.Question.QuestionName id="@Model.Question.QuestionName" value="@b.OptionName"> @b.OptionName
+                                    </label>
+                                }
+                            </div>
+                        }
+                        else if (@Model.Question.QuestionType == 2)
+                        {
+
+                            <label class="">@Model.Question.QuestionName</label>
+                            <div class="checkbox-list">
+                                @foreach (var c in @Model.Question.QuestionOptions)
+                                {
+
+                                    <label>
+                                        <input type="checkbox" name=@c.OptionName id=@c.OptionName>@c.OptionName
+                                    </label>
+                                }
+
+                            </div>
+
+                        }
+                        else if (@Model.Question.QuestionType == 3)
+                        {
+
+                            <label class="">@Model.Question.QuestionName</label>
+
+                            <div class="col-md-9">
+                                <textarea></textarea>
+                            </div>
+
+                        }
+
+                    
+
+
+
+                    <div class="form-actions fluid">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-success">返回</button><!--返回去action再再action里面重定向吧省的这里直接url-->
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+

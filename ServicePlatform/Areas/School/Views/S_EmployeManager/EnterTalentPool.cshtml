@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "EnterTalentPool";
+}
+
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    List<C_StuInfoType> StuInfoType = ViewBag.List;
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+<html>
+<head>
+    <title>学生岗位管理中心</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生岗位管理</a></li>
+            <li><a href="#">加入学校人才库</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @*@using (Html.BeginForm("ApplySchool", "PlatformApply", FormMethod.Post, new { id = "_form" }))
+            {
+                <div class="formtitle"><span>选择学校: </span></div>
+
+                <ul class="forminfo">
+                    <li><label>学校：</label>@Html.DropDownList("School", School, new { @class = "dfinput", id = "School", name = "School" })<i></i></li>
+                </ul>
+
+                <input type="submit" value="查询" class="btn" />
+            }*@
+        <div class="formtitle"><span>信息类型表:  </span></div>
+
+        <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+            <tr class="title">
+                @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                <td bgcolor="#CCCCCC">信息内容<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                <td bgcolor="#CCCCCC">当前开放级别<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+
+
+                <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            </tr>
+            <tbody>
+                @if (StuInfoType != null)
+                {
+                    for (int i = 0; i < StuInfoType.Count(); i++)
+                    {
+                        <tr class="odd">
+                            <td>
+                                @StuInfoType[i].InfoTypeName
+                            </td>
+                            <td>
+                                @if (ViewBag.OpenStatus[i]=="已开放")
+                                {
+                                    <label style="color:green">@ViewBag.OpenStatus[i]</label>
+                                }
+                                else
+                                {
+                                    <label style="color:red">@ViewBag.OpenStatus[i]</label>
+                                }
+                                    
+                                
+                            </td>
+                            <td>
+                                @if (ViewBag.OpenStatus[i] == "已开放")
+                                {
+                                    @Html.ActionLink("隐藏信息", "PubOperation", new { infotypeid = StuInfoType[i].InfoTypeID, to = "school", type = "hide" }, new{ style="color:red" }) @ViewBag.FenGe
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("开放信息", "PubOperation", new { infotypeid = StuInfoType[i].InfoTypeID, to = "school", type = "pub" }, new { style = "color:green" }) @ViewBag.FenGe                                   
+                                }                             
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+
+        function get(pracno, entpracno, posid) {
+            var vol = document.getElementById("volunteer").value;
+            var order = document.getElementById("vorder").value;
+            var url = "/School/S_PraEnrollManager/PreEnroll?pracno=" + pracno + "&entpracno=" + entpracno + "&posid=" + posid + "&vol=" + vol + "&order=" + order;
+            window.location = url;
+        }
+
+    </script>
+
+    <div class="none"></div>
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['300px', '180px'],
+                title: "岗位说明",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,61 @@
+﻿@model Core.Services.Entity.T_SchoolReviewItem
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>T_SchoolReviewItem</legend>
+
+        @Html.HiddenFor(model => model.ItemID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PracBatchID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PracBatchID)
+            @Html.ValidationMessageFor(model => model.PracBatchID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemName)
+            @Html.ValidationMessageFor(model => model.ItemName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemWeight)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemWeight)
+            @Html.ValidationMessageFor(model => model.ItemWeight)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemSequence)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemSequence)
+            @Html.ValidationMessageFor(model => model.ItemSequence)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

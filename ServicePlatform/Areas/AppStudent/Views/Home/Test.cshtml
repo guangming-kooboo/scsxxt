@@ -1,0 +1,292 @@
+﻿
+@{
+    Layout = "";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>weui</title>
+    <link href="~/Content/AppStudentV3/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/AppStudentV3/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/AppStudentV3/css/pubilice.css" rel="stylesheet" />
+    <script src="~/Content/AppStudentV3/js/jquery-2.1.4.js"></script>
+    <script src="~/Content/AppStudentV3/js/fastclick.js"></script>
+    <script>
+		  $(function() {
+		    FastClick.attach(document.body);
+		  });
+    </script>
+    <script src="~/Content/AppStudentV3/js/jquery-weui.js"></script>
+
+    <!----------------页面特有 ---------------------------->
+
+    <link rel="stylesheet" href="css/Dindex.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .weui-cell__ft1 {
+            position: absolute;
+            right: -80px;
+            height: 54px;
+            line-height: 54px;
+            background: #F6383A;
+            color: #ffffff;
+            width: 80px;
+            text-align: center;
+        }
+
+        .weui-btn {
+            position: static !important;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 14px;
+            padding-right: 14px;
+            box-sizing: border-box;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            line-height: 2.55555556;
+            border-radius: 5px;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            overflow: hidden;
+            font-size: 18px;
+        }
+
+        .guding {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            position: absolute;
+            z-index: 500;
+            bottom: 80px;
+            right: 20px;
+            background-color: #fafafa;
+        }
+    </style>
+    <script>
+	 /*
+	  * ÃèÊö£ºhtml5Æ»¹ûÊÖ»úÏò×ó»¬¶¯É¾³ýÌØÐ§
+	  */
+	 window.addEventListener('load', function() {
+	  var initX; //´¥ÃþÎ»ÖÃ
+	  var moveX; //»¬¶¯Ê±µÄÎ»ÖÃ
+	  var X = 0; //ÒÆ¶¯¾àÀë
+	  var objX = 0; //Ä¿±ê¶ÔÏóÎ»ÖÃ
+	  window.addEventListener('touchstart', function(event) {
+	   event.preventDefault();
+	   var obj = event.target.parentNode;
+	   if (obj.className == "weui-cell") {
+	    initX = event.targetTouches[0].pageX;
+	    objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+	   }
+	   if (objX == 0) {
+	    window.addEventListener('touchmove', function(event) {
+	     event.preventDefault();
+	     var obj = event.target.parentNode;
+	     if (obj.className == "weui-cell") {
+	      moveX = event.targetTouches[0].pageX;
+	      X = moveX - initX;
+	      if (X >= 0) {
+	       obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+	      } else if (X < 0) {
+	       var l = Math.abs(X);
+	       obj.style.WebkitTransform = "translateX(" + -l + "px)";
+	       if (l > 80) {
+	        l = 80;
+	        obj.style.WebkitTransform = "translateX(" + -l + "px)";
+	       }
+	      }
+	     }
+	    });
+	   } else if (objX < 0) {
+	    window.addEventListener('touchmove', function(event) {
+	     event.preventDefault();
+	     var obj = event.target.parentNode;
+	     if (obj.className == "weui-cell") {
+	      moveX = event.targetTouches[0].pageX;
+	      X = moveX - initX;
+	      if (X >= 0) {
+	       var r = -80 + Math.abs(X);
+	       obj.style.WebkitTransform = "translateX(" + r + "px)";
+	       if (r > 0) {
+	        r = 0;
+	        obj.style.WebkitTransform = "translateX(" + r + "px)";
+	       }
+	      } else { //Ïò×ó»¬¶¯
+	       obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+	      }
+	     }
+	    });
+	   }
+
+	  })
+	  window.addEventListener('touchend', function(event) {
+	   event.preventDefault();
+	   var obj = event.target.parentNode;
+	   if (obj.className == "weui-cell") {
+	    objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+	    if (objX > -40) {
+	     obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+	     objX = 0;
+	    } else {
+	     obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+	     objX = -80;
+	    }
+	   }
+	  })
+	 })
+    </script>
+    <!------------------------------------------------>
+
+</head>
+<body ontouchstart>
+
+    <div class="weui-tab__bd" style="padding-bottom:46px ;">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+
+            <div class="weui-cells__title">未完成</div>
+            <div class="weui-cells weui-cells_checkbox">
+
+
+                <div class="weui-cell" style="transform: translateX(0px);">
+
+                    <div class="weui-cell__hd">
+
+                        <i class="weui-icon-circle"></i>
+                    </div>
+
+                    <div class="weui-cell__bd">明天早上开会</div>
+                    <div class="weui-cell__ft">10；00AM 2/22</div>
+                    <div class="weui-cell__ft1">删除 </div>
+                </div>
+            </div>
+            <div class="weui-cells__title">已完成</div>
+            <div class="weui-cells weui-cells_checkbox">
+                <div class="weui-cell" style="transform: translateX(0px);">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">明天早上开会</div>
+                    <div class="weui-cell__ft">10；00AM 2/22</div>
+                    <div class="weui-cell__ft1">删除 </div>
+                </div>
+
+            </div>
+            <!--<a href="javascript:;"  class="weui-btn weui-btn_primary open-popup" data-target="#half">我的任务</a>
+            -->
+
+            <img src="images/main.png" width="60px" style="opacity:0.5; filter:alpha(opacity=50)" class="open-popup guding" data-target="#half">
+
+        </div>
+    </div>
+    <div class="weui-tabbar">
+        <div class="weui-tabbar__item">
+            <a href="javascript:;" class="weui-btn weui-btn_primary">新建任务</a>
+        </div>
+    </div>
+
+    <div id="half" class="weui-popup__container popup-bottom" style="display: none;z-index: 1000;">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                    <h1 class="title">jason</h1>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="weui-grids">
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_dialog.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            私人任务
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="progress">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_datetime.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            办公任务
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_msg.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            任务池
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_intro.png" ="">
+                        </div>
+                        <p class="weui-grid__label">
+                            我接收的任务
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="progress">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_button.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            我分配的任务
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_calendar.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            公开任务
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_cell.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            我的组
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="progress">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_icons.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            我的消息
+                        </p>
+                    </a>
+                    <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
+                        <div class="weui-grid__icon">
+                            <img src="images/icon_nav_feedback.png" alt="">
+                        </div>
+                        <p class="weui-grid__label">
+                            公开任务
+                        </p>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+      $(document).on("open", ".weui-popup-modal", function() {
+        console.log("open popup");
+      }).on("close", ".weui-popup-modal", function() {
+        console.log("close popup");
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+﻿@using ServicePlatform.Areas.V2.ViewModels
+@model ServicePlatform.Areas.V2.ViewModels.stubatchregextentAdd.stubatchregextentAdd_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.LabelFor(o => o.studentname)
+@Html.TextBoxFor(o => o.studentname)
+@Html.DropDownListFor(o => o.Ent_No, Model.T_EnterpriseselectItems)

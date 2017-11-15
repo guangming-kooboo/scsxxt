@@ -1,0 +1,15 @@
+  #container{width: 1600px;height: 800px;overflow: hidden;position: relative;margin: 0 auto;}
+  #list{width: 9600px;height: 500px;position: absolute;z-index:1;background-color: rgb(39,46,52);}
+  #list img{float: left;}
+  #buttons{position: absolute;height: 100px;width: 100%;z-index:4;bottom: 150px;margin: 0 auto;}
+  #buttons span{cursor: pointer;float: left;border: 1px solid #fff;width: 24%;height: 100px;}
+   #buttons span img{width: 60%;height: 100%;}
+  #buttons .on{border: 4px}
+
+  /*
+  .arrow{cursor:pointer;display: none;line-height: 39px;text-align: center;font-size: 36px;font-weight:bold;width: 40px;height: 40px;position: absolute;z-index: 2;top: 220px;background-color: rgba(0,0,0,.3);color: #fff; }
+  .arrow:hover{background-color: rgba(0,0,0,.7);}
+  #container:hover .arrow{display: block;}
+  #prev{left: 20px;}
+  #next{right: 20px;}
+  */

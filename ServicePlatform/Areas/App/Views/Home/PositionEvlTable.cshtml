@@ -1,0 +1,81 @@
+﻿@using iTextSharp.text.pdf.qrcode
+@model ServicePlatform.Areas.App.ViewModel.Home.PositionEvlTable_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>岗位表现评价表</title>
+
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <div class="appraisal-head">
+        <div class="left">
+            <a href="@Url.Action("Main", "Home", new {area = "App", uid = Model.uid })"><</a>
+        </div>
+
+        <div class="middle">
+            <p>岗位表现评价表</p>
+        </div>
+
+        @*<div class="right">
+            <a href="">提交</a>
+        </div>*@
+    </div>
+
+    <div class="attitude-evaluation">
+        <div>
+            <ul>
+                <li class="one">学生姓名:</li>
+                <li class="two">@Model.StuName</li>
+                <li class="one">实习岗位:</li>
+                <li class="two">@Model.PositionName</li>
+                <li class="one">实习部门:</li>
+                @if (Model.PracticeDept == null)
+                {
+                    <li class="two">无</li>
+                }
+                else
+                {
+                    <li class="two">@Model.PracticeDept</li>
+                }
+                <li class="one">实习分部:</li>
+                @if (Model.PracticeDivDept == null)
+                {
+                    <li class="two">无</li>
+                }
+                else
+                {
+                    <li class="two">@Model.PracticeDivDept</li>
+                }            
+                
+                <li class="one">实习单位:</li>
+                <li class="three">@Model.EntName</li>
+                <li class="one">实习时间:</li>
+                <li class="three">@Model.AllComment.PracticeStartEnd</li>
+                
+            </ul>
+            <table>
+                <tr>
+                    <th>考核项</th>
+                    <th>等级</th>
+                    <th>评价</th>
+                </tr>
+         
+                @foreach (var item in Model.EntEvaStu)
+                {
+                    <tr>
+                       <td>@item.ItemName</td>
+                        <td>@item.ItemGrade</td>
+                        <td>@item.ItemContent</td>              
+                    </tr>
+                }           
+            </table>
+        </div>
+
+    </div>
+</body>

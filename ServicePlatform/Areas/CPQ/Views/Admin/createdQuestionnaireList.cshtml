@@ -1,0 +1,32 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.Admin.CreatedQuestionnaireList_M
+@{
+    
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = ViewData["Layout"].ToString();
+}
+
+   
+
+<h2>已经创建的问卷列表</h2>
+<input type="text" name="userID" id="userID" value=@Model.owernID hidden="hidden">
+<div class="row">
+    <div class="col-lg-2">
+        <label>问卷领域</label>
+    </div>
+    <div class="col-lg-10">
+        @Html.DropDownListFor(o => o.QuestionnaireDomain, Model.QuestionnaireDomainListItem)
+</div>
+</div>
+
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+        
+        var Params = v("userID") + ";" + v("QuestionnaireDomain");
+        //    v("拥有者");这个第一个参数可以通过viewbag传过来！
+
+        Query(Params, "@ViewData["Url"]");
+    }
+</script>

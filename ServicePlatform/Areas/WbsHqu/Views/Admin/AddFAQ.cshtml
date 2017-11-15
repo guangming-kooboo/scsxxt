@@ -1,0 +1,97 @@
+﻿@using Qx.Contents.Services
+@using Qx.Tools.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.FAQ.AddFAQ_M
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Areas/Message/Content/jquery-1.9.1.min.js"></script>
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.InputFor(o => o._Title)
+@Html.SelectFor(o => o._FAQTypeId, Model._FAQtype,"为帮助文章选择父级分类")
+@Html.SelectFor(o => o._ChildFAQTypeId, Model._ChilldFAQtype, "（必填项）为帮助文章选择子级分类，若没有子级分类，请去分类列表添加")
+@Html.RichBoxFor(o => o._Contents)
+@Html.InputFor(o => o.Abstract)
+@Html.InputFor(o => o._Video,"请填写优酷视频地址")
+@*<img src="" id="pic1" style="width: 150px; height: 130px;"/>
+<input type="hidden" name="_FAQID" id="_FAQID"/>
+<input type="hidden" name="Pic" id="Pic" />
+
+<a id="active-upload" >上传照片(可隐藏)</a>
+    <div id="uploadPhoto" >
+        @Html.FileFor(o => o.FAQpic, "/UserFiles/Test/")
+    </div>*@
+@*<script>
+    function OnUploadFinish(filePath) {
+        $('#uploadPhoto').hide();
+        // var faqid = parseInt(Math.random() * (1000 - 1 + 1) + 1);
+        //   var faqtypeid = $("#_ChildFAQTypeId").val();
+        //  var childfaqtypeid = $("#_FAQTypeId").val();
+        alert("图片添加成功,请保存其他内容");
+        // $("#_FAQID").val(faqid);
+        $("#Pic").val(filePath);
+        $("#pic1").attr("src", filePath);
+        $("#pic1").show();
+        //if (childfaqtypeid != undefined) {
+        //    alert("图片添加成功,请保存其他内容");
+        //    $("#_FAQID").val(faqid);
+        //    $("#Pic").val(filePath);
+        //    $("#pic1").attr("src", filePath);
+        //    //提交ajax请求： 参数（文章id,filepath）
+        //    //$.post("/WbsHqu/Admin/SavePic?faqid=" + faqid + "&filepath=" + filePath + "&faqtypeid=" + childfaqtypeid,
+        //    //    { filePath: filePath },
+        //    //    function (result) {
+        //    //        alert("图片添加成功,请保存其他内容");
+        //    //        $("#_FAQID").val(faqid);
+        //    //        $("#Pic").val(filePath);
+        //    //        $("#pic1").attr("src", filePath);
+        //    //    });
+        //} else {
+        //    $("#_FAQID").val(faqid);
+        //    $("#Pic").val(filePath);
+        //    $("#pic1").attr("src", filePath);
+        //    //提交ajax请求： 参数（文章id,filepath）
+        //    //$.post("/WbsHqu/Admin/SavePic?faqid=" + faqid + "&filepath=" + filePath + "&faqtypeid=" + faqtypeid,
+        //    //    { filePath: filePath },
+        //    //    function (result) {
+        //    //        alert("图片添加成功,请保存其他内容");
+        //    //        $("#_FAQID").val(faqid);
+        //    //        $("#Pic").val(filePath);
+        //    //        $("#pic1").attr("src", filePath);
+        //    //    });
+        //}
+
+    };
+
+    $().ready(function() {
+        $('#uploadPhoto').hide();
+        $('#active-upload').click(function() {
+            $('#uploadPhoto').show();
+        });
+    });
+</script>*@
+<script>
+    $(document).ready(function() {
+     //   $("#pic1").hide();
+    });
+    $("#_FAQTypeId").change(function () {
+        childtype();
+    });
+    function childtype() {
+        var fatherid = $("#_FAQTypeId").val();
+        $.ajax({
+            type: "post",
+            url: "/WbsHqu/Admin/childtype?fatherid=" + fatherid,
+            dataType: "json",
+            success: function (result) {
+                if (result == 500) {
+                    return alert("请求失败"); 
+                } else {
+                    $("#_ChildFAQTypeId option").remove();
+                    $.each(result, function (i, item) {
+                        $("#_ChildFAQTypeId").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                    });
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"预报名志愿列表（未添加）.html",
+  "generationDate":new Date(1483078092206.79),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"5e5626eb841d4e5c83ac16fa7f494bc5",
+    "type":"Axure:Page",
+    "name":"预报名志愿列表（未添加）",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"3daac057b38444549d215228ef75f870",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":150,
+              "y":40},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d6e3a61cc876483ab2e63cd263d83671",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":150,
+                  "y":40},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/预报名/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "3daac057b38444549d215228ef75f870":{
+      "scriptId":"u0"},
+    "d6e3a61cc876483ab2e63cd263d83671":{
+      "scriptId":"u1"}}});

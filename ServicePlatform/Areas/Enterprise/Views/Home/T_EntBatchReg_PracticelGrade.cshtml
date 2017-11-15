@@ -1,0 +1,104 @@
+﻿@using ServicePlatform.Models
+@{
+    ViewBag.Title = "T_EntBatchReg_Ass";
+    List<C_EntEvaluateStuItem> C_EntEvaluateStuItemList = ViewBag.C_EntEvaluateStuItemList;
+    List<C_EntEvaStuGradeLevelItem> C_EntEvaStuGradeLevelItemList = ViewBag.C_EntEvaStuGradeLevelItemList;
+    T_PracticeIdentification_View data = ViewBag.T_PracticeIdentification_View;
+
+    // EnterpriseContext db = new EnterpriseContext();
+    //CodeTableContext ct = new CodeTableContext();
+    //ViewBag.PracticeNo = PracticeNo;
+    //ViewBag.EntPracNo = EntPracNo;
+    //ViewBag.PosID = PosID;
+    //ViewBag.SchoolID = SchoolID;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>实习评价</title>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
+    <link href="~/Areas/Enterprise/Content/Home/T_EntBatchReg_PracticelGrade/PracticelGrade.css" rel="stylesheet" />
+    <script>
+        function onPageLoad(row, starNum) {
+
+            for (var i = 1; i <= row; i++) {
+                var oDiv = document.getElementById("starBg" + i);
+                oDiv.style.width = "24" * starNum + "px";
+            }
+        }
+
+        function setStart(id, score) {
+           // alert('设置中...' + score);
+            document.getElementById(id).value = score;
+            alert('分数为' + document.getElementById(id).value);
+        }
+    </script>
+
+    <link href="/Areas/School/Content/S_WorkMyPlat/css/PracticelGrade.css" rel="stylesheet" type="text/css" />
+    <script src="/Areas/School/Content/S_WorkMyPlat/js/jquery-1.5.1.js" type="text/javascript"></script>
+    <script src="/Areas/School/Content/S_WorkMyPlat/js/jquery.raty.js" type="text/javascript"></script>
+</head>
+
+<body onload="onPageLoad('@C_EntEvaluateStuItemList.Count','@C_EntEvaStuGradeLevelItemList.Count')">
+    <form method="post" action="/Enterprise/Home/T_EntBatchReg_PracticelGrade">
+        <input type="text" name="PracticeNo" hidden="hidden" value="@ViewBag.PracticeNo" class="" />
+        <input type="text" name="EntPracNo" hidden="hidden" value="@ViewBag.EntPracNo" class="" />
+        <input type="text" name="PosID" hidden="hidden" value="@ViewBag.PosID" class="" />
+        <input type="text" name="SchoolID" hidden="hidden" value="@ViewBag.SchoolID" class="" />
+        <p class="UnivDept">华侨大学旅游学院</p>
+        <p class="PracticelGrade">学生顶岗实习岗位表现评价表</p>
+        <hr />
+        <label>学生姓名：</label><input name="stdName" type="text" readonly="readonly" value="@data.StuName" class="onlyRead" />
+        <label>学生学号：</label><input name="stdId" type="text" readonly="readonly" value="@data.StuNo" class="onlyRead" />
+        <div style="clear:both;"></div>
+        <label>实习单位：</label><input type="text" name="Unit" readonly="readonly" value="@(ViewBag.EntPracNo)" class="onlyRead" />
+        <label>实习岗位：</label><input type="text" name="Position" value="@(ViewBag.PosID)" readonly="readonly" class="onlyRead" />
+        <div style="clear:both;"></div>
+        <label>实习部门：</label><input type="text" name="Department" value="@data.PracticeDept" readonly="readonly" class="onlyRead" />
+        <label>实习分部门：</label><input type="text" name="SubDepartment" value="@data.PracticeDivDept" readonly="readonly" class="onlyRead" />
+        @*<div style="clear:both;"></div>
+        <label>起止时间：</label><input type="text" name="PracticeStartEnd" class="others" />*@
+
+
+        <table cellspacing="0">
+            <tr>
+                <th width="180" scope="col" class="firstLine">评价项目</th>
+                <th width="231" scope="col" class="firstLine">表现等级</th>
+                <th width="481" scope="col" class="firstLine">评价描述</th>
+            </tr>
+            @for(int i = 0; i < C_EntEvaluateStuItemList.Count; i++)
+            {
+                <tr>
+                    <th scope="row" class="firstRow">
+                        @C_EntEvaluateStuItemList[i].ItemName           
+
+                    </th>
+                    <td>
+                        <div>
+                            @using ServicePlatform.Lib
+                          
+                            @(new HtmlString(PageHelper.GetSelectHtml(PageHelper.GetSelectListItem<C_EntEvaStuGradeLevelItem>(C_EntEvaStuGradeLevelItemList, 1, 0), C_EntEvaluateStuItemList[i].ItemNo + "-ItemGrade")))
+                           
+                         
+                        </div>
+                    </td>
+                    <td>
+                        <textarea name='@(new HtmlString(C_EntEvaluateStuItemList[i].ItemNo +"-ItemContent"))'  class="judge" placeholder=""></textarea>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    
+
+        <input name="save" type="submit" value="保存"  class=" save" =save" />
+
+    </form>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,89 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using ServicePlatform.Models;
+@model Webdiyer.WebControls.Mvc.PagedList<T_PracBatch>
+
+@{
+    ViewBag.Title = "实习批次列表";
+    int initial = ViewBag.PageIndex;
+    int isa = (initial - 1) * 10;//是否有效
+}
+@using (Html.BeginForm("Mession_Approve_Operation", "Home", FormMethod.Post))
+{
+    <!-- <input type="button" id="btnall" name="btnall" class="btn" value="全选" onclick="checkall()" /> -->
+    <label>检索内容：</label><input type="text" class="dfinput" value="请输入检索内容" id="jiansuo" name="jiansuo" /><input type="submit" class="btn" value="检索" onclick="" name="action" />@*<label>按消息类型（10：用户注册、11：项目评估、12：项目招标、13：系统消息）</label>*@
+    <input type="text" value="" id="piliang" name="piliang" class="dfinput" style="display:none" />
+    <input type="text" value="" id="piliangmark" name="piliangmark" class="dfinput" style="display:none" />
+}
+
+@using (Html.BeginForm("MessionDetails", "Home", FormMethod.Post))
+{
+    <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+        <tr class="title">
+            <td  style="width: 20px"  bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>
+            <td bgcolor="#CCCCCC">批次名称<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">起止日期<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td style="width: 40px" bgcolor="#CCCCCC">是否当前批次<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td style="width: 40px" bgcolor="#CCCCCC">是否生效<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC" onclick="">操作</td>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="odd">
+                    <td style="width: 20px"><input type="checkbox" value="" name="check_approve" /></td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatchName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartEnd)
+                    </td>
+                    <td style="width: 40px">
+                        @Html.DisplayFor(modelItem => item.IsCurrentBatch)
+                    </td>
+                    <td style="width: 40px">
+                        @ViewBag.IsActive[isa++]
+                    </td>
+                    <td>
+                        @Html.ActionLink("设为当前批次", "SetCurrentBatch", new { batchid = item.PracBatchID, schoolid = item.SchoolID }) |
+                        @Html.ActionLink("删除", "BatchDelete", new { PracBatchID = item.PracBatchID }) |
+                        @Html.ActionLink("修改", "EditBatch", new { PracBatchID = item.PracBatchID }) |
+                        @{
+                            if (item.IsCurrentBatch == "是")
+                            {
+                                @Html.ActionLink("实习单位审批", "RegEntInBatchList", new { batchid = item.PracBatchID, schoolid = item.SchoolID,readOnly = false });
+                            }
+                            else
+                            {
+                                @Html.ActionLink("实习单位查看", "RegEntInBatchList", new { batchid = item.PracBatchID , schoolid = item.SchoolID , readOnly = true });
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <input type="text" value="" id="mark" name="mark" class="dfinput" style="display:none" />
+}
+
+<script type="text/javascript">
+
+    function checkall() {
+        var check = document.getElementsByName("check_approve");
+        if (check[0].checked == true) {
+            for (var j = 0; j < check.length; j++) {
+                check[j].checked = false;
+            }
+            document.getElementsByName('btnall').setAttribute("value", "全选");
+        }
+        else {
+            for (var j = 0; j < check.length; j++) {
+                check[j].checked = true;
+            }
+            document.getElementsByName('btnall').setAttribute("value", "取消全选");
+        }
+    }
+</script>
+
+
+

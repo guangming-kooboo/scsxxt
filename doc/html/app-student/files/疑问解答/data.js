@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"疑问解答.html",
+  "generationDate":new Date(1483078092035.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"e042d109f2054716842d923b9e121314",
+    "type":"Axure:Page",
+    "name":"疑问解答",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"84c508c538c4491786483ee8a780b611",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":150,
+              "y":30},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"a1b0927cd4b64cf8a7f8d5dc84b3c5da",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":150,
+                  "y":30},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/疑问解答/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "84c508c538c4491786483ee8a780b611":{
+      "scriptId":"u0"},
+    "a1b0927cd4b64cf8a7f8d5dc84b3c5da":{
+      "scriptId":"u1"}}});

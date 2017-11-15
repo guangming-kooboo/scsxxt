@@ -1,0 +1,45 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.VolunteerDetail_M
+@Html.Partial("student_menu")
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <div>
+                    <a href="javascript:submit('a');">
+                        <div class="placeholder colortitle"><img src="@ViewData["root"]images/return.png" class="return"></div>
+                    </a>
+                </div>
+                <div class="weui-flex__item colortitle"><div class="placeholder">志愿详情</div></div>
+                <div style="width:48px"><div class="placeholder"></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">实习企业</label>
+                        <span class="weui-form-preview__value" readonly="readonly">@Model._volunteer.EntName</span>
+                    </div>
+                </div>
+
+
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">岗位</label>
+                        <span class="weui-form-preview__value" readonly="readonly">@Model._volunteer.PositionName</span>
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">岗位描述</label>
+                        <span class="weui-form-preview__value"  readonly="readonly">@(new HtmlString(Model._volunteer.PositionDescription.Replace("\r\n", "<br/>")))</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+

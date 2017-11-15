@@ -1,0 +1,166 @@
+﻿@*@{
+    ServicePlatform.Config.VarsConfig Vars = (Session["vars"] as ServicePlatform.Config.VarsConfig);
+
+}*@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //导航切换
+            $(".menuson li").click(function () {
+                $(".menuson li.active").removeClass("active")
+                $(this).addClass("active");
+            });
+
+            $('.title').click(function () {
+                var $ul = $(this).next('ul');
+                $('dd').find('ul').slideUp();
+                if ($ul.is(':visible')) {
+                    $(this).next('ul').slideUp();
+                } else {
+                    $(this).next('ul').slideDown();
+                }
+            });
+        })
+    </script>
+
+
+</head>
+
+<body style="background:#f0f9fd;">
+    <div class="lefttop"><span></span>菜单</div>
+
+    <dl class="leftmenu">
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>学生信息维护
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/S_StuBaseInformation/BaseInfoMaintan" target="rightFrame">基本信息维护</a><i></i></li>
+                <li><cite></cite><a href="/Enterprise/Home/ChgPsw" target="rightFrame">修改密码</a><i></i></li>
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>实习报名管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/S_PraEnrollManager/KonwAboutEnt" target="rightFrame">了解企业</a><i></i></li>
+                <li><cite></cite><a href="/School/S_PraEnrollManager/IWantPrac" target="rightFrame">我要报名</a><i></i></li>
+                @*<li><cite></cite><a href="/School/S_PraEnrollManager/ModifyEnroll" target="rightFrame">修改报名</a><i></i></li>
+                <li><cite></cite><a href="/School/S_PraEnrollManager/ModifyEnroll" target="rightFrame">查看报名</a><i></i></li>*@
+                <li><cite></cite><a href="/School/S_PraEnrollManager/ConfirmVolunteer" target="rightFrame">招聘确认</a><i></i></li>
+
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>实习过程管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/S_MyWorkPlat/MyWorkPlat" target="rightFrame">我的工作台</a><i></i></li>
+                <li><cite></cite><a href="/School/S_MyWorkPlat/StuEvaluateEnt" target="rightFrame">评价企业</a><i></i></li>
+                <li><cite></cite><a href="/School/S_MyWorkPlat/StuEvaluateSchool" target="rightFrame">评价学校</a><i></i></li>
+
+            </ul>
+        </dd>
+        <dd>
+           
+            <div class="title">
+
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>招聘管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/S_EmployeManager/EnterTalentPool" target="rightFrame">加入人才库</a><i></i></li>
+                <li><cite></cite><a href="/School/S_EmployeManager/MyResume" target="rightFrame">简历管理</a><i></i></li>
+                <li><cite></cite><a href="/School/S_EmployeManager/SendMyResume" target="rightFrame">投放简历</a><i></i></li>
+                <li><cite></cite><a href="/School/S_EmployeManager/EnterTalentPool" target="rightFrame">面试管理</a><i></i></li>
+                <li><cite></cite><a href="/School/S_EmployeManager/EnterTalentPool" target="rightFrame">Offer管理</a><i></i></li>
+                <li><cite></cite><a href="/School/S_EmployeManager/EnterTalentPool" target="rightFrame">终录单位登记</a><i></i></li>
+
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>成绩管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/BatchManager/CreatBatch" target="rightFrame">成绩查看</a><i></i></li>
+
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>求职应聘
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/BatchManager/CreatBatch" target="rightFrame">我找企业</a><i></i></li>
+                <li><cite></cite><a href="/School/BatchManager/CreatBatch" target="rightFrame">企业找你</a><i></i></li>
+                <li><cite></cite><a href="/School/BatchManager/CreatBatch" target="rightFrame">应聘结果</a><i></i></li>
+
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>新闻管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/News/NewsCenter/HomePageTable" target="rightFrame">新闻列表</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>首页栏目管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/HPManager/HPM/HPMPage" target="rightFrame">栏目列表</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>文件管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/BatchManager/CreatBatch" target="rightFrame">文件下载</a><i></i></li>
+
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>系统管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/BatchManager/CreatBatch" target="rightFrame">签名下载</a><i></i></li>
+            </ul>
+        </dd>
+        <dd>
+            <div class="title"><span><img src="/Areas/Enterprise/Content/Admin/images/leftico03.png" /></span>实习评分管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/ScoreSetup/ScoreWeightSet" target="rightFrame">评分比重设置</a><i></i></li>
+                <li><cite></cite><a href="/School/ScoreSetup/ScoreItem_ListShow" target="rightFrame">评分项目设置</a><i></i></li>
+                <li><cite></cite><a href="/School/ScoreSetup/ScoreToStudent_ListShow" target="rightFrame">成绩录入</a><i></i></li>
+               
+
+            </ul>
+        </dd>
+    </dl>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Core.Services.Entity.T_Employee>
+
+@{
+    ViewBag.Title = "员工列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("添加员工", "Create")
+</p>
+
+
+<div class="col-lg-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>@ViewBag.Title</h5>
+        </div>
+        <div class="ibox-content">
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayName("员工号")
+                    </th>
+                    <th>
+                        @Html.DisplayName("员工姓名")
+                    </th>
+                    <th>
+                        @Html.DisplayName("联系电话")
+
+                    </th>
+                    <th>
+                        @Html.DisplayName("QQ")
+
+                    </th>
+                    <th>
+                        @Html.DisplayName("邮箱")
+
+                    </th>
+                    @*<th>
+                                @Html.DisplayName("家庭住址")
+
+                            </th>*@
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QQ)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>*@
+                        <td>
+                            @Html.ActionLink("编辑", "Edit", new {id = item.UserID}) |
+
+                            @Html.ActionLink("删除", "Delete", new {id = item.UserID})
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+

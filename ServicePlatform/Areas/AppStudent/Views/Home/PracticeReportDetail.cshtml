@@ -1,0 +1,44 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.PracticeReportDetail_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            @*跳转到主页*@
+            <a href="javascript:submit('a');">
+                <div><div class="placeholder colortitle"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+            </a>
+            <div class="weui-flex__item colortitle">
+                <div class="placeholder">实习报告</div>
+            </div>
+@if (Model._careerstatus == 11||Model._careerstatus==13)
+{
+    <a href="javascript:submit('b');">
+        <div class="placeholder" style="color: floralwhite">修改</div>
+    </a>
+}
+else
+{
+    <div class="placeholder"></div>
+}
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                @if (Model._careerstatus == 11)
+                {
+                    <textarea class="weui-textarea" placeholder="" rows="10" readonly="readonly"> @Model.AllComment.PracticeReport</textarea>
+                }
+                else
+                {
+                    <textarea readonly="readonly" class="weui-textarea" placeholder="" rows="10" > @Model.AllComment.PracticeReport</textarea>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

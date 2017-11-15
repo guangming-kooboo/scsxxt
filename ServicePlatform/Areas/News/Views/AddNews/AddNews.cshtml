@@ -1,0 +1,224 @@
+﻿@model ServicePlatform.Models.T_News
+
+@Styles.Render("/Areas/News/Content/CSSModel/newsDetail.css")
+@Scripts.Render("/UserFiles/HtmlTools/KindEditor/kindeditor.js")
+@Scripts.Render("/UserFiles/HtmlTools/KindEditor/lang/zh_CN.js")
+@Scripts.Render("/UserFiles/HtmlTools/KindEditor/plugins/code/prettify.js")
+@Styles.Render("/UserFiles/HtmlTools/KindEditor/themes/default/default.css")
+@Styles.Render("/UserFiles/HtmlTools/KindEditor/plugins/code/prettify.css")
+
+@{
+    Layout = null;
+    
+    int ConType = 11;//设定处理的内容为11---新闻类，为统一内容处理过程留出接口
+}
+
+<!DOCTYPE html>
+
+@{
+    //这里获取下来列表数据
+    ServicePlatform.Models.ContentContext sb = new ServicePlatform.Models.ContentContext();
+    //获取新闻种类作为下拉列表
+    var newtype = from oc in sb.C_NewsType select oc;
+    ViewData["NewtypeList"] = new SelectList(newtype, "TypeID", "TypeName");
+    //获取新闻栏目作为下拉列表
+
+    string subSystem = (Session["Vars"] as ServicePlatform.Config.Vars).getSubSystem();
+
+    var newcolumn = from oa in sb.C_ContentColumn where (oa.SybSystem == subSystem && oa.ContTypeID == ConType && oa.ContTypeID == ServicePlatform.Lib.ContentType.News) select oa;
+    ViewData["NewcolumnList"] = new SelectList(newcolumn, "ContColumnID", "ContColumnName");
+    string DefaultTimeValue = ServicePlatform.Areas.News.ToolHelper.CurrentTimeToEasyuiValue.getValue();
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddNews</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <script src="/Areas/News/Content/Uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+    <link href="/Areas/News/Content/Uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        KindEditor.ready(function (K) {
+            var editor1 = K.create('#editor', {
+                cssPath: '/UserFiles/HtmlTools/KindEditor/plugins/code/prettify.css',
+                uploadJson: '/UserFiles/HtmlTools/KindEditor/asp.net/upload_json.ashx',
+                fileManagerJson: '/UserFiles/HtmlTools/KindEditor/asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+                afterCreate: function () {
+                    var self = this;
+                    K.ctrl(document, 13, function () {
+                        self.sync();
+                        K('form[name=article]')[0].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function () {
+                        self.sync();
+                        K('form[name=article]')[0].submit();
+                    });
+                }
+            });
+            prettyPrint();
+        });
+    </script>
+
+    <style type="text/css">
+        .SubmitButton {
+            width: 137px;
+            height: 35px;
+            background: url(/Areas/News/Content/Image/btnbg.png) no-repeat;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            .SubmitButton:hover {
+                background-image: url(/Areas/News/Content/Image/btnbg3.png);
+                color: white;
+                cursor: pointer;
+            }
+
+        #TabSubmitButton {
+            width: 600px;
+            height: 40px;
+            margin-top: 10px;
+            border: 1px dashed #89bafd;
+            padding-left: 200px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    </style>
+
+    <script src="/Areas/News/Script/CursorBlur.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div id="AddContainer">
+
+        <div id="AddNewTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="/News/NewsCenter/HomePageTable">首页</a></li>
+                    <li><a href="#">新闻添加</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="TabContent">
+            @using (Html.BeginForm("AddNews", "AddNews", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div id="TabContainer" class="easyui-tabs" style="width:800px;height:460px;">
+                    <div title="新闻基本信息" style="padding:20px;" id="AddNewBasic">
+                        <!--新闻基本信息添加，包括新闻ID、新闻标题、新闻类别等-->
+
+                        <div class="editor-label" style="margin-top:5px;">
+                            新闻标题：
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            <input tyepe="text" id="ContentTitle" name="ContentTitle" />
+                            <div id="FillError3" style="font-family:'楷体';font-weight:bold;color:red;display:none;">您输入的新闻标题不能为空</div>
+                        </div>
+
+                        <div class="editor-label" style="margin-top:5px;">
+                            @Html.LabelFor(model => model.NewsTypeID)
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            @Html.DropDownListFor(model => model.NewsTypeID, ViewData["NewtypeList"] as SelectList, "--请选择--", null)
+                            @Html.ValidationMessageFor(model => model.NewsTypeID)
+                        </div>
+
+                        <div class="editor-label" style="margin-top:5px;">
+                            @Html.LabelFor(model => model.NewsAuthor)
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            @Html.EditorFor(model => model.NewsAuthor)
+                            @Html.ValidationMessageFor(model => model.NewsAuthor)
+                        </div>
+
+                        <div class="editor-label" style="margin-top:5px;">
+                            新闻发布者：
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            <input tyepe="text" id="ContentPublisher" name="ContentPublisher" />
+                        </div>
+
+                        <!--日期时间输入框-->
+                        <div class="editor-label" style="margin-top:5px;">
+                            日期输入：
+                        </div>
+                        <div id="TabNewsTime" style="margin-top:5px;">
+                            <input class="easyui-datetimebox" id="newPubdate" name="newPubdate" data-options="required:true" value=@DefaultTimeValue style="width:150px">                            
+                        </div>
+                        <input type="text" id="errorTime" value="无法输入日期" disabled="disabled" style="display:none;" />
+
+                        <div class="editor-label" style="margin-top:5px;">
+                            @Html.LabelFor(model => model.NewsColumnID)
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            @Html.DropDownListFor(model => model.NewsColumnID, ViewData["NewcolumnList"] as SelectList, "--请选择--", null)
+                            @Html.ValidationMessageFor(model => model.NewsColumnID)
+                        </div>
+
+                    </div>
+
+
+                    <div title="图片新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="AddNewPic">
+                        <!--图片新闻图片上传-->
+                        请上传图片新闻：<input type="file" id="NewsPicUpload" name="NewsPicUpload" />
+                        @Html.Hidden("HideInfo", new { @id = "HideInfo" });
+                    </div>
+                    <div title="视频新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="AddNewVedio">
+                        <!--视频新闻上传-->
+                        请上传视频新闻：<input type="file" id="NewsVideoUpload" name="NewsVideoUpload" />
+
+                    </div>
+                    <div title="图文新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="AddNewHtml">
+                        <label>图文新闻</label>
+                        @*@Html.TextAreaFor(model => model.Html, new { @id = "TextNews", @name = "TextNews", @style = "width:700px;height:250px;visibility:hidden;", @class = "textinput" })
+                            @Html.ValidationMessageFor(model => model.Html)*@
+
+                        @Html.TextAreaFor(model => model.Html, new { id = "editor", name = "editor", style = "height: 375px;width:680px;" })
+                        @Html.ValidationMessageFor(model => model.Html)
+
+                    </div>
+                    <div title="链接新闻" data-options="closable:true" style="overflow:auto;padding:20px;" id="AddNewLink">
+                        <!--新闻链接-->
+                        <div class="editor-label" style="margin-top:5px;">
+                            @Html.LabelFor(model => model.LinkUrl)
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            @Html.EditorFor(model => model.LinkUrl)
+                            @Html.ValidationMessageFor(model => model.LinkUrl)
+                        </div>
+                    </div>
+                    <div title="资源地址" data-options="closable:true" style="overflow:auto;padding:20px;" id="AddNewDownload">
+                        <!--下载资源-->
+                        <div class="editor-label" style="margin-top:5px;">
+                            @Html.LabelFor(model => model.Download)
+                        </div>
+                        <div class="editor-field" style="margin-top:5px;">
+                            @Html.EditorFor(model => model.Download)
+                            @Html.ValidationMessageFor(model => model.Download)
+                        </div>
+                    </div>
+                </div>
+                <div id="TabSubmitButton">
+                    <input class="SubmitButton" type="submit" value="提  交" name="sub3" />
+                    <input class="SubmitButton" type="submit" value="保存草稿" name="sub4" style="margin-left:100px;" />
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

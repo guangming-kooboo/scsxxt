@@ -1,0 +1,207 @@
+﻿@using Core.Services.Entity
+@model IEnumerable<Core.Services.Entity.T_SchoolStudentReviewLink>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "分配学生";
+
+    var UserUnit = ViewBag.UserUnit;
+    var TaskID = ViewBag.TaskID;
+    var EntPracNo =  ViewData["EntPracNo"];
+   
+   // List<T_Student> NotArragedStudents = ViewBag.NotArragedStudents;
+
+}
+
+    <hr/>
+    <div class="row">
+        <div  class="col-lg-12"></div>
+        @Html.Partial("_SelectPosition", new ViewDataDictionary()
+        {
+            {"EntPracNo", EntPracNo},  
+        })
+    </div>
+
+    <hr />
+<div class="row">
+    <div class="col-lg-6">
+        <h2>待分配学生</h2>
+        <p>点击"=>"分配学生:@*<a class="text text-warning" onclick="AddAll()">批量分配</a>*@
+        </p>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    学生账号
+                </th>
+                <th>
+                    学生姓名
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="tbContent">
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
+        <h2>已分配列表</h2>
+        <p>点击"删除"取消分配:</p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    学生账号
+                </th>
+                <th>
+                    学生姓名
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="arrangeList"></tbody>
+        </table>
+    </div>
+</div>
+
+ <div class="col-lg-12">
+    <hr />
+    <a href="/Enterprise/ScoreItemToTeacher/Index?ItemID=@ViewData["ItemID"]&EntPracNo=@ViewData["EntPracNo"]" class="btn btn-primary">返回</a>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetArrangedList();
+        $("#tip").html("请选择岗位");
+    });
+
+    //根据岗位取学生
+    function AfterSelectPositions() {
+      
+        var PositionID = $("#PositionID").val();
+        if (PositionID == "") {
+            alert('抱歉，发现异常，请报告给开发人员！');
+            return;
+        }
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItemLinkStudent/GetStudents",
+            data: { EntPracNo: '@EntPracNo', PositionID: PositionID, TaskID: '@TaskID' },
+            dataType: "json",
+            success: function (reslut) {     
+                var tb = "";
+                $.each(reslut, function (i, item) {
+                    tb += "<tr>" +
+                        "<td>" + item[1] + "</td>" +
+                        "<td>" + item[2] + "</td>" +
+                        "<td> " +
+                        "<a onclick=\"AjaxCreate(\'" + item[0] + "\', \'@TaskID\')\">分配</a>" +
+                        "</td>" +
+                        "</tr>";
+                });
+                $("#tbContent").html(tb);
+                $("#tip").html("准备就绪!");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择岗位");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+    //已分配列表
+    function GetArrangedList() {
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItemLinkStudent/GetArrangedList",
+            data: {  TaskID: '@TaskID' },
+            dataType: "json",
+            success: function (reslut) {
+                
+                var tb = "";
+                $.each(reslut, function (i, item) {
+                    tb += "<tr>" +
+                        "<td>" + item.UserID + "</td>" +
+                        "<td>" + item.StuName + "</td>" +
+                        "<td> " +
+                        "<a onclick=\"AjaxDelete(\'" + item.LinkID + "\')\">删除</a>" +
+                        "</td>" +
+                        "</tr>";
+                });
+                $("#arrangeList").html(tb);
+                $("#tip").html("准备就绪!");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择岗位");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+
+    function AjaxCreate(PracticeNo, TaskID) {
+        var PositionID = $("#PositionID").val();
+        if (PracticeNo == "" || TaskID == "" || PositionID == "") {
+            alert('抱歉，发现异常，请报告给开发人员！');
+            return;
+        }
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItemLinkStudent/AjaxCreate",
+            data: { PracticeNo: PracticeNo, TaskID: TaskID },
+            dataType: "text",
+            success: function (reslut) {
+                
+                    $("#tip").html("正在刷新列表...");
+                    AfterSelectPositions();
+                    $("#tip").html("请稍后...");
+                    GetArrangedList();
+                
+                $("#tip").html("继续点击'=>'分配学生");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择岗位");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+    
+
+    function AjaxDelete(LinkID) {
+        var classId = $("#classId").val();
+        if (LinkID == "" || classId=="") {
+            alert('抱歉，发现异常，请报告给开发人员！');
+            return;
+        }
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItemLinkStudent/AjaxDelete",
+            data: { LinkID: LinkID },
+            dataType: "text",
+            success: function (reslut) {
+                $("#tip").html("删除成功，正在刷新列表...");
+                GetArrangedList();
+                $("#tip").html("请稍后...");
+                AfterSelectPositions();
+                $("#tip").html("继续点击'删除'移除分配");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择岗位");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+
+    function AddAll() {
+        alert('批量添加开发中...');
+    }
+</script>
+
+

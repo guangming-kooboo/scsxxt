@@ -1,0 +1,29 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.Home._SearchLeft_M
+<div class="bank-select-head">
+    <div class="note-select-head">
+        <p class="note-select-head-p">
+            @(new HtmlString(Model.type == "SearchPosts" ? "|&nbsp" : ""))
+            <a href="@Url.Action("SearchPosts", "Home", new { area = "BBS", keyword =Model.keyword, type = "SearchPosts" })">
+                <img class="note-select-head-img"
+                     src="~/Areas/BBS/Content/Image/搜帖子.png">
+            </a><a class="note-select-head-a"
+                   href="@Url.Action("SearchPosts", "Home", new { area = "BBS", keyword = Model.keyword, type= "SearchPosts" })">搜帖子</a>
+        </p>
+        <p class="note-select-head-pp">
+            @(new HtmlString(Model.type == "SearchForums" ? "|&nbsp" : ""))
+            <a href="@Url.Action("SearchForums", "Home", new { area = "BBS", keyword =Model.keyword, type = "SearchForums" })">
+                <img class="note-select-head-img"
+                     src="~/Areas/BBS/Content/Image/搜板块.png">
+            </a><a class="note-select-head-a"
+                   href="@Url.Action("SearchForums", "Home", new { area = "BBS", keyword = Model.keyword, type= "SearchForums" })">搜版块</a>
+        </p>
+        <p class="note-select-head-ppp">
+            @(new HtmlString(Model.type == "SearchUsers" ? "|&nbsp" : ""))
+            <a href="@Url.Action("SearchUsers", "Home", new { area = "BBS", keyword =Model.keyword, type = "SearchUsers" })">
+                <img class="note-select-head-img"
+                     src="~/Areas/BBS/Content/Image/搜用户.png">
+            </a><a class="note-select-head-a"
+                   href="@Url.Action("SearchUsers", "Home", new { area = "BBS", keyword = Model.keyword, type= "SearchUsers" })">搜用户</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        <a href="/WbsHqu/WbsTask/Index">&lt&lt返回工作量列表</a>
+        <lable>&nbsp;&nbsp;&nbsp;&nbsp;相对占比总和为:</lable>
+        <lable id="summary">aaa</lable>
+        <lable>&nbsp;&nbsp;&nbsp;绝对占比总和为:</lable> 
+        <lable id="absummary">aaa</lable>
+    </ol>
+</div>
+@*<label>
+    定额任务名称:&nbsp;
+    @Html.TextBox("定额任务名称", "", new { @class = "form-control input-sm", PlaceHolder = "请输入要查询的定额任务名称" })
+</label>*@
+
+<script>
+    function Search() {
+        var Params = v("定额任务名称");
+        return Params;
+    }
+    function fn(id) {
+        if (confirm("确定删除吗")) {
+            location.href = "/WbsHqu/QuotaTask/Delete?id=" + id;
+        } else {
+            return;
+        }
+    }
+    $().ready(function ()
+    {
+        var summary = 0;
+        var absummary = 0;
+
+        $("table tr").each(function () {
+
+            var text = $(this).find("td:eq(1)").html();
+            if (text == undefined)
+            {
+                text = "";
+            }
+            text = text.substring(0, text.length - 2);
+         
+            var temp = parseFloat(text);
+            if (text != "") {
+                summary += temp;
+            }
+
+            var abtext = $(this).find("td:eq(2)").html();
+            if (abtext == undefined) {
+                abtext = "";
+            }
+            abtext = abtext.substring(0, abtext.length - 2);
+
+            var abtemp = parseFloat(abtext);
+            if (abtext != "") {
+                absummary += abtemp;
+            }
+        })
+
+        summary = summary.toFixed(2);
+        absummary = absummary.toFixed(2);
+        summary += "%";
+        absummary += "%";
+        $("#summary").html(summary);
+        $("#absummary").html(absummary);
+    })
+
+</script>

@@ -1,0 +1,62 @@
+﻿@{
+    //判断URL是否带有参数
+    ViewBag.link = ViewBag.link.Contains("?") ? ViewBag.link += "&" : ViewBag.link += "?";
+    //当前页索引
+    int currentPage = ViewBag.currentPage;
+    //总页数
+    int totalPageCount = ViewBag.total % ViewBag.perCount == 0 ? ViewBag.total / ViewBag.perCount : ViewBag.total / ViewBag.perCount + 1;
+    //跳转地址(jumpTo+=index)
+    string jumpTo = ViewBag.link + "template=" + ViewBag.template + "&perCount=" + ViewBag.perCount + "&pageIndex=";
+}
+
+<div class="pagin">
+    <div class="message">共<i class="blue">@ViewBag.total</i>条记录，当前显示第&nbsp;<i class="blue">@currentPage&nbsp;</i>页</div>
+
+    <ul class="paginList">
+
+        @if (currentPage == 1)
+        {
+            // 处理首页按钮[当前页=第一页]
+            <li class="paginItem"><a href="@(jumpTo + 1)">首页</a></li>
+        }
+        else
+        {
+            <li class="paginItem"><a href="#">当前首页</a></li>
+        }
+
+        @if (currentPage > 1)
+        {
+            //处理上一页按钮[当前页>第一页]
+            <li class="paginItem"><a href="@(jumpTo + (currentPage - 1))">上一页 </a></li>
+        }
+        else
+        {
+            <li class="paginItem"><a href="#">无上一页</a> </li>
+        }
+        @if (currentPage < totalPageCount)
+        {
+            //处理下一页按钮 [当前页<最后一页]
+            <li class="paginItem"> <a href="@(jumpTo + (currentPage + 1))">下一页</a> </li>
+        }
+        else
+        {
+            <li class="paginItem"><a href="#">无下一页</a></li>
+        }
+        @if (currentPage < totalPageCount)
+        {
+            //处理末页按钮 [当前页<最后一页]
+            <li class="paginItem"> <a href="@(jumpTo + totalPageCount)">末页</a></li>
+        }
+        else
+        {
+            <li class="paginItem"><a href="#">当前末页</a> </li>
+        }
+
+    </ul>
+   
+</div>
+
+
+
+
+

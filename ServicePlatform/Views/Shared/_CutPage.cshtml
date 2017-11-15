@@ -1,0 +1,118 @@
+﻿@{
+    string link= ViewBag.link;
+   // link = link.Replace("&amp;", "&").Replace("&&", "&");
+    string error = ViewBag.Error;
+    int perCount = ViewBag.perCount;
+    int currentPage = ViewBag.currentPage;
+    int total = ViewBag.total;
+    //判断是否带有参数
+    if (!link.Contains("?"))
+    {
+        link += "?";
+    }else
+    {
+        link += "&";
+    }
+    ////传递参数串
+    //foreach (var o in ViewData)
+    //{
+    //    if (!string.IsNullOrEmpty(o.Key)&& o.Value.GetType().ToString() == "System.String")
+    //    {
+    //        link += o.Key + "=" + o.Value + "&";
+    //    }
+
+    //}
+}
+
+<div class="last">
+    <label style="color:red"> @(error == null ? "" : "[检测到页面错误,错误代码：" + error + "]") </label><br />
+@if (currentPage != 1)
+{
+     <a href="@(link + "perCount=" + perCount + "&pageIndex=1")">
+         <input class="btn" name="first" type="button" value="首页">
+    </a>
+}
+else
+{
+    <input class="btn" name="first" type="button" value="当前首页">
+}
+   
+ @if (currentPage > 1)
+ {
+          <a href="@(link + "perCount=" + perCount + "&pageIndex=" + (currentPage - 1))">
+              <input class="btn" name="first" type="button" value="上一页">
+    </a>
+ }
+ else
+ {
+    <input class="btn" name="first" type="button" value="无上一页">
+ }
+   
+@if (currentPage < (total / perCount + 1))
+{
+     <a href="@(link + "perCount=" + perCount + "&pageIndex=" + (currentPage + 1))">
+         <input class="btn" name="first" type="button" value="下一页">
+    </a>
+}
+else
+{
+    <input class="btn" name="first" type="button" value="无下一页">
+}
+   @if (currentPage != (total / perCount + 1))
+   {
+         <a href="@(link + "perCount=" + perCount + "&pageIndex=" + (total / perCount + 1))">
+             <input class="btn" name="first" type="button" value="末页">
+    </a>
+   }
+   else
+   {
+    <input class="btn" name="first" type="button"  value="当前末页">
+   }
+    <br /><br />
+   
+    <form  >
+        <label>（共 @(total % perCount == 0 ? total / perCount : total / perCount + 1) 页, @total 条记录,本页显示第 @(perCount * (currentPage - 1) + 1) - @(perCount * (currentPage - 1) + perCount) 条）</label>
+        
+        <button type="button" onclick="setPageCount()"><a style="color:red">设置<a/></button>
+        <label>每页显示</label>
+        <input id="perCount" value="@perCount" type="text" style="width:20px" />
+        <label>条,</label>
+       
+        <button type="button" onclick="GotoPage()"><a style="color:red">跳转<a/></button><label>到第</label>
+        <input id="pageIndex" value="@currentPage" type="text" style="width:20px" />
+        <label>页</label>
+       
+        
+        <script>
+            function redirect(perCount,pageIndex) {
+              //  var re = "\&amp;";
+              //  alert(re);
+                //var perCount = $("#perCount").val();
+                //var pageIndex = $("#pageIndex").val();
+                var url = '@(new HtmlString(link))' + "perCount=" + perCount + "&pageIndex=" + pageIndex;
+              //  url = url.replace(re, "\&");
+               // alert(url);
+                location.href = url;
+            }
+
+            function setPageCount() {
+                var perCount = $("#perCount").val();
+                var pageIndex = 1;
+                redirect(perCount, pageIndex);
+
+            }
+            function GotoPage() {
+                var perCount = $("#perCount").val();
+                var pageIndex = $("#pageIndex").val();;
+                redirect(perCount, pageIndex);
+
+            }
+
+        </script>
+
+
+
+    </form>  
+    
+
+</div>

@@ -1,0 +1,147 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+}
+img{
+	border:none;
+}
+ul{
+	list-style: none;
+}
+nav ul li {
+	display: inline-block;
+	_zoom:1;
+	*display:inline;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+a:hover{
+	text-decoration:underline;
+}
+body{
+	font-family: tahoma, arial, 微软雅黑, 宋体,'Hiragino Sans GB', 'WenQuanYi Micro Hei',  sans-serif;
+	font-size:1.em;
+	font-weight:400;
+}
+
+/*----头部-----*/
+#header{
+	width: 100%;  
+	font: 12px/1.5 tahoma,arial,Hiragino Sans GB,WenQuanYi Micro Hei,\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;
+	font-size: 12px;
+	background:white;
+}
+
+/*----logo 区域----*/
+	.header-top-blank{
+		width:1000px;
+		height:80px;
+		margin:0 auto;
+		position: relative;		
+		padding:20px 0;		
+	}	
+	.header-top-blank a:hover{
+		text-decoration:none;
+	}
+	.header-logo img{
+		width:80px;
+		float:left;
+		margin-right:5px;
+		outline: none;
+	}
+	.header-logo p{
+		width:400px;
+		float:left;
+		font-size:2.5em;
+		margin-top:25px;
+		font-weight:bold;
+		font-family: "华文楷体",  "宋体";
+		color:#555;
+	}
+
+	/*----检索--- */
+	.header-search{
+		position:absolute;
+		right: 2px;  
+		top: 50px;
+		/*width:1000px;
+		margin:0 auto;		*/
+		color:#000;
+		/*height:60px;	*/	
+	}	
+	.header-search hr{
+		margin-top:10px;
+	}	
+	.header-search form{		
+		width:500px;
+		margin:0 auto;		
+	}	
+	.header-search div{
+		float:left;
+		width:500px;
+		height:32px;		
+	}
+	.header-search label{
+		display:none;
+	}
+	.header-search-style{	
+		float:left;
+		color:#000;	
+		font-size:1.1em;
+		height:26px;
+		width:265px;
+		border:2px solid #5c9f11;		
+	}
+	.header-search form input[type=submit]{
+		float:left;
+		width:70px;
+		height:30px;
+		background-color:#5c9f11;
+		border:3px solid #5c9f11;
+		font-size:1.2em;
+		font-weight:600;
+		color:#fff;
+		/*margin:0 0 0 -5px;*/		
+	}	
+
+/*----导航----*/
+.main-nav{
+	clear: both;
+	height: 48px;
+	line-height: 38px;		
+	background-color: #5C9F11; 
+	font-size: 14px;
+	font-weight:600;
+	color: white;
+}
+.main-nav li{
+	float: left;		
+}
+.main-nav .nav-inner{
+	width: 1000px;
+	margin: 0px auto;
+		}
+.main-nav-link a {
+	display: block;
+	width:80px;
+	height: 38px;	
+	padding: 5px 14px;
+	text-align: center;
+	color: white;
+	_width: 80px;
+	_padding: 0;
+}
+.main-nav-link a:hover {
+	background: #ccc;/*#5C9F11;*/
+	border-radius:10px;
+	text-decoration:none;
+}
+.main-nav-link .current{
+	background: #5C9F11;
+}	
+
+

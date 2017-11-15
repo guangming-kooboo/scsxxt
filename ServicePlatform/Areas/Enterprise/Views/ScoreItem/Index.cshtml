@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Core.Services.Entity.T_EntReviewItem>
+
+@{
+    ViewBag.Title = "评分项列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<SelectListItem> items= ViewBag.items;
+}
+
+
+<script>
+
+    $().ready(function() {
+        $("#bt_add").remove();
+    });
+
+    function AfterSelectSchools() {
+        var entPracNo = $("#EntPracNo").val();
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItem/GetEntItems",
+            data: { EntPracNo: entPracNo },
+            dataType: "json",
+            success: function (reslut) {
+
+                var tb = "";
+                $.each(reslut, function (i, item) {
+                    tb += "<tr>" +
+                        "<td>" + item.ItemName + "</td>" +
+                        "<td>" + item.ItemWeight + "%</td>" +
+                        "<td>" + item.ItemSequence + "</td>" +
+                        "<td> " +
+                        "<a onclick=\"AjaxDelete(\'" + item.ItemID + "\')\">删除 |</a>" +
+                        " <a href='/Enterprise/ScoreItem/Edit?id=" + item.ItemID + "'>编辑 |</a>" +
+                        " <a href='/Enterprise/ScoreItemToTeacher/Index?ItemID=" + item.ItemID + "&EntPracNo=" + entPracNo + "'>分配员工</a>"
+                    "</td>" +
+                        "</tr>";
+                });
+                $("#arrangeList").html(tb);
+                $("#tip").html("准备就绪!");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择班级");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+
+    function AjaxDelete(id) {
+        var EntPracNo = $("#EntPracNo").val();
+        if (id == "" || EntPracNo == "") {
+            alert('抱歉，发现异常，请报告给开发人员！');
+            return;
+        }
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItem/AjaxDelete",
+            data: { id: id },
+            dataType: "text",
+            success: function (reslut) {
+                $("#tip").html("删除成功，正在刷新列表...");
+                AfterSelectSchools();
+                $("#tip").html("准备就绪！");
+            },
+            error: function (data) {
+                $("#tip").html("删除失败！请先删除与该评分项关联的分配记录");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+
+    function Create() {
+        var EntPracNo=$("#EntPracNo").val();
+        if (EntPracNo == "-1") {
+            alert('请先选择学校');
+            return;
+        }
+        location.href="/Enterprise/ScoreItem/Create?EntPracNo=" + EntPracNo;
+    }
+</script>
+
+
+
+<div>
+    @Html.Partial("_SelectSchool")
+ 
+    <button class="btn btn-primary" onclick="Create()">添加评分项</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    评分项
+                </th>
+                <th>
+                    比重
+                </th>
+                <th>
+                    排序
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="arrangeList">
+            @*@foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ItemName
+                    </td>
+                    <td>
+                        @item.ItemWeight
+                    </td>
+                    <td>
+                        @item.ItemSequence
+                    </td>
+                    <td>
+                        <a href="/School/ScoreItemToTeacher/Index?id=@item.ItemID">分配教师</a>|
+                        @Html.ActionLink("删除", "Delete", new { id = item.ItemID })
+                    </td>
+                </tr>
+            }*@
+        </tbody>
+    </table>
+    @*@Html.Label((int)Model.Sum(a => a.ItemWeight) == 100 ? "" : "注意:权重和需要等于100（当前为："+ (int)Model.Sum(a => a.ItemWeight) +"）！！！", new { style = "color: red" })*@
+</div>
+

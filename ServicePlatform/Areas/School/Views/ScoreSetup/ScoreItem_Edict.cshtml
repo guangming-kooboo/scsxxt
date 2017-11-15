@@ -1,0 +1,82 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加记录</title>
+
+    <link href="~/Areas/School/Content/Home/css/style.css" rel="stylesheet" />
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">后台首页</a></li>
+            <li><a href="#">编辑记录</a></li>
+
+        </ul>
+    </div>
+
+
+    <form action="/School/ScoreSetup/ScoreItem_Edict" method="post">
+        <input name="ItemNo" type="text" hidden="hidden" class="dfinput" />
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>编辑记录</span></div>
+
+            <ul class="forminfo">
+                <li>
+                    <label>批次编号</label>
+                    @Html.DropDownList("PracBatchID", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.SchoolContext(), "T_PracBatch", "ServicePlatform.Models", 1, 1), new { @class = "dfinput" })
+                    <i>*请选择 批次编号</i>
+                </li>
+
+
+
+                <li>
+                    <label>条目名称</label>
+                    <input name="ItemName" type="text" class="dfinput" />
+                    <i>*请输入 条目名称</i>
+                </li>
+
+                <li>
+                    <label>权重</label>
+                    <input name="ItemWeight" type="text" class="dfinput" />
+                    <i>*请输入 权重</i>
+                </li>
+                <li>
+                    <label>显示顺序</label>
+                    <input name="ItemSequence" type="text" class="dfinput" />
+                    <i>*请输入显示顺序</i>
+                </li>
+
+
+
+
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" onclick="window.close();" /></li>
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+

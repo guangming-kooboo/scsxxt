@@ -1,0 +1,35 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.Home._Search_M
+
+
+<!-- 导航-->
+    <div class="main-headd">
+
+        <div class="main-headd-litter">
+            <p class="main-headd-p">|&nbsp;&nbsp;顶岗实习论坛</p>
+        </div>
+        <!-- 搜索-->
+        <div class="navigations">
+            <div class="searchs">
+                <form method="post" action="/BBS/Home/Search">
+                    
+                    <input class="input-text" style="width: 190px;" type="text" placeholder="&nbsp;请在此输入搜索内容"  name="found" value="@Model.keyword"/>
+                    <select  style="width: 105px;" name="sort" class="input-text"> 
+                        <option id="post" >搜帖子</option>
+                        <option id="forum">搜板块</option>
+                        <option id="user">搜用户</option>
+                    </select>
+                    <input class="input-submit" type="submit" value="搜索" />
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#@Model.type").attr("selected", "selected");
+    });
+</script>

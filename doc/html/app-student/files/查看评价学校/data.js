@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"查看评价学校.html",
+  "generationDate":new Date(1483078092498.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"a57fd19287764b7a9bee79977575ce02",
+    "type":"Axure:Page",
+    "name":"查看评价学校",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"50f7069d7a154de69780c4a1aa2f15b6",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":117,
+              "y":20},
+            "size":{
+              "width":313,
+              "height":554}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"df40495484394682821475707a5e66b5",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":117,
+                  "y":20},
+                "size":{
+                  "width":313,
+                  "height":554}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/查看评价学校/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "50f7069d7a154de69780c4a1aa2f15b6":{
+      "scriptId":"u0"},
+    "df40495484394682821475707a5e66b5":{
+      "scriptId":"u1"}}});

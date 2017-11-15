@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StampTable</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Areas/SigAndStamp/Script/StampTable.js"></script>
+
+    <script type="text/javascript">
+        function Delete() {
+            //删除按钮
+            var SelectRows = $('#StampTableBox').datagrid('getSelections');//获取选中的要删除的行
+            if (SelectRows.length > 0) {
+                $.messager.confirm('确定操作', '你确定要删除选中的数据吗？', function (flag) {
+                    if (flag) {
+                        //alert('弹出框框');
+                        var DeletedID = [];
+                        for (var i = 0; i < SelectRows.length; i++) {
+                            DeletedID.push(SelectRows[i].StampsID);
+                        }
+                        //console.log(DeletedID.join(','));
+
+                        //使用Ajax传递需要删除的新闻编号
+                        $.ajax({
+                            type: 'POST',
+                            url: '/SigAndStamp/DeleteStamp',
+                            data: {
+                                //DeleteRow: DeletedID.join(','),
+                                DeleteRow: DeletedID,
+                            },
+                            beforeSend: function () {
+                                $('#StampTableBox').datagrid('loading');
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    $('#StampTableBox').datagrid('loaded');
+                                    $('#StampTableBox').datagrid('load');
+                                    $.messager.show({
+                                        title: '提示信息',
+                                        msg: data + "个印章已被删除",
+                                    });
+                                }
+                            },
+                        });
+                    }
+                });
+            }
+            else {
+                //给予警告
+                $.messager.alert('警告', '百超提醒你，你没有选中要删除的行', 'warning');
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        .place {
+            height: 40px;
+            background: url(/Areas/News/Content/Image/righttop.gif) repeat-x;
+        }
+
+            .place span {
+                line-height: 40px;
+                font-weight: bold;
+                float: left;
+                margin-left: 12px;
+            }
+
+        .placeul li {
+            float: left;
+            line-height: 40px;
+            padding-left: 7px;
+            padding-right: 12px;
+            background: url(/Areas/News/Content/Image/rlist.gif) no-repeat right;
+        }
+
+            .placeul li:last-child {
+                background: none;
+            }
+    </style>
+
+</head>
+<body>
+    <div id="StampContanier">
+
+        <div id="StampContentTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">印章管理列表</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="StampContent">
+            <table id="StampTableBox"></table>
+        </div>
+        <div id="StampToolBar">
+            <div>
+                <a href="/DownLoadFile/AddDLF/AddDLF" class="easyui-linkbutton" iconcls="icon-add">添加</a>
+                <a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="Delete();">删除</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

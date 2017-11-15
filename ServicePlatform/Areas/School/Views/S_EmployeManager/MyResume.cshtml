@@ -1,0 +1,495 @@
+﻿@{
+    ViewBag.Title = "MyResume";
+}
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+@{
+    ViewBag.Title = "MyWorkPlat";
+
+    List<T_Resume> Resume = ViewBag.Resume;
+
+    List<T_RecruitPosition> My_Resume_Sended = ViewBag.My_Resume_Sended;//自投简历岗位信息
+    List<T_RecruitPosition> Resume_Get = ViewBag.Resume_Get;//企业邀请岗位信息   
+
+    List<T_JobWanted> History = ViewBag.History;//自投简历历史信息（面试时间等）
+    List<T_JobWanted> History2 = ViewBag.History2;//企业邀请历史信息（面试时间等）
+
+
+    IEnumerable<SelectListItem> Enterprise = ViewData["Enterprise"] as IEnumerable<SelectListItem>;
+
+    List<T_RecruitPosition> RecruitPosition = ViewBag.PositionList;
+
+    IEnumerable<SelectListItem> Resume_L = ViewData["Resume_L"] as IEnumerable<SelectListItem>;  
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的工作台</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.idTabs.min.js"></script>
+    <script language="JavaScript" src="/Areas/School/Content/Home/js/select-ui.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+
+            var flag = '@ViewBag.Focus';
+            if (flag == 'tab1') {
+                document.getElementById('upresume').click();
+            }
+            else if(flag == 'tab2')
+            {
+                document.getElementById('sendresume').click();
+            }
+            else {
+                document.getElementById('resumehis').click();
+            }
+
+        });
+    </script>
+    <script>
+    function jump(entno, posid) {
+        var practiceno = '@ViewBag.PraticeNo';
+        window.location = '/School/S_EmployeManager/JobWanted_RollBack?practiceno=' + practiceno + "&entno=" + entno + "&posid=" + posid;
+    }
+
+        function jump_finalop(entno, posid,flag)
+        {
+            var practiceno = '@ViewBag.PraticeNo';
+            window.location = '/School/S_EmployeManager/Offer_AgreeOrNot?practiceno=' + practiceno + "&entno=" + entno + "&posid=" + posid + '&flag=' + flag;
+        }
+
+        function jump_rollfinalop(entno, posid)
+        {
+            var practiceno = '@ViewBag.PraticeNo';
+            window.location = '/School/S_EmployeManager/RollBack_AgreeOrNot?practiceno=' + practiceno + "&entno=" + entno + "&posid=" + posid;
+        }
+    </script>
+
+
+    <script>
+        function jump_s(entno,posid)
+        {
+            var practiceno = '@ViewBag.PracticeNo';
+            var resume = document.getElementById("Resume").value;
+            window.location = '/School/S_EmployeManager/JobWanted?practiceno=' + practiceno + "&entno=" + entno + "&posid=" + posid + "&resume=" + resume;
+        }
+    </script>
+
+    <script>
+        function gradeChange() {
+            var entid = document.getElementById("batch").value;
+            var practiceno = '@ViewBag.PracticeNo';
+            //var grade = entid.options[entid.selectedIndex].grade;
+            var url = '/School/S_EmployeManager/MyResume/?focus=tab2'+'&StuPracNo='+practiceno+'&Entid=' + entid;
+            window.location = url;
+        }
+    </script>
+
+
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">招聘管理</a></li>
+            <li><a href="#">简历管理</a></li>
+        </ul>
+    </div>
+
+    <div class="formbody">
+
+        <div id="usual1" class="usual">
+
+            <div class="itab">
+                <ul>
+                    <li><a href="#tab1" class="selected" id="upresume" name="upresume">上传简历</a></li>
+                    <li><a href="#tab2" id="sendresume" name="sendresume">投放简历</a></li>
+                    <li><a href="#tab3" id="resumehis" name="resumehis" class="">求职结果</a></li>
+                </ul>
+            </div>
+
+            
+
+
+
+            <div id="tab1" class="tabson">
+                @using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+                {
+                    <div class="formtitle"><span>已提交的简历: <i style="color:red">默认企业将展示给企业</i></span></div>
+                    <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                        <tr class="title">
+                            @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                            @*<td bgcolor="#CCCCCC">企业<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                            <td bgcolor="#CCCCCC">简历名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">发布时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        </tr>
+                        <tbody>
+                            @if (Resume.Count != 0)
+                            {
+                                for (int i = 0; i < Resume.Count; i++)
+                                {
+                                    <tr class="odd">
+                                        <td>
+                                            <font color="red">@Resume[i].IsDefaultStr</font>@Resume[i].ResumeName
+                                        </td>
+                                        <td>
+                                            @DateTimeFormat.ConvertIntDateTime(Convert.ToInt32(Resume[i].PubTime)).ToString()
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("设为默认", "SetResumeDefault", "S_EmployeManager", new { practiceno = Resume[i].PracticeNo, name = Resume[i].ResumeName}, null)
+                                            @Html.ActionLink("预览", "ViewResume", "S_EmployeManager", new { practiceno = Resume[i].PracticeNo, name = Resume[i].ResumeName }, null)
+                                            @Html.ActionLink("删除", "DeleteResume", "S_EmployeManager", new { practiceno = Resume[i].PracticeNo, name = Resume[i].ResumeName }, null)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+
+
+                @using (Html.BeginForm("AddNewResume_ByFile", "S_EmployeManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="formtitle"><span>导入新的简历: </span></div>
+
+                    <input type="file" name="Resume" id="Resume" value="导入简历" />
+
+                    <input name="practiceno" id="practiceno" type="hidden" class="dfinput" value='@ViewBag.PraticeNo' />
+                    <input type="submit" value="确认导入" class="btn" />
+                    <br />
+                    <mark><label style="color:red">多份简历间请确保文件名不重复！</label></mark>
+                }
+
+
+
+            </div>
+
+
+            <div id="tab2" class="tabson">
+                @using (Html.BeginForm("SendMyResume", "S_EmployeManager", FormMethod.Post, new { id = "_form" }))
+                {
+                    <div class="formtitle"><span>选择企业: </span></div>
+                    @*<ul class="forminfo">
+                        <li><label>企业：</label>@Html.DropDownList("Enterprise", Enterprise, new { @class = "dfinput", id = "Enterprise", name = "Enterprise" })<i></i></li>
+                    </ul>
+                    <input type="submit" class="btn" value="查询" />*@
+    <ul class="forminfo">
+        <li>
+            <select id="batch" name="batch" class="dfinput" onchange="gradeChange()">
+                @foreach (var item in Enterprise)
+                {
+                    <option value="@item.Value" selected='@item.Selected'>
+                        @item.Text
+                    </option>
+                }
+            </select>
+        </li>
+    </ul>
+                }
+                <div class="formtitle"><span>选择简历: </span></div>
+                <ul class="forminfo">
+                    <li>@Html.DropDownList("Resume_L", Resume_L, new { @class = "dfinput", id = "Resume_L", name = "Resume_L" })<i></i></li>
+                </ul>
+                <div class="formtitle"><span>该公司已发布的岗位列表: </span></div>
+                <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                    @if (RecruitPosition.Any())
+                    {
+                        <tr class="title">
+                            @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                            @*<td bgcolor="#CCCCCC">企业<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>*@
+                            <td bgcolor="#CCCCCC">岗位名称<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">职位数量<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">岗位要求<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">薪资<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">发布者<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">发布时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">过期时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">接受申请<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                            <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        </tr>
+                    }
+                   
+                    <tbody>
+                    @if (RecruitPosition.Count != 0)
+                    {
+                        for (int i = 0; i < RecruitPosition.Count; i++)
+                        {
+                            <tr class="odd">
+                                <td>
+                                    @RecruitPosition[i].PositionName
+                                </td>
+                                <td>
+                                    @RecruitPosition[i].PosDesc
+                                </td>
+                                <td>
+                                    @RecruitPosition[i].PosQuantity
+                                </td>
+                                <td>
+                                    @RecruitPosition[i].PosRequirement
+                                </td>
+                                <td>
+                                    @RecruitPosition[i].PosPay
+                                </td>
+                                <td>
+                                    @RecruitPosition[i].Publisher
+                                </td>
+                                <td>
+                                    @DateTimeFormat.ConvertIntDateTime(RecruitPosition[i].PubDate).ToString()
+                                </td>
+                                <td>
+                                    @DateTimeFormat.ConvertIntDateTime(RecruitPosition[i].PosExpireDate).ToString()
+                                </td>
+                                <td>
+                                    @RecruitPosition[i].IsActive
+                                </td>
+                                <td>
+                                    @if (ViewBag.CanSend == "true")
+                                    {
+                                        <a href="#" onclick="jump_s('@RecruitPosition[i].Ent_No', '@RecruitPosition[i].PositionID')">投递简历</a>
+                                    }
+                                    else
+                                    {
+                                        <span>简历为空！无法操作</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <lable style="color: red">该公司暂未提供岗位！无法投递简历</lable>
+                    }
+                    </tbody>
+                </table>
+
+
+
+            </div>
+
+
+            <div id="tab3" class="tabson">
+
+                @*@using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+                {*@
+                <div class="formtitle"><span>我找企业: </span></div>
+                <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                    <tr class="title">
+                        <td bgcolor="#CCCCCC">公司名称<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">岗位名称<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">职位数量<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">岗位要求<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">薪资<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">发布时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">过期时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">面试时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">面试成绩<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">简历状态<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    </tr>
+                    <tbody>
+                        @if (My_Resume_Sended.Count != 0)
+                        {
+                            for (int i = 0; i < My_Resume_Sended.Count; i++)
+                            {
+                                <tr class="odd">
+                                    <td>
+                                        @My_Resume_Sended[i].Ent_Name
+                                    </td>
+                                    <td>
+                                        @My_Resume_Sended[i].PositionName
+                                    </td>
+                                    <td>
+                                        @My_Resume_Sended[i].PosDesc
+                                    </td>
+                                    <td>
+                                        @My_Resume_Sended[i].PosQuantity
+                                    </td>
+                                    <td>
+                                        @My_Resume_Sended[i].PosRequirement
+                                    </td>
+                                    <td>
+                                        @My_Resume_Sended[i].PosPay
+                                    </td>
+                                    <td>
+                                        @DateTimeFormat.ConvertIntDateTime(My_Resume_Sended[i].PubDate).ToString()
+                                    </td>
+                                    <td>
+                                        @DateTimeFormat.ConvertIntDateTime(My_Resume_Sended[i].PosExpireDate).ToString()
+                                    </td>
+                                    <td>
+                                        @if (History[i].ReviewTime != 0)
+                                        {
+                                            @DateTimeFormat.ConvertIntDateTime(History[i].ReviewTime).ToString()
+                                        }
+                                    </td>
+                                    <td>
+                                        @History[i].ReviewScore
+                                    </td>
+                                    <td>
+                                        @History[i].JobStatusName
+                                    </td>
+                                    <td>
+                                        @if (History[i].JobStatus == 4)
+                                        {
+                                            <a href="#" onclick="jump_finalop('@My_Resume_Sended[i].Ent_No','@My_Resume_Sended[i].PositionID','agree')">同意录取</a>
+                                            <a href="#" onclick="jump_finalop('@My_Resume_Sended[i].Ent_No','@My_Resume_Sended[i].PositionID','disagree')">拒绝录取</a>
+                                        }
+                                        else if (History[i].JobStatus == 5)
+                                        {
+                                            <a href="#" onclick="jump_rollfinalop('@My_Resume_Sended[i].Ent_No','@My_Resume_Sended[i].PositionID')">回退选择</a>
+                                        }
+                                        else
+                                        {
+                                       <a href="#" onclick="jump('@My_Resume_Sended[i].Ent_No','@My_Resume_Sended[i].PositionID')">撤回简历</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                @*}*@
+
+                <div class="formtitle"><span>企业找你: </span></div>
+                <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                    <tr class="title">
+                        <td bgcolor="#CCCCCC">公司名称<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">岗位名称<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">岗位描述<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">职位数量<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">岗位要求<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">薪资<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">发布时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">过期时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">面试时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">面试成绩<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">简历状态<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                        <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    </tr>
+                    <tbody>
+                        @if (Resume_Get.Count != 0)
+                        {
+                            for (int i = 0; i < Resume_Get.Count; i++)
+                            {
+                                <tr class="odd">
+                                    <td>
+                                        @Resume_Get[i].Ent_Name
+                                    </td>
+                                    <td>
+                                        @Resume_Get[i].PositionName
+                                    </td>
+                                    <td>
+                                        @Resume_Get[i].PosDesc
+                                    </td>
+                                    <td>
+                                        @Resume_Get[i].PosQuantity
+                                    </td>
+                                    <td>
+                                        @Resume_Get[i].PosRequirement
+                                    </td>
+                                    <td>
+                                        @Resume_Get[i].PosPay
+                                    </td>
+                                    <td>
+                                        @DateTimeFormat.ConvertIntDateTime(Resume_Get[i].PubDate).ToString()
+                                    </td>
+                                    <td>
+                                        @DateTimeFormat.ConvertIntDateTime(Resume_Get[i].PosExpireDate).ToString()
+                                    </td>
+                                    <td>
+                                        @if(History2[i].ReviewTime!=0)
+                                        { 
+                                        @DateTimeFormat.ConvertIntDateTime(History2[i].ReviewTime).ToString()
+                                        }
+                                    </td>
+                                    <td>
+                                        @History2[i].ReviewScore
+                                    </td>
+                                    <td>
+                                        @History2[i].JobStatusName
+                                    </td>
+                                    <td>
+                                        @if(History2[i].JobStatus==4)
+                                        { 
+                                        <a href="#" onclick="jump_finalop('@Resume_Get[i].Ent_No','@Resume_Get[i].PositionID','agree')">同意录取</a>
+                                        <a href="#" onclick="jump_finalop('@Resume_Get[i].Ent_No','@Resume_Get[i].PositionID','disagree')">拒绝录取</a>
+                                        }
+                                        else if(History2[i].JobStatus==5)
+                                        {
+                                            <a href="#" onclick="jump_rollfinalop('@Resume_Get[i].Ent_No','@Resume_Get[i].PositionID')">回退选择</a>
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                @*}*@
+
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+        </script>
+
+        <script type="text/javascript">
+            $('.tablelist tbody tr:odd').addClass('odd');
+        </script>
+
+        <script>
+
+            function show(PosDesc) {
+                //弹出一个页面层
+                layer.open({
+                    type: 1,
+                    area: ['300px', '180px'],
+                    title: "周记详情",
+                    shadeClose: true, //点击遮罩关闭
+                    offset: ['200px', '500px'],
+                    content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+                });
+            }
+        </script>
+
+
+
+    </div>
+
+</body>
+
+</html>
+
+
+

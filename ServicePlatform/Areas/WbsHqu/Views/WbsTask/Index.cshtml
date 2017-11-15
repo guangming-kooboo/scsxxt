@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<label>
+    工作量名称:&nbsp;
+    @Html.TextBox("工作量名称", "", new { @class = "form-control input-sm", PlaceHolder = "请输入要查询的工作量名称" })
+</label>
+
+<script>
+    function Search() {
+        var Params = v("工作量名称");
+        return Params;
+    }
+    function fn(id) {
+        if (confirm("确定删除吗")) {
+            location.href = "/WbsHqu/WbsTask/Delete?id="+id;
+        } else {
+            return;
+        }
+    }
+</script>

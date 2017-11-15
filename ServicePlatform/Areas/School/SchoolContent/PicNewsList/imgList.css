@@ -1,0 +1,107 @@
+﻿@charset "utf-8";
+/* CSS Document */
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+}
+img{
+	border:none;
+}
+ul{
+	list-style: none;
+}
+nav ul li {
+	display: inline-block;
+	_zoom:1;
+	*display:inline;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+a:hover{
+	text-decoration:underline;
+	color:#5c9f11;
+}
+body{
+	font-family: tahoma, arial, 微软雅黑, 宋体,'Hiragino Sans GB', 'WenQuanYi Micro Hei',  sans-serif;
+	font-size:1.em;
+	font-weight:400;
+	background:#eee;
+}
+
+/*-----------------------------------------------主体内容---------------------------------------------------------------------------*/
+.wrapper{
+	width:1000px;
+	margin:10px auto;
+	overflow:hidden;
+}
+.imgList{  /* 230+16=246*4 = 984   */
+	margin:10px auto;	
+	font-size:0.9em;
+}
+.classic{
+	width:910px;
+	background:white;
+	/*border:1px solid #ccc;*/
+	overflow:hidden;
+	margin :10px 6px;
+	padding:20px 30px;
+}
+.classic ul li {
+	display:inline;
+	padding:0 15px;	
+}
+.classic ul li a{
+	font-size:0.9em;
+	color:#666;
+	font-weight:bold;
+}
+.classic ul li a:hover{
+	color:#5c9f11;
+	text-decoration:underline;
+}
+
+.innerList{
+	float:left;
+	width:230px;
+	margin:0px 8px;
+}
+.inner{
+	width:230px;
+    height:230px;
+	background:white;
+	margin:25px 0;
+	padding-bottom:15px;
+}
+.inner img{
+	width:230px;  
+    height:210px;  
+	outline:none;
+	margin-bottom:10px;
+	opacity:0.85;
+	filter:alpha(opacity=85);
+}
+.inner img:hover{
+	cursor:pointer;
+	opacity:1.0;
+	filter:alpha(opacity=100);	
+	transform:scale(1.13 ,1.13 );
+	-ms-transform:scale(1.13 ,1.13 );/* Internet Explorer */
+	-moz-transform:scale(1.13 ,1.13 );/* Firefox */
+	-webkit-transform:scale(1.13 ,1.13 );/* Safari 和 Chrome */
+	-o-transform:scale(1.13 ,1.13 );/* Opera */
+	outline:none;
+	border:none;
+}
+.inner p{
+	display:inline;
+	padding: 0px 12px;
+	font-size:0.9em;
+	color:#666;
+	
+}
+
+	

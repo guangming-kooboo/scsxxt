@@ -1,0 +1,50 @@
+﻿@model Core.Services.Entity.T_SchoolReviewerTask
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>T_SchoolReviewerTask</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TeacherID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TeacherID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PracticeNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PracticeNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReviewScore)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReviewScore)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReviewComment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReviewComment)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.TaskID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

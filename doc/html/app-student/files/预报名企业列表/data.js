@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"预报名企业列表.html",
+  "generationDate":new Date(1483078092219.79),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"ce47eb0b0829413e9108f55c35b16955",
+    "type":"Axure:Page",
+    "name":"预报名企业列表",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"b82ee2d8d8334e16a9ecc1fe08a95bba",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":130,
+              "y":46},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"98ec8e7bcd6941449a32bc2113561329",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":130,
+                  "y":46},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/预报名企业列表/u0.jpg"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "b82ee2d8d8334e16a9ecc1fe08a95bba":{
+      "scriptId":"u0"},
+    "98ec8e7bcd6941449a32bc2113561329":{
+      "scriptId":"u1"}}});

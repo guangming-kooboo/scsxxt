@@ -1,0 +1,75 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.FAQ.EditFaq_M
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Areas/Message/Content/jquery-1.9.1.min.js"></script>
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.HiddenFor(o => o._FAQID)
+@Html.HiddenFor(o => o._StateID)
+<input type="hidden" name="child" id="child" value="@Model.childid" />
+<input type="hidden" name="father" id="father" value="@Model.fatherid" />
+@Html.InputFor(o => o._Title)
+@Html.SelectFor(o => o._FAQTypeId, Model._FAQtype, "为帮助文章选择分类")
+@Html.SelectFor(o => o._ChildFAQTypeId, Model._ChilldFAQtype, "为帮助文章选择子级分类")
+@Html.RichBoxFor(o => o._Contents)
+@Html.InputFor(o => o.Abstract)
+@Html.InputFor(o => o._Video, "请填写优酷视频地址")
+@*<input type="hidden" name="Pic" id="Pic"/>
+<input type="hidden" name="oldPic" id="oldPic" value="@Model.Pic"/>
+<img src="@Model.Pic" id="pic1" style="width: 150px; height: 130px;" />
+<a id="active-upload" >上传照片(可隐藏)</a>
+<div id="uploadPhoto">
+    @Html.FileFor(o => o.FAQpic, "/UserFiles/Test/")
+</div>*@
+<script>
+    //function OnUploadFinish(filePath) {
+    //    $('#uploadPhoto').hide();
+    //    alert("修改成功");
+    //    $("#Pic").val(filePath);
+    //    $("#pic1").attr("src", filePath);
+    //    $("#pic1").show();
+    //};
+
+    $().ready(function() {
+        $('#uploadPhoto').hide();
+        $('#active-upload').click(function() {
+            $('#uploadPhoto').show();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var fatherid = $("#father").val();
+        var childid = $("#child").val();
+        if ($("#pic1").attr("src") == "") {
+            $("#pic1").hide();
+        }
+        if (fatherid == "0") {
+            childtype();
+        }
+    });
+    $("#_FAQTypeId").change(function () {
+        childtype();
+    });
+
+    function childtype() {
+        var fatherid = $("#_FAQTypeId").val();
+        $.ajax({
+            type: "post",
+            url: "/WbsHqu/Admin/childtype?fatherid=" + fatherid,
+            dataType: "json",
+            success: function(result) {
+                if (result == 500) {
+                    return alert("请求失败");
+                } else {
+                    $("#_ChildFAQTypeId option").remove();
+                    $.each(result, function(i, item) {
+                        $("#_ChildFAQTypeId").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                    });
+                }
+            }
+        });
+    }
+</script>

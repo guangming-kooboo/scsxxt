@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NewsErrorPage1</title>
+    <style type="text/css">
+        .place {
+            height: 40px;
+            background: url(/Areas/News/Content/Image/righttop.gif) repeat-x;
+        }
+
+            .place span {
+                line-height: 40px;
+                font-weight: bold;
+                float: left;
+                margin-left: 12px;
+            }
+
+        .placeul li {
+            float: left;
+            line-height: 40px;
+            padding-left: 7px;
+            padding-right: 12px;
+            background: url(/Areas/News/Content/Image/rlist.gif) no-repeat right;
+        }
+
+            .placeul li:last-child {
+                background: none;
+            }
+    </style>
+</head>
+<body>
+    <div id="ErrorPage1Container">
+        <div id="ErrorPage1Top">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="/News/NewsCenter/HomePageTable">首页</a></li>
+                    <li><a href="#">新闻错误页</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="ErrorPage1Body">
+            <p>
+                对不起，您输入的新闻信息中有条目不能为空。
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"岗位评价表.html",
+  "generationDate":new Date(1483078092553.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"ec8eb6c4e735405aafe9a5a1de472c3e",
+    "type":"Axure:Page",
+    "name":"岗位评价表",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"6e9b888e2aeb47209566075fed7b24ef",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":169,
+              "y":54},
+            "size":{
+              "width":381,
+              "height":636}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"bf92bca84ea54a1c9838f1a1d0698375",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":169,
+                  "y":54},
+                "size":{
+                  "width":381,
+                  "height":636}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/岗位评价表/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "6e9b888e2aeb47209566075fed7b24ef":{
+      "scriptId":"u0"},
+    "bf92bca84ea54a1c9838f1a1d0698375":{
+      "scriptId":"u1"}}});

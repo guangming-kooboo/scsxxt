@@ -1,0 +1,79 @@
+﻿
+<img src="~/Content/AppStudentV3/images/1-0.png" class="img0">
+<div class="hide">
+    <a href="@Url.Action("Main","Home", new {area="AppStudent"})"><img src="~/Content/AppStudentV3/images/1-11.png" class="img4" style="display: none"></a>
+    <a href="@Url.Action("AllEnt_List","Home", new {area="AppStudent" })"><img src="~/Content/AppStudentV3/images/1-21.png" class="img3" style="display: none"></a>
+    <a href="@Url.Action("PersonalSpace", "Home", new {area = "AppStudent"})"><img src="~/Content/AppStudentV3/images/1-31.png" class="img2" style="display: none"></a>
+    <a href="@Url.Action("PracticeOverView", "Home", new {area = "AppStudent"})"><img src="~/Content/AppStudentV3/images/1-51.png" class="img5" style="display: none"></a>
+    <a href="@Url.Action("LogOut","Home", new {area="AppStudent" })"><img src="~/Content/AppStudentV3/images/1-41.png" class="img1" style="display: none"></a>
+</div>
+<div class="cloth" style="width: 100%;display:none;background-color: rgba(0,0,0,.3);z-index: 2000;bottom: 0;position: fixed;"></div>
+<style>
+    .img0 {
+        z-index: 2001;
+        height: 70px;
+        position: fixed;
+        right: 15px;
+        bottom: 35px;
+    }
+
+    .img1 {
+        z-index: 2001;
+        height: 70px;
+        position: fixed;
+        right: 0px;
+        bottom: 105px;
+    }
+
+    .img2 {
+        z-index: 2001;
+        height: 70px;
+        position: fixed;
+        right: 0px;
+        bottom: 165px;
+    }
+
+    .img3 {
+        z-index: 2001;
+        height: 70px;
+        position: fixed;
+        right: 0px;
+        bottom: 225px;
+    }
+
+    .img4 {
+        z-index: 2001;
+        height: 70px;
+        position: fixed;
+        right: 0px;
+        bottom: 345px;
+    }
+     .img5{
+	   	z-index: 2001;
+	   	height: 70px;
+	   	position: fixed;
+	   	right: 0px;
+	   	bottom:285px;
+	   	}
+</style>
+
+<script>
+      $(document).on("click", ".img0", function() {
+      $(".img1").fadeToggle(800) ;
+	  $(".img2").fadeToggle(600) ;
+	  $(".img3").fadeToggle(400) ;
+	  $(".img4").fadeToggle(200);
+	  $(".img5").fadeToggle();
+	  if($(".cloth").css("display")=="none")
+	  {
+	       $(".cloth").css("height", $("body").height()).fadeIn();
+		 	$(".cloth").show();
+		 }
+	    else{
+	    	$(".cloth").hide();
+	    }
+
+      });
+
+</script>
+

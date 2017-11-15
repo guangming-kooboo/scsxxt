@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"正式报名.html",
+  "generationDate":new Date(1483078091956.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"1253264eb6964c7b97f9039e17a6d317",
+    "type":"Axure:Page",
+    "name":"正式报名",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"5a8b83b4735e4b68a725c6d85ab87f34",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":140,
+              "y":70},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"021a1032864144c2babb3f2e43cf50e7",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":140,
+                  "y":70},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/正式报名/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "5a8b83b4735e4b68a725c6d85ab87f34":{
+      "scriptId":"u0"},
+    "021a1032864144c2babb3f2e43cf50e7":{
+      "scriptId":"u1"}}});

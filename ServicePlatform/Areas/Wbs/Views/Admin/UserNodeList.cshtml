@@ -1,0 +1,28 @@
+﻿@model ServicePlatform.Areas.Wbs.ViewModels.Admin.UserNodeList_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        <li><a href="/Wbs/Admin/ChildNodeList?ReportID=Wbs_子任务列表&Params=@Model.node.FatherNodeID">[子任务列表]@Model.node.NodeName</a><i class="fa fa-angle-right"></i></li>
+    </ol>
+
+</div>
+
+
+@*必须添加*@
+@Html.Partial("_Report", new ViewDataDictionary(ViewData)
+{
+    {"showDeafultButton",false }
+})
+<script>
+    function Preview() {
+        var Params =
+            v("父节点");
+
+        Query(Params, "@ViewData["Url"]");
+    }
+</script>

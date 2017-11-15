@@ -1,0 +1,39 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.Case_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>周记</title>
+
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="main-do">
+        <div class="note-head2">
+            <ul class="note-ul">
+                <li class="li-one"><a href=""></a></li>
+                <a class="note-a" href="@Url.Action("DiaryList", "Home", new {area = "App", uid = Model.Uid})"> <li class="note-li">周记</li></a>
+                <li class="li-three"><p></p></li>
+                <li class="note-lis">案例</li>
+                <li class="li-two"><p></p></li>
+            </ul>
+
+        </div>
+
+        <div class="note-main">
+            <p class="note-main-p">点击按钮编写</p>
+            <p class="note-main-p2">第一篇案例吧</p>
+            <img src="~/Areas/App/Content/Image/箭头.png" />
+        </div>
+
+        <a href="@Url.Action("AddPracticeCase", "Home", new { area = "App",uid=Model.Uid})">
+            <div class="do-it">
+                <p class="do-it-a">添加案例</p>
+            </div>
+        </a>
+    </div>
+</body>

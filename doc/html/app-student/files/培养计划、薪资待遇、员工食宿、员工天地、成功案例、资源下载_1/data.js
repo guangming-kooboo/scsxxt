@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"培养计划、薪资待遇、员工食宿、员工天地、成功案例、资源下载_1.html",
+  "generationDate":new Date(1483078092282.8),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"407acf68698445adb3895d981c39f5de",
+    "type":"Axure:Page",
+    "name":"培养计划、薪资待遇、员工食宿、员工天地、成功案例、资源下载",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"c435973fd83f49cb91d5802e5b62c3b9",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":260,
+              "y":266},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"495b6544853b451eb24e5f9bdccfde05",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":260,
+                  "y":266},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/培养计划、薪资待遇、员工食宿、员工天地、成功案例、资源下载/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "c435973fd83f49cb91d5802e5b62c3b9":{
+      "scriptId":"u0"},
+    "495b6544853b451eb24e5f9bdccfde05":{
+      "scriptId":"u1"}}});

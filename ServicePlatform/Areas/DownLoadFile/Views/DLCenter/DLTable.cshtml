@@ -1,0 +1,122 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DLTable</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Areas/DownLoadFile/Script/DLTableBox.js"></script>
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+
+    <link href="~/Areas/DownLoadFile/Content/AddDLF.css" rel="stylesheet" />
+    <script type="text/javascript">
+
+        $().ready(function () {
+            var id = "@ViewData["id"]";
+            if (id !== "") {
+                $("#DLFileColumnID").val(id);
+                $("#DLFTitle").val("未填写标题");
+                $("#DLFPulish").val("admin");
+
+                
+             //   $("#DLFileColumnID").attr("onmousemove", "this.setCapture()");
+            }
+          
+
+        });
+        function Delete() {
+            //删除按钮
+            var SelectRows = $('#DLTableBox').datagrid('getSelections');//获取选中的要删除的行
+            if (SelectRows.length > 0) {
+                $.messager.confirm('确定操作', '你确定要删除选中的数据吗？', function (flag) {
+                    if (flag) {
+                        //alert('弹出框框');
+                        var DeletedID = [];
+                        for (var i = 0; i < SelectRows.length; i++) {
+                            DeletedID.push(SelectRows[i].DLFileID);
+                        }
+                        //console.log(DeletedID.join(','));
+
+                        //使用Ajax传递需要删除的新闻编号
+                        $.ajax({
+                            type: 'POST',
+                            url: '/DLCenter/DeleteDL',
+                            data: {
+                                //DeleteRow: DeletedID.join(','),
+                                DeleteRow: DeletedID,
+                            },
+                            beforeSend: function () {
+                                $('#DLTableBox').datagrid('loading');
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    $('#DLTableBox').datagrid('loaded');
+                                    $('#DLTableBox').datagrid('load');
+                                    $.messager.show({
+                                        title: '提示信息',
+                                        msg: data + "个资源已被删除",
+                                    });
+                                }
+                            },
+                        });
+                    }
+                });
+            }
+            else {
+                //给予警告
+                $.messager.alert('警告', '你没有选中要删除的行', 'warning');
+            }
+        }
+
+        function Edit() {
+            var SelectRow = $('#DLTableBox').datagrid("getSelected");
+            var SelectId = SelectRow.DLFileID;
+            var s = "/DownLoadFile/DLCenter/EditDLF?id='" + SelectId + "'";
+            window.location = s;
+        }
+
+    </script>
+
+</head>
+<body>
+    <div id="DLContanier">
+
+        <div id="DLContentTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">资源上传管理列表</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="DLContentAdd">
+            <!--资源文件添加-->
+            @Html.Partial("ADD");
+        </div>
+        
+        <div>@ViewData["DLTip"]</div>
+
+        <div id="DLContent">
+            <table id="DLTableBox"></table>
+        </div>
+        <div id="DLFToolBar">
+            <div>
+                @*<a href="/DownLoadFile/AddDLF/AddDLF" class="easyui-linkbutton" iconcls="icon-add">添加</a>*@
+                <a href="#" class="easyui-linkbutton" iconcls="icon-edit" onclick="Edit();">编辑</a>
+                <a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="Delete();">删除</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

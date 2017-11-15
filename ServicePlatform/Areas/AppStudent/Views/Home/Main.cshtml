@@ -1,0 +1,369 @@
+﻿@using Qx.Tools.CommonExtendMethods
+@model ServicePlatform.Areas.AppStudent.ViewModel.Home.Main_M
+<style>
+    .placeholder3 {
+        line-height: 4em;
+        height: 4em;
+        text-align: center;
+    }
+
+    .placeholder1 {
+        line-height: 4em;
+        height: 4em;
+        text-align: left;
+        padding-left: 0.6em;
+        position: relative;
+        right: 0.9em;
+        width: 100%;
+    }
+
+    .placeholder2 {
+        line-height: 4em;
+        height: 4em;
+        text-align: right;
+        padding-right: 0.6em;
+    }
+
+    .back1 {
+        /*background: url(images/back.png);*/
+        background-image: url('../../../../Content/AppStudentV3/images/back.png');
+        background-size: 100% 4em;
+        color: #ffffff;
+        width: 80%;
+        text-align: center;
+    }
+
+    .back2 {
+        /*background: url(images/back2.png);*/
+        background-image: url('../../../../Content/AppStudentV3/images/back2.png');
+        background-size: 100% 4em;
+        color: #ffffff;
+        width: 80%;
+        text-align: center;
+    }
+
+    .back3 {
+        /*background: url(images/back3.png);*/
+        background-image: url('../../../../Content/AppStudentV3/images/back3.png');
+        width: 80%;
+        background-size: 100% 4em;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .back4 {
+        /*background: url(images/back4.png);*/
+        background-image: url('../../../../Content/AppStudentV3/images/back4.png');
+        width: 80%;
+        background-size: 100% 4em;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .back5 {
+        /*background: url(images/back5.png);*/
+        background-image: url('../../../../Content/AppStudentV3/images/back5.png');
+        background-size: 100% 4em;
+        color: #ffffff;
+        text-align: center;
+        width: 80%;
+    }
+
+    .pubilice-uppad2 {
+        height: 5px;
+        background-color: #f8f8f8;
+    }
+
+    .content {
+        background-color: #ffffff;
+    }
+
+    .swiper-container {
+        width: 100%;
+    }
+
+        .swiper-container img {
+            display: block;
+            width: 100%;
+            height: 295px;
+        }
+
+    .colorgray2 {
+        color: #ffffff;
+        font-size: 0.9em;
+    }
+</style>
+
+<div class="swiper-container swiper-container-horizontal">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper" style="transform: translate3d(-360px, 0px, 0px); transition-duration: 0ms;">
+        <div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style="width: 360px;">
+
+            <img src="~/Content/AppStudentV3/images/swiper-3.jpg" />
+        </div>
+        <!-- Slides -->
+        <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 360px;">
+
+            <img src="~/Content/AppStudentV3/images/swiper-1.jpg" />
+        </div>
+        <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 360px;">
+
+            <img src="~/Content/AppStudentV3/images/swiper-2.jpg" />
+        </div>
+        <div class="swiper-slide" data-swiper-slide-index="2" style="width: 360px;">
+            <img src="~/Content/AppStudentV3/images/swiper-3.jpg" />
+        </div>
+        <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="3" style="width: 360px;">
+
+            <img src="~/Content/AppStudentV3/images/swiper-4.jpg" />
+        </div>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination swiper-pagination-bullets">
+        <span class="swiper-pagination-bullet swiper-pagination-bullet-active">
+        </span>
+        <span class="swiper-pagination-bullet"></span>
+        <span class="swiper-pagination-bullet"></span>
+    </div>
+</div>
+<div class="content">
+    @*企业信息*@
+    <div class="pubilice-uppad2"></div>
+    <div class="weui-flex">
+        <div class="" style="width: 40%">
+            <a href="javascript:;" id="show-actions1">
+                <div class="placeholder3 back2">企业信息</div></a>
+        </div>
+        <div class="" style="width: 60%">
+            <a href="javascript:;" id="show-actions1">
+                <div class="placeholder1 mi">@Model._Count 家企业全新资讯</div></a>
+        </div>
+    </div>
+
+    @*我要报名*@
+    <div class="pubilice-uppad2"></div>
+    <div class="weui-flex">
+        <div class="" style="width: 40%"><a href="javascript:;" id="show-actions4">
+                <div class="placeholder3 back3">我要报名</div></a>
+        </div>
+        <div class="" style="width: 60%">
+            <a href="javascript:;" id="show-actions4">
+                <div class="placeholder1 mi">@Model._EntCount 家企业正在招聘</div>
+            </a>
+        </div>
+    </div>
+
+    @*实习记录*@
+    <div class="pubilice-uppad2"></div>
+    <div class="weui-flex">
+        <div class="" style="width: 40%"><a href="javascript:;" id="show-actions3">
+                <div class="placeholder3 back1">实习记录</div></a>
+        </div>
+        <div class="" style="width: 60%">
+            <a href="javascript:;" id="show-actions3">
+                <div class="placeholder1 mi">
+                    周记
+                    案例
+                    报告
+                </div>
+            </a>
+        </div>
+    </div>
+
+    @*实习评估*@
+    <div class="pubilice-uppad2"></div>
+    <div class="weui-flex">
+        <div class="" style="width: 40%"><a href="javascript:;" id="show-actions2">
+                <div class="placeholder3 back5">实习评估</div></a>
+        </div>
+        <div class="" style="width: 60%">
+            <a href="javascript:;" id="show-actions2">
+                <div class="placeholder1 mi ">
+                    学校
+                    企业
+                    鉴定表
+                    评价表
+                </div>
+            </a>
+        </div>
+    </div>
+    @*个人中心*@
+    <div class="pubilice-uppad2"></div>
+    <div class="weui-flex">
+        <div class="" style="width: 40%">
+            <a href="javascript:;" id="show-actions5">
+                <div class="placeholder3 back4">个人中心</div>
+            </a>
+        </div>
+        <div class="" style="width: 60%">
+            <a href="javascript:;" id="show-actions5">
+                <div class="placeholder1 mi">我的个人中心</div>
+            </a>
+        </div>
+    </div>
+    <div class="pubilice-uppad2"></div>
+</div>
+
+<!------页面特有----------->
+@section scripts{
+    <script src="~/Content/AppStudentV3/js/swiper.js"></script>
+    <script>
+        $(".swiper-container").swiper({
+            loop: true,
+            autoplay: 3000
+        });
+    </script>
+    <script>
+        $(document).on("click", "#show-actions1", function() {
+            $.actions({
+                title: "选择操作",
+                onClose: function() {
+                    console.log("close");
+                },
+                actions: [
+                    {
+                        text: "@Model._Count 家企业全新资讯",
+                        className: "color-primary",
+                        onClick: function() {
+                            submit('a');
+                        }
+                    }
+                ]
+            });
+        });
+        $(document).on("click", "#show-actions2", function() {
+            $.actions({
+                title: "选择操作",
+                onClose: function() {
+                    console.log("close");
+                },
+                actions: [
+                    {
+                        text: "评价学校",
+                        className: "color-primary",
+                        onClick: function() {
+                            if (@Model._EvaluateSchoolCount!= 0) { //已经对学校做过评价了
+                                submit('k');
+                            } else { //还没有对学校做评价
+                                submit('j');
+                            }
+                        }
+                    },
+                    {
+                        text: "评价企业",
+                        className: "color-warning",
+                        onClick: function() {
+                            if (@Model._EvaluateEntCount!=0) {
+                                // 已对企业做评价
+                                submit('m');
+                            } else {
+                                //还没对企业作评价
+                                submit('l');
+                            }
+                        }
+                    },
+                    {
+                        text: "实习鉴定表",
+                        className: 'color-danger',
+                        onClick: function() {
+                            submit('n');
+                        }
+                    },
+                    {
+                        text: " 岗位评价表",
+                        className: "   color-warning",
+                        onClick: function() {
+                            submit('o');
+                        }
+                    }
+                ]
+            });
+        });
+        $(document).on("click", "#show-actions3", function() {
+            $.actions({
+                title: "选择操作",
+                onClose: function() {
+                    console.log("close");
+                },
+                actions: [
+                    {
+                        text: "实习周记",
+                        className: "color-primary",
+                        onClick: function() {
+                            if (@Model._DiaryCount == 0) { //还没有添加周记
+                                submit('d');
+                            } else { //已经添加周记
+                                submit('e');
+                            }
+                        }
+                    },
+                    {
+                        text: "实习案例",
+                        className: "color-primary",
+                        onClick: function() {
+                            if (@Model._CaseCount == 0) {//没有添加案例
+                                submit('f');//添加案例
+                            } else {//添加过案例
+                                submit('g');//案例列表
+                            }
+                        }
+                    },
+                    {
+                        text: "实习报告",
+                        className: 'color-danger',
+                        onClick: function() {
+                            if (!@(Model._AllComment.PracticeReport.HasValue().ToString().ToLower()))
+                            {//没有填志愿，转到添加实习报告
+                                submit('h');
+                        }
+                    else
+                {//已经添加实习报告，转到实习报告详情
+                                submit('i');
+        }
+        }
+        }
+        ]
+        });
+        });
+        $(document).on("click", "#show-actions4", function() {
+            $.actions({
+                title: "选择操作",
+                onClose: function() {
+                    console.log("close");
+                },
+                actions: [
+                    {
+                        text: "@Model._EntCount 家企业正在招聘",
+                        className: "color-primary",
+                        onClick: function() {
+                            submit('b');
+                        }
+                    }
+                ]
+            });
+        });
+        $(document).on("click", "#show-actions5", function() {
+            $.actions({
+                title: "选择操作",
+                onClose: function() {
+                    console.log("close");
+                },
+                actions: [
+                    {
+                        text: "我的个人中心",
+                        className: "color-primary",
+                        onClick: function() {
+                            submit('c');
+                        }
+                    }
+                ]
+            });
+        });
+
+    </script>
+
+}
+
+
+
+<!---------------------->

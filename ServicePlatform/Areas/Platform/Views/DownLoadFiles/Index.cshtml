@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Core.Services.Entity.T_DownLoadFiles>
+
+@{
+    ViewBag.Title = "共享文件";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DLFileColumnID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DLFileUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InnerID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DLFileColumnID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DLFileUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InnerID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DLFileID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DLFileID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DLFileID })
+        </td>
+    </tr>
+}
+
+</table>

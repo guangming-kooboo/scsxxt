@@ -1,0 +1,70 @@
+﻿@model Core.Services.Entity.T_SchoolReviewerTask
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>T_SchoolReviewerTask</legend>
+
+        @Html.HiddenFor(model => model.TaskID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TeacherID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TeacherID)
+            @Html.ValidationMessageFor(model => model.TeacherID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemID)
+            @Html.ValidationMessageFor(model => model.ItemID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PracticeNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PracticeNo)
+            @Html.ValidationMessageFor(model => model.PracticeNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReviewScore)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReviewScore)
+            @Html.ValidationMessageFor(model => model.ReviewScore)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReviewComment)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReviewComment)
+            @Html.ValidationMessageFor(model => model.ReviewComment)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

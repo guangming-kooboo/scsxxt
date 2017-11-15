@@ -1,0 +1,149 @@
+﻿body {
+}
+
+.place {
+    height: 40px;
+    background: url(/Areas/News/Content/Image/righttop.gif) repeat-x;
+}
+
+    .place span {
+        line-height: 40px;
+        font-weight: bold;
+        float: left;
+        margin-left: 12px;
+    }
+
+.placeul li {
+    float: left;
+    line-height: 40px;
+    padding-left: 7px;
+    padding-right: 12px;
+    background: url(/Areas/News/Content/Image/rlist.gif) no-repeat right;
+}
+
+.placeul li:last-child {
+    background: none;
+}
+
+#AddContainer {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#TabContent {
+    margin-top: 10px;
+}
+#AddNewBasic {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#AddNewPic {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#AddNewVedio {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#AddNewHtml {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:17px;
+    font-weight:bold;
+}
+#AddNewLink {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#AddNewDownload{
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+
+.SubmitButton{width:137px;height:35px; background:url(/Areas/News/Content/Image/btnbg.png) no-repeat; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;}
+    .SubmitButton:hover {
+        background-image: url(/Areas/News/Content/Image/btnbg3.png);
+        color:white;
+        cursor:pointer;
+    }
+
+#TabSubmitButton {
+    width:600px;
+    height:40px;
+    margin-top:10px;
+    border:1px dashed #89bafd;
+    padding-left:200px;
+    padding-top:5px;
+    padding-bottom:5px;   
+}
+#TabSubmitButton1{
+    width:600px;
+    height:40px;
+    margin-top:10px;
+    border:1px dashed #89bafd;
+    padding-left:200px;
+    padding-top:5px;
+    padding-bottom:5px;   
+}
+
+#TabContent1 {
+    margin-top: 10px;
+}
+#UpdateNewBasic {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#UpdateNewPic {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#UpdateNewVedio {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#UpdateNewHtml {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:17px;
+    font-weight:bold;
+}
+#UpdateNewLink {
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}
+#UpdateNewDownload{
+    margin-left: 20px;
+    margin-top:5px;
+    font-family:"黑体";
+    font-size:15px;
+    font-weight:bold;
+}

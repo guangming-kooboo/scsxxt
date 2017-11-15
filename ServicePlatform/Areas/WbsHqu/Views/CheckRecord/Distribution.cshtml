@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试登陆</title>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+
+        $().ready(function() {
+                $.ajax({
+                    type: "Get",
+                    url: "/WbsHqu/CheckRecord/GetTasks",
+                    success: function (data)
+                    {
+                        if (data == "500")
+                        {
+                            alert("获取失败");
+                        }
+                        else {
+                            var html = "<select id='taskid' name='wbsId' onchange='mytask()' >";
+                            $.each(data, function (index, element) {
+                                $.each(element, function (index, e) {
+                                    html += "<option  value='" + e.Id + "'>" + e.Name + "</option>";
+                                }
+                                )
+                            });
+                            html += "</select>";
+                            document.getElementById('wbsId').innerHTML = html;
+                        }
+                    }
+                });
+            }
+        );
+    </script>
+</head>
+<body>
+    <form action="/WbsHqu/CheckRecord/Distribute">
+        <label id="wbsId" ></label>
+        <select id="tasktype" name="tasktype">
+            <option value="0">定额</option>
+            <option value="1">定量</option>
+        </select>
+        <input type="submit" name="submit" value="确定" />
+    </form>
+</body>
+</html>

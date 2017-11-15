@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"关于实学.html",
+  "generationDate":new Date(1483078092055.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"3d39005fe1c2458d935399ba701f2adc",
+    "type":"Axure:Page",
+    "name":"关于实学",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"6571a129fdc441158c069b3b1291d8de",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":300,
+              "y":246},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"6cdf6f33d86d4eeebe42082ac866fccd",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":300,
+                  "y":246},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/关于实学/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "6571a129fdc441158c069b3b1291d8de":{
+      "scriptId":"u0"},
+    "6cdf6f33d86d4eeebe42082ac866fccd":{
+      "scriptId":"u1"}}});

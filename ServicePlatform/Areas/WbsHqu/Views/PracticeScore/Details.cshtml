@@ -1,0 +1,25 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@model ServicePlatform.Areas.WbsHqu.ViewModels.StuScoreApply_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+@Html.HiddenFor(o => o.UserID)
+
+@Html.InputFor(o => o.ApplyReviewScore, "", true)
+@Html.InputFor(o => o.WeekRecordScore, "", true)
+@Html.InputFor(o => o.PracticeCaseScore, "", true)
+<div class="form-group">
+    <label class="col-md-3 control-label" for="WeekRecordComment">申请理由</label>
+    <div class="col-md-9">
+        <label class="" cols="20" data-val="true" data-val-length="字段 实习周记评语 必须是最大长度为 1024 的字符串。"
+               data-val-length-max="1024" id="WeekRecordComment" name="WeekRecordComment" readonly="readonly"
+               rows="2" style="width: 100%; height: 100%">
+
+            @(new HtmlString(Model.ApplyContents))
+        </label><span class="help-block">
+
+        </span>
+    </div>
+</div>

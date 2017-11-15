@@ -1,0 +1,67 @@
+﻿@Styles.Render("/Areas/School/SchoolContent/SchoolNewsList/NEWSList.css")
+@model List<ServicePlatform.Models.T_Content>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomeIndexNewsList</title>
+</head>
+<body>
+
+    @Html.Partial("Head")
+
+    <!--主内容-->
+    <section id="wrapper">
+        <!--NEWS-->
+        <div class="left_news">
+            <table class="newslist">
+                <caption>  </caption>
+                <tr>
+                    <th width="569" height="49" scope="col">新闻标题</th>
+                    <th width="200" scope="col">发布日期</th>
+                </tr>
+                @foreach(var m in Model)
+                {
+                    string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + @m.ContentID + "";
+                    <tr>
+                        <td class="text-overflow">
+                            <span>&#8226;</span><a href=@tlink>@m.ContentTitle</a>
+                        </td>
+                        <td class="timeType">@ServicePlatform.Areas.News.ToolHelper.HandleTime.ConvertIntDateTime(Convert.ToInt32(m.PubDate))</td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <div style="clear:both"></div>
+        <!--页尾导航-->
+        <div class="last">
+            <span>共&nbsp;<cite>246</cite>&nbsp;条</span>
+            <input name="first" type="button" value="首页">
+            <input name="prior" type="button" value="上一页">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <input name="next" type="button" value="下一页">
+            <input name="last" type="button" value="末页">
+            <span>第</span>
+            <input name="page" type="text" id="text" placeholder="1" />
+            <span>页</span>
+            <input name="ensure1" type="button" value="确定" />
+        </div>
+        <!--/页尾导航-->
+    </section> 
+
+    @Html.Partial("Foot")
+
+</body>
+</html>
+

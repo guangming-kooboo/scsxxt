@@ -1,0 +1,92 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加城市</title>
+
+   <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">地区代码管理</a></li>
+                <li><a href="#">添加城市</a></li>
+            </ul>
+        </div>
+
+    <div class="formbody">
+
+            <div class="formtitle"><span>添加城市</span></div>
+            
+
+    <form method="post" action="/Code/ReAddCity" name="myform" id="myform">
+        
+           <ul class="forminfo">
+               
+            <li>
+                <label >省份选择</label>
+                 <select style="width:100px" name="ProvinceName" id="ProvinceName" class="dfinput">
+                 <option value="--请选择--">--请选择--</option>
+                    @foreach (var item in ViewBag.PROVINCE)
+                    {
+                        <option value="@item.ProvinceName">@item.ProvinceName</option>
+
+                    }
+                </select>
+                    </li>
+           
+       
+        <li>
+                   <label>城市编号:</label>
+            <input type="text" name="CityID" id="CityID" class="dfinput" placeholder="例如：110200（6个数字)" />
+                
+         </li>
+            
+
+                <li>
+                   <label>城市名称:</label>
+                    <input type="text" id="CityName" name="CityName" class="dfinput" placeholder="例如：泉州市" />
+                    
+                  
+         </li>
+                
+            
+
+              <li>  
+                   <label>&nbsp;</label><input type="submit" value="保  存" class="btn"/>
+               
+            </li>
+               </ul>
+            
+    </form>
+   
+    </div>
+     
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

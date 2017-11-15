@@ -1,0 +1,106 @@
+﻿
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    ViewBag.Title = "终录单位登记";
+
+    T_StuFinalEntRecord ts = ViewBag.Detail;
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+<html>
+<head>
+    <title>人才库浏览</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">招聘管理</a></li>
+            <li><a href="#">终录单位等级</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("StuFinalEntRecordOP", "S_EmployeManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>终录单位登记: </span></div>
+              if(ts==null)
+              { 
+                <ul class="forminfo">
+                <li><label>工作单位名：</label><input type="text" class="dfinput" id="entname" name="entname" value="" /><i style="color:red">*</i></li>
+                <li><label>工作单位类型：</label><input type="text" class="dfinput" id="entcategory" name="entcategory" value="" /><i style="">*</i></li>
+                <li><label>工作单位级别：</label><input type="text" class="dfinput" id="entrank" name="entrank" value="" /><i style="">*</i></li>
+                <li><label>工作单位地址：</label><input type="text" class="dfinput" id="entaddress" name="entaddress" value="" /><i style="color: red">*</i></li>
+                <li><label>工作单位简介：</label><input type="text" class="dfinput" id="entresume" name="entresume" value="" /><i style="">*</i></li>
+                <li><label>工作单位E-Mail：</label><input type="text" class="dfinput" id="entemail" name="entemail" value="" /><i style="">*</i></li>
+                <li><label>工作单位联系方式：</label><input type="text" class="dfinput" id="entconnect" name="entconnect" value="" /><i style="color: red">*</i></li>
+                <li><label>操作：</label><input type="submit" class="btn" value="保存" /></li>
+                </ul>
+              }
+              else
+              {
+                <ul class="forminfo">
+                <li><label>工作单位名：</label><input type="text" class="dfinput" id="entname" name="entname" value='@ts.Ent_Name' /><i style="color:red">*</i></li>
+                <li><label>工作单位类型：</label><input type="text" class="dfinput" id="entcategory" name="entcategory" value='@ts.EntCategory' /><i style="">*</i></li>
+                <li><label>工作单位级别：</label><input type="text" class="dfinput" id="entrank" name="entrank" value='@ts.EntRank' /><i style="">*</i></li>
+                <li><label>工作单位地址：</label><input type="text" class="dfinput" id="entaddress" name="entaddress" value='@ts.EntAddress' /><i style="color: red">*</i></li>
+                <li><label>工作单位简介：</label><input type="text" class="dfinput" id="entresume" name="entresume" value='@ts.EntResume' /><i style="">*</i></li>
+                <li><label>工作单位E-Mail：</label><input type="text" class="dfinput" id="entemail" name="entemail" value='@ts.Email' /><i style="">*</i></li>
+                <li><label>工作单位联系方式：</label><input type="text" class="dfinput" id="entconnect" name="entconnect" value='@ts.Contectinfo' /><i style="color: red">*</i></li>
+                <li><label>操作：</label><input type="submit" class="btn" value="提交修改" /></li>
+                </ul>
+                
+              }
+        }
+
+
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <div class="none"></div>
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['300px', '180px'],
+                title: "岗位说明",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+

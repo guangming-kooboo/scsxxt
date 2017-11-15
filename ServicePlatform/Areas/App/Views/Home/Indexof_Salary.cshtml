@@ -1,0 +1,43 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.IndexofDownLoadFiles_M
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>薪资待遇</title>
+
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="main-do">
+        <div class="company-head">
+            <div class="left">
+                <a href="@Url.Action("EnterpriseIndex","Home",new {Ent_No=Model.Ent_No,uid=Model.uid})">&nbsp;&nbsp;<span><</span>&nbsp;返回</a>
+            </div>
+            <div class="middle">
+                <p>薪资待遇</p>
+            </div>
+            <div class="right">
+                <p></p>
+            </div>
+        </div>
+        <div class="update">
+            <ul>
+                @if (Model.DownLoadFiles.Count == 0)
+                {
+                    <li><a href="">很抱歉，企业还没有上传资源</a></li>
+                }
+                else
+                {
+                    foreach (var item in Model.DownLoadFiles)
+                    {
+                        var names = item.DLFileUrl.Split('/');
+                        var fileName = names[names.Length - 1];
+                        <li><a href="@item.DLFileUrl" download="@fileName">@fileName</a></li>
+                    }
+                }
+            </ul>
+
+        </div>
+    </div>
+</body>

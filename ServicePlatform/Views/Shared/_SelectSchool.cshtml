@@ -1,0 +1,54 @@
+﻿@{
+    var EntPracNo = ViewData["EntPracNo"]??"-1";
+}
+
+<ul class="toolbar">
+    <li>
+        <label class="text text-info">选择学校：</label>
+        @Html.DropDownList("EntPracNo", new List<SelectListItem>(), new {id = "EntPracNo"})
+        <label id="tip" style="color: red">&nbsp; </label>
+        @Html.ActionLink("添加岗位", "T_PracticePosition_Add", "Home",new {@class= "btn btn-primary"  ,id="bt_add"})
+    </li>
+  
+</ul>
+<br/>
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        GetSchools();
+        $("#EntPracNo").change(function () {
+            $("#tip").html("请稍后...");
+            AfterSelectSchools();
+        });
+        });
+
+    
+    function GetSchools() {
+        $.ajax({
+            type: "post",
+            url: "/Ajax/GetSchools",
+            data: { Ent_No: '' },
+            dataType: "json",
+            success: function (reslut) {
+                $("#EntPracNo option").remove();
+                $("#EntPracNo").append("<option value='-1'>请选择</option>");
+                $.each(reslut, function (i, item) {
+                    if (item.Value == "@EntPracNo")
+                    {
+                        $("#EntPracNo").append("<option selected='selected' value='" + item.Value + "'>" + item.Text + "</option>");
+                        AfterSelectSchools();
+                    } else {
+                        $("#EntPracNo").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                    }
+                    
+                });
+                
+            },
+            error: function (data) {
+                alert("请求出错！" + data);
+            }
+        });
+    }
+
+
+</script>

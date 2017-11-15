@@ -1,0 +1,114 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	font-size:12px;
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+body{
+	font-family:'微软雅黑'; 
+	margin-left:15px;
+	margin-top:15px;
+	min-width:430px;
+}
+a,a:focus{
+	text-decoration:none;
+	color:#000;
+	outline:none;
+	blr:expression(this.onFocus=this.blur());
+}
+a:hover{
+	color:#9A3601;
+	text-decoration:none;
+}
+
+cite{font-style:normal;}
+h2{font-weight:normal;}
+
+ul{
+	list-style: none;
+}
+nav ul li {
+	display: inline-block;
+	_zoom:1;
+	*display:inline;
+}
+img{border:0;}
+ 
+hr{
+	width:95%;
+	margin:10px 0;
+	height:0;
+	border:1px solid #9A3601;
+}
+
+table{
+	width:900px;
+	 border:1px solid #999;
+	 text-align:center;
+	
+}
+table caption{
+	color:#333;
+	font-size:18px;
+	font-weight:bold;
+	padding:10px 0;
+}
+table tr th,table tr td{
+	 border:1px solid #999;
+	color:#333;
+}
+.Practicel{
+	height:38px;	
+	text-align:center;
+	color:#000;
+	font-family:"仿宋";
+	font-size:16px;
+}
+.Name{
+	width:248px;
+}
+.Enpr{
+	width:300px;
+}
+.Time{
+	width:747px;
+}
+
+.PracticelContent{	 
+	margin :8px 0;
+	height:114px;
+	width:760px;
+	font-family:"仿宋";
+	font-size:16px;
+}
+
+.sign{
+	width:180px;
+	margin-left:600px;
+	padding:8px;
+	text-align:left;
+}
+.sign span{
+	padding-left:30px;
+	
+}
+
+.save{
+	width:300px;
+	height:38px;
+	border:2px solid #682D20;
+	border-radius:8px;
+	text-align:center;
+	margin :20px  0px 20px   300px;
+	color:white;
+	font-weight:bold;
+	background:#9A3601;
+}
+.save:hover{
+	cursor:pointer;
+	border-radius:16px 4px 16px 4px;
+}
+

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ServicePlatform.Models.T_News>
+@Styles.Render("/Areas/News/Content/CSSModel/newsTable.css")
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomePageTable</title>
+
+    <script src="~/Areas/News/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/News/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/News/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/News/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+    <script src="~/Areas/News/Script/EasyuiScript/HomePageTable-easyui.js"></script>
+
+    <script language="javascript" type="text/javascript">
+        function detail() {
+            var SelectRow = $('#HomePageTableBox').datagrid("getSelected");
+            var SelectId = SelectRow.NewsID;
+            var s = "/News/NewsCenter/NewsDetail?id='" + SelectId + "'";
+            window.location = s;
+        }
+        function update() {
+            var SelectRow = $('#HomePageTableBox').datagrid("getSelected");
+            var SelectId = SelectRow.NewsID;
+            var s = "/News/NewsCenter/UpdateNews?id='" + SelectId + "'";
+            window.location = s;
+        }
+    </script>
+
+    <style type="text/css">
+        .datagrid-cell {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="HomeBodyContainer">
+        <div id="HomePageTableTop">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">新闻列表</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--用于显示表格-->
+        <div id="HomePageTable">
+            <table id="HomePageTableBox"></table>
+            <div id="HomeToolBar">
+                <div id="TButton" style="padding:5px;">
+                    <div>
+                        <a href="/News/AddNews/AddNews" class="easyui-linkbutton" iconcls="icon-add">添加</a>
+                        <a href="#" class="easyui-linkbutton" iconcls="icon-remove" onclick="obj.remove();">删除</a>
+                        操作：
+                        <a href="#" class="easyui-linkbutton" id="TB1" iconcls="icon-edit" style="display:none;" onclick="update();">修改</a>
+                        <a href="#" class="easyui-linkbutton" id="TB2" iconcls="icon-tip" style="display:none;" onclick="detail();">详情</a>
+                        <a href="#" class="easyui-linkbutton" id="TB3" iconcls="icon-filter" style="display:none;" onclick="obj.pass();">通过审核</a>
+                        <a href="#" class="easyui-linkbutton" id="TB4" iconcls="icon-cancel" style="display:none;" onclick="obj.reject();">驳回</a>
+                        <a href="#" class="easyui-linkbutton" id="TB5" iconcls="icon-chaolock" style="display:none;" onclick="obj.lock();">锁定</a>
+                        <a href="#" class="easyui-linkbutton" id="TB6" iconcls="icon-chaounlock" style="display:none;" onclick="obj.Unlock();">解锁</a>
+                        <a href="#" class="easyui-linkbutton" id="TB7" iconcls="icon-chaohide" style="display:none;" onclick="obj.newhide();">禁用</a>
+                        <a href="#" class="easyui-linkbutton" id="TB8" iconcls="icon-chaoshow" style="display:none;" onclick="obj.newshow();">解禁</a>
+                    </div>
+                </div>
+                @*<div>
+                        查询新闻：<input type="text" name="SearchNews" style="width=100px;" />
+                        <a href="#" class="easyui-linkbutton" iconcls="icon-search" onclick="obj.search();">查询</a>
+                    </div>*@
+                <input class="easyui-searchbox" data-options="prompt:'搜索内容',menu:'#SearchItem',searcher:doSearch" style="width:300px" name="AtributeSearch"></input>
+
+                <div id="SearchItem">
+                    <div data-options="name:'all',iconCls:'icon-ok'">所有新闻</div>
+                    <div data-options="name:'NewsID'">新闻编号</div>
+                    <div data-options="name:'NewsTitle'">新闻标题</div>
+                    <div data-options="name:'NewsTypeID'">新闻种类</div>
+                    <div data-options="name:'NewsAuthor'">新闻作者</div>
+                    <div data-options="name:'NewsPublisher'">新闻发布者</div>
+                    <div data-options="name:'FlowState'">新闻状态</div>
+                    <div data-options="name:'IsShow'">新闻是否禁用</div>
+                    <div data-options="name:'IsLocked'">新闻是否锁定</div>
+                    <div data-options="name:'NewsColunmID'">新闻栏目</div>
+                    <script>
+                        function doSearch(value, name) {
+                            //alert('You input: ' + value + '(' + name + ')');
+                            $('#HomePageTableBox').datagrid('load', {
+                                NewsAttribute: name,
+                                NewsValue: value,
+                            });
+                        }
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

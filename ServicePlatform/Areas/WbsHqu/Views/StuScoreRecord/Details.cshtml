@@ -1,0 +1,48 @@
+﻿@*@using Qx.Tools.Web.Mvc.Html*@
+@using Qx.Tools.Scsxxt.Web.Mvc.Html
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@model ServicePlatform.Areas.WbsHqu.ViewModels.StuScoreRecord_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.HiddenFor(o => o.PraticeNo)
+
+@Html.InputFor(o => o.UserID, "", true)
+
+@Html.InputFor(o => o.ApplyReviewScore, "", true)
+@*@Html.LabelFor(o=>o.ApplyContents)*@
+@Html.HiddenFor(o=>o.ApplyContents)
+@*<textarea class="form-control" style="width: 400px;height: 200px" readonly="readonly">@(new HtmlString(Model.ApplyContents) )</textarea>*@
+@Html.HiddenFor(o => o.StateID)
+
+@Html.InputFor(o => o.PracticeStartEnd, "", true)
+
+@Html.InputFor(o => o.WeekRecordScore, "", true)
+
+@Html.InputAreaFor(o => o.WeekRecordComment, "", 400, 200, true)
+
+@Html.InputFor(o => o.PracticeCaseScore, "", true)
+
+@Html.InputAreaFor(o => o.PracticeCaseComment, "", 400, 200, true)
+
+@Html.InputAreaFor(o => o.PracUnitComment, "", 400, 200, true)
+
+@Html.InputAreaFor(o => o.SchoolComment, "", 400, 200, true)
+
+@Html.InputAreaFor(o => o.TutorComment, "", 400, 200, true)
+
+@Html.InputAreaFor(o => o.PracticeContent, "", 400, 200, true)
+
+@Html.InputAreaFor(o => o.PracticeReport, "", 400, 200, true)
+
+@Html.InputFor(o => o.StuEvaEntScore, "", true)
+
+@Html.InputFor(o => o.StuEvaSchoolScore, "", true)
+
+@Html.InputFor(o => o.PracticeReportFile)
+
+@Html.InputFor(o => o.Evidence)
+
+@Html.InputFor(o => o.ReviewScore, "", true)
+
+@Html.InputAreaFor(o => o.AuditOpinion, "", 400, 200, true)

@@ -1,0 +1,21 @@
+﻿@Styles.Render("~/Include/summernote/summernote.css")
+@Scripts.Render("~/Include/summernote/summernote.min.js")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height:300,
+        });
+
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            alert($('.summernote').code());
+        });
+    });
+</script>
+
+<div>
+    <textarea id="summernote">Hello world！</textarea>
+</div>
+<p>使用文档见：http://www.jqcool.net/bootstrap-summernote.html </p>
+

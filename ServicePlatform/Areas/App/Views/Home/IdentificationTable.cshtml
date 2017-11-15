@@ -1,0 +1,102 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.IdentificationTable_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>顶岗实习鉴定表</title>
+
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <div class="appraisal-head">
+        <div class="left">
+            <a href="@Url.Action("Main", "Home", new { uid=Model.uid})"><</a>
+        </div>
+
+        <div class="middle">
+            <p>华侨大学学生实习鉴定表</p>
+        </div>
+
+    </div>
+    <p></p>
+    <div>
+    </div>
+<div class="appraisal-main">
+    <div>
+        <ul>
+            <li class="appraisal-main-li">姓名</li>
+            <li class="appraisal-main-lis">@Model.StuName</li>
+            <li class="appraisal-main-li">性别</li>
+            <li class="appraisal-main-lis">@Model.StuSex</li>
+            <li class="appraisal-main-li">学号</li>
+            <li class="appraisal-main-lis">@Model.StuNo</li>
+        </ul>
+    </div>
+        <div>
+            <ul>             
+                <li class="appraisal-main-li">年级</li>
+                <li class="appraisal-main-lis">@Model.EnteyYear 级</li>
+                <li class="appraisal-main-li">专业</li>
+                <li class="appraisal-main-lis">@Model.SpeName</li>
+                <li class="appraisal-main-li">班级</li>
+                <li class="appraisal-main-lis">@Model.ClassName</li>
+
+            </ul>
+        </div>
+
+    
+    <div>
+        <ul>
+            <li class="appraisal-main-lit">实习企业</li>
+            <li class="appraisal-main-list">@Model.EntName</li>
+        </ul>
+    </div>
+
+    <div>
+        <ul>
+            <li class="appraisal-main-lit">实习岗位</li>
+            <li class="appraisal-main-list">@Model.PositionName</li>
+        </ul>
+    </div>
+
+    <div>
+
+        <ul>
+            <li class="appraisal-main-lit">实习时间</li>
+            <li class="appraisal-main-list">@Model.AllComment.PracticeStartEnd</li>
+        </ul>
+    </div>
+    @*<div>
+        <p><span>|</span>&nbsp;实习内容
+        </p>
+        <textarea readonly="readonly">@Model.AllComment.PracticeContent</textarea>
+    </div>*@
+    <div>
+        <p><span>|</span>&nbsp;实习报告
+        </p>
+        <textarea readonly="readonly">@Model.AllComment.PracticeReport</textarea>
+    </div>
+    <div>
+        <p><span>|</span>&nbsp;实习单位考核意见
+        </p>
+        <textarea readonly="readonly">@Model.AllComment.PracUnitComment</textarea>
+    </div>
+    <div>
+        <p><span>|</span>&nbsp;指导老师考核意见
+        </p>
+        <textarea readonly="readonly">@Model.AllComment.TutorComment</textarea>
+    </div>
+    <div>
+        <p><span>|</span>&nbsp;院系考核评定意见
+        </p>
+        <textarea readonly="readonly">@Model.AllComment.SchoolComment</textarea>
+    </div>
+
+</div>
+
+</body>

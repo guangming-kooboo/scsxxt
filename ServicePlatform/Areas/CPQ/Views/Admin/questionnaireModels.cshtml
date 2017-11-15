@@ -1,0 +1,36 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.Admin.QuestionnaireModels_M
+@{
+    
+    Layout = ViewData["Layout"].ToString();
+}
+
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=@Model.ownerID+";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+       
+    </ol>
+
+</div>
+<h2>问卷模板库</h2>
+
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>问卷领域</label>
+    </div>
+    <div class="col-lg-10">
+        @Html.DropDownListFor(o => o.QuestionnaireDomain, Model.QuestionnaireDomainListItem)
+    </div>
+</div>
+
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+        var Params = v("QuestionnaireDomain");
+        //    v("拥有者");
+
+        Query(Params, "@ViewData["Url"]");
+    }
+</script>

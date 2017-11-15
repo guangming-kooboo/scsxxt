@@ -1,0 +1,152 @@
+﻿@using Qx.Tools.CommonExtendMethods
+@model ServicePlatform.Areas.AppStudent.ViewModel.Home.DiaryList_M
+<style>
+    .weui-cell__ft1 {
+        position: absolute;
+        right: -80px;
+        height: 50px;
+        line-height: 50px;
+        background: #F6383A;
+        color: #ffffff !important;
+        width: 80px;
+        text-align: center;
+            margin-top: 0;
+    }
+</style>
+<script>
+    /*
+     * ÃèÊö£ºhtml5Æ»¹ûÊÖ»úÏò×ó»¬¶¯É¾³ýÌØÐ§
+     */
+    window.addEventListener('load', function () {
+        var initX; //´¥ÃþÎ»ÖÃ
+        var moveX; //»¬¶¯Ê±µÄÎ»ÖÃ
+        var X = 0; //ÒÆ¶¯¾àÀë
+        var objX = 0; //Ä¿±ê¶ÔÏóÎ»ÖÃ
+        window.addEventListener('touchstart', function (event) {
+            var obj = event.target.parentNode;
+            if (obj.className == "weui-cell") {
+                initX = event.targetTouches[0].pageX;
+                objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+            }
+            if (objX == 0) {
+                window.addEventListener('touchmove', function (event) {
+                    var obj = event.target.parentNode;
+                    if (obj.className == "weui-cell") {
+                        moveX = event.targetTouches[0].pageX;
+                        X = moveX - initX;
+                        if (X >= 0) {
+                            obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+                        } else if (X < 0) {
+                            var l = Math.abs(X);
+                            obj.style.WebkitTransform = "translateX(" + -l + "px)";
+                            if (l > 80) {
+                                l = 80;
+                                obj.style.WebkitTransform = "translateX(" + -l + "px)";
+                            }
+                        }
+                    }
+                });
+            } else if (objX < 0) {
+                window.addEventListener('touchmove', function (event) {
+                    var obj = event.target.parentNode;
+                    if (obj.className == "weui-cell") {
+                        moveX = event.targetTouches[0].pageX;
+                        X = moveX - initX;
+                        if (X >= 0) {
+                            var r = -80 + Math.abs(X);
+                            obj.style.WebkitTransform = "translateX(" + r + "px)";
+                            if (r > 0) {
+                                r = 0;
+                                obj.style.WebkitTransform = "translateX(" + r + "px)";
+                            }
+                        } else { //Ïò×ó»¬¶¯
+                            obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+                        }
+                    }
+                });
+            }
+
+        })
+        window.addEventListener('touchend', function (event) {
+            var obj = event.target.parentNode;
+            if (obj.className == "weui-cell") {
+                objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+                if (objX > -40) {
+                    obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+                    objX = 0;
+                } else {
+                    obj.style.WebkitTransform = "translateX(" + -80 + "px)";
+                    objX = -80;
+                }
+            }
+        })
+    })
+</script>
+<!--
+页面特有
+-->
+<script>
+    $("body").click(function() {
+        $(".weui-cell").css("transform", "translateX(0px)");
+    });
+</script>
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            <div>
+                @*<a href="javascript:submit('a');">*@
+                    <div class="placeholder">
+                        <img src="" class="">
+                    </div>
+                @*</a>*@
+            </div>
+            <div class="weui-flex__item"><div class="placeholder">周记(@Model.DiaryCount)</div></div>
+@if (Model._careerstatus == 13)
+{
+    <div class="placeholder">
+        <a href="javascript:submit('c');" class="weui-input">添加</a>
+    </div>
+}
+else
+{
+    <div class="placeholder">
+    </div>
+}
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        @foreach (var item in Model.Diarys)
+        {
+            <div class="weui-cells">
+
+                <div class="weui-cell" style="transform: translateX(0px);">
+                    <div class="weui-cell__bd">@item.RecordTitle</div>
+                    <div class="weui-cell__ft">@item.RecordTime.ToDateTime().ToString("yyyy-M-d dddd")</div>
+                    <div class="weui-cell__ft1">
+                        @if (Model._careerstatus == 11||Model._careerstatus==13)
+                        {
+                            <a href='javascript:submit("-",{RecordNo:"@item.RecordNo"});'>
+                                <div style="color: #ffffff">删除</div>
+                            </a>
+                        }
+                        else
+                        {
+                            <div style="color: #ffffff">不能删除哦</div>
+                        }
+                    </div>
+                </div>
+
+                <a href='javascript:submit("b",{RecordNo:"@item.RecordNo"});'>
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder="@item.RecordContent" readonly="true">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@Html.Partial("student_menu")
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                @*跳转到实习总览*@
+                <a href="javascript:submit('a');">
+                    <div><div class="placeholder colortitle"><img src="@ViewData["root"]images/return.png" class="return"></div></div>
+                </a>
+                <div class="weui-flex__item colortitle"><div class="placeholder">我的简历</div></div>
+                <div style="width:48px"><div class="placeholder"></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells">
+                <div class="weui-cell">很抱歉，你还没有上传简历，请从电脑端上传</div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="请上传简历" rows="3"></textarea>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>

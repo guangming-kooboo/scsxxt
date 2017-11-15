@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ServicePlatform.Models.T_Student>
+<div style="float:left">
+    @using (Html.BeginForm("DeleteALLImportedStu", "StuManager", FormMethod.Post))
+    {
+        <input type="button" id="btnall" name="btnall" class="btn" value="全选/全不选" onclick="checkall()" />
+        <input type="hidden" id="classno_dall" name="classno_dall" class="btn" value='@ViewBag.ClassNo' />
+                <input type="submit" class="btn" value="批量删除" onclick="findRow()">
+                <div hidden="hidden"><input type="text" value="" id="piliang" name="piliang" class="dfinput" /></div>
+    }
+</div>
+<div style="float:left">
+    @using (Html.BeginForm("StuRegToBatch", "StuManager", FormMethod.Post))
+    {
+        <input type="submit" id="reg" name="action" class="btn" value="加入批次" />
+                <input type="hidden" id="schoolid" name="schoolid" class="btn" value='@ViewBag.Schoolid' />
+                <input type="hidden" id="classno" name="classno" class="btn" value='@ViewBag.ClassNo' />
+                <input type="hidden" id="speno" name="speno" class="btn" value='@ViewBag.SpeNo' />
+                <input style="text-align: center;" arget="view_window" type="text" name="speno" class="btn" value='添加单个学生' onclick="window.location.href = '/School/StuManager/AddSignerStu?classid=@ViewBag.ClassNo&speno=@ViewBag.SpeNo'" />
+    }
+</div>
+@using (Html.BeginForm("MessionDetails", "StuManager", FormMethod.Post))
+{
+    <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="t_stulist">
+        <tr class="title">
+            <td bgcolor="#CCCCCC" style="width:10%">&nbsp;&nbsp;&nbsp;</td>
+            <td bgcolor="#CCCCCC">学号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">姓名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">电话<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC" onclick="">操作</td>
+        </tr>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr class="odd">
+                        <td><input type="checkbox" value="" name="check_approve" /></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StuNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StuName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StuCellphone)
+                        </td>
+                        <td>
+                            @Html.ActionLink("查看详情", "ViewDetail", new { userid = item.UserID, Href = "#" }) |
+                            @Html.ActionLink("编辑", "ModifyImportedStuInfo", new { stuno = item.StuNo, stuname = item.StuName, classid = item.StuClass, userid = item.UserID, Href = "#" }) |
+                            @Html.ActionLink("删除", "DeleteImportedStu", new { stuno = item.StuNo, classno = item.StuClass, userid = item.UserID, Href = "#" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+
+<script type="text/javascript">
+        function findRow() {
+            if (confirm("确认删除所选的信息吗？")) {
+                var check = document.getElementsByName("check_approve");
+                var result = "";
+                var table = document.getElementById('t_stulist');
+                var rows = table.rows.length;
+                for (var j = 0; j < check.length; j++) {
+                    if (check[j].checked) {
+                        //result += table.rows[j + 1].cells[4].innerText + "!";
+                        result += table.rows[j + 1].cells[1].innerHTML + "!";
+                    }
+                }
+                var objsel = document.getElementById("piliang");
+                objsel.setAttribute("value", result);
+            }
+        }
+
+        function checkall() {
+            var check = document.getElementsByName("check_approve");
+            if (check[0].checked == true) {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = false;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "全选");
+            }
+            else {
+                for (var j = 0; j < check.length; j++) {
+                    check[j].checked = true;
+                }
+                document.getElementsByName('btnall').setAttribute("value", "取消全选");
+            }
+        }
+</script>

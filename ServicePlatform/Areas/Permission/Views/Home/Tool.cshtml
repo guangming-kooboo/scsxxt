@@ -1,0 +1,90 @@
+﻿@{
+    string[] Properties = (string[])ViewData["Properties"];
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="/Areas/Permission/Content/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">@ViewBag.Title</a></li>
+        </ul>
+    </div>
+
+
+    <form action="/Permission/Home/Tool" method="post">
+
+        <input name="objName" value="@ViewBag.objName" type="text" hidden="hidden" class="dfinput" />
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>@ViewBag.Title</span></div>
+
+            <ul class="forminfo">
+                @for (int i = 0; i < Properties.Length; i++)
+                {
+                    if (ViewBag.Values == null)
+                    {
+                         <li>
+                             <label>@Properties[i]</label>
+                             <input name="@Properties[i]" type="text" class="dfinput" />
+                             <i>*请输入</i>
+                         </li>
+                    
+                         @*<li>
+                             <label>@Properties[i]</label>
+                             <input name="@Properties[i]" type="text" class="dfinput" />
+                             <i><a href="/Permission/Home/" target="_blank">*查询</a></i>
+                         </li>*@
+                    
+                         @*<li>
+                              <label>@Properties[i]</label>
+                             <select name="@Properties[i]"  class="dfinput">
+                                 <option value="id">name</option>
+                            </select>
+                             <i>*请选择</i>
+                         </li>*@
+             
+                    }
+                    else
+                    { 
+                         <li><label>@Properties[i]</label><input readonly="readonly" name="@Properties[i]" value="@ViewBag.Values[1][i]"  type="text" class="dfinput" /><i>@Properties[i]</i></li>
+             
+                    }
+                }
+                @if (ViewBag.Values == null)
+                {
+                        <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="保存" /></li>
+                }
+             
+
+
+
+                @*<li><label>文章标题</label><input name="" type="text" class="dfinput" /><i>标题不能超过30个字符</i></li>
+                <li><label>关键字</label><input name="" type="text" class="dfinput" /><i>多个关键字用,隔开</i></li>
+                <li><label>是否审核</label><cite><input name="" type="radio" value="" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio" value="" />否</cite></li>
+                <li><label>引用地址</label><input name="" type="text" class="dfinput" value="http://www.mycodes.net" /></li>
+                <li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>*@
+
+            </ul>
+
+
+        </div>
+    </form>
+
+ </body>
+
+</html>
+
+
+
+

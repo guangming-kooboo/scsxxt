@@ -1,0 +1,69 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.PersonalInformation_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+
+
+
+
+
+<div class="main">
+
+    <!-- 导航-->
+      @Html.Action("_Head", new  { id=Model.userid})
+    <div class="means">
+        <div class="means-main-head">
+            <p class="means-main-head-p">个人资料</p>
+
+        </div>
+        <div class="means-left">
+            <p align="center"><img class="means-left-img" style="width:170px;height:170px;" src="@Model.userinformation.HeadPictureUrl"></p>
+            <p align="center"><a class="means-left-a" href="@Url.Action("ChangeHeadPicture","UserCenter",new{area="BBS"})">修改头像</a></p>
+            <p align="center">
+                <ul>
+                    <li class="means-left-li">
+            <p class="means-left-li-p">日志</p><p class="means-left-li-pp">@Model.statistics.diary</p></li>
+            <li class="means-left-li"><p class="means-left-li-p">回帖</p><p class="means-left-li-pp">@Model.statistics.Reply</p></li>
+            <li class="means-left-li"><p class="means-left-li-p">分享</p><p class="means-left-li-pp">@Model.statistics.Share</p></li>
+
+
+
+
+            </ul>
+            </p>
+
+
+        </div>
+        <div class="means-right">
+
+            <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a" href="">统计信息</a></p>
+            <hr class="means-right-hr">
+            <p class="means-right-p">空间访问量:@Model.statistics.Visitor</p>
+            <p class="means-right-p">好友数:@Model.statistics.Friend</p>
+            <p class="means-right-p">积分:@Model.statistics.Point</p>
+
+            <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a" href="">基本信息</a></p>
+            <hr class="means-right-hr">
+            <p class="means-right-p">性别:@Model.userinformation.Sex</p>
+            <p class="means-right-p">邮箱:@Model.userinformation.Email</p>
+            <p class="means-right-p">生日:@Model.userinformation.Birthday</p>
+            <p class="means-right-p">联系方式:@Model.userinformation.Phone</p>
+            <p class="means-right-p">地址:@Model.userinformation.Address </p>
+            <p class="means-right-p">经历:@Model.userinformation.Experience</p>
+            <a class="means-right-a" href="@Url.Action("UpdateInformation","UserCenter",new{area="BBS",id=Model.userinformation.ID})">修改</a>
+            <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a" href="">活跃状况</a></p>
+            <hr class="means-right-hr">
+            <p class="means-right-p">用户组:普通用户</p>
+            <p class="means-right-p">管理组:版权</p>
+            <p class="means-right-p">状态:@Model.userinformation.State</p>
+            <p class="means-right-p">注册时间:@Model.userinformation.Register</p>
+            <p class="means-right-p">最后访问时间:@Model.userinformation.LastLogin</p>
+            <p class="means-right-p">上次活动时间:@Model.userinformation.RecentActivity</p>
+            
+        </div>
+
+    </div>
+
+
+</div>

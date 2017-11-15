@@ -1,0 +1,63 @@
+﻿
+@model ServicePlatform.Areas.CPQ.ViewModels.AdminCRUD.CQO_M
+@{
+    Layout = ViewData["Layout"].ToString();
+   
+}
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        
+        <li><a href=@Url.Action("createdQuestionnaireList", "Admin", new { area = "CPQ", ReportID = "CPQ已创建的问卷列表",Params=";" })>已创建的问卷列表</a><i class="fa fa-angle-right"></i></li>
+       @*这个到时候还是要继续读取的*@
+    </ol>
+
+</div>
+
+
+<div class="form-group">
+    <label class="col-md-3 control-label">问卷名称</label>
+    <div class="col-md-9">
+        @Html.TextBoxFor(o => o.QuestionnaireName, new { @class = "form-control" })
+
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-3 control-label">问卷简介</label>
+    <div class="col-md-9">
+        @Html.TextBoxFor(o => o.Summarize, new { @class = "form-control" })
+
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-3 control-label">问卷领域</label>
+    <div class="col-md-9">
+        @Html.DropDownListFor(o => o.QuestionnaireDomain, Model._QuestionnaireDomainListItem, new { @class = "form-control" })
+
+
+        @*@Html.HiddenFor()*@
+
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-3 control-label">是否共享</label>
+    <div class="col-md-9">
+        @Html.DropDownListFor(o => o.share, Model._ShareListItem, new { @class = "form-control" })
+
+
+
+
+    </div>
+</div>
+<hr>
+<button type="button" class="btn btn-default" onclick="questionnaireModel()">从问卷模板库中选择</button><!--这个以后再写链接-->
+  <script>
+
+    function questionnaireModel() {
+        var s = "/CPQ/Admin/questionnaireModels?ReportID=CPQ问卷模板库&Params=;";
+        window.location = s;
+
+    }
+
+</script>

@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "EntEnrollInformation";
+}
+
+
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+
+<html>
+<head>
+    <title>添加岗位</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $('')
+        });
+
+        function jump(Entprano,PosID) {
+            var volunteer = document.getElementById("volunteer").value;
+            var vorder = document.getElementById("vorder").value;
+            var userid = '@ViewBag.UserID';
+            var url = '/School/StuPosManager/AddEnrollToStuOP?UserID='+userid+'&Entprano=' + Entprano + '&PosID=' + PosID+'&PosID=' + PosID+'&volunteer=' + volunteer+'&vorder=' + vorder;
+            window.location = url;
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生岗位管理</a></li>
+            <li><a href="#">添加岗位</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("AddEnrollToStu", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>当前操作的学生:@ViewBag.StuName  ||  用户名:@ViewBag.UserID</span></div>
+            <input type="hidden" value='@ViewBag.UserID' name="UserID" id="UserID" />
+            <div class="formtitle"><span>选择企业/岗位: </span></div>
+
+            @Html.Partial("_EntPosition")
+            
+            <input type="submit" class="btn" value="查询" id="nowoperation"/>
+            
+            @Html.Partial("_Vol1andVol2")
+            
+            
+            <div class="formtitle"><span>添加岗位:  </span></div>
+
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="poslistdetail">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">企业<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">报名人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">安排面试人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">已面试人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">录用人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">学生已确认人数<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                </tr>
+                <tbody>
+                    @if (ViewBag.CountNum != 0)
+                    {
+                        for (int i = 0; i < ViewBag.CountNum; i++)
+                        {
+                            <tr class="odd">
+                                <td>
+                                    @ViewBag.EntName
+                                </td>
+                                <td>
+                                    @ViewBag.PosName[i]
+                                </td>
+                                <td>
+                                    @ViewBag.EnrollNum[i]
+                                </td>
+                                <td>
+                                    @ViewBag.MeetingNum[i]
+                                </td>
+                                <td>
+                                    @ViewBag.MeetedNum[i]
+                                </td>
+                                <td>
+                                    @ViewBag.HiredNum[i]
+                                </td>
+                                <td>
+                                    @ViewBag.ConfirmNum[i]
+                                </td>
+                                <td>
+                                    @*<a href="#" onclick="jump('@ViewBag.PosID[i]')">查看详情</a>*@
+                                    <a href="#" onclick="jump('@ViewBag.Entprano','@ViewBag.PosID[i]')">添加</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+
+
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+
+        function get(pracno, entpracno, posid) {
+            var vol = document.getElementById("volunteer").value;
+            var order = document.getElementById("vorder").value;
+            var url = "/School/S_PraEnrollManager/PreEnroll?pracno=" + pracno + "&entpracno=" + entpracno + "&posid=" + posid + "&vol=" + vol + "&order=" + order;
+            window.location = url;
+        }
+
+    </script>
+
+    <div class="none"></div>
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['300px', '180px'],
+                title: "岗位说明",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+            });
+        }
+    </script>
+
+</body>
+</html>

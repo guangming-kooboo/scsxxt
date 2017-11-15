@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改广告栏目</title>
+
+   <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+    
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+    
+    
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class ="placeul">
+                <li><a href="#">广告栏目管理</a></li>
+                <li><a href="#">修改广告栏目</a></li>
+            </ul>
+        </div>
+
+    
+
+            <div class="formtitle"><span>修改广告栏目</span></div>
+            
+
+    <form method="POST" action="/CodeManager/Code/ReupdateADColumn">
+
+        <ul class="forminfo">
+
+
+
+
+            <li>
+                <label>广告栏目编号:</label>
+                <input type="text" name="ADColumnID" id="ADColumnID" class="dfinput" value="@ViewBag.update.ADColumnID">
+            </li>
+
+
+            <li>
+                <label>广告栏目名称:</label>
+                <input type="text" id="ADColumnName" name="ADColumnName" class="dfinput" value="@ViewBag.update.ADColumnName">
+            </li>
+
+           
+            <li>
+                <label>所属单位选择：</label>
+                <select style="width:100px" name="SybSystem" id="SybSystem" class="dfinput">
+                   
+                    @foreach (var item in ViewBag.system)
+                    {
+                        if (@item == @ViewBag.update.SybSystem)
+                        {
+                            <option value="@item" selected="selected">@item</option> }
+
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+
+
+                    }
+                </select>
+            </li>
+
+            <li>
+
+                <label>&nbsp;</label><input type="submit" value="保  存" class="btn">
+
+            </li>
+        </ul>
+
+
+
+    </form>
+     
+    
+
+</body>
+</html>
+

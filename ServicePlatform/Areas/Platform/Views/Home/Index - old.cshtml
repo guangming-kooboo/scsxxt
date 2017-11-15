@@ -1,0 +1,291 @@
+﻿@using ServicePlatform.Models
+@{
+    ViewBag.Title = "Index";
+
+
+    List<T_School> SchoolList = ViewBag.SchoolList;
+    List<T_Enterprise> EnterpriseList = ViewBag.EnterpriseList;
+    List<T_Content> PlateInfoList = ViewBag.PlateInfoList;
+  
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>顶岗实习系统</title>
+    <link href="~/Areas/Platform/Content/Home/Index/BigPlat.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/Areas/Platform/Content/Home/Index/js/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <header id="header" class="">
+        <div class="header-top-blank ">
+            <!-- logo -->
+            <a class="header-logo" href="#" title="">
+                <img src="/Areas/Platform/Content/Home/Index/img/logo.png" width="80" height="80" alt="旅游学院顶岗实习管理系统">
+                <p>旅游学院顶岗实习管理系统</p>
+            </a>
+            <!--检索-->
+            <div class="header-search">
+                <form action="#" method="post">
+                    <div>
+                        <label for="products">搜索：</label>
+                        <input type="text" id="products" name="products" placeholder="你想找什么，输入关键词试试" class="header-search-style" />
+                        <input type="submit" name="ensure2" value="搜索" />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </header>
+    <!-- /header -->
+    <!-- 轮播大图 -->
+    <div id="slides" class="slide-banner">
+        <ul class="slides_container">
+            <li class="banner-img" style="background: url(/Areas/Platform/Content/Home/Index/img/banner/1.jpg); background-position: center; "></li>
+            <li class="banner-img" style="background: url(/Areas/Platform/Content/Home/Index/img/banner/2.jpg); background-position: center; "></li>
+            <li class="banner-img" style="background: url(/Areas/Platform/Content/Home/Index/img/banner/3.jpg); background-position: center; "></li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+    <!--内容主体部分-->
+    <div id="wrapper">
+        <div class="content">
+
+            <!--参与学校-->
+            <div class="UnitList">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p>入驻院校</p>
+                    <a href="#">更多>></a>
+                </div>
+                <div class="listinner">
+                    <ul>
+                        @{
+                            for(int i = 0; i < SchoolList.Count; i++)
+                            {
+                                  <li>
+                                      <a href="/School/Home/SchoolIndex?SchoolID=@SchoolList[i].SchoolID">
+                                          <img src="@SchoolList[i].SchoolLogo"/>
+                                          <center>@SchoolList[i].SchoolName</center>
+                                      </a>
+                                 </li>
+                            }
+                        }
+                      
+                    </ul>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+
+            <!--企业列表-->
+            <div class="UnitList">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p>入驻企业</p>
+                    <a href="#">更多>></a>
+                </div>
+                <div class="listinner">
+                    <ul>
+                        @{
+                            for(int i = 0; i < EnterpriseList.Count; i++)
+                            {
+                                  <li>
+                                      <a href="/Enterprise/Home/Index?Ent_No=@EnterpriseList[i].Ent_No">
+                                          <img src=@EnterpriseList[i].EntLogo />
+                                          <center>@EnterpriseList[i].Ent_Name</center>
+                                      </a>
+                                    </li>
+                            }
+                        }
+
+                     
+                    </ul>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+
+            <!--成功案例-->
+            <div class="UnitList">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p>成功案例</p>
+                    <a href="#">更多>></a>
+                </div>
+                <div class="listinner">
+                    <ul>
+                        <li>
+                            <a href="">
+                                <img src="/Areas/Platform/Content/Home/Index/img/case/4.jpg" />
+                                <center>华侨大学 & 厦门翔鹭</center>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/Areas/Platform/Content/Home/Index/img/case/22.jpg" />
+                                <center>华侨大学 & 泉州森林公园</center>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/Areas/Platform/Content/Home/Index/img/case/15.jpg" />
+                                <center>华侨大学 & 厦门翔鹭</center>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <img src="/Areas/Platform/Content/Home/Index/img/case/21.jpg" />
+                                <center>华侨大学 & 厦门鼓浪屿</center>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/Areas/Platform/Content/Home/Index/img/case/18.jpg" />
+                                <center>华侨大学 & 福州海关</center>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/Areas/Platform/Content/Home/Index/img/case/9.jpg" />
+                                <center>华侨大学 & 去哪儿</center>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div><!--/content-->
+
+
+        <div class="siderbar">
+            <!--用户登录-->
+            <div class="login height">
+                <div class="title">
+                    <span class="logo"></span>
+                    <p> 用户登录</p>
+                </div>
+                <form action="/Platform/Home/Login" method="post">
+                    <input id="UnitID" name="UnitID"  type="text" value="Platform" hidden="hidden" />
+                    <div class="user">
+                        <label for="username">用户名：</label><input name="UserID" type="text" /><br />
+                    </div>
+                    <div class="user">
+                        <label for="password">密  &nbsp; 码：</label><input name="UserPwd" type="password" />
+                    </div>
+
+                    <div style="clear:both;"></div>
+
+                    <div class="botton">
+                        <input name="submit" type="submit" value="确定" />
+                        <input name="reset" type="reset" value="重置" />
+                    </div>
+                    <a href="#">忘记密码</a>
+                </form>
+            </div>    <!--/logo-->
+            <!--平台信息-->
+            <div class="UnitList">
+                <div class="title">
+                    <span class="logo job"></span>
+                    <p>平台信息</p>
+                    <a href="#">更多>></a>
+                </div>
+                <ul class="list">
+                    @for (int i = 0; i < PlateInfoList.Count; i++)
+                            {
+                                //string tlink = "/Platform/Home/NewsDetail?id=" + PlateInfoList[i].ContentID + ""; 
+                                string tlink = "/School/SchoolHomePage/HomeNewsDetail?id=" + PlateInfoList[i].ContentID + "";
+                                  <li>
+                                      <span>●</span><a href=@tlink>@PlateInfoList[i].ContentTitle</a>
+                                 </li>
+                            }                    
+                </ul>
+            </div>
+            <!--资料下载-->
+            <div class="UnitList">
+                <div class="title">
+                    <span class="logo download"></span>
+                    <p>资料下载</p>
+                    <a href="#">更多>></a>
+                </div>
+                <ul class="list">
+                    <li>
+                        <span>●</span><a href="#">2015级新生开学典礼</a>
+                    </li>
+                    <li>
+                        <span>●</span><a href="#">”铭记.铸心“--旅游学院2015级新生联合晚会</a>
+                    </li>
+                    <li>
+                        <span>●</span><a href="#">2012级毕业实习须知</a>
+                    </li>
+                    <li>
+                        <span>●</span><a href="#">华侨大学旅游学院2015级新生联合晚会</a>
+                    </li>
+                    <li>
+                        <span>●</span><a href="#">2015级新生开学典礼</a>
+                    </li>
+                    <li>
+                        <span>●</span><a href="#">”铭记.铸心“--华侨大学2015级新生联合晚会-华侨大学2015级</a>
+                    </li>
+                    <li>
+                        <span>●</span><a href="#">2012级毕业实习须知</a>
+                    </li>
+                    <li>
+                        <span>●</span><a href="#">华侨大学旅游学院2015级新生联合晚会</a>
+                    </li>
+                </ul>
+            </div>
+            <!--联系我们-->
+            <div class="UnitList">
+                <div class="title">
+                    <span class="logo job"></span>
+                    <p>联系我们</p>
+                    <a href="#">更多>></a>
+                </div>
+                <ul class="list">
+                    <li>邮箱：12345@hqu.edu.cn</li>
+                    <li>地址：华侨大学旅游学院顶岗实习办公室</li>
+                    <li>电话：0595-22690000</li>
+                </ul>
+            </div>
+        </div> <!--/siderbar-->
+    </div><!--/wrapper-->
+    <!--footer-->
+    <footer id="footer">
+        <div>
+            <ul>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">服务协议</a></li>
+                <li><a href="#">帮助中心</a></li>
+            </ul>
+            <div style="clear:both;"></div>
+            <p>copyright &copy; 2015 - 2020 华侨大学版权所有</p>
+
+        </div>
+    </footer>
+    
+    <!-- js -->
+    <script type="text/javascript" src="/Areas/Platform/Content/Home/Index/js/lib/Slides-SlidesJS-3/source/jquery.slides.min.js"></script>
+    <!-- 页面自定义js -->
+    <script type="text/javascript">
+        $().ready(function () {
+            //$("#slides ul").slidesjs({
+            $("#slides ul").slidesjs();
+
+
+            $(".main-nav-link a").click(function () {
+                $(".main-nav-link .current").removeClass("current");
+                $(this).addClass("current");
+            });
+
+            $("#slides1 ul").slidesjs();
+
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,64 @@
+﻿@Html.Partial("student_menu")
+   <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <div>
+                    @*@跳转到个人中心*@
+                <a  href="javascript:submit('a');"><div class="placeholder "><img src="@ViewData["root"]images/return.png" class="return"></div></a>
+                </div>
+                <div class="weui-flex__item "><div class="placeholder">疑问解答</div></div>
+                <div style="width:48px"><div class="placeholder"></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells">
+                <div class="weui-cell" style="background-color: #ebeeef">
+                    <div class="weui-cell__bd">
+                        <p>顶岗实习的操作流程是什么?</p>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="suojin">
+                        <p>大致的步骤如下：</p> 
+                        <p>1.第一步：登陆系统</p>
+                        <p>2.第二步：查看企业，对喜欢的岗位进行报名</p>
+                        <p>3.第三步：将预报名志愿转为正式志愿，并结束报名</p>
+                        <p>4.第四步：等企业安排面试</p>
+                        <p>5.第五步：面试通过，开始实习，填写实习周记，实习案例</p>
+                        <p>6.第六步：实习结束之后对学校，企业进行评价，填写实习报告</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui-cells">
+
+                <div class="weui-cell" style="background-color: #ebeeef">
+                    <div class="weui-cell__bd">
+                        <p>预报名可以报几个志愿？</p>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="suojin">
+                        <P>都可以，你想要报名的都可以报名，你可以把它当做是一个购物车</P>
+                    </div>
+                </div>
+
+            </div>
+            <div class="weui-cells">
+
+                <div class="weui-cell" style="background-color: #ebeeef">
+                    <div class="weui-cell__bd">
+                        <p>正式志愿可以有几个？
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="suojin">
+                        <P>四个</P>
+                    </div>
+                </div>
+
+            </div> 
+        </div>
+    </div>

@@ -1,0 +1,159 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.StudentDetail_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <div><a href="@Url.Action("StudentInfo","THome",new {area="AppTeacher2"})"><div class="placeholder colortitle"><img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" /></div></a></div>
+                <div class="weui-flex__item colortitle"><div class="placeholder">学生信息详情 </div></div>
+                <div style="width:48px"><div class="placeholder"></div></div>
+            </div>
+        </div>
+    </div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-cells weui-cells_form">
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">姓名</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" value="@Model._StudentInfo.StuName" readonly class="weui-input">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">性别</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" value="@Model._StudentInfo.StuSex" readonly class="weui-input">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">年级</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" value="@Model._StudentInfo.EntryYear" readonly class="weui-input">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">班级</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" value="@Model._StudentInfo.Class" readonly class="weui-input">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">学号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" value="@Model._StudentInfo.StuNo" readonly class="weui-input">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">手机</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" value="@Model._StudentInfo.Phone" readonly class="weui-input">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">QQ</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="text" value="@Model._StudentInfo.QQ" readonly class="weui-input">
+                </div>
+            </div>
+            @if (Model._StudentInfo.EntEnterprise == null)
+            {
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">实习单位</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="还没有实习企业" readonly class="weui-input">
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">实习单位</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" value="@Model._StudentInfo.EntEnterprise" readonly class="weui-input">
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="weui-uploader__bd" style="width: 100%">
+            <ul class="weui-uploader__files">
+                @if (Model._StudentInfo.Photo != null)
+                {
+                    var photo = Model._StudentInfo.Photo.Split(';');
+                    for (int item = 0; item < photo.Count(); item ++)
+                    {
+                        <li class="weui-uploader__file1 Photo"><img style="background-image: url(@photo[item]); background-size: 100% auto" width="90%" src="@photo[item]"></li>
+                    }
+                }
+                else
+                {
+                    <li class="weui-uploader__file1"><img style="background-image: url(); width: 90%;" src=""></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="weui-gallery" id="gallery" style="opacity: 1; display: none">
+        <span class="weui-gallery__img" id="galleryImg" style="background-image: url()"></span>
+        <div class="weui-gallery__opr">
+        </div>
+    </div>
+
+<script src="~/Areas/AppTeacher2/Content/js/zepto.js"></script>
+    <script>
+                    $gallery = $("#gallery"),
+                    $galleryImg = $("#galleryImg"),
+                        $uploaderFiles = $(".Photo");
+                    $uploaderFiles.on("click", "img", function () {
+                        $galleryImg.attr("style", this.getAttribute("style"));
+
+
+                        $gallery.fadeIn(100);
+                        $gallery.on("click", function () {
+                            $gallery.fadeOut(100);
+                        });
+                    });
+    </script>
+</body>
+</html>
+
+
+
+
+

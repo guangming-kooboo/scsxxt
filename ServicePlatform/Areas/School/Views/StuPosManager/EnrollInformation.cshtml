@@ -1,0 +1,260 @@
+﻿@{
+    ViewBag.Title = "EnrollInformation";
+}
+
+
+@*@model IEnumerable<ServicePlatform.Models.T_PracticeVolunteer>*@
+@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    List<T_PracticeVolunteer> Volunteer = ViewBag.Volunteer;
+    string[] StuNo = ViewBag.StuNo;
+    string[] StuName = ViewBag.StuName;
+    string[] StuSex = ViewBag.StuSex;
+    int[] LoopNum = ViewBag.LoopNum;
+    int index = 0;
+    int loop = 0;
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@*@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")*@
+
+
+<html>
+
+<head>
+    <title>学生岗位管理中心</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @Html.Partial("_LayerLinks")
+    <script src="~/Include/layer/layer.js"></script>
+    <link href="~/Include/layer/skin/layer.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生岗位管理</a></li>
+            <li><a href="#">报名情况查询</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("EnrollInformation", "StuPosManager", FormMethod.Post, new { id = "_form" }))
+        {
+        <div class="formtitle"><span>选择年级/专业/班级: </span></div>
+
+       
+            @Html.Partial("_YearSpeClass")
+
+            <ul class="forminfo">
+                <li>
+                    <label>志愿顺序：</label>
+                    <select id="VolSqc" name="VolSqc" class="dfinput">
+                        <option value="No_Limit" selected='No_Limit'>
+                            全部
+                        </option>
+                        <option value="1">
+                            1
+                        </option>
+                        <option value="2">
+                            2
+                        </option>
+                    </select>
+                    <i></i>
+                </li>
+
+                <li>
+                    <label>岗位顺序：</label>
+                    <select id="PosSqc" name="PosSqc" class="dfinput">
+                        <option value="No_Limit" selected='No_Limit'>
+                            全部
+                        </option>
+                        <option value="1">
+                            1
+                        </option>
+                        <option value="2">
+                            2
+                        </option>
+                    </select>
+                    <i></i>
+                </li>
+
+                <li>
+                    <label>学号：</label>
+                    <input type="text" class="dfinput" placeholder="请输入要查询的学号（支持模糊查询）" name="StuNo" value="" />
+                    <i></i>
+                </li>
+                <li>
+                    <label>姓名：</label>
+                    <input type="text" class="dfinput" placeholder="请输入要查询的姓名（支持模糊查询）" name="StuName" value="" />
+                    <i></i>
+                </li>
+
+                <li>
+                    <label>企业：</label>
+                    <input type="text" class="dfinput" placeholder="请输入要查询的企业（支持模糊查询）" name="EntName" value="" />
+                    <i></i>
+                </li>
+
+                <li>
+                    <label>岗位：</label>
+                    <input type="text" class="dfinput" placeholder="请输入要查询的岗位（支持模糊查询）" name="PosName" value="" />
+                    <i></i>
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <button type="button" class="btn" onclick="query('cx')">查询</button>&nbsp;
+                    <button type="button" class="btn" onclick="query('dc')">导出Excel</button>&nbsp;
+                    <i></i>
+                </li>
+
+            </ul>
+
+
+
+
+
+
+
+
+            <input type="hidden" id="ToExcelFlag" name="ToExcelFlag" value="查询" />
+
+            <div class="formtitle"><span>报名情况:  </span></div>
+
+            <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+                <tr class="title">
+                    @*<td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>*@
+                    <td bgcolor="#CCCCCC">学号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">姓名<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">性别<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">手机号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+
+                       <td bgcolor="#CCCCCC">志愿顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位顺序<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">企业<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">岗位<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">面试时间<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">面试记录<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">面试成绩<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">录取情况<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                    <td bgcolor="#CCCCCC">学生确认<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+                </tr>
+                <tbody>
+                    @if (Volunteer != null)
+                    {
+                        for (int i = 0; i < Volunteer.Count(); i += loop)
+                        {
+                            for (int j = 0; j < LoopNum[index]; j++)
+                            {
+                                <tr class="odd">
+                                    <td>
+                                        @StuNo[index]
+                                    </td>
+                                    <td>
+                                        @StuName[index]
+                                    </td>
+                                    <td>
+                                        @StuSex[index]
+                                    </td>
+                                    <td>
+                                        @Volunteer[i].Phone
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].VolunteerSequence
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].PosSequence
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].EntName
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].PosName
+                                    </td>
+                                    <td>
+                                        @DateTimeFormat.ConvertIntDateTime(Volunteer[i + j].InterviewTime).ToString()
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].InterviewRecord
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].InterviewScore
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].VolunteerStatusName
+                                    </td>
+                                    <td>
+                                        @Volunteer[i + j].VolunteerStatusName
+                                    </td>
+                                </tr>
+                            }
+                            loop = LoopNum[index];
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+            }
+
+
+
+
+
+
+
+</div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <script type="text/javascript">
+        function query(flag)
+        {
+            if (flag == 'dc') {
+                $("#ToExcelFlag").val('导出Excel');
+              
+            } else {
+                $("#ToExcelFlag").val('查询');
+              
+            }
+            $("#_form").submit();
+        }
+        function get(pracno, entpracno, posid) {
+            var vol = document.getElementById("volunteer").value;
+            var order = document.getElementById("vorder").value;
+            var url = "/School/S_PraEnrollManager/PreEnroll?pracno=" + pracno + "&entpracno=" + entpracno + "&posid=" + posid + "&vol=" + vol + "&order=" + order;
+            window.location = url;
+        }
+
+    </script>
+
+    <div class="none"></div>
+
+    <script>
+
+        function show(PosDesc) {
+            //弹出一个页面层
+            layer.open({
+                type: 1,
+                area: ['300px', '180px'],
+                title: "岗位说明",
+                shadeClose: true, //点击遮罩关闭
+                offset: ['200px', '500px'],
+                content: '\<\div style="padding:20px;">' + PosDesc + '\<\/div>'
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+

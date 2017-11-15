@@ -1,0 +1,73 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script>
+    $().ready(function() {
+        getdate();
+    });
+    function p(s) {
+        return s < 10 ? '0' + s : s;
+    }
+    function getdate() {
+        var myDate = new Date();
+        //获取当前年
+        var year = myDate.getFullYear();
+        //获取当前月
+        var month = myDate.getMonth() + 1;
+        //获取当前日
+        var date = myDate.getDate();
+        var h = myDate.getHours();       //获取当前小时数(0-23)
+        var m = myDate.getMinutes();     //获取当前分钟数(0-59)
+        var s = myDate.getSeconds();
+        //2012-06-15 14:45
+        var now = year + '-' + p(month) + "-" + p(date) + " " + p(h) + ':' + p(m);
+        $("#starttime").val(now);
+        $("#endtime").val(now);
+    }
+</script>
+@model ServicePlatform.Areas.WbsHqu.ViewModels.EditStuEnterPriseApply_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.HiddenFor(o => o.Ent_No)
+@Html.HiddenFor(o => o.StuEnterPriseApplyID)
+@Html.InputFor(o => o.entname)
+
+@Html.InputFor(o => o.practiceDept)
+
+@Html.InputFor(o => o.practiceDivDept)
+
+@Html.SelectFor(o => o.positionId, Model.posttionitems)
+
+@Html.InputFor(o => o.posDesc)
+<div class="form-group">
+    <label class="col-md-3 control-label">实习开始时间</label>
+    <div class='col-md-9'>
+        <input id="starttime" size="16" type="text" value="@Model.starttime" name="practiceStart" readonly class="form_datetime form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-3 control-label">实习结束时间</label>
+    <div class='col-md-9'>
+        <input id="endtime" size="16" type="text" value="@Model.endtime." name="practiceEnd" readonly class="form_datetime form-control">
+    </div>
+</div>
+<script src="~/assets/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+@*<script type="text/javascript">
+        $(".form_datetime").datetimepicker({ format: 'yyyy-mm-dd hh:ii' });
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+        });
+    </script>*@
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.fr.js"></script>
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+

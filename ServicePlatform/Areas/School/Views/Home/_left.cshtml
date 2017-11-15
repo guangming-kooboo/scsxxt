@@ -1,0 +1,115 @@
+﻿@*@{
+    ServicePlatform.Config.VarsConfig Vars=(Session["vars"] as ServicePlatform.Config.VarsConfig);
+    
+}*@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="/Areas/School/Content/Home/js/jquery.js"></script>
+
+<script type="text/javascript">
+$(function(){	
+	//导航切换
+	$(".menuson li").click(function(){
+		$(".menuson li.active").removeClass("active")
+		$(this).addClass("active");
+	});
+	
+	$('.title').click(function(){
+		var $ul = $(this).next('ul');
+		$('dd').find('ul').slideUp();
+		if($ul.is(':visible')){
+			$(this).next('ul').slideUp();
+		}else{
+			$(this).next('ul').slideDown();
+		}
+	});
+})	
+</script>
+
+
+</head>
+
+<body style="background:#f0f9fd;">
+	<div class="lefttop"><span></span>菜单</div>
+    
+    <dl class="leftmenu">
+    
+    <dd>
+    <div class="title">
+    <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>批次管理中心
+    </div>
+    <ul class="menuson">
+        <li><cite></cite><a href="/School/BatchManager/CreatBatch" target="rightFrame">创建批次</a><i></i></li>
+        <li><cite></cite><a href="/School/BatchManager/BatchList" target="rightFrame">批次列表</a><i></i></li>
+        </ul>     
+    </dd>
+
+
+      <dd>
+      <div class="title">
+      <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>学生管理中心
+      </div>
+      <ul class="menuson">
+            <li><cite></cite><a href="/School/StuManager/StuImprot" target="rightFrame">学生信息维护</a><i></i></li>
+            <li><cite></cite><a href="/School/StuManager/StuPwdReset" target="rightFrame">学生密码重置</a><i></i></li>
+      </ul>
+      </dd> 
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>学生岗位管理中心
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/StuPosManager/EnrollInformation" target="rightFrame">学生报名情况查询</a><i></i></li>
+                <li><cite></cite><a href="/School/StuPosManager/EntEnrollInformation" target="rightFrame">企业报名情况查询</a><i></i></li>
+                <li><cite></cite><a href="/School/StuPosManager/FindPosToStu" target="rightFrame">岗位协调</a><i></i></li>
+                @*<li><cite></cite><a href="/School/StuPosManager/FindStuToEnt" target="rightFrame">给岗位找学生</a><i></i></li>*@
+            </ul>
+        </dd> 
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>实习过程管理中心
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/StuPraManager/ChangeStuPraPos" target="rightFrame">更换学生岗位</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>申请管理中心
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/ApplyManager/PlatFormApply" target="rightFrame">处理申请</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>文件管理中心
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/School/FileManager/FileUpDownLoad" target="rightFrame">文件管理</a><i></i></li>
+            </ul>
+        </dd>
+
+        <dd>
+      <div class="title">
+      <span><img src="/Areas/School/Content/Home/img/leftico03.png" /></span>学生代码维护表
+      </div>
+      <ul class="menuson">
+            <li><cite></cite><a href="/School/maintenanceStudent/speciality1" target="rightFrame">学生专业维护</a><i></i></li>
+          <li><cite></cite><a href="/School/maintenanceClass/class1" target="rightFrame">学生班级维护</a><i></i></li>
+      </ul>
+      </dd> 
+
+    </dl>
+    
+</body>
+</html>

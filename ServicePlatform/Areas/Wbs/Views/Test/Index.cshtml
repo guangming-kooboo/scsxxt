@@ -1,0 +1,80 @@
+﻿
+@model  List<ServicePlatform.Models.Template.ItemList>
+@{
+    ViewBag.Title = "报表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>报名情况查询</h2>
+<div class="row">
+    <div class="col-lg-2">
+        
+    </div>
+    <div class="col-lg-10">
+
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-lg-2">
+            <label>@item.Name</label>
+        </div>
+        <div class="col-lg-10">
+            @Html.DropDownList(item.Name, item.Items)
+        </div>
+    </div>
+  
+}
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>学号 </label>
+    </div>
+    <div class="col-lg-10">
+        @Html.TextBox("学号", "", new { PlaceHolder = "请输入要查询的学号（支持模糊查询）" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        <label>姓名</label>
+    </div>
+    <div class="col-lg-10">
+        @Html.TextBox("姓名", "", new { PlaceHolder = "请输入要查询的姓名（支持模糊查询）" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-lg-offset-2">
+        <button class="btn btn-deafult" onclick="StuInfo()">学生资料</button>&nbsp;
+        <button class="btn btn-primary" id="Preview">预览</button>&nbsp;
+        <button class="btn btn-warning" id="ToExcel">导出</button>
+    </div>
+</div>
+@Html.Partial("_Report")
+<script>
+    function StuInfo() {
+        if (v("学号") == "") {
+            alert("请在学号栏输入要查询学生的学号！");
+        } else {
+            window.open("/School/S_StuBaseInformation/BaseInfoMaintan?userid=10385-" + v("学号") + "&ForbidFlag=true");
+       
+        }
+    }
+
+    function Preview() {
+        var Params = v("批次号") + ";" +
+            t("岗位名字") + ";" +
+            t("年级") + ";" +
+            t("专业") + ";" +
+            t("班级") + ";" +
+            t("志愿顺序") + ";" +
+            t("岗位顺序") + ";" +
+            t("企业") + ";" +
+            v("学号") + ";" +
+            v("姓名");
+
+        Query(Params, "/Wbs/Test/Index");
+    }
+</script>
+
+
+

@@ -1,0 +1,419 @@
+﻿
+@using Qx.Tools.CommonExtendMethods
+@using Qx.Tools.Scsxxt.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.FAQ.FAQList_M
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>帮助中心-分类页-FAQ</title>
+    <meta content="FAQ" name="description">
+    <meta content="FAQ" name="keywords">
+    @*<link rel="icon" href="#favicon.ico" mce_href="//www.jd.com/favicon.ico" type="image/x-icon">*@
+    <link href="~/Content/AppStudentV3/css/FAQ/base.css" rel="stylesheet" />
+    <link href="~/Content/AppStudentV3/css/FAQ/manage.css" rel="stylesheet" />
+    <style>
+        .h-level1 li {
+            border-top: 1px solid rgb(238, 238, 238);
+        }
+
+        .bgcol {
+            background-color: rgb(110,117,127);
+            color: white;
+            text-indent: 40px;
+        }
+
+        .h-container .h-fw-ls {
+            min-height: 500px;
+            overflow: visible;
+        }
+
+        .sonn {
+            color: white;
+            overflow: hidden;
+            position: absolute;
+            z-index: 1000;
+            background: white;
+            width: 150px;
+            border-radius: 5px;
+            display: none;
+            background-color: gray;
+        }
+
+        .fath {
+            background-color: rgb(245,245,245);
+            color: black;
+        }
+
+        .pstyle {
+            width: 100%;
+            line-height: 20px;
+        }
+
+        .xiala {
+            text-indent: 0;
+            float: right;
+            right: 15px;
+            text-align: center;
+            width: 40px;
+            position: absolute;
+            line-height: 40px;
+            font-size: 20px;
+            -o-transition: transform .3s linear;
+            -moz-transition: transform .3s linear;
+            -webkit-transition: transform .3s linear;
+            -ms-transition: transform .3s linear;
+        }
+
+        .xz {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <!--头部-->
+    <div id="h-header">
+        <div class="h-container">
+            <h1><img src="~/Content/AppStudentV3/images/u8.png" /><a href="@Url.Action("ShowFAQList", "admin", new {area="WbsHqu"})">帮助中心</a></h1>
+            <span class="h-welcome">
+                您好，欢迎来到顶岗实习帮助中心！
+            </span>
+        </div>
+    </div>
+    <script src="~/Content/AppStudentV3/js/FAQ/jquery-1.7.2.min.js"></script>
+    <script src="~/Content/AppStudentV3/js/FAQ/sea.js"></script>
+    <script src="~/Content/AppStudentV3/js/FAQ/seajs-combo.js"></script>
+    <script type="text/javascript">
+        seajs.config({
+            comboSyntax: ['?js=', ','],
+            comboExcludes: function (uri) {
+                // 某些特定目录下的文件不合并
+                if (/^jquery$/.test(uri) || /xheditor/.test(uri)) {
+                    return true
+                }
+            },
+            base: "/misc/script/",
+            alias: {
+                "jquery": "common/jquery.js"
+            }
+        });
+    </script>
+
+    <!--内容区-->
+    <input id="project_id" type="hidden" value="5">
+    <input id="current_nav_id" type="hidden" value="16">
+    <div id="h-content" class="h-pages-content">
+        <div class="h-guide-wrap">
+            <div class="h-guide">
+                <span class="h-path"><i></i><label><a href="/">首页</a></label> &gt; </span>帮助中心
+            </div>
+        </div>
+        <div class="h-container">
+            <div class="h-fw-ls">
+                @*<ul class="h-nav h-level1 " style="color:black">
+                        <li class="h-child-nav bgcol" style="width: 100%; display: block" onclick="FaqList('')">
+                            <span class="h-name">所有文章<span class="xiala">+</span></span>
+                        </li>
+                    </ul>*@
+                <ul class="h-nav h-level1 " style="color: black" id="leftnavs">
+                    <li class="h-child-nav" id="father">
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="h-aw-rs" id="faqlist">
+                <ul class="h-pages" id="list"></ul>
+                <!-- 分页 -->
+                @*<input id="page_index" value="1" type="hidden">
+                <input id="page_totalPage" value="3" type="hidden">
+                <div class="h-page-util">
+                    <div id="page-wrap"><span class="current-page">1</span><span><a href="javascript:;">2</a></span><span><a href="javascript:;">3</a></span><span class="next"><a href="javascript:;">&gt;</a></span></div>
+                </div>*@
+            </div>
+            <div class="h-aw-rs" id="faqdetail">
+            </div>
+        </div>
+    </div>
+    <!--底部-->
+    @*<script type="text/javascript">
+        seajs.use("/misc/script/user/pagelist");
+    </script>*@
+    <div id="h-footer">
+        <div class="h-copyright"></div>
+    </div>
+    <div style="display: none;">
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            menu();
+            //   FaqList("");
+        });
+
+        function menu() {
+            $.ajax({
+                type: "post",
+                url: "/WbsHqu/Admin/jsonfathertype?fatherid=" + "0",
+                dataType: "json",
+                success: function (father) {
+                    if (father == 500) {
+                        return alert("请求失败");
+                    } else {
+                        var html = "";
+                        $.each(father, function (i, item) {
+                            if (item.Value != null) {
+                                var fatherid = item.Value;
+                                html += "<li class='h-child-nav bgcol' >",
+                                html += "<span class='h-name' style='width:100%;display:block' onclick='sss(this)'>" + item.Text,
+                                html += "<span class='xiala'>+</span>",
+                                html += "</span>",
+                                html += "<ul class='hid' style='text-indent: 20px;display:none' id='" + fatherid + "'></ul>";
+                                html += "</li>",
+                                    $("#leftnavs").html(html);
+                                $.ajax({
+                                    type: "post",
+                                    url: "/WbsHqu/Admin/jsonchildtype?fatherid=" + item.Value,
+                                    dataType: "json",
+                                    success: function (child) {
+                                        if (child == 500) {
+                                            return alert("请求失败");
+                                        } else {
+                                          //  debugger
+                                            var html2 = "";
+                                            $.each(child, function (i, item) {
+                                                if (item.Value != null) {                                                 
+                                                        html2 += "<li class='fath'>",
+                                                        html2 += "<div id='" + item.Value + "' class='sonn'>",
+                                                        html2 += "<ul>",
+                                                        html2 += "</ul>",
+                                                        html2 += "</div>",
+                                                        html2 += "<p class='pstyle' onmouseenter ='list(this)'>" + item.Text + "</p>",
+                                                        html2 += "</li>";
+                                                }
+                                                $("#" + fatherid).html(html2);
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+
+    <script>
+        //$(".fath").click(function () {
+        function list(o) {
+            var faqid = $(o).siblings(".sonn").attr("id");
+            //$("#faqdetail").show();
+            // alert(faqid);
+            $.ajax({
+                type: "post",
+                url: "/WbsHqu/Admin/FaqList?typeid=" + faqid,
+                dataType: "json",
+                success: function (data) {
+                    if (data == 500) {
+                        return alert("请求出错");
+                    } else {
+                        var html = "";
+                        $.each(data, function (i, item) {
+                            html += '<li onclick=FaqDetail(\'' + item.FAQID + '\')>' + item.Title + '</li>';
+                        });
+                        $(o).siblings(".sonn").find("ul").html(html);
+                        $("#list").hide();
+                        $("#faqlist").show();
+                        $("#faqdetail").show();
+                    }
+                }
+            });
+            $(".sonn").css("margin-left", '210px');
+
+            if ($(o).siblings(".sonn li")) {
+                $(o).siblings(".sonn").css("display", "block");
+            }
+            $(o).parent().mouseleave(
+                function () {
+                    $(this).find(".sonn").css("display", "none");
+                }
+            );
+        }
+
+    </script>
+    <script>
+
+        function fatherfaqlist() {
+            $.ajax({
+                type: "post",
+                url: "/WbsHqu/Admin/FaqList?typeid=" + faqid,
+                dataType: "json",
+                success: function (data) {
+                    if (data == 500) {
+                        return alert("请求出错");
+                    } else {
+                        var html = "";
+                        $.each(data, function (i, item) {
+                            html += '<li onclick=FaqDetail(\'' + item.FAQID + '\')>' + item.Title + '</li>';
+                        });
+                        $(o).siblings(".sonn").find("ul").html(html);
+                        $("#faqlist").show();
+                        $("#faqdetail").hide();
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        //收菜单
+        function sss(o) {
+            var typeid = $(o).siblings("ul").attr("id");
+     //       list();
+           // ChildList(o);
+
+            var flag = true;
+            if (flag) {
+                flag = false;
+                if ($(o).siblings("ul").css("display") == "none") {
+                    $(o).siblings("ul").slideDown();
+                    $(o).find("span").addClass("xz");
+                } else {
+                    $(o).siblings("ul").slideUp();
+                    $(o).find("span").removeClass("xz");
+                }
+            } else {
+            };
+            // var fatherid = $("#fathertype").val();
+            // childtype(fatherid);
+        };
+    </script>
+    <script>
+        function ChildList(o) {
+            var fatherid = $(o).siblings("ul").attr("id");
+            $.ajax({
+                type: "post",
+                url: "/WbsHqu/Admin/jsonchildtype?fatherid=" + fatherid,
+                dataType: "json",
+                success: function (data) {
+                    if (data == 500) {
+                        return alert("请求出错");
+                    } else {
+                        //if (data.hasVal) {
+                        var html = "";
+                        $.each(data, function (i, item) {
+                            html += "<li class='fath'>",
+                            html += "<div id='" + item.Value + "' class='sonn'>",
+                            html += "<ul>",
+                            html += "</ul>",
+                            html += "</div>",
+                            html += "<p class='pstyle' onclick='list(this)'>" + item.Text + "</p>",
+                            html += "</li>";
+                        });
+                        $("#" + fatherid).html(html);
+                        //$(o).siblings(".sonn").find("ul").html(html);
+                        //$("#faqlist").show();
+                        //$("#faqdetail").hide();
+                        //} else {
+                        //    alert("1112");
+                        //    $("#faqdetail").show();
+                        //}
+                    }
+                }
+            });
+        }
+    </script>
+
+    <script>
+        //文章详情
+        function FaqDetail(faqid) {
+            $.ajax({
+                type: "post",
+                url: "/WbsHqu/Admin/FaqDetail?faqid=" + faqid,
+                dataType: "json",
+                success: function (data) {
+                    if (data == 500) {
+                        return alert("请求出错");
+                    } else {
+                        var html = "";
+                        html +=
+                            "<div class='h-title-wrap'>" +
+                            "<div class='h-title'>" +
+                            "<h1>" + data.Title + "</h1>" +
+                            "<span class='h-reads'><label></label></span>" +
+                            "</div>" +
+                            "<div class='h-labels'>" +
+                            " <i></i>" +
+                            "<span class='h-label'>" + data.Abstract + "</span>" +
+                            "<span class='h-date'></span>" +
+                            "</div>" +
+                            "</div>" +
+                            "<div class='h-page-detail '>" +
+                            "<p><span style='font-size: 18px;'>帮助内容：</span></p>" +
+                            "<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style='font-size: 16px;'></span></p>" +
+                            "<p><span style='font-size: 16px;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + data.Contents + "</span></p>" +
+                            "<p><span style='font-size: 16px;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style='color: #CC0000;'></span></span></p>" +
+                            "</div>";
+
+                    }
+                    $("#faqdetail").html(html);
+                    $("#faqdetail").show();
+                    $("#faqlist").hide();
+                }
+            });
+        }
+    </script>
+    <script>
+        //分页
+        function goPage(pno, psize) {
+            var itable = document.getElementById("idData");
+            var num = itable.rows.length; //表格所有行数(所有记录数)
+            console.log(num);
+            var totalPage = 0; //总页数
+            var pageSize = psize; //每页显示行数
+            //总共分几页
+            if (num / pageSize > parseInt(num / pageSize)) {
+                totalPage = parseInt(num / pageSize) + 1;
+            } else {
+                totalPage = parseInt(num / pageSize);
+            }
+            var currentPage = pno; //当前页数
+            var startRow = (currentPage - 1) * pageSize + 1; //开始显示的行  31
+            var endRow = currentPage * pageSize; //结束显示的行   40
+            endRow = (endRow > num) ? num : endRow; // 40
+            console.log(endRow);
+            //遍历显示数据实现分页
+            for (var i = 1; i < (num + 1) ; i++) {
+                var irow = itable.rows[i - 1];
+                if (i >= startRow && i <= endRow) {
+                    irow.style.display = "block";
+                } else {
+                    irow.style.display = "none";
+                }
+            }
+            var pageEnd = document.getElementById("pageEnd");
+            var tempStr = "共" + num + "条记录 分" + totalPage + "页 当前第" + currentPage + "页";
+            if (currentPage > 1) {
+                tempStr += "<a href=\"#\" onClick=\"goPage(" + (1) + "," + psize + ")\">首页</a>";
+                tempStr += "<a href=\"#\" onClick=\"goPage(" + (currentPage - 1) + "," + psize + ")\"><上一页</a>"
+            } else {
+                tempStr += "首页";
+                tempStr += "<上一页";
+            }
+
+            if (currentPage < totalPage) {
+                tempStr += "<a href=\"#\" onClick=\"goPage(" + (currentPage + 1) + "," + psize + ")\">下一页></a>";
+                tempStr += "<a href=\"#\" onClick=\"goPage(" + (totalPage) + "," + psize + ")\">尾页</a>";
+            } else {
+                tempStr += "下一页>";
+                tempStr += "尾页";
+            }
+
+            document.getElementById("barcon").innerHTML = tempStr;
+
+        }
+    </script>
+
+
+</body>
+</html>

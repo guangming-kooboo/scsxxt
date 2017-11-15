@@ -1,0 +1,3300 @@
+﻿html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+li
+{
+list-style:none;
+}
+img
+{
+border: 0;
+}
+
+ul
+{
+	overflow:hidden;width:100%;
+}
+
+a:link 
+{
+text-decoration: none;
+}
+
+a:hover {
+
+}
+a:active {
+text-decoration: none;
+color: rgb(98,32,100);
+}
+.login-text:hover
+.login-password:hover
+.input-text:hover
+{
+background-color: rgb(255,255,255);
+}
+
+body
+{
+background-color: rgb(255,255,255);
+font-family: "微软雅黑";
+margin: 0;
+}
+.main
+{
+width: 100%;
+height:736px;
+margin:0 auto;
+background: url(/Areas/App/Content/Image/background.png);
+background-repeat:no-repeat;
+background-size:100% 100%;
+text-align: center;
+
+}
+
+.main-logo
+{
+width: 120px;
+height: 120px;
+margin-top: 140px;
+}
+
+.main-name-p
+{
+color: rgb(255,255,255);
+font-size: 18px;
+}
+
+.main-num-p
+{
+color: rgb(255,255,255);
+font-size: 10px;
+margin-top: -15px;
+}
+
+
+.go-img
+{
+width: 15px;
+height: 15px;
+padding-right: 20px;
+margin-top: 5px;
+}
+.go-imgs
+{
+width: 15px;
+height: 15px;
+padding-right: 20px;
+margin-top: 5px;
+margin-left:-5px;
+}
+.go-imgs
+{
+width: 15px;
+height: 15px;
+padding-right: 20px;
+margin-top: 5px;
+margin-left:-5px;
+}
+
+.go-inputs
+{
+background: none transparent scroll repeat 0% 0%;
+background:transparent; border:none;
+height: 18px;
+width: 100px;
+color: rgb(166,171,177);
+}
+
+.go-input
+{
+background: none transparent scroll repeat 0% 0%;
+background:transparent; border:none;
+height: 18px;
+width: 180px;
+color: rgb(166,171,177);
+}
+
+.get-selects
+{
+border: none;
+background: none transparent scroll repeat 0% 0%;
+background:transparent; border:none;
+color: rgb(166,171,177);
+}
+
+
+
+.go-form
+{
+margin-top: 100px;
+padding-bottom: 15px;
+}
+
+.go-submit
+{
+	margin-top: 30px;
+width: 250px;
+height: 40px;
+background-color: rgb(187,119,255);
+color: rgb(255,254,255);
+border: 1px solid rgb(177,110,255);
+text-align: center;	
+
+
+	text-shadow: 1px 1px 1px rgba(255,255,255, .22);
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+
+	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	-moz-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+
+	-webkit-transition: all 0.1s ease;
+	-moz-transition: all 0.1s ease;
+	-o-transition: all 0.1s ease;
+	-ms-transition: all 0.1s ease;
+	transition: all 0.1s ease;
+}
+
+.main-tail
+{
+margin-top: 10px;
+}
+
+.forget
+{
+font-size: 12px;
+color: rgb(166,167,171);
+}
+.forget:hover
+{
+	color:rgb(187,119,255); 
+}
+
+.found
+{
+font-size: 12px;
+color: rgb(255,255,255);	
+}
+.found:hover
+{
+	color:rgb(187,119,255); 
+}
+
+
+.main-do
+{
+width: 100%;
+height:735px;
+margin:0 auto;
+
+}
+.main-head
+{
+	margin-top: -20px;
+width: 100%;
+height: 208px;
+background-color: rgb(187,119,255);
+text-align: center;
+}
+
+.main-head-add
+{
+	margin-top: -20px;
+width: 100%;
+height: 210px;
+background-color: rgb(187,119,255);
+text-align: center;
+}
+.main-heads
+{
+margin-top: -20px;
+width: 100%;
+height: 300px;
+background-color: rgb(187,119,255);
+text-align: center;
+}
+.main-list-head
+{
+margin-top: -16px;
+width: 100%;
+height: 70px;
+background-color: rgb(187,119,255);
+padding-top: 35px;
+
+}
+
+.main-head-p
+{
+	font-size: 20px;
+	color: rgb(255,255,255);
+	padding-top: 28px;
+
+}
+.main-head-volunteer .head-left
+{
+    width: 20%;
+    text-align: center;
+    float: left;
+    margin-top: 35px;
+}
+.main-head-volunteer .head-middle
+{
+    width: 60%;
+    text-align: center;
+    float: left;
+    margin: -10px 0;
+}
+
+.main-head-volunteer .head-right
+{
+    width: 20%;
+    text-align: center;
+    float: left;
+    margin-top: 38px;
+    
+}
+
+.list-head-ok 
+{
+    	font-size: 18px;
+	color: rgb(255,255,255);
+ 
+}
+
+.main-head-img
+{
+	margin-top: 32px;
+	padding-top: px;
+	width: 80px;
+	height: 80px;
+    border-radius:50%;
+}
+
+.main-head-a
+{
+	font-size: 12px;
+	color: rgb(255,255,255);	
+}
+
+.main-head-a:hover
+{
+color: rgb(87,50,150);
+}
+.get-p
+{
+padding-top: 10px;
+margin-left: 20px;
+padding-bottom: 12px;
+font-size: 15px;
+}
+.get-p .left {
+        width: 20%;
+        height:50px;
+        float: left;
+    }
+.get-p .right
+{
+    width:60%;
+    height:50px;
+    float:right;
+}
+
+.get-p textarea
+{
+    min-width:62%;
+    min-height:127px;
+    max-width:62%;
+    max-height:127px;
+    margin:0px auto;
+}
+.get-p-p
+{
+    width:15%;
+}
+.get-input
+{
+width: 62%;
+height: 25px;
+margin-left: 10px;
+
+}
+
+.get-select
+{
+border: none;
+
+}
+.do-it
+{
+width: 100%;
+height: 75px;
+text-align: center;
+background-color: rgb(187,119,255);
+}
+
+.do-its{
+    width: 100%;
+height: 75px;
+text-align: center;
+background-color: rgb(187,119,255);
+    font-size: 20px;
+color: rgb(255,255,255);
+}
+
+.do-its-2{
+    width: 100%;
+height: 66px;
+text-align: center;
+background-color: rgb(187,119,255);
+    font-size: 20px;
+color: rgb(255,255,255);
+margin-top:214px;
+}
+
+.do-it-p
+{
+
+padding-top: 25px;
+}
+.do-it:hover
+{
+	background-color: rgb(160,89,255);
+}
+.do-it-a
+{
+	padding-top: 25px;
+
+font-size: 20px;
+color: rgb(255,255,255);
+}
+
+.main-head-one
+{
+	font-size: 18px;
+	color: rgb(255,255,255);
+	padding-top: 40px;
+}
+
+.main-head-two
+{
+	font-size: 13px;
+	color: rgb(255,255,255);
+	padding-top: 2px;
+}
+
+.note-textarea
+{
+border: none;
+height: 320px;
+width: 96.5%;
+margin-bottom: 0px;
+line-height:20px;
+padding-top: 10px;
+padding-left: 10px;
+resize:none
+}
+.camera-photo
+{
+    overflow-y: auto;
+    width:100%;
+   max-height:114px;
+    min-height: 114px;
+}
+    .camera-photo input {
+        width: 200px;
+        height: 30px;
+        /*opacity: 0;
+        filter: alpha(opacity=0);*/
+       /*background: url(/Areas/App/Content/Image/upload.jpg);*/
+    }
+    .camera-photo img
+{
+        margin-left: 20px;
+    
+    width:114px;
+    height:114px;
+}
+
+.note-head
+{
+background: url(/Areas/App/Content/Image/head.png);
+background-size:100% 100%;
+background-repeat:no-repeat;
+		margin-top: -16px;
+	height: 72px;
+
+
+}
+.note-head3
+{
+background: url(/Areas/App/Content/Image/head.png);
+background-size:100% 100%;
+background-repeat:no-repeat;
+
+	height: 72px;
+
+
+}
+.list-head-a span{
+    font-size:20px;
+    color:rgb(255,255,255);
+}
+.note-head2
+{
+background: url(/Areas/App/Content/Image/head2.png);
+background-size:100% 100%;
+background-repeat:no-repeat;
+	margin-top: -16px;
+	height: 72px;
+}
+
+.note-ul
+{
+	padding:0 0;
+
+}
+
+.note-li
+{
+float: left;
+color: rgb(255,255,255);
+font-size: 18px;
+padding-top: 30px;
+width: 30%;
+text-align:center;
+height:42px;
+}
+.note-lii
+{
+float: left;
+color: rgb(255,255,255);
+font-size: 20px;
+padding-top: 30px;
+width: 30%;
+text-align:center;
+height:72px;
+}
+.li-one
+{
+    width:10%;
+ float:left;
+ height:42px;
+
+}
+.li-one a
+{
+    font-size:32px;
+    color:rgb(235,205,254);
+    float:left;
+    margin-top:20px;
+    margin-left:10px;
+}
+.li-two
+{width:10%;
+ float:left;
+
+}
+.li-three
+{width:20%;
+ float:left;
+ height:80px;
+
+}
+
+.note-li-main
+ {
+float: left;
+color: rgb(255,255,255);
+font-size: 14px;
+
+padding-top: 30px;
+width: 20%;
+text-align:center;
+}
+
+.note-lis
+{
+float: left;
+padding-top: 30px;
+width: 30%;
+text-align:center;
+color: rgb(255,255,255);
+font-size: 18px;
+height:42px;
+}
+.note-list
+{
+float: left;
+color: rgb(255,255,255);
+font-size: 18px;
+
+padding-top: 28px;
+width: 30%;
+text-align:center;
+
+}
+
+.note-a
+{
+color: rgb(230,207,254);
+font-size: 18px;
+}
+
+.note-main
+{
+text-align: center;
+height: 550px;
+}
+
+.note-main-p
+{
+font-size: 18px;
+color: rgb(187,119,255);
+padding-top: 260px;
+
+}
+
+.note-main-p2
+{
+font-size: 18px;
+color: rgb(187,119,255);
+margin-top: -10px;
+}
+
+.boot
+{
+width: 100%;
+height: 350px;
+margin-top: -24px;
+}
+
+.qiye
+{
+width: 100%;
+height: 125px;
+border: 4px solid rgb(228,228,230);
+text-align: center;
+padding-top: 32px;
+
+}
+
+.boot-a
+{
+font-size: 20px;
+color: rgb(244,201,114);
+
+}
+.boot-b
+{
+font-size: 20px;
+color: rgb(144,159,252);
+
+}
+.boot-c
+{
+font-size: 20px;
+color: rgb(171,50,166);
+
+}
+.boot-d
+{
+font-size: 20px;
+color: rgb(52,185,197);
+
+}
+.boot-e
+{
+font-size: 20px;
+color: rgb(223,129,66);
+
+}
+.boot-aa
+{
+font-size: 14px;
+color: rgb(168,168,170);
+}
+
+
+.mid
+{
+width: 100%;
+height: 200px;
+}
+
+.mid-left
+{
+	width: 50%;
+	float: left;
+	height: 210px;
+	border: 4px solid rgb(228,228,230);
+	margin-top: -4px;
+	text-align: center;
+    padding:70px 0;
+	
+}
+
+.mid-right
+{
+	width: 50%;
+	float:right;
+	height:210px;
+	margin-top: -4px;
+
+	
+}
+
+.pinggu
+{
+	width: 100%;
+	float:right;
+	height: 108px;
+	border: 4px solid rgb(228,228,230);
+	text-align: center;padding-top: 28px;
+}
+
+.baogao
+{
+width: 100%;
+	
+	height: 106px;
+	border: 4px solid rgb(228,228,230);	
+	text-align: center;
+	margin-top: 104px;
+	padding-top: 24px;
+}
+
+.zhaoping
+{
+width: 100%;
+height: 107px;
+border: 4px solid rgb(228,228,230);
+text-align: center;
+margin-top: 2px;
+padding-top: 25px;
+}
+.list-main-do
+{
+width: 100%;
+height:735px;
+margin:0 auto;
+
+
+}
+.lists-main
+{
+width: 100%;
+min-height:585px;
+max-height:585px;
+overflow-y:auto;
+padding:0 0;
+}
+
+.post-div
+{
+    width:100%;
+    min-height:660px;
+    max-height:660px;
+    overflow-y:auto;
+}
+.lists
+{
+margin:0 auto;
+margin-top: 10px;
+margin-bottom: 10px;
+width: 90%;
+height: 115px;
+background-color: rgb(187,119,255);
+padding-top: 5px;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+
+.listst
+{
+margin:0 auto;
+margin-top: 8px;
+margin-bottom: 8px;
+width: 90%;
+height: 80px;
+background-color: rgb(187,119,255);
+padding-top: 5px;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+.lists-a
+{
+font-size: 17px;
+color: rgb(255,255,255);
+padding:0 0;
+margin:10px 0;
+}
+
+.lists-p
+{
+font-size: 14px;
+color: rgb(255,255,255);
+margin-top: 5px;
+}
+.lists-hr
+{
+margin-top: -10px;
+}
+
+.lists-main-p
+{
+font-size: 14px;
+color: rgba(255,255,255,0.5);
+margin-top: 5px;	
+width:auto;/*设置一个宽度*/
+overflow:hidden;/*溢出的部分是否隐藏*/
+white-space:nowrap;/*把文本限制在一行里面*/
+text-overflow:ellipsis;/*然后出现省略号*/
+}
+
+.btn
+{
+background: none transparent scroll repeat 0% 0%;
+background:transparent; border:none;
+}
+
+.btn:hover
+{
+background: none transparent scroll repeat 0% 0%;
+background:transparent; border:none;	
+}
+.btn:active
+{
+background: none transparent scroll repeat 0% 0%;
+background:transparent; border:none;	
+}
+.btn:link 
+{
+background: none transparent scroll repeat 0% 0%;
+background:transparent; border:none;	
+}
+
+.list-for-data
+{
+	margin-left: 80px;
+	margin-top: -50px;
+	margin-bottom: 20px;
+}
+
+.head-li-left
+{
+	float: left;
+	margin-left: -10px;
+    width:68%;
+	/*padding-right: 110px;*/
+}
+.head-li-right
+{
+	float: left;
+	padding-top: px;
+	padding-left: 3px;
+}
+.li-lift
+{
+	float: left;
+	padding-right: 20px;
+	margin-left: -10px;
+}
+.li-right
+{
+	float: left;
+    width:80%;
+    padding-right:5%;
+}
+.head-css
+{
+	font-size: 20px;
+	color: rgb(187,119,255);
+}
+
+.title
+{
+	font-size: 14px;
+	color: rgb(23,24,25);	
+}
+.title-main
+{
+		font-size: 14px;
+	color: rgb(159,159,159);
+}
+
+.li-right-div
+{
+width: 100%;
+min-height: 30px;
+}
+.ul-hr
+{
+margin-top: -14px;	
+}
+
+.classify
+{
+
+	width: 100%;
+
+}
+.classify-p
+{
+	font-size: 14px;
+	color: rgb(187,119,255);
+	padding-left: 28px;
+}
+.classify-li
+{
+	float: left;
+	width: 18%;
+	margin-top: -15px;
+	margin-left: 6%;
+}
+
+.classify-lis
+{
+	float: left;
+	width:50%;
+	margin-top: -15px;
+	margin-left: 0px;
+
+}
+.classify-lit
+{
+    float:left;
+    width:%;
+    text-align:center;
+    margin-left:22px;
+    margin-bottom:15px;
+    margin-top:-3px;
+ 
+    
+}
+.classify-li-p
+{
+		font-size: 14px;
+	color: rgb(69,69,69);
+}
+
+.classify-li-p2
+{
+		font-size: 14px;
+	    color: rgb(159,159,159);
+        width:100%;
+}
+.note-uls
+{
+    width:88%;
+  
+}
+
+.classify-hr
+{
+	margin-top: -14px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.baoming
+{
+width:50px;
+height:20px;
+background-color:rgb(187,119,255);
+color:rgb(255,255,255);
+border:1px solid rgb(187,119,255);
+text-shadow: 1px 1px 1px rgba(255,255,255, .22);
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	-moz-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+
+	-webkit-transition: all 0.1s ease;
+	-moz-transition: all 0.1s ease;
+	-o-transition: all 0.1s ease;
+	-ms-transition: all 0.1s ease;
+	transition: all 0.1s ease;
+}
+.baoming:hover
+{
+    color:rgb();
+}
+
+
+
+.main-head-name
+{
+	font-size: 24px;
+	color: rgb(255,255,255);
+	margin-top: -12px;
+}
+
+.main-head-name-p
+{
+    width:auto;/*设置一个宽度*/
+            overflow:hidden;/*溢出的部分是否隐藏*/
+            white-space:nowrap;/*把文本限制在一行里面*/
+            text-overflow:ellipsis;/*然后出现省略号*/
+font-size: 15px;
+color: rgb(250,248,254);
+padding-left: 100px;
+padding-right: 100px;
+margin-top: -15px;
+}
+
+.main-class
+{
+width: 100%;
+height: 440px;
+background: url(/Areas/App/Content/Image/background2.png);
+background-size:100% 100%;
+background-repeat:no-repeat;
+margin-top: -10px;
+padding-top: 5px;
+
+}
+
+
+.main-class-li
+{
+	float: left;
+	width: 30%;
+	padding-top: -10px;
+	text-align: center;
+}
+.main-class-li p
+{
+	font-size: 15px;
+	color: rgb(255,255,255);
+}
+.main-class-li1
+{
+	float: left;
+	width: 40%;
+	padding-top: -10px;
+	text-align: center;
+}
+.main-class-li1 img
+{
+	float: left;
+	width: 14%;
+	padding-top: 0px;
+    padding-left: 28%;
+	text-align: center;
+}
+.main-class-ul
+{
+	
+	width: 88%;
+	text-align: center;
+	margin-top: -40px;
+
+
+
+}
+.main-note-ul
+{
+	width: 88%;
+	padding-top: 35px;
+	
+	margin-top: -10px;
+}
+
+.main-class-li-a
+{
+	font-size: 15px;
+	color: rgb(244,243,255);
+}
+
+.main-class-li-aa
+{
+	font-size: 20px;
+	color: rgb(255,255,255);
+}
+
+.main-class-li-aaa
+{
+	font-size: 15px;
+	color: rgb(255,255,255);
+}
+
+.main-class-li-a:hover
+{
+color: rgb(201,198,204);
+
+}
+.main-class-li-aa:hover
+{
+	color: rgb(201,198,204);
+}
+.main-class-li-aaa:hover
+{
+	color: rgb(201,198,204);
+}
+
+.list-head-a
+{
+font-size: 25px;
+color: rgb(255,255,255);
+}
+
+.list-head-b
+{
+    float:left;
+font-size: 25px;
+color: rgb(255,255,255);
+}
+
+.list-head-aa
+{
+font-size: 20px;
+color: rgb(255,255,255);
+
+}
+.list-head-get
+{
+border: none;
+color: rgb(255,255,255);
+background-color: rgb(187,119,255);
+font-size: 16px;
+
+margin-top: 10px;
+
+}
+.main-list-head-li
+{
+	float: left;
+	margin-top: 0px;
+}
+.main-list-head-lis
+{
+	float: right;
+	padding-left: px;
+}
+.main-list-head-lit
+{
+	float: right;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+.main-list-head-ul
+{
+	margin-left: -30px;
+	margin-top: 0px;
+    width:80%;
+}
+
+.list-main
+{
+min-height: 665px;
+max-height:665px;
+width: 100%;
+background-color: rgb(226,226,226);
+margin-top: -20px;
+overflow-y:auto;
+}
+.lists-one
+{
+	background-color: rgb(255,255,255);
+	width: 95%;
+	height: 360px;
+	margin:0 auto;
+ 
+}
+
+.lists-one div
+{
+    width:100%;
+    height:170px;
+   
+}
+
+
+
+
+.list-one-p 
+{
+	font-size: 22px;
+	color: rgb(255,255,255);
+    margin-top:16px;
+	/*padding-top: 130px;*/
+	margin-left: 15px;
+}
+
+.lists-one div img
+ {
+    width: 96%;
+    height:170px;
+    margin-top:8px;
+    width:expression(this.width<95% ? 95%:true);
+}
+.list-one-list
+{
+	font-size: 14px;
+	color: rgb(185,185,185);
+}
+.note-ull
+{
+    padding:0 0;
+    margin-top:-20px;
+}
+
+.head-li-rights
+{
+	float: left;
+    margin-top:0px;
+	padding-left: 3px;
+}
+.head-li-lefts
+{
+	float: left;
+    margin-left:15px;
+    
+    width:70%;
+
+}
+.list-one-pp
+{
+	font-size: 15px;
+	color: rgb(104,104,104);
+	margin-top: -10px;
+	margin-left: 15px;
+}
+.get-select
+{
+width: 120px;
+height: 30px;
+color: rgb(104,104,104);
+}
+
+
+
+
+.main-head-volunteer
+{
+margin-top: -20px;
+width: 100%;
+height: 80px;
+background-color: rgb(187,119,255);
+text-align: center;
+}
+
+
+.volunteers
+{
+margin: 0 auto;
+width: 100%;
+height: 660;
+}
+.volunteers-buy
+{
+margin: 0 auto;
+width: 100%;
+min-height: 566px;
+max-height: 736px;
+overflow-y:auto; 
+
+
+}
+.volunteer
+{
+width: 90%;
+height: 35px;
+padding-left: 15px;
+padding-top: 10px;
+
+margin-top: -16px;
+}
+.volunteer p
+{
+font-family: "微软雅黑";
+font-size: 20px;
+color: rgb(146,141,255);
+
+}
+.volunteer p span
+{
+font-family: "微软雅黑";
+font-size: 22px;
+color: rgb(146,141,255);	
+}
+.volunteer-p
+{
+font-family: "微软雅黑";
+font-size: 16px;
+color: rgb(69,69,69);
+margin-left: 20px;
+}
+
+.volunteer-ul
+{
+	width: 90%;
+    padding:0 0;
+    margin:0 auto;
+    height: 100px;
+    /*overflow-y:auto;*/
+
+}
+.volunteer-li-one
+{
+	float: left;
+	width: 60%;
+    height:40px;
+    text-align:left;
+	
+}
+.volunteer-li
+{
+	float: left;
+	width: 40%;
+	text-align: left;
+    /*margin-top:5px;*/
+    height:40px;
+}
+.volunteer-li-three
+{
+	float: left;
+	width: 60%;
+	text-align: left;
+    margin-top:5px;
+    height:30px;
+}
+
+.volunteer-hrr
+{
+   margin:0 10px;
+}
+
+.volunteer-li-two
+{
+	float: right;
+	width: 40%;
+	margin-top: 5px;
+	/*padding-left: 0px;*/
+	text-align: left;
+	color: rgb(187,119,255);
+}
+
+.volunteer-li-one p
+{
+	font-size: 16px;
+	color: rgb(97,96,96);
+
+}
+.volunteer-li p
+{
+	font-size: 16px;
+	color: rgb(97,96,96);
+	
+}
+.volunteer-li-three p
+{
+	font-size: 16px;
+	color: rgb(97,96,96);
+  
+	
+}
+.volunteer-li-two a 
+{
+		font-size: 16px;
+		color: rgb(187,119,255);
+
+}
+.volunteer-li-two img
+{
+width: 16px;
+height: 11px;
+}
+
+.volunteer-head-ul
+{
+	width: 87%;
+}
+.volunteer-head-ul-left
+{
+	float: left;
+	margin-left: -40px;
+}
+.volunteer-head-ul-right
+{
+	float: right;
+	padding-right: 30px;
+}
+.volunteer-head-ul-right button
+{
+	margin-top: 10px;
+	width: 50px;
+	height: 22px;
+	background-color: rgb(255,255,255);
+	border: 1px solid rgb(201,146,255);
+	color: rgb(201,146,255);
+	text-shadow: 1px 1px 1px rgba(255,255,255, .22);
+
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+
+	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	-moz-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+
+	-webkit-transition: all 0.1s ease;
+	-moz-transition: all 0.1s ease;
+	-o-transition: all 0.1s ease;
+	-ms-transition: all 0.1s ease;
+	transition: all 0.1s ease;
+}
+
+
+.main-head-do {
+    margin-top: -20px;
+    width: 100%;
+    height: 80px;
+    background-color: rgb(187,119,255);
+    text-align: center;
+}
+
+.write-mine
+{
+    min-height:596px;
+    max-height:596px;
+    overflow-y:auto;
+    width:100%;
+   
+}
+.write-mine-div
+{
+    width:90%;
+    height:150px;
+    margin:0 auto;
+
+}
+
+.write-mine p
+{
+     font-size:16px;
+     color:rgb(187,119,255);
+
+}
+
+.write-mine input
+{
+     font-size:16px;
+     color:rgb(187,119,255);
+
+}
+
+.write-mine span
+{
+     font-size:20px;
+      color:rgb(187,119,255);
+
+}
+.write-mine textarea
+{
+    width:100%;
+    height:100px;
+    margin-top:0px;
+    border:1px solid rgba(0,0,0,1);
+    resize: none;
+}
+
+.list-left
+{
+    float:left;
+    width:95%;
+    height:50px;
+}
+
+.list-right
+{
+    float:right;
+    width:5%;
+    height:50px;
+}
+
+.list-right a
+{
+    font-size:22px;
+    color:rgb(255,255,255);
+}
+
+.write-theone
+{
+   
+   margin:15px auto;
+   width:60%;
+   height:30px;
+}
+.write-mine-one {
+    width: 60%;
+    height: 40px;
+    margin: 0 auto;
+}
+.write-mine-two {
+
+    width:60%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.write-mine-one  label
+{
+    font-size: 16px;
+    color: rgb(109,109,109);
+}
+
+
+
+.abc
+{
+        color:red;
+        /*width:400px;*/
+        margin:0 auto;
+        line-height:35px;
+        text-indent: 2em;
+        font-size:25px;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        max-width:95%; 
+        max-height: 250px;
+        width:expression(this.width<95% ? 95%:true); 
+}
+
+
+.photo-company
+{
+    width:100%;
+    height:260px; 
+    padding:0 0;
+}
+
+.photo-company img{
+    width:100%;
+    height:240px;
+    margin-top:-5px;
+  
+}
+
+
+.appraisal-head
+{
+	width: 100%;
+	height: 60px;
+	background-color: rgb(187,119,255);
+	padding: 0 0;
+
+}
+
+.appraisal-head .left
+{
+	width: 15%;
+	float: left;	
+	margin-top: 14px;
+	left: 10px;
+	position: relative;
+}
+.appraisal-head .left a
+
+{
+	font-size: 23px;
+	color: rgb(255,255,255);
+
+}
+
+.appraisal-head .middle
+{
+	width: 70%;
+	float: left;
+	text-align: center;
+}
+
+.appraisal-head .middle p
+{
+	font-size: 18px;
+	color: rgb(255,255,255);
+}
+
+.appraisal-head .right
+{
+	width: 15%;
+	float: left;
+	margin-top: 18px;
+}
+.appraisal-head .right a
+{
+	font-size: 14px;
+	color: rgb(255,255,255);
+}
+
+
+.appraisal-main
+{
+    overflow-y:auto;
+	width: 100%;
+	padding: 0 0;
+	margin: 0 0;
+}
+
+
+.appraisal-main div
+{
+	width: 90%;
+	padding: 0 0;
+	margin: 0 auto;
+
+}
+
+.appraisal-main div ul
+{
+	width: 100%;
+	padding: 0 0;
+	margin: 18px auto;
+
+}
+
+.appraisal-main div li
+{
+	float: left;
+
+	font-size: 14px;
+	color: rgb(109,109,109);
+}
+
+.appraisal-main-li
+{
+	width:10%;
+}
+.appraisal-main-lis
+{
+	width: 23%;
+}
+
+
+.appraisal-main-lit
+{
+	width: 20%;
+
+}
+.appraisal-main-list
+{
+	width: 80%;
+}
+
+.appraisal-main div p
+{
+	font-size: 16px;
+	color: rgb(187,119,255);
+}
+
+.appraisal-main div p span
+{
+		font-size: 18px;
+	color: rgb(187,119,255);
+}
+.appraisal-main div textarea
+{
+	width: 95%;
+	height: 48px;
+	border: 1px solid rgb(0,0,0,.5)
+
+}
+
+
+
+
+
+
+
+
+.school-evaluation
+{
+	width: 90%;
+	margin: 0 auto;
+	padding: 0 0;
+	height: 580px;
+
+}
+
+.school-evaluation p
+{
+	font-size: 18px;
+	color: rgb(187,119,255);
+	
+}
+
+.school-evaluation span
+{
+	font-size: 22px;
+	color: rgb(187,119,255);
+}
+
+.school-evaluation div
+{
+	width: 100%;
+	padding: 0 0;
+	margin: 20px 0;
+}
+
+.school-evaluation div ul
+{
+	width: 100%;
+	padding: 0 0;
+	margin: 5px; 0;
+}
+
+.school-evaluation div ul .title
+{
+	float: left;
+	width: 35%;
+	font-size: 16px;
+	color: rgb(109,109,109);
+    margin-bottom:10px;
+    
+}
+.school-evaluation div ul .chose
+{
+	float: left;
+    width: 22%;
+	font-size: 16px;
+	color: rgb(109,109,109);
+      margin-bottom:10px;
+    
+    
+}
+.school-evaluation div ul .tt
+{
+	float: left;
+	width: 100%;
+	font-size: 16px;
+	color: rgb(109,109,109);
+    margin-bottom:10px;
+}
+.school-evaluation div ul li select
+{
+		font-size: 14px;
+	color: rgb(69,69,69);
+}
+.school-evaluation div ul li textarea
+{
+    width: 100%;
+    font-size: 14px;
+	color: rgb(109,109,109);
+	border: 1px solid rgb(0,0,0,.5);
+	margin-top: 10px;
+}
+
+
+.do-its
+{
+width: 100%;
+height: 60px;
+text-align: center;
+background-color: rgb(187,119,255);
+}
+
+.do-its:hover
+{
+	background-color: rgb(160,89,255);
+}
+.do-its-a
+{
+	padding-top: 20px;
+
+font-size: 18px;
+color: rgb(255,255,255);
+}
+
+.the-main-of-v
+{
+   width: 90%;
+   margin: 0 auto;
+}
+
+.the-main-of-v .one
+{
+	font-size: 20px;
+	color: rgb(69,69,69);
+}
+
+.the-main-of-v .two
+{
+	font-size: 16px;
+	color: rgb(69,69,69);
+}
+.the-main-of-v .three
+{
+	font-size: 16px;
+	color: rgb(69,69,69);
+}
+
+.the-main-of-v .div-one
+{
+	width: 25%;float: left;
+		font-size: 16px;
+	color: rgb(69,69,69);
+
+}
+.the-main-of-v .div-two
+{
+	width: 70%;float: left;
+
+		font-size: 16px;
+	color: rgb(69,69,69);
+}
+
+
+
+
+.attitude-evaluation
+{
+	width: 90%;
+	margin: 0 auto;
+	padding: 0 0;
+	height: 580px;
+
+}
+
+.attitude-evaluation div
+{
+	width: 100%;
+	height: 100%;
+	margin: 0 0;
+	padding: 0 0;
+}
+.attitude-evaluation div ul
+{
+	width: 100%;
+
+	margin: 0 0;
+	padding: 0 0;
+}
+
+.attitude-evaluation div ul .one
+{
+	width: 24%;
+	float: left;
+		margin: 12px 0;
+	padding: 0 0;
+	color: rgb(69,69,69);
+			font-size: 15px;
+
+}
+.attitude-evaluation div ul .two
+{
+	width: 26%;
+	float: left;
+		margin: 12px 0;
+	padding: 0 0;
+			color: rgb(69,69,69);
+					font-size: 15px;
+
+}
+.attitude-evaluation div ul .two input
+{
+	width: 78%;
+	height: 16px;
+}
+.attitude-evaluation div ul .three
+{
+	width: 65%;
+	float: left;
+		margin: 12px 0;
+	padding: 0 0;
+		color: rgb(69,69,69);
+				font-size: 15px;
+
+}
+.attitude-evaluation div ul .three input
+{
+	width: 90%;
+	height: 16px;
+}
+
+.attitude-evaluation div ul .four
+{
+	width: 78%;
+	float: left;
+		margin: 12px 0;
+	padding: 0 0;
+		color: rgb(69,69,69);
+		font-size: 14px;
+
+}
+
+.attitude-evaluation div ul .four input
+{
+	width: 4%;
+	height: 12px;
+	margin: 0 2px;
+}
+.attitude-evaluation div table
+{
+	width: 100%;
+	text-align: center;
+}
+.attitude-evaluation div table tr th
+{
+	 color: rgb(69,69,69);
+	 padding: 5px 0;
+	 font-size: 16px;
+}
+
+
+.attitude-evaluation div table tr td
+{
+	 color: rgb(69,69,69);
+	 padding: 5px 0;
+	 font-size: 14px;
+}
+
+
+.done
+{
+    background-color:rgb(187,119,255);
+    color:rgb(255,255,255);
+    border:none;
+    font-size:18px;
+    font-family:"微软雅黑";
+}
+
+
+
+.attitude-evaluation p
+{
+    font-size: 15px;
+    color: rgb(109,109,109);
+    text-indent:2em;
+    margin-bottom: -12px;
+    font-family: "微软雅黑";
+}
+
+
+.answer-questions
+{
+	width: 100%;
+	margin: 0 0;
+	padding: 0 0;
+}
+
+.answer-questions div
+{
+	width: 100%;
+	margin:0 0;
+	padding: 0 0;
+}
+
+.answer-questions div .head
+{
+	width: 100%;
+	height: 28px;
+	background-color:rgb(245,233,255);
+	padding: 7px 10px;
+}
+
+.answer-questions div .head p
+{
+	margin: 0 0;
+	font-size: 16px;
+	color: rgb(69,69,69);
+	 font-family: "微软雅黑";
+}
+
+.answer-questions div .head p span
+{
+	 font-size: 20px;
+	 color: rgb(187,119,255);
+	 font-family: "微软雅黑";
+}
+
+.answer-questions div .answer
+{
+	width: 90%;
+	margin: 0 auto;
+
+
+}
+.answer-questions div .answer p
+{
+margin:4px 0;
+	font-size: 15px;
+	color: rgb(69,69,69);
+	 font-family: "微软雅黑";	
+}
+
+
+
+  .upload-img{
+float:left;
+margin: 7px 20px 0 0;
+overflow: hidden;
+}
+.upload-img img{
+  margin-left:16px;
+width: 100px;
+height: 100px;
+
+}
+
+.comment-pic-upd{
+     /*width:100%;
+    height:104px;*/
+position: absolute;
+margin-left:15px;
+z-index: 100;
+width: 100px;
+height: 100px;
+
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+filter:alpha(opacity=0);
+-moz-opacity:0;
+-khtml-opacity: 0;
+opacity:0;
+background: none;
+border: none;
+cursor: pointer;
+}.company-head
+{
+	width: 100%;
+	height: 60px;
+	background-color: rgb(187,119,255);
+}
+
+.company-head .left
+{
+	width: 20%;
+	float: left;
+    padding-top: 18px;
+
+}
+.company-head .left a
+{
+	font-size: 17px;
+	color: rgb(255,255,255);
+    font-family:"微软雅黑";
+}
+.company-head .left a span
+{
+	font-size: 18px;
+	color: rgb(255,255,255);
+}
+
+.company-head .middle
+{
+	width: 60%;
+	float: left;
+	text-align: center;
+    padding: 0 0;
+    margin: 0 0;
+   
+
+}
+.company-head .middle p
+{
+
+	font-size: 20px;
+	color: rgb(255,255,255);
+    font-family:"微软雅黑";
+    margin: 0 0;padding-top: 18px;
+
+}
+.company-head .middles
+{
+	width: 60%;
+	float: left;
+	text-align: center;
+    padding-top:18px;
+   
+
+}
+.company-head .middles p
+{
+
+	font-size: 20px;
+	color: rgb(255,255,255);
+    font-family:"微软雅黑";
+}
+
+
+.company-head .right
+{
+	width: 20%;
+	float: left;
+}
+
+
+.company-photo
+{
+	width: 100%;
+	height: 270px;
+    margin: 0 0;
+
+	
+
+}
+.company-photo img
+{
+	width: 100%;
+	height: 250px;
+
+	padding: 0 0;
+}
+
+.company-main
+{
+	width: 100%;
+
+}
+
+.company-main ul
+{
+	width: 90%;
+	margin: 35px auto;
+	padding: 0 0;
+	
+}
+
+.company-main ul li
+{
+	width: 33.3%;
+text-align: center;
+float: left;
+height: 110px;
+	
+}
+
+.company-main ul li  img
+{ 
+    width: 60px;
+    height: 60px;
+    margin-top: 10px;
+}
+
+.company-main ul li p
+{ 
+	font-size: 15px;
+	color: rgb(69,69,69);
+	margin-top: 5px;
+  }  .much-money
+  {
+  	width: 100%;
+  	margin:10px 0;
+  	padding: 0 0;
+  }
+
+   .much-money ul
+  {
+  	width: 90%;
+  	margin:0 auto;
+ padding: 0 0;
+ text-align: center;
+
+  }
+
+    .much-money ul li
+  {
+  	width: 33.3%;
+  	margin:5px auto;
+ padding: 0 0;
+ float: left;
+ font-size: 15px;
+ color: rgb(109,109,109);
+
+  }
+
+
+    .update
+{
+	width: 100%;
+	margin: 10px 0;
+	padding: 0 0;
+}
+
+.update ul
+{
+	width: 80%;
+	margin: 0 auto;
+	padding: 0 0;
+}
+.update ul li
+{
+	width: 100%;
+	margin: 0 auto;
+	padding: 6px 0;
+	float: left;
+
+}
+.update ul li a
+{
+		font-size: 18px;
+	color: rgb(109,109,109);
+}
+
+
+
+
+
+
+.process-read {
+    width: 100%;
+    height: 670px;
+    /*background: url(../img/实习总览back.png);*/
+    background-image: url('../Image/实习总览back.png');
+    background-size: 100% 670px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+}
+
+.process-read .left
+{
+	width: 46.5%;
+	float: left;
+	height: 670px;
+}
+
+.process-read .left p
+{
+   float: right;
+}
+
+/*one------------------------------------------------------------------------------------------*/
+.process-read .left .one
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 25px;
+
+}
+.process-read .left .one .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .one .a span
+
+{
+font-size: 8px;
+
+
+}
+.process-read .left .one .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .one .b
+{
+font-size: 10px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .one .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+/*two------------------------------------------------------------------------------------------*/
+
+
+.process-read .left .two
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 15px;
+
+}
+.process-read .left .two .a
+{
+font-size: 13px;
+padding: 0 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .two .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .two .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .two .b
+{
+font-size: 12px;
+padding: 0 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .two .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+/*three------------------------------------------------------------------------------------------*/
+
+.process-read .left .three
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 32px;
+
+}
+.process-read .left .three .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .three .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .three .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .three .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .three .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+/*four------------------------------------------------------------------------------------------*/
+
+.process-read .left .four
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 12px;
+
+}
+.process-read .left .four .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .four .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .four .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .four .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .four .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+/*five------------------------------------------------------------------------------------------*/
+
+.process-read .left .five
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 12px;
+
+}
+.process-read .left .five .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .five .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .five .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .five .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .five .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+/*six------------------------------------------------------------------------------------------*/
+
+.process-read .left .six
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 25px;
+
+}
+.process-read .left .six .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .six .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .six .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .six .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .six .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+/*seven------------------------------------------------------------------------------------------*/
+.process-read .left .seven
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 18px;
+
+}
+.process-read .left .seven .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .seven .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .seven .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .seven .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .seven .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+/*eight------------------------------------------------------------------------------------------*/
+.process-read .left .eight
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 18px;
+
+}
+.process-read .left .eight .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .eight .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .eight .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .eight .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .eight .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+
+/*nine------------------------------------------------------------------------------------------*/
+.process-read .left .nine
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 12px;
+
+}
+.process-read .left .nine .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+.process-read .left .nine .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .left .nine .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .left .nine .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: right;
+
+}
+
+.process-read .left .nine .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+
+
+.process-read .right
+{
+	width: 43.5%;
+	float: left;
+	height: 670px;
+}
+
+.process-read .right p
+{
+   float: left;
+}
+
+
+/*one------------------------------------------------------------------------------------------*/
+.process-read .right .one
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 55px;
+
+}
+.process-read .right .one .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .one .a span
+
+{
+font-size: 8px;
+
+
+}
+.process-read .right .one .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .one .b
+{
+font-size: 10px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .one .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+/*two------------------------------------------------------------------------------------------*/
+
+
+.process-read .right .two
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 100px;
+
+}
+.process-read .right .two .a
+{
+font-size: 13px;
+padding: 0 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .two .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .right .two .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .two .b
+{
+font-size: 12px;
+padding: 0 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .two .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+/*three------------------------------------------------------------------------------------------*/
+
+.process-read .right .three
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 10px;
+
+}
+.process-read .right .three .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .three .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .right .three .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .three .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .three .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+/*four------------------------------------------------------------------------------------------*/
+
+.process-read .right .four
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 90px;
+
+}
+.process-read .right .four .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .four .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .right .four .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .four .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .four .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+/*five------------------------------------------------------------------------------------------*/
+
+.process-read .right .five
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 80px;
+
+}
+.process-read .right .five .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .five .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .right .five .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .five .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .five .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+/*six------------------------------------------------------------------------------------------*/
+
+.process-read .right .six
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 25px;
+
+}
+.process-read .right .six .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .six .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .right .six .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .six .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .six .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+/*seven------------------------------------------------------------------------------------------*/
+.process-read .right .seven
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 18px;
+
+}
+.process-read .right .seven .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .seven .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .right .seven .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .seven .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .seven .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+/*eight------------------------------------------------------------------------------------------*/
+.process-read .right .eight
+{
+	width: 100%;
+	float: left;
+	height: 50px;
+	padding: 0 0;
+	margin-top: 18px;
+
+}
+.process-read .right .eight .a
+{
+font-size: 13px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+.process-read .right .eight .a span
+
+{
+font-size: 11px;
+
+
+}
+.process-read .right .eight .a span a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+.process-read .right .eight .b
+{
+font-size: 12px;
+padding: 2px 0;
+margin: 0 0;
+float: left;
+
+}
+
+.process-read .right .eight .b a
+
+{
+font-size: 8px;
+color: rgb(255,101,144);
+
+}
+
+
+
+
+
+
+.process-read .middle
+{
+	width: 10%;
+	float: left;
+	height: 670px;
+
+}
+
+.process-read .middle .one
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 38px;
+
+}
+
+.process-read .middle .one img
+{
+   width: 14px;
+   height: 14px;
+
+}
+.process-read .middle .two
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 10px;
+
+}
+
+.process-read .middle .two img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .three
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 10px;
+
+}
+
+.process-read .middle .three img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+
+.process-read .middle .four
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 70px;
+
+}
+
+.process-read .middle .four img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .five
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 10px;
+
+}
+
+.process-read .middle .five img
+{
+   width: 14px;
+   height: 14px;
+
+}
+.process-read .middle .six
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 18px;
+
+}
+
+.process-read .middle .six img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .seven
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 19px;
+
+}
+
+.process-read .middle .seven img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .eight
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 18px;
+
+}
+
+.process-read .middle .eight img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+
+.process-read .middle .nine
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 60px;
+
+}
+
+.process-read .middle .nine img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .ten
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 20px;
+
+}
+
+.process-read .middle .ten img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .elven
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 18px;
+
+}
+
+.process-read .middle .elven img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .twelve
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 53px;
+
+}
+
+.process-read .middle .twelve img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .thirteen
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 20px;
+
+}
+
+.process-read .middle .thirteen img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+.process-read .middle .fourteen
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 15px;
+
+}
+
+.process-read .middle .fourteen img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+
+.process-read .middle .fifteen
+{
+	width: 100%;
+
+	height: 14px;
+	margin-top: 18px;
+
+}
+
+.process-read .middle .fifteen img
+{
+   width: 14px;
+   height: 14px;
+
+}
+
+
+
+.boxs {
+    min-height: 680px;
+    max-height: 680px;
+    overflow-y: auto;
+    width: 100%;
+}

@@ -1,0 +1,328 @@
+﻿@using iTextSharp.text.pdf
+@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.StudentInfo_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+    <script src="~/Include/Jquery/jquery.min.js"></script>
+    <style>
+        .label2 {
+            float: right;
+        }
+    </style>
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            student();
+            $("#Tab2").click(function () {
+                MyGroup();
+            });
+            $("#Tab1").click(function () {
+                student();
+            });
+           
+          
+            var schoolid = $("#schoolid").val();
+            $("#gradeId").change(function() {
+                //$("#tip").html("请选择专业");
+                GetMajors();
+                //$("#classId").hide();
+            });
+
+            $("#majorId").change(function() {
+                //$("#tip").html("请选择班级");
+                GetClasss($(this).val());
+            });
+            $("#classId").change(function() {
+                student();
+            });
+            $("#mygroup").change(MyGroupMember);
+
+        });
+
+        //根据年级取专业
+        function GetMajors() {
+            var schoolId = $("#schoolid").val();
+            var gradeId = $("#gradeId").val();
+            $.ajax({
+                type: "post",
+                url: "/AppTeacher2/THome/GetMajors",
+                data: { schoolId: schoolId, gradeId: gradeId },
+                dataType: "json", 
+                    success: function(reslut) {
+                        $("#majorId option").remove();
+                        $("#majorId").append("<option value='-1'>请选择</option>");
+                        $.each(reslut, function(i, item) {
+                            $("#majorId").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                        });
+                    },
+                error: function(data) {
+                    alert("请求出错！" + data);
+                }
+            });
+        }
+
+//根据专业取班级
+        function GetClasss(value) {
+            $.ajax({
+                type: "post",
+                url: "/AppTeacher2/THome/GetClasss",
+                data: { majorId: value },
+                dataType: "json",
+                success: function(reslut) {
+                    $("#classId option").remove();
+                    $("#classId").append("<option value='-1'>请选择</option>");
+                    $.each(reslut, function(i, item) {
+                        $("#classId").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                    });
+                },
+                error: function(data) {
+                    alert("请求出错！" + data);
+                }
+            });
+        }
+
+        function student() {
+            var classID = $("#classId").val();
+            $.ajax({
+                type: "post",
+                url: "/AppTeacher2/THome/GetStudentInfo",
+                data: { classid: classID },
+                dataType: "json",
+                success: function(result) {
+                    var html = "";
+                    $.each(result, function(i, item) {
+                        if (item.Phone) {
+                            html += ("<div class='weui-cell'>");
+                            // html += ("<div class=‘weui-cell__hd’><label class='weui-label' style='text-align:center'>姓名</label></div>");
+                            html += ("<a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><div class='weui-cell__hd'><label class='weui-label'>" + item.StuName + "</label></div></a>");
+                            html += ("<div class='weui-cell__hd'><a href='tel:" + item.Phone + " '><label class='weui-label'>" + item.Phone + "</label></a></div>");
+                            html += ("<div class='weui-cell__bd '><a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><label class='weui-label label2'>" + item.Class + "</label></a></div>");
+                            html += ("</div>");
+                        } else {
+                            html += ("<div class='weui-cell'>");
+                            // html += ("<div class=‘weui-cell__hd’><label class='weui-label' style='text-align:center'>姓名</label></div>");
+                            html += ("<a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><div class='weui-cell__hd'><label class='weui-label'>" + item.StuName + "</label></div></a>");
+                            html += ("<div class='weui-cell__hd'><a href='#'><label class='weui-label'>未填写</label></a></div>");
+                            html += ("<div class='weui-cell__bd '><a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><label class='weui-label label2'>" + item.Class + "</label></a></div>");
+                            html += ("</div>");
+                        }
+                        
+                    });
+                    $("#studentlist").html(html);
+                },
+                error: function(xhr, type, exception) //请求失败的回调函数
+                {
+                    alert(xhr.responseText, "请求发生错误");
+                }
+            });
+        }
+
+        function MyGroup() {
+            var uid = $("#userid").val();
+            $.ajax({
+                type: "post",
+                url: "http://wx.52xyj.cn/Msg/Open/MyGroup?uid="+uid,
+                dataType: "json",
+                success: function(data) {
+                    if (data == 500) {
+                        return alert("请求出错");
+                    } else {
+                        $("#mygroup option").remove();
+                        $("#mygroup").append("<option value='-1'>请选择</option>");
+                        $.each(data, function(index, element) {
+                            $.each(element, function(index, item) {
+                                $("#mygroup").append("<option value='" + item.Value + "'>" + item.Text + "</option>");
+                            });
+                        });
+                    }
+                }
+            });
+        }
+
+        function MyGroupMember() {
+            var groupid = $("#mygroup").val();
+            $.ajax({
+                type: "post",
+                url: "http://wx.52xyj.cn/Msg/Open/MyGroupMember?groupid=" + groupid,
+                dataType: "json",        
+                success: function (data) {
+                    if (data == 500)
+                    {
+                        return alert("请求失败");
+                    }
+                    else {
+                        var JsonToString = "";                   
+                        for (var i = 0; i < data.data.length; i++) {
+                            JsonToString += data.data[i].Value+";";
+                        }
+                        $.ajax({
+                            type: "get",
+                            url: "/AppTeacher2/THome/MyGroupStudent?data=" + JsonToString,
+                            dataType: "json",
+                            success: function (result) {
+                                if (result == 500) {
+                                    return alert("请求失败");
+                                } else {
+                                    var html = "";
+                                    $.each(result.students, function (index, item) {
+                                        if (item.Phone != null) {
+                                            html += "<div class='weui-cell' >" +
+                                           "<div class='weui-cell__hd'><a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><label class='weui-label'>" + item.StuName + "</label></a>" +
+                                           "</div>" +
+                                           "<div class='weui-cell__bd'>" +
+                                           "<a href='tel:" + item.Phone + " '><input class='weui-input'' type='text' value='" + item.Phone + "' readonly></a>" +
+                                           "</div>" +
+                                            "<div class='weui-cell__bd'>" +
+                                           "<a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><input class='weui-input'' type='text' value='" + item.Class + "' readonly></a>" +
+                                           "</div>" +
+                                           "</div>";
+                                            $("#mygroupstu").html(html);
+                                        } else {
+                                            html += "<div class='weui-cell' >" +
+                                           "<div class='weui-cell__hd'><a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><label class='weui-label'>" + item.StuName + "</label></a>" +
+                                           "</div>" +
+                                           "<div class='weui-cell__bd'>" +
+                                           "<a href='#'><input class='weui-input'' type='text' value=' 暂无' readonly></a>" +
+                                           "</div>" +
+                                            "<div class='weui-cell__bd'>" +
+                                           "<a href='/AppTeacher2/THome/StudentDetail?uid=" + item.UserID + "'><input class='weui-input'' type='text' value='" + item.Class + "' readonly></a>" +
+                                           "</div>" +
+                                           "</div>";
+                                            $("#mygroupstu").html(html);
+                                        }
+                                                                     
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+        });
+        }    
+    </script>
+
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("HomePage", "THome", new {area = "AppTeacher2"})">
+                    <div>
+                        <div class="placeholder colortitle">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return"/>
+                        </div>
+                    </div>
+                </a>
+                <div class="weui-flex__item colortitle">
+                    <div class="placeholder">所有学生</div>
+                </div>
+                <div style="width: 48px">
+                    <div class="placeholder"></div>
+                </div>
+            </div>
+            <input type="hidden" value="@Model._schoolid" name="schoolid" id="schoolid"/>
+            <input type="hidden" value="@Model.uid" name="userid" id="userid" />
+        </div>
+    </div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-tab">
+            @*<div class="weui-navbar">
+                <a class="weui-navbar__item weui-bar__item--on" href="#tab1" id="Tab1">
+                    所有学生
+                </a>
+                <a class="weui-navbar__item" href="#tab2" id="Tab2" >
+                    我管理的
+                </a>
+
+            </div>*@
+            <div class="weui-tab__bd">
+                <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    <div class="weui-cells deletegap">
+                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">年级 :</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                @Html.DropDownListFor(o => o.gradeId, Model._EntryYear, new {@class = "weui-select", onclick = "GetMajors()"})
+                            </div>
+                        </div>
+
+                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">专业 :</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <select class="weui-select" name="majorId" id="majorId">
+                                    <option selected="selected" value="-1">请选择</option>
+                                    <i></i>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">班级 :</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <select class="weui-select" name="classId" id="classId">
+                                    <option selected="selected" value="">请选择</option>
+                                    <i></i>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="weui-cells weui-cells_form" id="studentlist">
+                    </div>
+
+                </div>
+
+                <div id="tab2" class="weui-tab__bd-item ">
+                    
+                    <div class="weui-cells deletegap">
+                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">我的组 :</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                @*通讯组*@
+                                <select class="weui-select" name="mygroup" id="mygroup">
+                                    <option selected="selected" value="">请选择</option>
+                                    <i></i>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-cells">
+
+                    </div>
+                    <div class="weui-cells weui-cells_form" id="mygroupstu">
+                    
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

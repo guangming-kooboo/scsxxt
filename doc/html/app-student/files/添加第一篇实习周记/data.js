@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"添加第一篇实习周记.html",
+  "generationDate":new Date(1483078092431.8),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"6d612be42a854e15a03187681c72911b",
+    "type":"Axure:Page",
+    "name":"添加第一篇实习周记",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"6ef454c2cc674f07990e0fdf72ad4d48",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":130,
+              "y":40},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"1706eacf9d8544b8a45ec15151899342",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":130,
+                  "y":40},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/添加第一篇实习周记/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "6ef454c2cc674f07990e0fdf72ad4d48":{
+      "scriptId":"u0"},
+    "1706eacf9d8544b8a45ec15151899342":{
+      "scriptId":"u1"}}});

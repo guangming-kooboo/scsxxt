@@ -1,0 +1,94 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using ServicePlatform.Models;
+@model Webdiyer.WebControls.Mvc.PagedList<T_EntBatchReg>
+
+@{
+    ViewBag.Title = "实习单位申请列表";
+    int initial = ViewBag.PageIndex;
+}
+
+@using (Html.BeginForm("Mession_Approve_Operation", "Home", FormMethod.Post))
+{
+    <!-- <input type="button" id="btnall" name="btnall" class="btn" value="全选" onclick="checkall()" /> -->
+    <label>检索内容：</label><input type="text" class="dfinput" value="请输入检索内容" id="jiansuo" name="jiansuo" /><input type="submit" class="btn" value="检索" onclick="" name="action" />@*<label>按消息类型（10：用户注册、11：项目评估、12：项目招标、13：系统消息）</label>*@
+    <input type="text" value="" id="piliang" name="piliang" class="dfinput" style="display:none" />
+    <input type="text" value="" id="piliangmark" name="piliangmark" class="dfinput" style="display:none" />
+}
+
+@using (Html.BeginForm("MessionDetails", "Home", FormMethod.Post))
+{
+    <table class="tablelist" width="1400" border="0" cellspacing="1" bgcolor="#666666" id="msgcontent">
+        <tr class="title">
+            <td bgcolor="#CCCCCC">&nbsp;&nbsp;&nbsp;</td>
+            <td bgcolor="#CCCCCC">序号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">实习单位编号<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">单位名称<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">审批状态<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+            <td bgcolor="#CCCCCC">操作<i class="sort"><img src="/Areas/School/Content/Home/img/px.gif" /></i></td>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                int iCount = 1;
+                <tr class="odd">
+                    <td><input type="checkbox" value="" name="check_approve" /></td>
+                    <td>
+                        @iCount
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ent_No)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ent_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplyStatusName)
+                    </td>
+                    <td>
+                        <a href="/Enterprise/Home/T_Enterprise_Show?Ent_No=@item.Ent_No">单位详情</a>&nbsp;|
+                        @Html.ActionLink("退出审核", "EntRegDeny", new { EntPracBatchID = item.EntPracNo })
+                       
+                        @{
+                string span = " | ";
+                if (!ViewBag.ReadOnly)
+                {
+                   
+                    if (item.ApplyStatusName!="审核通过")
+                    {
+                            @Html.ActionLink("| 审核通过", "EntRegApproved", new { EntPracBatchID = item.EntPracNo })
+                            @span
+                            @Html.ActionLink("拒绝", "EntRegDeny", new { EntPracBatchID = item.EntPracNo })
+                    }
+                    @span
+                    @Html.ActionLink("实习岗位", "EntPositionList", new { entpracno = item.EntPracNo })       
+
+                }
+
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <input type="text" value="" id="mark" name="mark" class="dfinput" style="display:none" />
+}
+
+<script type="text/javascript">
+
+    function checkall() {
+        var check = document.getElementsByName("check_approve");
+        if (check[0].checked == true) {
+            for (var j = 0; j < check.length; j++) {
+                check[j].checked = false;
+            }
+            document.getElementsByName('btnall').setAttribute("value", "全选");
+        }
+        else {
+            for (var j = 0; j < check.length; j++) {
+                check[j].checked = true;
+            }
+            document.getElementsByName('btnall').setAttribute("value", "取消全选");
+        }
+    }
+</script>

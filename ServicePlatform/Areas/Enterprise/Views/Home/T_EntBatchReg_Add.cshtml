@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "T_EntBatchReg_Add";
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加记录</title>
+
+    <link href="/Areas/Enterprise/Content/Admin/css/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            getPracBatchID($("#SchoolID").val())
+            $("#SchoolID").change(function () {
+                getPracBatchID($(this).val());
+                document.getElementById('SchoolID').setAttribute("value", $(this).val());
+            });
+        })
+
+        function getPracBatchID(value) {
+            $.ajax({
+                type: "post",
+                url: "/Enterprise/Home/getPracBatchIDList",
+                data: { SchoolID: value },
+                dataType: "json",
+                success: function (data) {
+                    if (data.count > 0) {
+                        $("#PracBatchID option").remove();
+                        $.each(data.Pos, function (i, item) {
+                            $("#PracBatchID").append("<option value='" + item.PracBatchID + "'>" + item.BatchName + "</option>");
+                        });
+                        document.getElementById('submit').setAttribute("type", "submit");
+                        document.getElementById('submit').setAttribute("class", "btn");
+                        document.getElementById('submit').setAttribute("value", "提交");
+                    }
+                    else {
+                        $("#PracBatchID option").remove();
+                        alert('该学校暂时无实习批次，请与学校管理员联系');
+                        document.getElementById('submit').setAttribute("type", "button");
+                        document.getElementById('submit').setAttribute("class", "");
+                        document.getElementById('submit').setAttribute("value", "");
+                       
+
+                    }
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">添加记录</a></li>
+        </ul>
+    </div>
+
+
+    <form action="/Enterprise/Home/T_EntBatchReg_Add" method="post">
+
+
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>添加记录</span></div>
+
+            <ul class="forminfo">
+             
+                <li>
+                    <label>学校</label>
+                    @Html.DropDownList("SchoolID", ServicePlatform.Lib.PageHelper.GetCodeTable(new ServicePlatform.Models.CodeTableContext(), "T_School", "ServicePlatform.Models", 1), new {id="SchoolID", @class = "dfinput" })
+                    <i>*请选择 学校</i>
+                </li>
+                <li>
+                    <label>批次编号</label>
+                    @Html.DropDownList("PracBatchID", new List<SelectListItem>(), new { id = "PracBatchID", @class = "dfinput" })
+                   
+                    <i>*请选择 批次</i>
+                </li>
+        @*<li>
+            <label>申请编号</label>
+            <input name="EntPracNo" type="text" class="dfinput" />
+            <i>*请输入 申请编号</i>
+        </li>
+             <li>
+            <label>企业编号</label>
+            <input name="Ent_No" type="text" class="dfinput" />
+            <i>*请输入 企业编号</i>
+        </li>
+      
+        <li>
+            <label>注册编号</label>
+            <input name="RegistTime" type="text" class="dfinput" />
+            <i>*请输入 注册编号</i>
+        </li>
+        <li>
+            <label>当前状态</label>
+            <input name="ApplyStatus" type="text" class="dfinput" />
+            <i>*请输入 当前状态</i>
+        </li>*@
+                <li><label>&nbsp;</label><input id="submit" type="submit" class="btn" value="提交" /></li>
+
+            </ul>
+
+
+        </div>
+    </form>
+
+
+
+</body>
+
+</html>
+
+
+
+
+

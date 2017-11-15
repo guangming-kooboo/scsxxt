@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"修改评价_1.html",
+  "generationDate":new Date(1483078092534.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"4e5465daefcd4e1b8e7c57bc79671ca9",
+    "type":"Axure:Page",
+    "name":"修改评价",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"03196c5f573a441a92859b3c482fb3f8",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":120,
+              "y":30},
+            "size":{
+              "width":311,
+              "height":550}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d477e0820cb84b6cac9e1040daaf7f77",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":120,
+                  "y":30},
+                "size":{
+                  "width":311,
+                  "height":550}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/修改评价_1/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "03196c5f573a441a92859b3c482fb3f8":{
+      "scriptId":"u0"},
+    "d477e0820cb84b6cac9e1040daaf7f77":{
+      "scriptId":"u1"}}});

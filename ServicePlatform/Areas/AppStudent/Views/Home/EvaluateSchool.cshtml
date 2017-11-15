@@ -1,0 +1,67 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Home.EvaluateSchool_M
+@Html.Partial("student_menu")
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex">
+
+            <div style="width: 60px;">
+                @*跳到主页*@
+                <a href="javascript:submit('a');">
+                    <div class="placeholder">
+                        <img src="@ViewData["root"]images/return.png" class="return">
+                    </div>
+                </a>
+            </div>
+
+            <div class="weui-flex__item"><div class="placeholder">评价学校</div></div>
+
+            @*跳到查看评价学校*@
+            <a href="javascript:submit('b');">
+                <div>
+                    <div class="placeholder" style="color: floralwhite">确定</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active">
+        <div class="weui-cells">
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd" style="border-right:1px solid #c8c8cd">
+                    <label class="weui-label">学校</label>
+                </div>
+                <div class="weui-cell__bd" style="padding-left: 2em">
+                    <label type="text" id="Subjects" readonly="readonly" class="weui-input">@Model._schoolname</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="weui-cells weui-cells_form">
+            @if (Model.EvaluateSchoolItem.Count == 0)
+            {
+
+            }
+            @foreach (var item in Model.EvaluateSchoolItem)
+            {
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <input type="hidden" value="@item.ItemNo" name="ItemNo">
+                    <div class="weui-cell__hd" style="border-right: 1px solid #c8c8cd">
+                        <label for class="weui-label">@item.ItemName</label>
+                    </div>
+                    <div class="weui-cell__bd" style="padding-left: 2em">
+                        @Html.DropDownListFor(o => o.ItemGrade, Model._StuEvaSchoolGradeLevelItem, new {@class = "weui-select"})
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        @Html.TextAreaFor(o => o.ItemContent, new {@class = "weui-textarea", rows = "5"})
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

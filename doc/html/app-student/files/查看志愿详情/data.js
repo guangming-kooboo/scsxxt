@@ -1,0 +1,108 @@
+﻿$axure.loadCurrentPage({
+  "url":"查看志愿详情.html",
+  "generationDate":new Date(1483078091974.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"d917e69e506742a29f7a5f0095d22f53",
+    "type":"Axure:Page",
+    "name":"查看志愿详情",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"6bf8731b66bd49e8bb034597e3918c93",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":137,
+              "y":110},
+            "size":{
+              "width":313,
+              "height":609}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"2f7b09ea1b73464fa3ebafbf45c1f2e6",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":137,
+                  "y":110},
+                "size":{
+                  "width":313,
+                  "height":609}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/查看志愿详情/u0.png"}},
+{
+          "id":"69e88a5c4ab64b65a5a428e67748d458",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":489,
+              "y":110},
+            "size":{
+              "width":311,
+              "height":609}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"725f734aabae42e2a7b994bf58357d6c",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":489,
+                  "y":110},
+                "size":{
+                  "width":311,
+                  "height":609}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/查看志愿详情/u2.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "6bf8731b66bd49e8bb034597e3918c93":{
+      "scriptId":"u0"},
+    "2f7b09ea1b73464fa3ebafbf45c1f2e6":{
+      "scriptId":"u1"},
+    "69e88a5c4ab64b65a5a428e67748d458":{
+      "scriptId":"u2"},
+    "725f734aabae42e2a7b994bf58357d6c":{
+      "scriptId":"u3"}}});

@@ -1,0 +1,88 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+    
+
+    <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+    <!--
+        关于教师端的描述：如无特殊说明，head部分是公共部分，部分页面有特有的css和js，写在head中的最下面
+    -->
+</head>
+<body ontouchstart>
+
+    <div class="weui-navbar">
+        <div class="colortitle weui-navbar__item">
+            <div class="weui-flex ">
+                <a href="@Url.Action("HomePage","THome",new {area="AppTeacher2"})">
+                    <div>
+                        <div class="placeholder">
+                            <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return" />
+                        </div>
+                    </div>
+                </a>
+                    <div class="weui-flex__item">
+                        <div class="placeholder">疑问解答</div>
+                    </div>
+                    <div style="width: 48px">
+                        <div class="placeholder"></div>
+                    </div>
+</div>
+        </div>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells deletegap">
+                <div class="weui-cell" style="background-color: #ebeeef">
+                    <p>教师使用步骤是什么</p>
+                </div>
+                <div class="weui-cell" >
+                    <div class="suojin">
+                        <P>1、登录教师端的APP</P>
+                        <P>2、在首页可以进入各个子模块</P>
+                        <P>3、学生信息模块：可以看见所有学生，分年级、专业、班级，以及登陆者所管理的学生，并且可以看见他们的详细信息</P>
+                        <P>4、记录工作量模块：根据所有的工作量列表，定额任务以及定量任务的选择，完成自己的工作量，并且可以提交证明材料</P>
+                        <p>5、企业信息模块：所有在当前实习批次下的所有企业，以及该企业的介绍详情、岗位介绍、等各个栏目的详情</p>
+                        <p>6、工作量报表：显示我所有的已经提交的任务列表，以及任务的详情</p>
+                        <p>7、我的任务消息：接受消息，查看消息的详情</p>
+                        <p>8、FAQ：疑问解答</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui-cells">
+
+                <div class="weui-cell"  style="background-color: #ebeeef">
+                    <div class="weui-cell__bd">
+                        <p>怎么区分定量和定额任务？</p>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="suojin">
+
+                        <P>1.定额任务是负责人所分配的具体的某一个任务，一次只能提交一次，且不能修改删除，只能有管理员来删除</P>
+                       <p>2.定量任务是负责人所分配的每一个子任务，这里叫做计分标准，不限定人员去完成，且完成人可多次提交该任务，</P>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

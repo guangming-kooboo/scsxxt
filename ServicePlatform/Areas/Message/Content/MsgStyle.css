@@ -1,0 +1,31 @@
+﻿.main {
+    height: auto;
+    overflow: hidden;
+    margin: 0px auto;
+}
+
+    .main td {
+        text-align: center;
+        height: 28px;
+        width: 200px;
+        line-height: 28px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .main .title td {
+        cursor: pointer;
+        color: #333;
+    }
+
+.none {
+    display: none;
+}
+
+.mybtn{
+    background-color: transparent; 
+    border: 0;
+}
+.mybtn:hover {
+    background: #9bf704;
+}

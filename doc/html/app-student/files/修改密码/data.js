@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"修改密码.html",
+  "generationDate":new Date(1483078092021.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"b36f4c55691143c79e35212944ca58cb",
+    "type":"Axure:Page",
+    "name":"修改密码",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"af7e69b7b77947898aac728a8be68669",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":120,
+              "y":50},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"7127430f354c4a5e9688dd294b7d61fd",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":120,
+                  "y":50},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/修改密码/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "af7e69b7b77947898aac728a8be68669":{
+      "scriptId":"u0"},
+    "7127430f354c4a5e9688dd294b7d61fd":{
+      "scriptId":"u1"}}});

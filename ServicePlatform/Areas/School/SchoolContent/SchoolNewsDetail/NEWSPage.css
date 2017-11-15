@@ -1,0 +1,73 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+}
+img{
+	border:none;
+}
+ul{
+	list-style: none;
+}
+nav ul li {
+	display: inline-block;
+	_zoom:1;
+	*display:inline;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+a:hover{
+	text-decoration:underline;
+}
+body{
+	font-family: tahoma, arial, 微软雅黑, 宋体,'Hiragino Sans GB', 'WenQuanYi Micro Hei',  sans-serif;
+	font-size:1.em;
+	font-weight:400;
+}
+
+	
+/*----------------------mainConnet---------------------------------------------------------------------------*/
+	#wrapper{
+		width:1000px;
+		overflow:hidden;
+		margin: 0 auto;
+	}
+	/*---------左侧：NEWS(当前只有这一栏，如果以后有需要可以分栏） ------*/
+	.left_news{  /*1000-4-60-30=706*/
+		width:906px;		
+		border:1px solid #ccc;
+		margin:15px 15px;
+		float:left;
+		padding:5px 30px;
+	}
+	.left_news h3{
+		text-align:center;
+		line-height::1.5em;
+		padding-top:20px;
+		letter-spacing:2pt;
+		color:#B50000;		
+	}
+	.left_news p{
+		display:block;
+		width:300px;  /*----1000/3  -----*/
+		float:left;
+		color:#888;
+		text-align:center;
+		font-size:0.9em;
+		padding:18px 0;
+	}
+	hr{
+		height:1px;
+		border:none;
+		border-top:2px solid #5C9F11;
+	}
+	.NEWSConent{
+		padding:15px 0;
+		color:#333;
+		overflow:hidden;
+	}	
+	
+	

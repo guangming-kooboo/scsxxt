@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "AddStuEvaluateEntItem";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加条目</title>
+
+    <script src="~/Areas/CodeManager/Content/Easyui/jquery.min.js"></script>
+
+    <link href="/Areas/CodeManager/Content/All/css/style.css" rel="stylesheet" type="text/css" />
+
+
+
+
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生评价企业代码管理</a></li>
+            <li><a href="#">添加条目</a></li>
+        </ul>
+    </div>
+
+    <div class="formbody">
+
+        <div class="formtitle"><span>添加条目</span></div>
+
+
+        <form method="post" action="/Code/ReAddStuEvaluateEntItem" name="myform" id="myform">
+
+            <ul class="forminfo">
+
+                <li>
+                    <label>批次编号:</label>
+                    <select style="width:200px" name="BatchName" id="BatchName" class="dfinput">
+                        <option value="--请选择--">--请选择--</option>
+                        @foreach (var item in ViewBag.piciid)
+                        {
+                            <option value="@item.BatchName">@item.BatchName</option>
+
+                        }
+                    </select>
+                </li>
+
+
+
+                <li>
+                    <label>条目次序（两位数）:</label>
+                    <input type="text" name="ItemSequence" id="ItemSequence" class="dfinput" placeholder="例如：01（2个数字）">
+                </li>
+                <li>
+                    <label>条目编号:</label>
+                    <input type="text" name="ItemNo" id="ItemNo" class="dfinput" readonly="readonly" placeholder="根据批次名称和条目次序自动生成">
+                </li>
+
+
+                <li>
+                    <label>条目名称:</label>
+                    <input type="text" id="ItemName" name="ItemName" class="dfinput" placeholder="例如：企业文化">
+                </li>
+
+
+           
+                <li>
+                    <label>条目所占权重:</label>
+                    <input type="text" id="ItemPower" value="0" name="ItemPower" class="dfinput" placeholder="例如：80（百分制）">
+                </li>
+
+                <li>
+                    <label>&nbsp;</label><input type="submit" value="保  存" class="btn" />
+
+                </li>
+            </ul>
+
+        </form>
+        <script>
+            $("#ItemSequence").bind("blur", function () {
+
+                var ItemSequence = $("#ItemSequence").val();
+                var BatchName = $("#BatchName").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Code/receajaxGetStuEvaluateEntItemPID',
+                    data: {
+                        //DeleteRow: DeletedID.join(','),
+                        DeleteRow: BatchName,
+                       
+
+
+
+                    },
+                    success: function (data) {
+                        if (ItemSequence != null) {
+                            if (ItemSequence.length == 1) {
+                                ItemSequence = "0" + ItemSequence;
+                            }
+                            $("#ItemNo").val(data + "-" + ItemSequence)
+
+
+                        }
+
+                    },
+                });
+
+
+                
+ 
+
+            });
+
+
+        </script>
+
+    </div>
+
+
+
+
+</body>
+</html>
+
+

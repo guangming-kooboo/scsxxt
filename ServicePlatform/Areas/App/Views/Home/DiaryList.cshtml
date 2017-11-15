@@ -1,0 +1,67 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.DiaryList_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>周记列表</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+    <script type="text/javascript">
+        function Delete(PracticeNo,RecordNo,uid) {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg) == true) {
+                alert("PracticeNo, RecordNo, uid");
+                window.location.href = "/App/Home/DeleteDiary" + "?PracticeNo=PracticeNo&recordno=recordno&uid=uid";
+            }
+            else
+            {
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="main-do">
+    <div class="company-head">
+        <div class="left">
+            <a href="@Url.Action("Main", "Home", new { area = "App",uid=Model.Uid })">&nbsp;<span><</span>&nbsp;返回</a>
+        </div>
+        <div class="middle">
+            <p>周记(@Model.DiaryCount)</p>
+        </div>
+        <div class="right">
+            <p></p>
+        </div>
+    </div>
+            <div class="lists-main"> 
+                 @foreach (var item in Model.Diarys)
+                 {
+                     var RecordTime = item.RecordDate.ToDateTime();
+                     <div class="lists">
+                         <a href="@Url.Action("EditDiary", "Home", new { area = "App",uid=Model.Uid, recordno=@item.RecordNo })">
+                                <div class="list-left">
+                                     <p class="lists-a" href="">@item.RecordTitle</p>    
+                                </div>
+                                <div class="list-right">
+                                    <a href="" onclick="Delete('@item.PracticeNo,@item.RecordNo,@item.uid')">X
+                                        @*@Html.ActionLink("X", "DeleteDiary", "Home", new {PracticeNo = item.PracticeNo, recordno = item.RecordNo, uid = item.uid}, new {})*@
+                                    </a>
+                                 </div>
+                                <p class="lists-p">创建于 @RecordTime.ToString("yyyy-M-d dddd")</p>
+                                <hr class="lists-hr">
+                                <p class="lists-main-p">@item.RecordContent</p>
+                                </a>
+                            </div>
+                 }      
+        </div>
+      
+        <a href="@Url.Action("AddDiary", "Home", new { area = "App",uid=Model.Uid })">
+            <div class="do-it">
+                <p class="do-it-a">添加周记</p>
+            </div>
+        </a>
+        
+    </div>
+</body>

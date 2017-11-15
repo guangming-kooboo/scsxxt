@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "ImportedStuList";
+}
+
+@{
+    ViewBag.Title = "学生密码重置";
+}
+
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+<html>
+<head>
+    <title>密码重置</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">学生/教师管理中心</a></li>
+            <li><a href="#">学生密码重置</a></li>
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+
+        @using (Html.BeginForm("ResetStuPwd", "StuManager", FormMethod.Post))
+        {
+                <ul class="forminfo">
+                <li><label>学号/职工号：</label><input type="text" value="" id="stuno" name="stuno" class="dfinput" /></li>
+                <li><label>重置密码：</label><input type="text" value="" id="newpwd" name="newpwd" class="dfinput" /><i style="color:red">若不填写,将自动重置密码为该学号/职工号</i></li>
+                    <li></li>
+                <li><input type="submit" value="重置密码" class="btn" style="margin-left:330px"/></li>                   
+                </ul>
+        }
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+
+    <div class="none"></div>
+</body>
+</html>

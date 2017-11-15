@@ -1,0 +1,10 @@
+﻿@using Qx.Tools.Web.Mvc.Html
+@model ServicePlatform.Areas.WbsHqu.ViewModels.FAQ.FAQType_M
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Areas/Message/Content/jquery-1.9.1.min.js"></script>
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+@Html.HiddenFor(o => o._FAQTypeId)
+@Html.HiddenFor(o => o.fatherId)
+@Html.InputFor(o => o._TypeName)

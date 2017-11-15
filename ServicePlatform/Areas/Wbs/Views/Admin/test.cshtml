@@ -1,0 +1,24 @@
+﻿@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+<h2>@ViewBag.Title</h2>
+@Html.Label("测试标签")
+@Html.DropDownList("下拉框",new List<SelectListItem>(){})
+
+
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+
+        Query(Params, "@ViewData["Url"]");
+    }
+</script>
+
+
+
+
+@Html.Label("测试标签2")
+@Html.DropDownList("下拉框", new List<SelectListItem>() { })

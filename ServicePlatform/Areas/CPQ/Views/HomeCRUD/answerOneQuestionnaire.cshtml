@@ -1,0 +1,164 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.HomeCRUD.AnswerOneQuestionnaire_M
+
+@{
+    var sequence = 1;   
+}
+<!DOCTYPE html>
+<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>顶岗实习需求调查</title>
+
+    <script src="~/Areas/CPQ/Content/JS/modernizr.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/CPQ/Content/CSS/default.css">
+
+    <link rel="stylesheet" href="~/Areas/CPQ/Content/CSS/jqueryui.min.css" />
+
+
+    <link rel="stylesheet" href="~/Areas/CPQ/Content/CSS/jquery-ui-slider-pips.min.css" />
+
+
+    <link rel="stylesheet" href="~/Areas/CPQ/Content/CSS/app.min.css" />
+    <link rel="stylesheet" href="~/Areas/CPQ/Content/CSS/css.css">
+</head>
+    <body>
+        <div>
+            <input type="text" name=QuestionID id=QuestionnaireID value=@Model.Questionnaire.QuestionnaireID hidden="hidden">
+            <p class="need-p" align="center">@Model.Questionnaire.QuestionnaireName</p>
+        </div>
+        <hr class="need-hr">
+        <div class="need-learn">
+            <p class="need-head">你好！</p>
+            <p class="need-head">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Model.Questionnaire.Summarize </p>
+
+
+            @foreach (var a in Model.Questionnaire.Questions)
+            {
+
+
+                if (a.QuestionType == 1)
+                {
+
+                    <div id=@a.QuestionID name="Question">
+
+                        <input type="text" name="QuestionType" id="QuestionType" value="1" hidden="hidden">
+                        <p class="need-learn-p">@sequence :@a.QuestionName</p>
+
+                        @foreach (var b in a.QuestionOptions)
+                        {
+                            <p class="need-learn-pp"><input type="radio" value=@b.OptionID name=@a.QuestionID id=@b.OptionID class=@b.OptionID>@b.OptionName</p>
+                        }
+                    </div>
+                }
+                else if (a.QuestionType == 2)
+                {
+                    <div id=@a.QuestionID name="Question">
+                        <input type="text" name="QuestionType" id="QuestionType" value="2" hidden="hidden">
+                        <p class="need-learn-p">@sequence :@a.QuestionName</p>
+
+                        @foreach (var b in a.QuestionOptions)
+                        {
+                            <p class="need-learn-pp"><input type="checkbox" value=@b.OptionID name=@a.QuestionID id=@b.OptionID class=@b.OptionID>@b.OptionName</p>
+                        }
+                    </div>
+                }
+
+                else if (a.QuestionType == 3)
+                {<div id=@a.QuestionID name="Question">
+                    <input type="text" name="QuestionType" id="QuestionType" value="3" hidden="hidden">
+                    <p class="need-learn-p">@sequence :@a.QuestionName</p>
+                    <textarea name=@a.QuestionID id=@a.QuestionID class=" need-textarea" placeholder=""></textarea>
+                </div>
+                }
+                sequence++;
+            }
+
+            <button onclick="submit()">确定</button>
+        </div>
+
+
+
+
+    
+    <script src="~/Areas/CPQ/Content/JS/jquery-plus-ui.min.js"></script>
+
+    <!-- foundation, prettify, jqueryui, twemoji -->
+    <script src="~/Areas/CPQ/Content/JS/bower-libs.min.js"></script>
+
+    <!-- slider -->
+    <script src="~/Areas/CPQ/Content/JS/jquery-ui-slider-pips.js"></script>
+
+    <!-- twemojiWrapper, prettyPre -->
+    <script src="~/Areas/CPQ/Content/JS/helpers.js"></script>
+
+    <!-- app -->
+    <script src="~/Areas/CPQ/Content/JS/examples.js"></script>
+    <script src="~/Areas/CPQ/Content/JS/styling.js"></script>
+    <script src="~/Areas/CPQ/Content/JS/app.js"></script>
+
+    <script>
+
+
+        function submit() {
+
+            //问卷id，问题ID：答案(选项ID)；答案，问题2：答案；
+            var QuestionnaireID = $("#QuestionnaireID").val();
+            var answer = QuestionnaireID + ",";
+            var a = $("div[name='Question']").each(function (index) {
+                var QuestionID = $(this).attr("id");
+
+                if ($(this).find("input[name='QuestionType']").val() == 1) {
+                   // alert($(this).find("input[name='QuestionType']").val());
+                    answer = answer + QuestionID + ":"
+                    $(this).find("input[type='radio']:checked").each(function (index) {
+                        //if ($(this).is(':checked')) {
+                           
+                        answer = answer + $(this).attr("id");
+                        //alert($(this).attr("id"));
+                        //}
+
+                    });
+                    answer = answer+ ",";
+                }
+                if ($(this).find("input[name='QuestionType']").val() == 2) {
+                   // alert($(this).find("input[name='QuestionType']").val());
+                    answer = answer + QuestionID + ":"
+                    $(this).find("input[type='checkbox']:checked").each(function (index) {
+                        //if ($(this).is(':checked')) {
+
+                        answer = answer + this.attributes['id'].value + ";"
+                       // alert(this.attributes['id'].value);
+                        //}
+
+                    });
+                    answer = answer + ",";
+                }
+
+                if ($(this).find("input[name='QuestionType']").val() == 3) {
+                   // alert($(this).find("input[name='QuestionType']").val());
+                    answer = answer + QuestionID + ":"
+                    answer = answer + $(this).find("textarea").val() + ",";
+
+
+                }
+
+            });
+
+            var s = "/HomeCRUD/answerOneQuestionnaire_Form?AnswerContent=" + answer;
+            //alert("最终结果" + answer);
+            window.location = s;
+
+        };
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

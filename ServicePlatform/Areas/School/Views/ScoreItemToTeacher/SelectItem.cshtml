@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Core.Services.Entity.T_SchoolReviewerTask>
+
+@{
+    ViewBag.Title = "我负责的评分项列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    评分项
+                </th>
+                <th>
+                    比重
+                </th>
+                <th>
+                    排序
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="arrangeList">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.T_SchoolReviewItem.ItemName
+                    </td>
+                    <td>
+                        @item.T_SchoolReviewItem.ItemWeight
+                    </td>
+                    <td>
+                        @item.T_SchoolReviewItem.ItemSequence
+                    </td>
+                    <td>
+                        <a href="/School/ScoreItemLinkStudent/SelectStudent?id=@item.TaskID">学生列表</a>|
+                        @Html.ActionLink("删除", "Delete", new { id = item.ItemID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

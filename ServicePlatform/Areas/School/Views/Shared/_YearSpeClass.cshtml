@@ -1,0 +1,132 @@
+﻿@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+@Scripts.Render("/Areas/School/Content/Home/js/jquery-1.5.2.min.js")
+@{
+    IEnumerable<SelectListItem> EntryYear = ViewData["EntryYear"] as IEnumerable<SelectListItem>;
+    IEnumerable<SelectListItem> Specility = ViewData["Specialty"] as IEnumerable<SelectListItem>;
+    IEnumerable<SelectListItem> Class = ViewData["Class"] as IEnumerable<SelectListItem>;
+    string sid = ViewBag.SchoolID;
+}
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("#EntryYear").change(function () {
+            var sid='@sid';
+            //var sid = $("#School").val();
+            getSpe($(this).val(), sid);
+            $("#nowoperation").disabled = true;
+
+        });
+        //获取专业
+        $("#Specialty").change(function () {
+            var sid = '@sid';
+            //var sid = $("#School").val();
+            getClass($(this).val(), sid);
+            document.getElementById('stunum').setAttribute("value", "班级人数:");
+        });
+    })
+
+    function getSpe(value,sid) {
+        //$("#City").html(""); //清空
+        $.ajax({
+            type: "post",
+            url: "GetSpeList",
+            //data: "p=" + provinveCode + "&date=" + new Date(),
+            data: { EntryYearCode: value ,SchoolID: sid},
+            dataType: "json",
+            success: function (data) {
+                if (data.count > 0) {
+                    $("#Specialty option").remove();
+                    $.each(data.Pos, function (i, item) {
+                        $("#Specialty").append("<option value='" + item.SpeNo + "'>" + item.SpeName + "</option>");
+                    });
+
+                    getClass($("#Specialty").val(), sid);
+                }
+                else {
+                    $("#Specialty option").remove();
+                    $("#Specialty").append("<option value=''>--请选择--</option>")
+                    $("#nowoperation").attr({ "disabled": "disabled" });
+                }
+            },
+            error: function (data) {
+                //alert(data);
+            }
+        });
+    }
+
+    function getClass(value,sid) {
+        //$("#City").html(""); //清空
+        $.ajax({
+            type: "post",
+            url: "GetClassList",
+            //data: "p=" + provinveCode + "&date=" + new Date(),
+            data: { SpeCode: value, SchoolID: sid },
+            dataType: "json",
+            success: function (data) {
+                if (data.count > 0) {
+                    $("#Class option").remove();
+                    $.each(data.Pos, function (i, item) {
+                        $("#Class").append("<option value='" + item.ClassID + "'>" + item.ClassName + "</option>");
+                    });
+                    $("#nowoperation").disabled = false;
+                }
+                else {
+                    $("#Class option").remove();
+                    $("#Class").append("<option value=''>--请选择--</option>")
+                    $("#nowoperation").attr({ "disabled": "disabled" });
+                    document.getElementById('stunum').setAttribute("value", "班级人数:");
+
+                }
+            },
+            error: function (data) {
+                //alert(data);
+            }
+        });
+    }
+</script>
+
+
+<ul class="forminfo">
+
+    @*<li><label>学校：</label><input value='@ViewBag.SchoolName' class="dfinput" readonly /><i></i></li>*@
+    <li>
+        <label>年级：</label>
+        <select id="EntryYear" name="EntryYear" class="dfinput">
+        @foreach (var item in EntryYear)
+        {
+                <option value="@item.Value" selected='@item.Selected'>
+                    @item.Text
+                </option>
+        }
+    </select>
+        <i>@ViewBag.Extra_ForE</i>
+    <li>
+    <li>
+        <label>专业：</label>
+        <select id="Specialty" name="Specialty" class="dfinput">
+            @foreach (var item in Specility)
+            {
+                <option value="@item.Value" selected='@item.Selected'>
+                    @item.Text
+                </option>
+            }
+        </select>
+        <i>@ViewBag.Extra_ForS</i>
+    <li>
+    <li>
+        <label>班级：</label>
+        <select id="Class" name="Class" class="dfinput">
+            @foreach (var item in Class)
+            {
+                <option value="@item.Value" selected='@item.Selected'>
+                    @item.Text
+                </option>
+            }
+        </select>
+        <i>@ViewBag.Extra_ForC</i>
+    <li>
+</ul>

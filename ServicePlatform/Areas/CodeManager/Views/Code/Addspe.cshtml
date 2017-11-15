@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Addspe";
+}
+
+
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddNews</title>
+    <link href="/Areas/School/Content/Home/css/style.css" rel="stylesheet" type="text/css" />
+   <script src="~/Areas/School/Content/Easyui/jquery.min.js"></script>
+    <script src="~/Areas/School/Content/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Areas/School/Content/Easyui/easyui-lang-zh_CN.js"></script>
+    <link href="~/Areas/School/Content/Easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/School/Content/Easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+    <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">学生代码维护表</a></li>
+                <li><a href="#">添加专业</a></li>
+            </ul>
+        </div>
+    <div class="formtitle"><span>添加专业</span></div>
+    
+     <form method="post" action="/Addspeciality/reciveSpe" name="myform" id="myform">
+     <ul class="forminfo">
+    
+         <li>
+                  <label>学校编号</label>
+                <select style="width:155px " name="SchoolID" id="SchoolID"class="dfinput">
+                    <option value="--请选择--">---请选择---</option>
+                    @foreach (var item in ViewBag.schoolid)
+                    {
+                        <option value="@item">@item</option>
+
+                    }
+                </select>
+               
+            </li>            
+                                          
+            <li>           
+                            <label>学校名称</label>
+
+                            <input name="SchoolName" id="SchoolName" value="--请选择--"class="dfinput"/>
+                        
+
+         </li>
+
+                      
+           <li>              
+                            <label>年级</label>
+
+                            <input name="EntryYear" id="EntryYear" class="dfinput" /><span>*必须为数字</span>
+                       
+         </li>
+          <li>
+                        
+                            <label>专业编号</label>
+                            <input type="text" name="SpeNo" id="SpeNo"class="dfinput">
+                        
+         </li>
+            <li>             
+                            <label>专业名称</label>
+                            <input type="text" name="SpeName" id="SpeName" class="dfinput">
+                        
+         </li>
+            <li>            
+                            <label>&nbsp;</label><input type="submit" value="提  交"  class="btn"/>
+          </li>              
+                    <ul>
+                </form>
+      
+    <script>         
+    
+        $("#SchoolID").bind("change", function () {
+
+
+            var SCHOOLID = $("#SchoolID").val();
+            if (SCHOOLID == "--请选择--") {
+                
+                $("#SchoolName").val("--请选择--");
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Addspeciality/receajax',
+                    data: {
+                        //DeleteRow: DeletedID.join(','),
+                        DeleteRow: SCHOOLID,
+
+
+                    },
+                    success: function (data) {
+                        if (data) {
+                            $("#SchoolName").val(data);
+
+                        }
+                    },
+                });
+            }
+            
+
+            
+
+
+         });
+         
+
+    </script>
+        
+       
+    </body>
+</html>
+

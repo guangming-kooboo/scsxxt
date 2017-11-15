@@ -1,0 +1,21 @@
+img{border:0}
+#slideshow{position: relative;height: 300px;width: 930px;margin: 0 auto;}
+#slideshow a{float: left;display: inline;}
+#slideshow .img{position: absolute;width: 930px;height: 300px;overflow: hidden}
+#slideshow .img span{position: absolute;width: 19999px;display: block}
+#slideshow .btns{z-index: 10;position: absolute;width: 930px}
+#slideshow .btns b{position: absolute;width: 100px;display: block;height: 14px;overflow: hidden;top: 275px;left: 50%}
+#slideshow .btns b i{width: 10px;background: #414140;float: left;height: 10px;font-size: 0px;overflow: hidden;cursor: pointer;margin-right: 6px;border: #414140 2px solid;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px}
+#slideshow .btns b i: hover{background: #a7a7a6}
+#slideshow .btns b i.on{background: #3cd2f1;cursor: default}
+#slideshow .btns b i.on: hover{background: #3cd2f1;cursor: default}
+#slideshow .btns s{position: absolute;width: 60px;display: none;height: 80px;overflow: hidden;top: 115px;cursor: pointer}
+#slideshow .btns s i{position: absolute;width: 60px;background: url(images/btn_slideshow.png);height: 160px;_filter: progid: dximagetransform.microsoft.alphaimageloader(enabled=true, sizingmethod=scale, src="images/btn_slideshow.png");_background: none;}
+#slideshow .btns s.prev{left: 0px}
+#slideshow .btns s.prev i{top: -80px}
+#slideshow .btns s.next{right: 0px}
+.slideshow-hover#slideshow .btns s{display: block}
+.paging{opacity: 0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;-khtml-opacity: 0.5;height: 300px;position: absolute;background: #000;overflow: hidden}
+.wtit .info,.wtit .tit{float: left;}
+.wtit .info{padding: 35px 0 0 20px;color: #989898;}
+.wtit .info span{margin: 0 8px

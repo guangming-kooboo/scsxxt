@@ -1,0 +1,93 @@
+﻿@model ServicePlatform.Models.T_PracBatch
+
+
+
+
+
+@{
+    ViewBag.Title = "WriteNews";
+    string sID = Model.SchoolID;
+}
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@*@Scripts.Render("/Content/kindeditor/kindeditor.js")
+@Scripts.Render("/Content/kindeditor/lang/zh_CN.js")
+@Scripts.Render("/Content/kindeditor/plugins/code/prettify.js")
+@Styles.Render("/Content/kindeditor/themes/default/default.css")
+@Styles.Render("/Content/kindeditor/plugins/code/prettify.css")
+@Scripts.Render("/Content/kindeditor/others/json2.js")
+@Scripts.Render("/Content/kindeditor/others/jquery.uploadify.min.js")
+@Scripts.Render("/Content/kindeditor/others/paperUploadFile.js")
+@Scripts.Render("/Content/kindeditor/others/acticleVefity.js")
+@Scripts.Render("/Content/kindeditor/others/isHasFlash.js")*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新建批次</title>
+
+    @*<script type="text/javascript">
+        KindEditor.ready(function (K) {
+            var editor1 = K.create('#editor', {
+                cssPath: '/Content/kindeditor/plugins/code/prettify.css',
+                uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+            });
+            prettyPrint();
+        });
+    </script>*@
+</head>
+@*@using (Html.BeginForm("WriteNews", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+@using (Html.BeginForm("BatchCreat", "BatchManager", FormMethod.Post))
+{
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">批次管理中心</a></li>
+                <li><a href="#">新建批次</a></li>
+            </ul>
+        </div>
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>新建批次</span></div>
+            <ul class="forminfo">
+
+                <li><label>学校ID：</label>@Html.TextBoxFor(model => model.SchoolID, new { id = "SchoolID", value=@ViewBag.SchoolID , name = "SchoolID" , @class = "dfinput", @readonly="readonly"})<i>*</i></li>
+
+                <li><label>批次名称：</label>@Html.TextBoxFor(model => model.BatchName, new { id = "batchname", name = "batchname", @class = "dfinput" })<i>*(例如：2016年春季实习)</i></li>
+                <li><label>起止日期：</label>@Html.TextBoxFor(model => model.StartEnd, new { id = "starend", name = "starend", @class = "dfinput" })<i>*(例如：2016.3.1-2016.7.1)</i></li>
+                <li><label>当前批次：</label><select id="iscurrent" name="iscurrent" class="dfinput"><option>是</option><option>否</option></select></li>
+                
+                @*@if (ViewBag.IMGURL == null)
+                {
+                    <li><label>标题图片：</label> <input name="Titlepic" type="file" class="dfinput" /><i>@Html.ValidationMessageFor(model => model.TitlePic)</i><i>*推荐尺寸：168x126</i></li>
+                }
+                else
+                {
+                    <li><label>标题图片：</label> <input name="Titlepic" type="file" class="dfinput" /><i style="color:red">原始图片路径如下，如需更改，请重新选择图片</i><i>*推荐尺寸：168x126</i></li>
+                    <li><label>原始图片：</label><input type="text" name="oldpic" id="oldpic" value='@ViewBag.IMGURL' class="dfinput" readonly /></li>
+                }*@
+                <li><label>是否生效：</label><select id="isactive" name="isactive" class="dfinput">
+                    <option>是</option>
+                    <option>否</option>
+                </select></li>
+                @*<li><label>&nbsp;</label><input class="btn" type="submit" value="返回" id="save" name="action" onclick="check()" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input class="btn" type="submit" value="投递" id="send" name="action" onclick="check()" /></li>*@
+                <li><label>&nbsp;</label><input class="btn" type="submit" value="创建" id="save" name="action" /></li>
+            </ul>
+        </div>
+
+        <div visibility:hidden><input type="text" id="flag" name="flag" value="" /></div>
+        <div visibility:hidden><input type="text" id="msgcontent" name="msgcontent" value="" /></div>
+
+    </body>
+}
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

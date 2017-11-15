@@ -1,0 +1,67 @@
+﻿@model Core.Services.Entity.T_Employee
+
+@{
+    ViewBag.Title = "编辑员工资料";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Ent_No)
+    @Html.HiddenFor(model => model.EmployeeID)
+    @Html.HiddenFor(model => model.UserID)
+    <fieldset>
+        <div class="editor-label">
+            @Html.Label("员工姓名")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EmployeeName)
+            @Html.ValidationMessageFor(model => model.EmployeeName)
+        </div> 
+
+        <div class="editor-label">
+            @Html.Label("联系电话")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("QQ")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.QQ)
+            @Html.ValidationMessageFor(model => model.QQ)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("邮箱")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("家庭住址")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <p>
+            <input type="submit" class="btn btn-primary" value="保存" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("返回列表", "Index")
+</div>
+
+

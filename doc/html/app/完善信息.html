@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>完善信息</title>
+
+<link rel="stylesheet" href="css/css.css">
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+</head>
+<body>
+   <div class="main-do">  
+        <div class="main-head">
+             <p class="main-head-p">完善信息</p>
+             <p>
+             <a href=""><img class="main-head-img"src="img/头像.png"></a>
+             </p>
+             <a class="main-head-a"href="">设置头像进行个人验证</a>
+          
+        </div>
+        <form>
+                <p class="get-p">手机号码<input class="get-input" typle="text" placeholder="" name=""/></p>
+                <p class="get-p">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="get-input" typle="text" placeholder="" name=""/></p>
+                <p class="get-p">QQ号码&nbsp;<input class="get-input" typle="text" placeholder="" name=""/></p>
+                <p class="get-p">新密码&nbsp;&nbsp;&nbsp;<input class="get-input" typle="password" placeholder="" name=""/></p>
+                <p class="get-p">
+                性别&nbsp;&nbsp;
+                   <select class="get-select">
+                     <option value="volvo">&nbsp;</option>
+                     <option value="">男</option>
+                     <option value="">女</option>
+
+                   </select>
+                </p>
+       
+                <p class="get-p">
+                出生日期
+                  <div class="list-for-data">
+                  
+                     <form action="" class="form-horizontal"  role="form">
+                           <fieldset>
+                               <div class="form-group">
+                                        
+                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                                     <input class="form-control" size="15" type="text" value="" readonly>
+                                                     
+                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                         <input type="hidden" id="dtp_input1" value="" />
+                                
+                                         
+                                         <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                      <input class="form-control" size="15" type="text" value="" readonly>
+                                                      
+                                                      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                          </div>
+                                          <input type="hidden" id="dtp_input2" value="" /><br/>
+                               </div>
+            
+                               </fieldset>
+                         </form>
+
+                        </div>
+                </p>
+             
+
+           </form>
+        <a href="">
+            <div class="do-it">
+                <p class="do-it-a">添加周记</p>
+            </div>
+        </a> 
+   </div>
+
+
+   <script type="text/javascript" src="./jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    $('.form_date').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+</script>
+
+
+
+</body>

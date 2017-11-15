@@ -1,0 +1,69 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.UserCenter.PersonalInformation_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+<div class="main">
+
+<!-- 导航-->
+          @Html.Action("_Head", new { id = Model.userid })
+           <div class="meanst">
+                <div class="means-main-head">
+                      <p class="means-main-head-p">个人资料</p> 
+                    
+                </div>
+                <div class="means-left">
+                   <p align="center"><img class="means-left-img" style="width:170px;height:170px;"src="@Model.userinformation.HeadPictureUrl"></p>
+                   <p align="center"><a class="means-left-a"href="">修改头像</a></p>
+                   <p align="center">
+                   <ul class="means-left-ul">
+                       <li class="means-left-li"><a class="means-left-li-pp"href="">@Model.statistics.diary</a><p class="means-left-li-p">日志</p></li>
+                       <li class="means-left-li"><a class="means-left-li-pp"href="">@Model.statistics.Reply</a><p class="means-left-li-p">回帖数</p></li>
+                       <li class="means-left-li"><a class="means-left-li-pp"href="">@Model.statistics.Share</a><p class="means-left-li-p">分享数</p></li>
+                   </ul>
+                   <hr class="means-left-hr">
+                   </p>
+      
+                </div>
+                <div class="means-right">
+                    <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a"href="">基本信息</a></p>
+                    <hr class="means-right-hr-hr">
+                    <table>
+                      <form>
+                         <p class="means-right-p">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;别&nbsp;:<input type="radio" value="男" name="sex">男
+                                                  <input type="radio" value="女" name="sex">女 </p>
+                         <p class="means-right-p">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;:&nbsp;<input  typle="text" placeholder="请输入邮箱" name="found"/></p>
+                         <p class="means-right-p">生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;:&nbsp;<input  typle="text" placeholder="请输入生日" name="found"/></p> 
+                         <p class="means-right-p">联系方式&nbsp;:&nbsp;<input  typle="text" placeholder="请输入联系电话" name="found"/></p>
+                         <p class="means-right-p">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;:&nbsp;<input  typle="text" placeholder="请输入地址" name="found"/></p> 
+                         <tr><td><p class="means-right-p">经&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历&nbsp;:</td><td><textarea name="" class="text-means"  placeholder="请输入你的经历"></textarea></td></tr></p>
+                         
+                       </form>
+                     </table>
+                      <div class="table-location">
+                         <input class="input-submit"type="submit" value="确定" />
+                         <input class="input-submit"type="submit" value="取消" />
+                      </div>
+
+                    <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a"href="">统计信息</a></p>
+                    <hr class="means-right-hr-hr">
+                    <p class="means-right-p">空间访问量:@Model.statistics.Visitor</p>
+                    <p class="means-right-p">好友数:@Model.statistics.Friend</p>
+                    <p class="means-right-p">积分:@Model.statistics.Point</p> 
+                   
+
+                    
+                    <p class="means-right-head">|&nbsp;&nbsp;<a class="means-right-head-a"href="">活跃状况</a></p>
+                    <hr class="means-right-hr-hr">
+                    <p class="means-right-p">用户组:普通用户</p>
+                    <p class="means-right-p">管理组:版权</p>
+                    <p class="means-right-p">状态:@Model.userinformation.State</p> 
+                    <p class="means-right-p">注册时间:@Model.userinformation.Register</p>
+                    <p class="means-right-p">最后访问时间:@Model.userinformation.LastLogin</p> 
+                    <p class="means-right-p">上次活动时间:@Model.userinformation.RecentActivity</p>                  
+                    
+                </div>
+               
+           </div>
+    </div>
+
+

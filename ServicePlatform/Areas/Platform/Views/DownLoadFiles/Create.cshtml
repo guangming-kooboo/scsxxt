@@ -1,0 +1,49 @@
+﻿@model Core.Services.Entity.T_DownLoadFiles
+
+@{
+    ViewBag.Title = "添加文件";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>T_DownLoadFiles</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DLFileColumnID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DLFileColumnID)
+            @Html.ValidationMessageFor(model => model.DLFileColumnID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DLFileUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DLFileUrl)
+            @Html.ValidationMessageFor(model => model.DLFileUrl)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InnerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InnerID)
+            @Html.ValidationMessageFor(model => model.InnerID)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

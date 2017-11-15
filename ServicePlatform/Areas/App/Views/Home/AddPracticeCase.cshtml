@@ -1,0 +1,100 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.AddPracticeCase_M
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>编写案例</title>
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+  
+</head>
+<body>
+<div class="main-do">
+    <form runat="server" id="form1" method="post" enctype="multipart/form-data">
+        <div class="main-head-do">
+            <p class="main-head-p">添加案例</p>
+        </div>
+        <div class="write-mine">
+            <div class="write-mine-one">
+                <label>案例  @Model.CaseCount</label>
+                @Html.TextBoxFor(o => o.CaseName, new { @class = "write-theone", placeholder = "案例标题" })
+            </div>
+            @foreach (var item in Model.CaseItemNo)
+            {
+                <div class="write-mine-div">
+                    <input type="hidden" value="@item.ItemNo" name="ItemNo">
+                    <p>
+                        <span>|</span>&nbsp;&nbsp;
+                        @item.ItemName
+                    </p>
+                    @Html.TextAreaFor(o => o.ItemContent)
+                </div>
+            }
+            <hr size="2px" color="purple" width="94%"/>
+            <div class="upload-img">
+                <input type="file" class="comment-pic-upd" style="margin-top: -80px" multiple="multiple" accept="image/*" capture="camera" name="file_head" id="file_head" onchange="javascript:setImagePreview();"/>
+                <img src="~/Areas/App/Content/Image/photo.png" alt="上传照片" title="">
+            </div>
+
+            <div data-role="fieldcontain">
+                <div id="localImag">
+                    <img id="preview" width="100px" height="100px" style="display: none; margin-top: 18px"/>
+                </div>
+            </div>
+
+
+        </div>
+        @*</div>*@
+
+            <a href="">
+                <div class="">
+                    <input class="do-its" type="submit" value="保存案例" />
+                </div>
+            </a>
+       
+    </form>
+  
+</div>
+
+    <script type="text/javascript">
+        function setImagePreview() {
+            var preview, img_txt, localImag, file_head = document.getElementById("file_head"),
+            picture = file_head.value;
+            if (!picture.match(/.jpg|.gif|.png|.bmp|.img/i)) return alert("您上传的图片格式不正确，请重新选择！"),
+            !1;
+            //console.log(file_head.files);
+            if (preview = document.getElementById("preview"),file_head.files &&file_head.files[0])
+
+                preview.style.display = "block",
+                preview.style.width = "100px",
+                preview.style.height = "100px",
+                preview.src = window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1 ?
+                window.webkitURL.createObjectURL(file_head.files[0]) :
+                window.URL.createObjectURL(file_head.files[0]
+
+                );
+
+            else {
+                file_head.select(),
+                file_head.blur(),
+                img_txt = document.selection.createRange().text,
+                localImag = document.getElementById("localImag"),
+                localImag.style.width = "115px",
+                localImag.style.height = "115px";
+                try {
+                    localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
+                    localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
+                } catch(f) {
+                    return alert("您上传的图片格式不正确，请重新选择！"),
+                    !1
+                }
+                preview.style.display = "none",
+                document.selection.empty()
+            }
+            return document.getElementById("DivUp").style.display = "block",
+            !0
+        }
+    </script>  
+</body>

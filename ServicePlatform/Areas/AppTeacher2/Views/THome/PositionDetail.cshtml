@@ -1,0 +1,90 @@
+﻿@model ServicePlatform.Areas.AppTeacher2.ViewModel.THome.PositionDetail_M
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="~/Areas/AppTeacher2/Content/css/pubilice.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Areas/AppTeacher2/Content/css/weui.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-2.1.4.js"></script>
+    <script src="~/Areas/AppTeacher2/Content/js/fastclick.js"></script>
+ 
+
+    <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+    </script>
+    <script src="~/Areas/AppTeacher2/Content/js/jquery-weui.js"></script>
+
+
+</head>
+<body ontouchstart>
+
+<div class="weui-navbar">
+    <div class="colortitle weui-navbar__item">
+        <div class="weui-flex ">
+            <a href="@Url.Action("EnterpriseInfo", "THome", new {area = "AppTeacher2", Ent_No = Model.Ent_No})">
+                <div>
+                    <div class="placeholder colortitle">
+                        <img src="~/Areas/AppTeacher2/Content/images/return.png" class="return"/>
+                    </div>
+                </div>
+            </a>
+            <div class="weui-flex__item colortitle">
+                <div class="placeholder">岗位详情</div>
+            </div>
+            <div style="width: 48px">
+                <div class="placeholder"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+            @foreach (var item in Model._PositionList)
+            {
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">岗位名称</label>
+                            <span class="weui-form-preview__value bigger">@item.PositionName</span>
+                        </div>
+
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">招聘人数</label>
+                            <span class="weui-form-preview__value">@item.PosQuantity</span>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">剩余空位</label>
+                            <span class="weui-form-preview__value">@item.RemainRecruitingCount</span>
+                        </div>
+                    </div>
+
+                    <div class="weui-cell">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">截止日期</label>
+                            <span class="weui-form-preview__value">@item.PosExpireDate.ToString("yyyy-M-d dddd")</span>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">岗位描述</label>
+                            <span class="weui-form-preview__value">@(new HtmlString(item.Discription.Replace("\r\n","<br/>")))</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div 
+    </div>
+</body>
+</html>

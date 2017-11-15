@@ -1,0 +1,54 @@
+﻿@model ServicePlatform.Models.T_SysMsg
+@{
+    ViewBag.Title = "New_Msg_Detail";
+    
+}
+
+@*@Styles.Render("/Content/css/Admin/style.css")
+@Scripts.Render("/Scripts/Admin/jquery.js")
+@Scripts.Render("/Scripts/Admin/jquery.idTabs.min.js")
+@Scripts.Render("/Scripts/Admin/select-ui.min.js")
+@Scripts.Render("/Scripts/Admin/kindeditor.js")*@
+
+<html>
+<head>
+    <title>消息详情</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/Areas/Message/Content/jquery-1.9.1.min.js"></script>
+    @Html.Partial("_KindEditorLinks")
+</head>
+@using (Html.BeginForm("Msg_Detail_Reply", "MsgCenter", FormMethod.Post))
+{
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">消息中心</a></li>
+                <li><a href="#">消息详情</a></li>
+            </ul>
+        </div>
+
+        <div class="formbody">
+
+            <div class="formtitle"><span>消息详情</span></div>
+            <ul class="forminfo">@Html.TextBoxFor(model => model.MsgID, new { @class = "dfinput", @readonly = true, @hidden = true })
+                <li><label>发送人：</label>@Html.TextBoxFor(model => model.MsgOwner, new { @class = "dfinput", @readonly = true})</li>
+                <li><label>发送时间：</label><input type="text" class="dfinput" readonly value=@ViewBag.dttime /></li>
+                <li><label>消息内容：</label><label>@Html.Raw(@ViewBag.msgcontent)</label></li>  
+                <li><label>&nbsp;</label><input class="btn" type="button" value="返回" id="save" name="action" onclick="window.location.href = '@ViewBag.PageName'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @if(@ViewBag.Display==true)
+                { 
+                <input class="btn" type="submit" value="回复" id="send" name="action" />
+                }
+                else
+                {}
+                </li>
+            </ul>
+
+        </div>
+
+
+    </body>
+}
+</html>

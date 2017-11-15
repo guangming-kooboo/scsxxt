@@ -1,0 +1,108 @@
+﻿$axure.loadCurrentPage({
+  "url":"简历管理.html",
+  "generationDate":new Date(1483078092574.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"37b8a65ad91441068d4809e98e036f2b",
+    "type":"Axure:Page",
+    "name":"简历管理",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"9735679a19334901907dfbf9b0283661",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":71,
+              "y":19},
+            "size":{
+              "width":315,
+              "height":571}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"758704805996482a9332c7d0b05c9718",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":71,
+                  "y":19},
+                "size":{
+                  "width":315,
+                  "height":571}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/简历管理/u0.png"}},
+{
+          "id":"28533adf89174cc8985bcb4aaf45b2c8",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":457,
+              "y":15},
+            "size":{
+              "width":313,
+              "height":575}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"ebe5a21dfa194ce1be90f858e8234798",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":457,
+                  "y":15},
+                "size":{
+                  "width":313,
+                  "height":575}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/简历管理/u2.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "9735679a19334901907dfbf9b0283661":{
+      "scriptId":"u0"},
+    "758704805996482a9332c7d0b05c9718":{
+      "scriptId":"u1"},
+    "28533adf89174cc8985bcb4aaf45b2c8":{
+      "scriptId":"u2"},
+    "ebe5a21dfa194ce1be90f858e8234798":{
+      "scriptId":"u3"}}});

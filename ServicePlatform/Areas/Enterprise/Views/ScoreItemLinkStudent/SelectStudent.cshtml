@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "给学生打分";
+    var UserUnit = ViewBag.UserUnit;
+    var TaskID = ViewBag.TaskID;
+    var EntPracNo = ViewBag.EntPracNo;
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>给学生打分</h2>
+            <p>点击"评分"为学生录入分数:</p>
+            @Html.Partial("_SelectPosition", new ViewDataDictionary()
+        {
+            {"EntPracNo", EntPracNo},
+        })
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        学生账号
+                    </th>
+                    <th>
+                        学生姓名
+                    </th>
+                    <th>
+                        分数
+                    </th>
+                    <th>
+                        评分说明
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="tbContent">
+                @*@foreach (var item in NotArragedStudents)
+                        {
+                            <tr >
+                                <td>
+                                    @item.UserID
+                                </td>
+                                <td>
+                                    @item.StuName
+                                </td>
+                                <td>
+                                    <a onclick="AjaxCreate('@item.UserID', '@TaskID')">加入</a>
+                                </td>
+                            </tr>
+                        }*@
+                </tbody>
+            </table>
+               
+        </div>
+    </div>
+    <hr/>
+    <a href="/Enterprise/ScoreItemToTeacher/SelectItem?EntPracNo=@EntPracNo&pageId=M15-3(E)" class="btn btn-primary">返回</a>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tip").html("请选择岗位");
+    });
+
+    //根据岗位取学生
+    function AfterSelectPositions() {
+
+        var PositionID = $("#PositionID").val();
+        if (PositionID == "") {
+            alert('抱歉，发现异常，请报告给开发人员！');
+            return;
+        }
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItemLinkStudent/GetMarkingStudents",
+            data: { EntPracNo: '@EntPracNo', PositionID: PositionID, TaskID: '@TaskID' },
+            dataType: "json",
+            success: function (reslut) {
+                var tb = "";
+                $.each(reslut, function (i, item) {
+                   tb += "<tr id='" + item.LinkID + "'>" +
+                        "<td>" + item.UserID + "</td>" +
+                        "<td>" + item.StuName + "</td>" +
+                         "<td id='" + item.LinkID + "ReviewScoreTB'>" + item.ReviewScore + "</td>" +
+                          "<td id='" + item.LinkID + "ReviewCommentTB'>" + item.ReviewComment + "</td>" +
+                        "<td id='" + item.LinkID + "bt'> " +
+                        "<a onclick=\"Marking(\'" + item.LinkID + "\')\">评分</a>" +
+                        "</td>" +
+                        "</tr>";
+                });
+                $("#tbContent").html(tb);
+                $("#tip").html("准备就绪!");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择岗位");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+
+    function AjaxMarking(LinkID) {
+        var classId = $("#classId").val();
+        var ReviewScore = $("#" + LinkID + "ReviewScore").val();
+        var ReviewComment = $("#" + LinkID + "ReviewComment").val();
+
+        if (ReviewScore == "" || classId == "") {
+            alert('抱歉，发现异常，请报告给开发人员！');
+            return;
+        }
+        $("#tip").html("请稍后...");
+        $.ajax({
+            type: "post",
+            url: "/Enterprise/ScoreItemLinkStudent/AjaxMarking",
+            data: { LinkID: LinkID, ReviewScore: ReviewScore, ReviewComment: ReviewComment },
+            dataType: "text",
+            success: function (reslut) {
+                $("#tip").html("操作成功，正在刷新列表...");
+                AfterSelectPositions();
+                $("#tip").html("继续点击'评分'给学生评分");
+            },
+            error: function (data) {
+                $("#tip").html("加载出错，请重新选择班级");
+                //  alert("请求出错！" + data);
+            }
+        });
+    }
+
+
+
+
+    function Marking(LinkID) {
+
+        $("#" + LinkID + "ReviewScoreTB").html("<input type='text' placeholder='请输入分数' id='" + LinkID + "ReviewScore'/>" );
+        $("#" + LinkID + "ReviewCommentTB").html("<input type='text' placeholder='请输入评分说明' id='" + LinkID + "ReviewComment'/>");
+        $("#" + LinkID + "bt").html("<a onclick=\"AjaxMarking(" + LinkID + ")\">确认</a>");
+
+    }
+</script>
+
+

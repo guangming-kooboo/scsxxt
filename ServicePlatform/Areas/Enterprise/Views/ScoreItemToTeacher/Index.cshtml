@@ -1,0 +1,92 @@
+﻿@using Core.Services.Entity
+@model IEnumerable<Core.Services.Entity.T_EntReviewerTask>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "分配员工";
+    string ItemID = ViewBag.ItemID;
+    List<T_Employee> NotArragedEmployees = ViewBag.NotArragedEmployees;
+
+}
+<div class="col-lg-6">
+
+    <h2>待分配员工</h2>
+    <p>点击"加入"选择员工:</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    员工账号
+                </th>
+                <th>
+                    员工姓名
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in NotArragedEmployees)
+            {
+                <tr>
+                    <td>
+                        @item.UserID
+                    </td>
+                    <td>
+                        @item.EmployeeName
+                    </td>
+                    <td>
+                        <form method="POST" action="/Enterprise/ScoreItemToTeacher/Create">
+                            <input type="hidden" name="EmployeeID" value="@item.UserID" />
+                            <input type="hidden" name="ItemID" value="@ItemID" />
+                            <a><button  type="submit">加入</button></a>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="col-lg-6">
+
+    <h2>已分配列表</h2>
+    <p>点击"删除"取消分配:</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    员工账号
+                </th>
+                <th>
+                    员工姓名
+                </th>
+                <th>
+                    评分项
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="arrangeList">
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.T_Employee.UserID
+                </td>
+                <td>
+                    @item.T_Employee.EmployeeName
+                </td>
+                <td>
+                    @item.T_EntReviewItem.ItemName
+                </td>
+                <td>
+                    <a href="/Enterprise/ScoreItemLinkStudent/Index?TaskID=@item.TaskID&ItemID=@ViewData["ItemID"]&EntPracNo=@ViewData["EntPracNo"]">分配学生</a>|
+                    @Html.ActionLink("删除", "Delete", new { id = item.TaskID, ItemID = item.ItemID })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

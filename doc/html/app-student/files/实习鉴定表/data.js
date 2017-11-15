@@ -1,0 +1,108 @@
+﻿$axure.loadCurrentPage({
+  "url":"实习鉴定表.html",
+  "generationDate":new Date(1483078092545.81),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"ec56ef8420444f4cb526c8731c07e16e",
+    "type":"Axure:Page",
+    "name":"实习鉴定表",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"bc97cc9f4812480fb4b8955da19ab95b",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":157,
+              "y":160},
+            "size":{
+              "width":383,
+              "height":710}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"acf54b12f35d4a8b8d062204bf8a5f99",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":157,
+                  "y":160},
+                "size":{
+                  "width":383,
+                  "height":710}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/实习鉴定表/u0.png"}},
+{
+          "id":"4cd100bb1059460f8258d9fdcc6d5229",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":676,
+              "y":166},
+            "size":{
+              "width":384,
+              "height":704}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"74c87a1479ad46fc93bc23661d356967",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":676,
+                  "y":166},
+                "size":{
+                  "width":384,
+                  "height":704}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/实习鉴定表/u2.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "bc97cc9f4812480fb4b8955da19ab95b":{
+      "scriptId":"u0"},
+    "acf54b12f35d4a8b8d062204bf8a5f99":{
+      "scriptId":"u1"},
+    "4cd100bb1059460f8258d9fdcc6d5229":{
+      "scriptId":"u2"},
+    "74c87a1479ad46fc93bc23661d356967":{
+      "scriptId":"u3"}}});

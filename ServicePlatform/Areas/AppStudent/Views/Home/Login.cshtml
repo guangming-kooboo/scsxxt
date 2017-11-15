@@ -1,0 +1,58 @@
+﻿@model ServicePlatform.Areas.AppStudent.ViewModel.Visitor.Login_M
+
+<div class="weui-flex">
+    <div class="weui-flex__item"><div class="placeholder"><br></div></div>
+</div>
+<div class="weui-flex">
+
+    <div class="weui-flex__item"><div class="placeholder"><img src="@ViewData["root"]/images/u8.png" width=50%></div></div>
+
+</div>
+
+<div class="weui-flex">
+    <div class="weui-flex__item"><div class="placeholder">实学</div></div>
+</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">账号</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入帐号">
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">学校</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select class="weui-select" name="select2">
+                <option value="1">    </option>
+                <option value="2">中国</option>
+                <option value="3">美国</option>
+                <option value="4">英国</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入密码">
+        </div>
+    </div>
+</div>
+
+
+    <div class="pubilice-uppad">
+@*跳转到主页*@
+        <a href="javascript:submit('c');" class="weui-btn weui-btn_primary">登录</a>
+    </div>
+
+<div class="weui-flex">
+    @*跳转到忘记密码*@
+    <a href="javascript:submit('a');">
+        <div><div class="placeholder">忘记密码？</div></div>
+        </a>
+        <div class="weui-flex__item"><div class="placeholder"> </div></div>
+        <div><div class="placeholder"></div></div>
+</div>

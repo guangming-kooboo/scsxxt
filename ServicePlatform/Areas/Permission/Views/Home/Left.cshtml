@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Left";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>菜单栏</title>
+
+    <link href="~/Areas/Permission/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Permission/Content/css/select.css" rel="stylesheet" />
+ 
+    <script src="~/Areas/Permission/Content/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //导航切换
+            $(".menuson li").click(function () {
+                $(".menuson li.active").removeClass("active")
+                $(this).addClass("active");
+            });
+
+            $('.title').click(function () {
+                var $ul = $(this).next('ul');
+                $('dd').find('ul').slideUp();
+                if ($ul.is(':visible')) {
+                    $(this).next('ul').slideUp();
+                } else {
+                    $(this).next('ul').slideDown();
+                }
+            });
+        })
+    </script>
+
+
+</head>
+
+<body style="background:#f0f9fd;">
+    <div class="lefttop"><span></span>权限控制台</div>
+
+    <dl class="leftmenu">
+
+        @*<dd>
+            <div class="title">
+                <span><img src="/Areas/Permission/Content/images/leftico01.png" /></span>管理信息
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
+                <li class="active"><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li>
+                <li><cite></cite><a href="imgtable.html" target="rightFrame">图片数据表</a><i></i></li>
+                <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
+                <li><cite></cite><a href="imglist.html" target="rightFrame">图片列表</a><i></i></li>
+                <li><cite></cite><a href="imglist1.html" target="rightFrame">自定义</a><i></i></li>
+                <li><cite></cite><a href="tools.html" target="rightFrame">常用工具</a><i></i></li>
+                <li><cite></cite><a href="filelist.html" target="rightFrame">信息管理</a><i></i></li>
+                <li><cite></cite><a href="tab.html" target="rightFrame">Tab页</a><i></i></li>
+                <li><cite></cite><a href="error.html" target="rightFrame">404页面</a><i></i></li>
+            </ul>
+        </dd>*@
+
+        <dd>
+            <div class="title">
+               
+                <span><img src="/Areas/Permission/Content/images/leftico01.png" /></span>用户管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Permission/Home/UserAdd" target="rightFrame">添加用户</a><i></i></li>
+                <li><cite></cite><a href="/Permission/Home/UserShow" target="rightFrame">用户列表</a><i></i></li>
+                
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title">
+                <span><img src="/Areas/Permission/Content/images/leftico02.png" /></span>角色管理
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Permission/Home/RoleAdd" target="rightFrame">添加角色</a><i></i></li>
+                <li><cite></cite><a href="/Permission/Home/RoleShow" target="rightFrame">角色列表</a><i></i></li>
+               
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Permission/Content/images/leftico03.png" /></span>菜单管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Permission/Home/ModuleAdd" target="rightFrame">添加菜单</a><i></i></li>
+                <li><cite></cite><a href="/Permission/Home/ModuleShow" target="rightFrame">菜单列表</a><i></i></li>
+               
+            </ul>
+        </dd>
+
+
+        <dd>
+            <div class="title"><span><img src="/Areas/Permission/Content/images/leftico04.png" /></span>按钮管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Permission/Home/FuncObjectAdd" target="rightFrame">添加按钮</a><i></i></li>
+                <li><cite></cite><a href="/Permission/Home/FuncObjectShow" target="rightFrame">按钮列表</a><i></i></li>
+                
+            </ul>
+
+        </dd>
+
+        @*<dd>
+            <div class="title"><span><img src="/Areas/Permission/Content/images/leftico04.png" /></span>授权管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="/Permission/Home/UserRoleAdd" target="rightFrame">用户授权</a><i></i></li>
+                <li><cite></cite><a href="/Permission/Home/UserRoleShow" target="rightFrame">用户角色管理</a><i></i></li>
+                <li><cite></cite><a href="/Permission/Home/RoleModuleShow" target="rightFrame">角色菜单管理</a><i></i></li>
+                <li><cite></cite><a href="/Permission/Home/RoleFuncObjForbidShow" target="rightFrame">菜单按钮管理</a><i></i></li>
+            </ul>
+
+        </dd>*@
+    </dl>
+
+</body>
+</html>
+

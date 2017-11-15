@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Tool";
+}
+
+@{
+    string[] Properties = (string[])ViewData["Properties"];
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="~/Scripts/Bootstrap/jquery.js"></script>
+    <script src="~/Scripts/Bootstrap/bootstrap.min.js"></script>
+    <link href="~/Content/Bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    <script type="text/javascript">
+
+        function changeTable() {
+           
+            location.href = "/ESApi/Tool?objName=" + $("#TableName").val();
+            alert('请稍后..')
+        }
+    </script>
+    <style>
+        .top-offset-20px {
+            margin-top: 400px;
+        }
+
+        .centerTitle {
+            margin-left: 43%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="centerTitle">@ViewBag.Title</h1>
+
+    <div class="control-group row col-lg-12 col-lg-offset-5 ">
+        <div class="controls">
+            <label for="TableName">数据库表名</label><br/>
+            <select onchange="changeTable()" id="TableName">
+                @foreach (var item in ViewBag.Tables)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+           
+        </div>
+    </div>
+
+    
+    
+    <h4 class="centerTitle">表单信息如下</h4>
+    
+
+
+    <form class="form-horizontal" method="post" action="@ViewBag.FormAction">
+
+        <input name="objName" value="@ViewBag.objName" type="text" hidden="hidden" class="dfinput" />
+        <input name="nameSpace" value="@ViewBag.nameSpace" type="text" hidden="hidden" class="dfinput" />
+
+       
+        @if (ViewBag.Values == null)
+        {
+             <div class="control-group row col-lg-12 col-lg-offset-5 ">
+                    <div class="controls">
+                        <label for="TableName">选择操作</label><br />
+                        <select name="method">
+                            <option value="0">无操作</option>
+                            <option value="1">添加</option>
+                            <option value="2">删除</option>
+                            <option value="3">修改</option>
+                        </select>
+                    </div>
+                </div>
+        }
+
+
+        @for (int i = 0; i < Properties.Length; i++)
+        {
+            if (ViewBag.Values == null)
+            {
+                <div class="control-group row col-lg-12 col-lg-offset-5 ">
+            <div class="controls">
+                <input type="text" id="@Properties[i]" name="@Properties[i]" placeholder="@Properties[i]" />
+            </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="control-group row col-lg-12 col-lg-offset-5 ">
+            <div class="controls">
+                <label for="@Properties[i]">@Properties[i]</label><br />
+                <input type="text" id="@Properties[i]" name="@Properties[i]" value="@ViewBag.Values[i]" placeholder="@Properties[i]" />
+            </div>
+                </div>
+            }
+        }
+        @if (ViewBag.Values == null)
+        {
+           <div class="control-group col-lg-12 col-lg-offset-5">
+            <div class="controls ">
+                <button type="submit" class=" btn-success">submit</button>
+            </div>
+        </div>
+        }
+         
+    </form>
+
+
+    
+
+</body>
+
+</html>
+
+
+
+
+

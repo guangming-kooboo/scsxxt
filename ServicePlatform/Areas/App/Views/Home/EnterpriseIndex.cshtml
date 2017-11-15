@@ -1,0 +1,50 @@
+﻿@model ServicePlatform.Areas.App.ViewModel.Home.EnterpriseIndex_M
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="~/Areas/App/Content/CSS/css.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="main-do">
+        <div class="company-head">
+            <div class="left">
+                <a href="@Url.Action("AllEnterprise", "Home", new {area = "App", uid = Model.Uid})">&nbsp;<span><</span>&nbsp;返回</a>
+            </div>
+            <div class="middle">
+                <p>@Model.Ent_Name</p>
+            </div>
+            <div class="right">
+                <p></p>
+            </div>
+        </div>
+
+        <div class="company-photo">
+            @if (Model.Photos != null)
+            {
+                var photo = @Model.Photos.Split(';');
+                var first = photo[photo.Length - 1];
+                <img src="@first">
+            }
+            else
+            {
+                <img src="">
+            }
+        </div>
+        <div class="company-main">
+            <ul>
+                <a href="@Url.Action("SingleEnterprise","Home",new {area = "App", Ent_No = Model.Ent_No,uid=Model.Uid  })"><li><img src="~/Areas/App/Content/Image/企业.png"><p>企业介绍</p></li></a>
+                <a href="@Url.Action("CheckEntBatch","Home",new {area = "App", Ent_No = Model.Ent_No,uid=Model.Uid  })"><li><img src="~/Areas/App/Content/Image/岗位.png"><p>岗位查看</p></li></a>
+                <a href="@Url.Action("Indexof_TrainingPlan","Home",new {area = "App", uid=Model.Uid, Ent_No = Model.Ent_No,DLFileColumnID= 7826  })"><li><img src="~/Areas/App/Content/Image/培养.png"><p>培养计划</p></li></a>
+                <a href="@Url.Action("Indexof_Salary","Home",new {area = "App", uid=Model.Uid, Ent_No = Model.Ent_No,DLFileColumnID= 9000  })"><li><img src="~/Areas/App/Content/Image/薪资.png"><p>薪资待遇</p></li></a>
+                <a href="@Url.Action("Indexof_StaffAcc","Home",new {area = "App", uid=Model.Uid, Ent_No = Model.Ent_No,DLFileColumnID= 4000  })"><li><img src="~/Areas/App/Content/Image/食宿.png"><p>员工食宿</p></li></a>
+                <a href="@Url.Action("Indexof_Staff","Home",new {area = "App", uid=Model.Uid, Ent_No = Model.Ent_No,DLFileColumnID=  5000 })"><li><img src="~/Areas/App/Content/Image/天地.png"><p>员工天地</p></li></a>
+                <a href="@Url.Action("Indexof_SucceedCase","Home",new {area = "App", uid=Model.Uid, Ent_No = Model.Ent_No,DLFileColumnID= 6000  })"><li><img src="~/Areas/App/Content/Image/成功.png"><p>成功案例</p></li></a>
+                <a href="@Url.Action("Indexof_Download","Home",new {area = "App", uid=Model.Uid, Ent_No = Model.Ent_No,DLFileColumnID= 7878  })"><li><img src="~/Areas/App/Content/Image/下载.png"><p>资源下载</p></li></a>
+                <a href=""><li><img src="~/Areas/App/Content/Image/疑问.png"><p>疑问解答</p></li></a>
+            </ul>
+        </div>
+
+    </div>
+</body>

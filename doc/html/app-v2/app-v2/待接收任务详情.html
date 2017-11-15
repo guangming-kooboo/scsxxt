@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>WeUI</title>
+    
+    <link rel="stylesheet" href="css/jquery-weui.css"/>
+    <link rel="stylesheet" href="css/weui.min.css" />
+    <link rel="stylesheet" href="css/pubilice.css"/>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+	</script>
+	<script src="js/jquery-weui.js"></script>
+   <!--
+                 特有
+   -->
+   <style>
+   	   .placeholder1 {
+					   
+					    color:#ffffff !important;
+					     text-align: center;
+					}
+					
+   </style>
+</head>
+<body ontouchstart>
+		
+	    <div class="weui-tab__bd">
+	        <div class="weui-tab__bd-item weui-tab__bd-item--active">
+	        	<div class="weui-cells-nonepadding weui-cells_form">
+	          <div class="weui-cell">
+		        <div class="weui-cell__hd"><label class="weui-label">分配人员</label></div>
+		        <div class="weui-cell__bd">                                      某某某
+		        </div>
+		      </div>
+	          <div class="weui-cell">
+		        <div class="weui-cell__hd"><label for="time3" class="weui-label">截止时间 :</label></div>
+		        <div class="weui-cell__bd">
+		          <input class="weui-input" id="date" type="text" readonly="">
+		        </div>
+		      </div>
+		    </div>
+	          <div class="weui-cells weui-cells_form">
+			      <div class="weui-cell">
+			        <div class="weui-cell__bd">
+			          <textarea class="weui-textarea"  rows="8">2月22号早上开会</textarea>
+         	        </div>
+			      </div>
+			    </div>
+	       
+	  <div class="weui-cells weui-cells_form">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">是否为公开任务</div>
+        <div class="weui-cell__ft">
+          <label for="switchCP" class="weui-switch-cp">
+            <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked">
+            <div class="weui-switch-cp__box"></div>
+          </label>
+        </div>
+      </div>
+    </div>	  
+   </div>
+	</div>
+        <div class="weui-tabbar">
+        <div class="weui-tabbar__item">
+        	  <div class="weui-form-preview__ft">
+		        <a class="weui-form-preview__btn weui-btn_default" href="javascript:">拒绝</a>
+		        <a class="weui-form-preview__btn weui-btn_primary" href="javascript:" style="color:#fff;">同意</a>
+		      </div>
+        </div>
+	</div>
+
+    <script>
+
+        $("#date").calendar({
+        onChange: function (p, values, displayValues) {
+          console.log(values, displayValues);
+        }
+      });
+
+    </script>
+	  </body>
+</html>

@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"进程总览.html",
+  "generationDate":new Date(1483078091988.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"3bca76ebfc7747daa0f1623326c90837",
+    "type":"Axure:Page",
+    "name":"进程总览",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"1b7383cde4334d0aa89127fb2eb358c1",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":180,
+              "y":36},
+            "size":{
+              "width":390,
+              "height":694}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"0e23ca73d1e948679abfbb6e8e505cb0",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":180,
+                  "y":36},
+                "size":{
+                  "width":390,
+                  "height":694}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/进程总览/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "1b7383cde4334d0aa89127fb2eb358c1":{
+      "scriptId":"u0"},
+    "0e23ca73d1e948679abfbb6e8e505cb0":{
+      "scriptId":"u1"}}});

@@ -1,0 +1,26 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.ManagerCerter.PostManager_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+        <li><a href="/BBS/ManagerCenter/ForumManager?ReportID=BBS_版块管理&Params=;">板块管理</a><i class="fa fa-angle-right"></i></li>
+        <li><a href="/BBS/ManagerCenter/ForumManager?ReportID=BBS_版块管理&Params=@Model.forum.ID">@Model.forum.ForumName</a><i class="fa fa-angle-right"></i></li>
+        <li><a href="/BBS/ManagerCenter/ColumnManager?ReportID=BBS_子版块管理&Params=@Model.column.ID">@Model.column.ColumnName</a><i class="fa fa-angle-right"></i></li>
+        <li><a href="/BBS/ManagerCenter/ThemeManager?ReportID=BBS_主题管理&Params=@Model.theme.ID">@Model.theme.ThemeName</a><i class="fa fa-angle-right"></i></li>
+    </ol>
+
+</div>
+<input type="text" placeholder="输入帖子标题搜索" name="test" />
+
+
+@*必须添加*@
+@Html.Partial("_Report")
+<script>
+    function Preview() {
+        var Params = v("test");
+        Query(Params, "@ViewData["Url"]");
+    }
+</script>

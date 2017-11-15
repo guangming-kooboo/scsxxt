@@ -1,0 +1,72 @@
+﻿@using ServicePlatform.Lib
+@using ServicePlatform.Config
+@using ServicePlatform.Areas.Permission.Models
+@{
+    ViewBag.Title = "Left";
+    List<MenuItem> menuItemList=(Session["Vars"] as ServicePlatform.Config.Vars).getmenuItems(true); //获取菜单[是否强制刷新]
+    
+    
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>菜单栏</title>
+
+
+    <link href="~/Areas/Platform/Content/Admin/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Platform/Content/Admin/css/select.css" rel="stylesheet" />
+    <script src="~/Areas/Platform/Content/Admin/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //导航切换
+            $(".menuson li").click(function () {
+                $(".menuson li.active").removeClass("active")
+                $(this).addClass("active");
+            });
+
+            $('.title').click(function () {
+                var $ul = $(this).next('ul');
+                $('dd').find('ul').slideUp();
+                if ($ul.is(':visible')) {
+                    $(this).next('ul').slideUp();
+                } else {
+                    $(this).next('ul').slideDown();
+                }
+            });
+        })
+    </script>
+
+
+</head>
+
+<body style="background:#f0f9fd;">
+    <div class="lefttop"><span></span>功能菜单</div>
+
+    <dl class="leftmenu">
+
+
+        @{//动态生成菜单
+            for (int i = 0; i < menuItemList.Count; i++)
+            {
+                @(new HtmlString(PageHelper.getMenuHead()));
+                @( new HtmlString(PageHelper.getTitle(menuItemList[i].father.ModuleName)));
+                List<T_Module>children=  menuItemList[i].children;
+                if (children.Count>0)
+                {
+                    @(new HtmlString(PageHelper.getItemHead()));
+                    for (int j = 0; j < children.Count; j++)
+                    {
+                        @(new HtmlString(PageHelper.getItem(children[j].PageName,children[j].ModuleName,children[j].ModuleID)));
+                    }
+                    @(new HtmlString(PageHelper.getItemFoot()));
+                }
+                @(new HtmlString(PageHelper.getMenuFoot()));
+              }  
+        } 
+    </dl>
+
+</body>
+</html>
+

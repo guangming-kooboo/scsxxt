@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ServicePlatform.Models.T_News>
+@Styles.Render("/Areas/News/Content/CSSModel/newsDetail.css")
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NewsDetail</title>
+
+    <link href="~/Areas/DownLoadFile/Content/HeadStyle.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="NewsDetailContainer">
+        <div id="NewsDetailTopic">
+            <div class="place">
+                <span>位置：</span>
+                <ul class="placeul">
+                    <li><a href="/News/NewsCenter/HomePageTable">首页</a></li>
+                    <li><a href="#">新闻详情</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="NewsDetailContent">
+            @foreach (var s in Model)
+            {
+                <div id="NewsDetailLeft">
+                    <div style="margin-top:10px;"><div class="fontSet">新闻编号：</div>@s.NewsID</div>
+                    <div style="margin-top:10px;"><div class="fontSet">新闻标题：</div>@ViewData["thetitle"]</div>
+                    <div style="margin-top:10px;"><div class="fontSet">新闻种类：</div>@ViewData["thetype"]</div>
+                    <div style="margin-top:10px;"><div class="fontSet">新闻作者：</div>@s.NewsAuthor</div>
+                    <div style="margin-top:10px;"><div class="fontSet">新闻发布者：</div>@ViewData["thepublish"]</div>
+                </div>
+
+                <div id="NewsDetailRight">
+                    <div style="margin-top:10px;"><div class="fontSet">发布时间：</div>@ViewData["thetime"]</div>
+                    <div style="margin-top:10px;"><div class="fontSet">新闻状态：</div>@ViewData["thestate"]</div>
+                    <div style="margin-top:10px;"><div class="fontSet">新闻栏目：</div>@ViewData["thecolumn"]</div>
+                    <div style="margin-top:10px;"><div class="fontSet">新闻链接：</div>@s.LinkUrl</div>
+                    <div style="margin-top:10px;"><div class="fontSet">资源链接：</div>@s.Download</div>
+                </div>
+
+                <div id="NewsDetailBottom">
+                    <div style="margin-top:10px;">
+                        <div class="fontSet">
+                            图片新闻：
+                        </div>
+                        <div><img src="@s.PicUrl" /></div>
+                    </div>
+                    <div style="margin-top:10px;"><div class="fontSet">视频新闻：</div>@s.VideoUrl</div>
+                    <div style="margin-top:10px;">
+                        <div class="fontSet">
+                            图文新闻：
+                        </div>
+                        @Html.Raw(s.Html);
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+/************************************************************************/
+/******************* Portfolious StyleSheet *****************************/
+/************************************************************************/
+/*
+00. General Settings
+01. Headings & Colours
+02. Header
+03. Home Blog Posts Settings
+04. Content, Home Sidebar
+05. Footer
+06. General Sidebar
+07. Post General Settings
+
+Additional:Common Classes
+
+---------------------------------------------
+Author:Onur Oztaskiran - www.monofactor.com
+*/
+/************************************************************************/
+/************************************************************************/
+
+/*** 00. General Settings ***/
+/** ----------------------------------------------------- **/
+
+body{font:82.5% "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial;
+/*** you can change background image here if you like**/
+background:url(images/bg-office.jpg) #ebebeb no-repeat top center;}
+body, html{height:100%}
+a{cursor:pointer;}
+
+
+
+
+/** Container Settings **/
+#container{width:960px; padding:20px 5px;margin:0 auto;}
+
+/*** 03. Home Featured Section ***/
+#featured{padding-top:30px;color:#fff}
+
+#featured-info, #home-featured-nav{float:left;}
+#featured-images{float:right;}
+
+#featured-info{width:455px;margin-top:72px;}
+#featured-info p{margin:10px 0;}
+#featured-info p strong{color:#d98f19;}
+
+a#home-read-more-button{background:url(images/bt-home-readmore.png) no-repeat;width:103px;height:42px;margin-top:25px;
+display:block;text-indent:-9999px;}
+
+/** featured images**/
+#featured-images{width:440px;height:416px;background:url(images/computer.png) no-repeat top center;margin-right:-10px;
+position:relative;}
+#images{margin:42px 0 0 50px;}
+#images ul li{width:354px;height:214px;}
+span.glare{background:url(images/computer-glare.png) no-repeat;display:block;position:absolute;right:25px;top:30px;
+width:219px;height:239px;z-index:9999;}
+
+/** featured slider navigation **/
+ul#home-featured-nav{background:url(images/bg-homeslider.png) no-repeat;width:33px;height:48px;margin-left:35px;margin-top:127px;
+padding-top:12px;}
+ul#home-featured-nav li{margin-bottom:5px;}
+ul#home-featured-nav a{width:16px;height:18px;display:block;text-indent:-9999px;margin:auto;
+filter:alpha(opacity=60);-moz-opacity:0.6;-khtml-opacity:0.6;opacity:0.6;}
+ul#home-featured-nav a:hover{filter:alpha(opacity=100);-moz-opacity:1;-khtml-opacity:1;opacity:1;}
+ul#home-featured-nav li.next a{background:url(images/homeslider-arrow-down.png) no-repeat;margin-left:9px;}
+ul#home-featured-nav li.prev a{background:url(images/homeslider-arrow-up.png) no-repeat;}
+

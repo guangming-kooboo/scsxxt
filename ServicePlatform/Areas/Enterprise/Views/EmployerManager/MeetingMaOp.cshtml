@@ -1,0 +1,113 @@
+﻿@using ServicePlatform.Lib;
+@using ServicePlatform.Models;
+
+@{
+    ViewBag.Title = "MeetingMaOp";
+
+    T_JobWanted tj = ViewBag.Detail;
+
+    string t = "";
+    if(tj.ReviewTime!=null&&tj.ReviewTime!=0)
+    {
+        t = DateTimeFormat.ConvertIntDateTime(tj.ReviewTime).ToString();
+    }
+    else
+    {
+        t = ViewBag.NowTime;
+    }
+    
+ }
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>面试邀请</title>
+    <link href="@Url.Content("/Areas/School/Content/Home/css/style.css")" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    @*<link href="@Url.Content("/Areas/School/Content/Home/css/select.css")" rel="stylesheet" type="text/css" />*@
+    <link href="~/Areas/Platform/Content/Admin/css/style.css" rel="stylesheet" />
+    <!--日期时间控件引入-->
+    @Html.Partial("_LaydateTimePick")
+    <script>
+        function show()
+        {
+            var ss = '@t';
+            alert(ss);
+        }
+
+    </script>
+</head>
+<body>
+
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">面试与Offer管理</a></li>
+            <li><a href="#">面试邀请</a></li>
+        </ul>
+    </div>
+    
+        @using (Html.BeginForm("SaveMeetingMaOp", "EmployerManager", FormMethod.Post, new { id = "_form" }))
+        {
+            <div class="formtitle"><span>面试详情: </span></div>
+            
+            <ul class="forminfo">
+                
+                @if (tj.ReviewTime==null)
+                {     
+                <li><label>面试时间:</label><input type="text" placeholder="请输入日期" name="meettime" id="meettime" class="laydate-icon" value='@t' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" /><i style="color:red">*</i></li>
+                }
+                else
+                {
+                <li><label>面试时间:</label><input type="text" placeholder="请输入日期" name="meettime" id="meettime" class="laydate-icon" value='@t' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" /><i style="color:red">*</i></li>
+                }
+                @if(tj.ReviewRecord!=null)
+                { 
+                <li><label>面试记录:</label><textarea name="meetrec" id="meetrec" class="dfinput">@tj.ReviewRecord</textarea></li>
+                }
+                else
+                {
+                    <li><label>面试记录:</label><textarea name="meetrec" id="meetrec" class="dfinput"></textarea></li>
+                }
+                @if(tj.ReviewRecord!=null)
+                {
+                <li><label>面试成绩:</label><input type="text" name="meetscore" id="meetscore" class="dfinput" value='@tj.ReviewScore' style="ime-mode:disabled;" onpaste="return false;" onkeyup="this.value=this.value.replace(/[^0-9\.]/,'')" onkeydown="this.value=this.value.replace(/[^0-9\.]/,'')" /><i style="color:red">面试成绩为纯数字</i></li>
+                }
+                else
+                {
+                    <li><label>面试成绩:</label><input type="text" name="meetscore" id="meetscore" class="dfinput" style="ime-mode:disabled;" onpaste="return false;" onkeyup="this.value=this.value.replace(/[^0-9\.]/,'')" onkeydown="this.value=this.value.replace(/[^0-9\.]/,'')" /><i style="color:red">面试成绩为纯数字</i></li>
+                }
+                <li>
+                <label>录取结果:</label>
+                <select name="meetresult" class="dfinput">
+                    @if (tj.JobStatusName == "通过面试" || tj.JobStatusName == "学生同意,录取成功")
+                    { 
+                    <option value="empty">--请选择--</option>
+                    <option value="get" selected>录取</option>
+                    <option value="unget">不录取</option>
+                    }
+                    else if (tj.JobStatusName == "未通过面试" )
+                    {
+                    <option value="empty">--请选择--</option>
+                    <option value="get">录取</option>
+                    <option value="unget" selected>不录取</option>
+                    }
+                    else
+                    {
+                     <option value="empty" selected>--待定--</option>
+                    <option value="get">录取</option>
+                    <option value="unget">不录取</option>
+                    }
+                </select>
+                </li>
+                <li><input type="hidden" name="Practiceno" id="Practiceno" value='@ViewBag.Practiceno' /></li>
+                <li><input type="hidden" name="Entno" id="Entno" value='@ViewBag.Entno' /></li>
+                <li><input type="hidden" name="Posid" id="Posid" value='@ViewBag.Posid' /></li>
+                <li><label>&nbsp;</label><input type="submit" value="保存" class="btn" /></li>
+            </ul>
+        }
+
+</body>
+
+</html>
+

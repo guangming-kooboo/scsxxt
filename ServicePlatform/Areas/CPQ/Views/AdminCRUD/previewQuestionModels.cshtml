@@ -1,0 +1,89 @@
+﻿@model ServicePlatform.Areas.CPQ.ViewModels.AdminCRUD.PreviewQuestionModels_M
+@{
+    Layout = ViewData["Layout"].ToString();
+
+}
+<div class="col-md-12">
+    <ol class="page-breadcrumb breadcrumb">
+
+        <li><a href=@Url.Action("questionModels", "Admin", new { area = "CPQ", ReportID = "CPQ问题模板库", Params = ";" })>问题模板库</a><i class="fa fa-angle-right"></i></li>
+    </ol>
+
+</div>
+<div class="col-md-6">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-reorder"></i>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" method="POST" role="form">
+                <div class="form-body">
+                    <input type="text" name=QuestionID id=QuestionID value=@Model.Question.QuestionID hidden="hidden">
+                    <input type="text" name=QuestionnaireID id=QuestionnaireID value=@Model.QuestionnaireID hidden="hidden">
+                    @if (@Model.Question.QuestionType == 1)
+                    {
+
+                        <label class="">@Model.Question.QuestionName</label>
+                        <div class="radio-list">
+                            @foreach (var b in @Model.Question.QuestionOptions)
+                            {
+                                <label>
+                                    <input type="radio" name=@Model.Question.QuestionName id="@Model.Question.QuestionName" value="@b.OptionName"> @b.OptionName
+                                </label>
+                            }
+                        </div>
+                    }
+                    else if (@Model.Question.QuestionType == 2)
+                    {
+
+                        <label class="">@Model.Question.QuestionName</label>
+                        <div class="checkbox-list">
+                            @foreach (var c in @Model.Question.QuestionOptions)
+                            {
+
+                                <label>
+                                    <input type="checkbox" name=@c.OptionName id=@c.OptionName>@c.OptionName
+                                </label>
+                            }
+
+                        </div>
+
+                    }
+                    else if (@Model.Question.QuestionType == 3)
+                    {
+
+                        <label class="">@Model.Question.QuestionName</label>
+
+                        <div class="col-md-9">
+                            <textarea></textarea>
+                        </div>
+
+                    }
+
+
+
+
+
+                 
+                </div>
+            </form>
+            <div class="form-actions fluid">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-success" onclick="referenceQuestionnaire()">引用</button><!--返回去action再再action里面重定向吧省的这里直接url-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+
+        function referenceQuestionnaire() {
+            var s = "/CPQ/AdminCRUD/referenceQuestion?QuestionID=" + $("#QuestionID").val() + "&QuestionnaireID=" + $("#QuestionnaireID").val();
+            window.location = s;
+
+        }
+    </script>

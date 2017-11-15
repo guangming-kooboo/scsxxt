@@ -1,0 +1,67 @@
+﻿@model ServicePlatform.Areas.Wbs.ViewModels.CRUD.NodeList_Edit_M
+@{
+    Layout = ViewData["Layout"].ToString();
+}
+
+<div class="col-md-6">
+<!-- BEGIN SAMPLE FORM PORTLET-->
+<div class="portlet ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-reorder"></i>@ViewBag.Title
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form class="form-horizontal" method="POST" role="form">
+            <div class="form-body">
+
+              
+               @Html.HiddenFor(o=>o.NodeID)
+                <div class="form-group">
+                    @Html.LabelFor(o => o.NodeName, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(o => o.NodeName,new { @class = "form-control" }) 
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(o => o.Place, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(o => o.Place, new { @class = "form-control" })
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(o => o.Decription, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(o => o.Decription, new { @class = "form-control" })
+                    </div>
+                </div>
+              
+                @Html.Partial("/Views/Templates/_BootTimePicker.cshtml", new ViewDataDictionary(ViewData)
+                                {
+                                   { "id","BeginTime"},
+                                   { "name","BeginTime"},
+                                   { "value",Model.BeginTime},
+                                   { "displayName","任务开始时间"}
+                                })
+
+                @Html.Partial("/Views/Templates/_BootTimePicker.cshtml", new ViewDataDictionary(ViewData)
+                                {
+                                   { "id","EndTime"},
+                                   { "name","EndTime"},
+                                   { "value",Model.EndTime},
+                                   { "displayName","任务结束时间"}
+                                })
+              
+            </div>
+            <div class="form-actions fluid">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-success">保存</button>
+                    <button type="button" class="btn btn-default back">返回</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+

@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"修改信息.html",
+  "generationDate":new Date(1483078092003.78),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"47ee00c8f18f4451b46b0b9e33fac896",
+    "type":"Axure:Page",
+    "name":"修改信息",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"386cacd633ff4fe8bef2841fd4234aa6",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":131,
+              "y":42},
+            "size":{
+              "width":309,
+              "height":548}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"edd62abc946849c99b5da0102616615d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":131,
+                  "y":42},
+                "size":{
+                  "width":309,
+                  "height":548}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/修改信息/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "386cacd633ff4fe8bef2841fd4234aa6":{
+      "scriptId":"u0"},
+    "edd62abc946849c99b5da0102616615d":{
+      "scriptId":"u1"}}});

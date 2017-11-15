@@ -1,0 +1,81 @@
+﻿@model ServicePlatform.Areas.BBS.ViewModels.Home.SearchColumns_M
+@{
+    Layout = ViewData["Layout"].ToString();
+    int pageIndex = (int)ViewData["pageIndex"];
+    int maxIndex = (int)ViewData["maxIndex"];
+}
+@section script{
+    <script>
+    function jumpTo(index) {
+        location.href = '@ViewData["currentUrl"]?pageIndex=' + index + '&perCount=@ViewData["perCount"]' + '&keyword=@Model.keyword';
+    };
+    </script>
+}
+<div class="main">
+
+    <!-- 导航-->
+    @Html.Action("_Search", new { type = "forum" })
+    <div class="bank-select">
+
+        @Html.Action("_SearchLeft")
+        <div class="list-main-lists-select-bank">
+            @foreach (var item in Model.searchColumn)
+            {
+                <ul class="list-main-lists-select-bank-ul">
+                    <li class="list-main-lists-li"><a href="@Url.Action("PostList","Home",new{area="BBS",columnid=item.ID})"><img style="width:71px;height:72px;" class="part-a" src="@item.ImageUrl"></a></li>
+
+                    <li class="list-main-lists-li">
+                    <li class="part-p">
+                        <p class="part-p-head"><a class="part-a-head" href="@Url.Action("PostList", "Home", new { area = "BBS", columnid = item.ID })">@item.ColumnName</a>&nbsp;(@(item.TodayPost==null?0:item.TodayPost))</p>
+                        <p class="part-p-main">
+                            主题&nbsp;:&nbsp;@item.ThemeCount&nbsp;&nbsp;&nbsp;&nbsp;帖子&nbsp;:&nbsp;@(item.PostCount==null?0:item.PostCount)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            版主: @foreach (var manager in item.ForumManager)
+                            {
+                                <a href="@Url.Action("PersonalSpace","Home",new{area="BBS",id=manager.ID})">@manager.Name&nbsp;</a>
+                            
+                            }
+                            @if (item.ForumManager.Count == 0)
+                            { 
+                              <label>无</label>
+                            }
+                        </p>
+                        @if(item.NewHotPost!=null)
+                        {
+                            <p class="part-p-main-p">最新热帖&nbsp;:&nbsp;<a class="part-p-main-p-a" href="@Url.Action("PostPage","Home",new{area="BBS",id=item.NewHotPost.ID})">@item.NewHotPost.PostTitle</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@item.NewHotPost.Time</p>
+                        }
+                     </li>
+                </ul>
+                <hr class="bank-hr">
+            }
+
+
+
+
+        </div>
+
+    </div>
+    @if ((int)ViewData["maxIndex"] > 1)
+    {
+        <div class="jump">
+            <a class="jump-a-border" onclick="jumpTo('1')">首页</a>&nbsp;
+            @if (pageIndex != 1)
+            {
+                <a class="jump-a-border" onclick="jumpTo('@(pageIndex-1)')">上一页</a>@(new HtmlString("&nbsp"));
+            }
+            <a onclick="jumpTo('@(pageIndex)')">&nbsp;<input type="text" style="width:20px;" value="@(pageIndex)" />&nbsp;</a>
+            @if (pageIndex != maxIndex)
+            {
+                <a class="jump-a" onclick="jumpTo('@(pageIndex+1)')">&nbsp;下一页&nbsp;</a>
+            }
+            <a class="jump-a" onclick="jumpTo('@(maxIndex)')">&nbsp;末页&nbsp;</a>
+
+        </div>
+    }
+    </div>
+
+
+
+</div>
+
+
+

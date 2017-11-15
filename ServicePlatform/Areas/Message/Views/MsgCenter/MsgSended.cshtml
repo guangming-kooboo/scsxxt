@@ -1,0 +1,64 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using ServicePlatform.Models;
+@model Webdiyer.WebControls.Mvc.PagedList<T_SysMsg>
+
+@{
+    ViewBag.Title = "发件箱";
+ }
+@Styles.Render("/Areas/School/Content/Home/css/style.css")
+@Styles.Render("/Areas/School/Content/Home/css/MsgStyle.css")
+@Scripts.Render("/Areas/School/Content/Home/js/MsgJs.js")
+
+@Scripts.Render("/Areas/Message/Content/jquery-1.9.1.min.js")
+<html>
+<head>
+    <title>发件箱</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".click").click(function () {
+                $(".tip").fadeIn(200);
+            });
+
+            $(".tiptop a").click(function () {
+                $(".tip").fadeOut(200);
+            });
+
+            $(".sure").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+            $(".cancel").click(function () {
+                $(".tip").fadeOut(100);
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">消息中心</a></li>
+            <li><a href="#">发件箱</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        @Html.Partial("_MsgSendedList", Model)
+        @section scripts
+        {
+            @{Html.RegisterMvcPagerScriptResource();}
+        }
+        <div class="pagin">
+            @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "paginList", PagerItemTemplate = "<li class=\"paginItem\"><a style='display:none'>{0}</a></li>" }).AjaxOptions(a => a.SetUpdateTargetId("articles"))
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+    <div class="none"></div>
+</body>
+</html>
